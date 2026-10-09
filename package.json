@@ -1,0 +1,24 @@
+{
+  "name": "ingetya",
+  "version": "0.0.1",
+  "description": "Undangan digital terjangkau dengan fitur sekebon buat kamu",
+  "main": "dist/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IngetYa/IngetYa.git"
+  },
+  "keywords": [],
+  "author": "HiccupsRaven <hiccusraven@devanka.id> (https://devanka.id/)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/IngetYa/IngetYa/issues"
+  },
+  "homepage": "https://github.com/IngetYa/IngetYa#readme",
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {},
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon"
+  }
+}
