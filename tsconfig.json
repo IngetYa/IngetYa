@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "rootDir": "./backend",
+    "paths": {
+      "#controllers/*": ["./backend/controllers/*"],
+      "#routes/*": ["./backend/routes/*"],
+      "#models/*": ["./backend/models/*"],
+      "#types/*": ["./backend/types/*"],
+      "#core/*": ["./backend/core/*"],
+      "#main/*": ["./backend/main/*"],
+      "#bot/*": ["./backend/bot/*"],
+      "#lib/*": ["./backend/lib/*"],
+      "#cfg": ["./backend/cfg"]
+    },
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "removeComments": true
+  },
+  "include": ["backend/**/*"],
+  "exclude": ["node_modules/*", "dist/**/*", "public/**/*", "backend/danger/**/*"]
+}

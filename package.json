@@ -2,7 +2,7 @@
   "name": "ingetya",
   "version": "0.0.1",
   "description": "Undangan digital terjangkau dengan fitur sekebon buat kamu",
-  "main": "dist/app.js",
+  "main": "dist/server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IngetYa/IngetYa.git"
@@ -15,10 +15,55 @@
   },
   "homepage": "https://github.com/IngetYa/IngetYa#readme",
   "private": true,
-  "devDependencies": {},
-  "dependencies": {},
+  "imports": {
+    "#controllers/*": "./dist/controllers/*.js",
+    "#routes/*": "./dist/routes/*.js",
+    "#models/*": "./dist/models/*.js",
+    "#types/*": "./dist/types/*.js",
+    "#core/*": "./dist/core/*.js",
+    "#main/*": "./dist/main/*.js",
+    "#bot/*": "./dist/bot/*.js",
+    "#lib/*": "./dist/lib/*.js",
+    "#cfg": "./dist/cfg.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
+    "@types/express-ws": "^3.0.6",
+    "@types/multer": "^2.3.0",
+    "@types/node": "^26.6.4",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "sass": "^1.105.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "connect-mongo": "^6.0.0",
+    "discord.js": "^14.27.0",
+    "dotenv": "^18.0.6",
+    "ejs": "^7.0.1",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "express-ws": "^5.0.2",
+    "mongoose": "^9.11.1",
+    "multer": "^2.4.0",
+    "webfont-awesome-pro": "7.3.2-wip.10"
+  },
   "scripts": {
+    "format": "prettier --write .",
+    "check": "prettier --check .",
+    "type-check": "tsc -p . --pretty --noEmit",
+    "lint": "eslint --ext ts",
     "start": "node .",
-    "dev": "nodemon"
+    "dev:server": "nodemon",
+    "dev:client": "vite build --config vite.config.ts --mode development",
+    "build": "npm run build:client && npm run build:server",
+    "build:server": "rm -rf ./dist/backend && tsc -p . --extendedDiagnostics",
+    "build:client": "vite build --config vite.config.ts --mode production"
   }
 }

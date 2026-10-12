@@ -1,0 +1,6 @@
+{
+  "ignore": ["**.json", "frontend/**", "public/**"],
+  "watch": ["./backend"],
+  "ext": "ts",
+  "exec": "tsx ./backend/server.ts"
+}
