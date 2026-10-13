@@ -15,6 +15,7 @@ $fontProviderIcon: 1.1rem;
     border: 1px solid v.$px3;
     text-align: center;
     animation: modal_in 0.2s;
+    border-radius: 20px;
     p {
       line-height: 1.5;
       font-size: 1.5rem;
@@ -62,7 +63,10 @@ $fontProviderIcon: 1.1rem;
       padding: v.$bigPadding;
       border: 1px solid v.$px3;
       border-bottom: none;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
       .f {
+        display: block;
         width: 100%;
         margin-bottom: v.$medPadding;
         .title-icons {
@@ -72,11 +76,13 @@ $fontProviderIcon: 1.1rem;
           padding: v.$bigPadding 0;
           gap: v.$medPadding;
           color: v.$pm1;
+          width: 100%;
           span {
             transform: translateY(v.$smallPadding);
           }
           img {
             display: block;
+            max-width: calc(100% - (v.$bigPadding * 4));
             max-height: 75px;
           }
         }
@@ -118,6 +124,7 @@ $fontProviderIcon: 1.1rem;
           align-items: center;
           gap: 0;
           border: 1px solid v.$px1;
+          border-radius: 5px;
           .inp-icon {
             padding-left: v.$medPadding;
           }
@@ -155,79 +162,13 @@ $fontProviderIcon: 1.1rem;
             display: block;
             padding: v.$medPadding;
             font-weight: 600;
-            &.btn-restart {
-              background-color: v.$pm2;
-              flex-shrink: 0;
-              flex-grow: 0;
-              &.hide {
-                display: none;
-              }
-            }
+            border-radius: 5px;
             &.btn-login {
               flex-shrink: 0;
               flex-grow: 1;
               background-color: v.$pm1;
               color: v.$px1;
             }
-            &.btn-cancel {
-              flex-grow: 0;
-              flex-shrink: 0;
-              background-color: v.$px25;
-              width: calc(100% / 2);
-            }
-            &.btn-change {
-              background-color: v.$px25;
-              color: v.$pm1;
-            }
-            &.btn-authorize {
-              flex-grow: 0;
-              flex-shrink: 0;
-              background-color: v.$cgreen;
-              color: v.$px1;
-              width: calc(100% / 2);
-            }
-          }
-        }
-
-        &.field-user {
-          width: 100%;
-          .card {
-            padding: v.$medPadding;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: v.$medPadding;
-            border: 1px solid v.$px1;
-            background-color: v.$px3;
-            background-image: url(./abstracts/mosaic-seamless.svg);
-            background-position: top left;
-            background-repeat: repeat;
-            .card-meta {
-              .card-name {
-                font-weight: 700;
-                word-break: break-all;
-                word-break: break-word;
-              }
-            }
-            .card-actions {
-              .btn-action-authorize {
-                padding: v.$medPadding;
-                background-color: v.$px25;
-                text-align: center;
-              }
-            }
-          }
-        }
-
-        &.turnstile-field {
-          margin-top: calc(v.$medPadding + 3px);
-          .card-turnstile.no-turnstile {
-            width: 100%;
-            margin-bottom: calc(v.$bigPadding + 3px);
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: v.$smallPadding;
           }
         }
 
@@ -244,6 +185,8 @@ $fontProviderIcon: 1.1rem;
       padding-top: 0;
       border: 1px solid v.$px3;
       border-top: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
       .login-providers {
         display: block;
         .btn {
@@ -259,6 +202,7 @@ $fontProviderIcon: 1.1rem;
           cursor: pointer;
           text-decoration: none;
           color: v.$softwhite;
+          border-radius: 5px;
           i {
             font-size: $fontProviderIcon;
           }
@@ -294,13 +238,18 @@ $fontProviderIcon: 1.1rem;
       gap: v.$bigPadding;
       .PortalEmail {
         flex-grow: 1;
+        padding-bottom: v.$largePadding;
         max-width: 700px;
         border-bottom: 1px solid v.$px3;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
       }
       .PortalOthers {
         flex-shrink: 0;
         max-width: 250px;
         border-top: 1px solid v.$px3;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         .portal-other-divider {
           margin-top: v.$bigPadding;
         }

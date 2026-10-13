@@ -4,11 +4,9 @@ package-lock.json
 **/tsconfig.json
 eslint.config.mjs
 views/*
-# vite.config.ts
 .prettier*
 .vscode/**
 nodemon.json
-README.md
 public
 dist
 ex

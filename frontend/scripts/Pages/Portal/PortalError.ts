@@ -1,4 +1,4 @@
-import { IPortalClass } from "@/types/PortalTypes"
+import type { IPortalClass } from "@/types/PortalTypes"
 import { eroot, futor, kel } from "@/core/kel"
 import { lang } from "@/core/languages"
 

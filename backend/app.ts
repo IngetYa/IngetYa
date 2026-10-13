@@ -1,4 +1,3 @@
-import fs from "fs"
 import express, { type Request, type Response, type NextFunction } from "express"
 import expressWs from "express-ws"
 import { WebSocket } from "ws"
@@ -45,13 +44,10 @@ app.use(
 app.use(sessionUserBinder)
 
 // rencana diubah ke "static"
-app.use(express.static("public"))
+app.use(express.static("public"), express.static("static"))
 
 // view engine, tadinya html biasa
 app.set("view engine", "ejs")
-
-// ambil manifest buat hash file
-const manifest = JSON.parse(fs.readFileSync("./views/manifest.json", "utf-8"))
 
 // endpoint buat websocket
 app.ws("/socket", (wsClient, req: Request) => {
@@ -85,11 +81,11 @@ getWss().on("error", () => {
 })
 
 app.get("/portal", (req: Request, res: Response) => {
-  res.render("portal", { manifest: manifest["scripts/portal.ts"] })
+  res.render("portal")
 })
 
 app.get("/", (req: Request, res: Response) => {
-  res.render("home", { manifest: manifest["scripts/home.ts"] })
+  res.render("home")
 })
 
 // endpoint ga ketemu

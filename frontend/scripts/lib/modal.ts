@@ -1,4 +1,4 @@
-import { IResponse } from "../types/LibTypes"
+import type { IResponse } from "../types/LibTypes"
 import { iform } from "./iform"
 import { eroot, futor, kel } from "@/core/kel"
 import { lang } from "@/core/languages"

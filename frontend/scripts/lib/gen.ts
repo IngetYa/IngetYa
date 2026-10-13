@@ -1,4 +1,4 @@
-import { IAny, IQueries } from "@/types/LibTypes"
+import type { IAny, IQueries } from "@/types/LibTypes"
 
 export function genStringId(radix: number = 36): string {
   return Date.now().toString(radix) + Math.random().toString(radix).substring(2, 9)

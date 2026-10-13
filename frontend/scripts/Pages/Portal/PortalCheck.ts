@@ -1,17 +1,17 @@
-import { IPortalClass } from "@/types/PortalTypes"
+import type { IPortalClass } from "@/types/PortalTypes"
 import { eroot, kel } from "@/core/kel"
 import { lang } from "@/core/languages"
 import waittime from "@/lib/waittime"
 import xhr from "@/lib/xhr"
-import { IResponse } from "@/types/LibTypes"
-import { IUser } from "@/types/UserTypes"
+import type { IResponse } from "@/types/LibTypes"
+import type { IUser } from "@/types/UserTypes"
 
 async function checkUser(useAuth?: string): Promise<IResponse> {
   const authStr = useAuth === "1" ? `?apps=${useAuth}` : ""
 
   const user = await xhr.get(`/x/auth/get-user${authStr}`)
 
-  if (user.code === 429) {
+  if (user.status === 429) {
     await waittime(1000)
     return await checkUser(useAuth)
   }

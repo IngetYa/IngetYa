@@ -1,8 +1,8 @@
 import { eroot, futor } from "@/core/kel"
-import { IAny, ILanguage, ILocaleData } from "@/types/LibTypes"
+import type { IAny, ILanguage, ILocaleData } from "@/types/LibTypes"
 import { findQuery, setQueries } from "@/core/queries"
 import { iform } from "@/lib/iform"
-import { type ILocaleKey } from "@/types/PortalTypes"
+import type { ILocaleKey } from "@/types/PortalTypes"
 
 const langKey = "locale"
 

@@ -615,7 +615,7 @@
     }
   }
   &:has(:checked) {
-    background-image: url(../abstracts/letter-y-seamless.svg);
+    background-image: url("../abstracts/letter-y-seamless.svg");
     background-position: center center;
     background-repeat: repeat;
     span {

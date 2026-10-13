@@ -7,7 +7,7 @@ name is available.
 
 ## Project Founders
 
-    Devanka761 (devanka761, dvnkz)
+    Deva Krista Aranda (devanka761, dvnkz)
 
 ## Lead Developer
 
@@ -19,4 +19,5 @@ name is available.
 
 ## Developers
 
-    Devanka761 (devanka761, dvnkz)
+    Deva Krista Aranda (devanka761, dvnkz)
+    Syafril Krisnanda (SyafrilKrisnanda)

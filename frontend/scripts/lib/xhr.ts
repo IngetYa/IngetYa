@@ -1,5 +1,4 @@
-import { IAny, IResponse, IRequestType } from "@/types/LibTypes"
-
+import type { IAny, IResponse, IRequestType } from "@/types/LibTypes"
 import waittime from "@/lib/waittime"
 
 async function efetch(method: IRequestType, url: string, s?: IAny, isFile?: boolean): Promise<IResponse> {

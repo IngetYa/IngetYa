@@ -1,4 +1,4 @@
-import { SSKelement } from "@/types/LibTypes"
+import type { SSKelement } from "@/types/LibTypes"
 import { kel } from "@/core/kel"
 
 export function iform(childs?: string | SSKelement): HTMLFormElement {

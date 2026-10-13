@@ -10,8 +10,9 @@ export type IRequestType = "POST" | "GET"
 
 export interface IResponseRaw {
   ok: boolean
-  code: number
-  msg: string
+  status: number
+  code?: string
+  text?: string
   data?: IAny
   errors?: IAny
 }

@@ -12,8 +12,9 @@ export type IRequestType = "POST" | "GET"
 
 export interface IResTemp {
   ok?: boolean
-  code: number
-  msg?: string
+  status: number
+  code?: string
+  text?: string
   data?: IAny
   error?: IAny
   errors?: IAny

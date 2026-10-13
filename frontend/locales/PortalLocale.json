@@ -52,8 +52,12 @@
     "en": "CANCEL"
   },
   "use_luna": {
-    "id": "Gunakan Akun Luna kamu",
-    "en": "Use your Luna Account"
+    "id": "Lanjutkan masuk akun IngetYa dengan Luna SSO",
+    "en": "Continue to IngetYa with Luna SSO"
+  },
+  "email_placeholder": {
+    "id": "contoh: emailkamu@email.com",
+    "en": "ex: youremail@email.com"
   },
   "email_not_valid": {
     "id": "<b>Alamat email gak valid</b><br />Periksa dulu aja dan coba lagi",
@@ -86,22 +90,6 @@
   "auth_with_provider": {
     "id": "atau masuk dengan",
     "en": "or continue with"
-  },
-  "auth_verification_otp": {
-    "id": "Kami udah kirim kode verifikasi 6-digit ke email tersebut. Cek folder spam kalo ga muncul di kontak masuk.",
-    "en": "We have sent you an email for your 6-digit verification code. Check the spam folder if it does not appear in your inbox."
-  },
-  "auth_headback_msg": {
-    "id": "Kembali dan mulai dari awal?",
-    "en": "Head back and start over?"
-  },
-  "auth_headback_btn": {
-    "id": "GANTI EMAIL",
-    "en": "CHANGE EMAIL"
-  },
-  "auth_link_headback": {
-    "id": "Balik atur email?",
-    "en": "Head back to set up email?"
   },
   "auth_login_rate_limit": {
     "id": "Kamu udah ngelebihin batas percobaan login. Coba lagi nanti.",
@@ -147,41 +135,13 @@
     "id": "Nampaknya percobaan autentikasi-mu gagal yaa.<br />Kalem, ntar coba lagi aja kalo udah readyy!",
     "en": "It seems your authentication attempt failed.<br />Don't worry, just try again when you're ready!"
   },
-  "turnstile_failed": {
-    "id": "Kami ga bisa mastiin kamu robot atau bukan. Coba lagi ya ntar.",
-    "en": "We couldn't verify that you're human. Please try again."
-  },
   "label_error_back": {
     "id": "KEMBALI",
     "en": "BACK"
   },
-  "connect_sign_label": {
-    "id": "Masuk sebagai",
-    "en": "Signed in as"
-  },
-  "connect_user_authorize": {
-    "id": "Lanjutkan",
-    "en": "Continue"
-  },
-  "connect_cancel": {
-    "id": "GA JADI",
-    "en": "CANCEL"
-  },
-  "connect_authorize": {
-    "id": "KASIH IZIN",
-    "en": "AUTHORIZE"
-  },
-  "connect_switch": {
-    "id": "Pake akun yang lain",
-    "en": "Use a different account"
-  },
   "connect_divider": {
     "id": "atau",
     "en": "or"
-  },
-  "example_client": {
-    "en": "This is just an example and cannot be used publicly. Please create your own app on <a href=\"/luna/developers\">Luna for Developers</a>.",
-    "id": "Ini hanya contoh saja dan gabisa dipake publik. Mending bikin app kamu sendiri di <a href=\"/luna/developers\">Luna for Developers</a>."
   },
   "copied": {
     "id": "Disalin",
@@ -198,13 +158,5 @@
   "internal_server_error": {
     "id": "Server lagi ngadepin masalah nih. Coba lagi nanti ya.",
     "en": "Our server is currently experiencing an unexpected issue."
-  },
-  "invalid_redirect_uri": {
-    "id": "OAuth2 redirect_uri tidak valid",
-    "en": "Invalid OAuth2 redirect_uri "
-  },
-  "invalid_client_id": {
-    "id": "App tidak dikenali",
-    "en": "Unknown App"
   }
 }

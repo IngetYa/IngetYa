@@ -35,7 +35,8 @@ export function rUid(): string {
 // transpile cepet response.status sama response.json
 export function rep(options: IResTemp): IResponse {
   const repData: IResponse = {
-    ok: options.code === 200 || options.ok || false,
+    ok: options.status === 200 || options.ok || false,
+    status: options.status,
     code: options.code,
     data: options.data,
     msg: options.msg || "not_found",
@@ -43,7 +44,7 @@ export function rep(options: IResTemp): IResponse {
     error: options.error
   }
 
-  if (options.code === 200 && !options.msg) repData.msg = "Ok"
+  if (options.status === 200 && !options.msg) repData.msg = "Ok"
 
   return repData
 }

@@ -1,4 +1,4 @@
-import { IAny } from "@/types/LibTypes"
+import type { IAny } from "@/types/LibTypes"
 import type portalLang from "@/locales/PortalLocale.json"
 
 export interface IPortalClass {

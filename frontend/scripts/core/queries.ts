@@ -1,4 +1,4 @@
-import { IAny, IQueries, IURLQueries } from "@/types/LibTypes"
+import type { IAny, IQueries, IURLQueries } from "@/types/LibTypes"
 import { qutor } from "@/core/kel"
 
 const queries: IURLQueries = {}

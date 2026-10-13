@@ -18,7 +18,7 @@ export async function startAppContent(): Promise<void> {
 
   const user = await userCheck.getUser()
 
-  if (user.code !== 200) return createSignInForm()
+  if (user.status !== 200) return createSignInForm()
 
   window.location.href = "/app"
 }

@@ -1,4 +1,4 @@
-import { IAny } from "@/types/LibTypes"
+import type { IAny } from "@/types/LibTypes"
 
 export type FileDataType = "audio" | "image" | "json" | "script" | "style" | "type_definition"
 
