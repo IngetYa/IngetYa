@@ -1,0 +1,210 @@
+{
+  "redirecting": {
+    "id": "Mengarahkan",
+    "en": "Redirecting"
+  },
+  "processing": {
+    "id": "Memproses",
+    "en": "Processing"
+  },
+  "loading": {
+    "id": "Memuat",
+    "en": "Loading"
+  },
+  "type_here": {
+    "id": "Tulis Sesuatu",
+    "en": "Type Here"
+  },
+  "error": {
+    "id": "Terjadi kesalahan",
+    "en": "Something went wrong"
+  },
+  "success": {
+    "id": "Berhasil",
+    "en": "Logged in successfully"
+  },
+  "connecting": {
+    "id": "Menghubungkan",
+    "en": "Connecting"
+  },
+  "please_wait": {
+    "id": "Tunggu Bentar",
+    "en": "Please Wait"
+  },
+  "waiting_for_network": {
+    "id": "Menunggu Jaringan",
+    "en": "Waiting for Network"
+  },
+  "too_many_request": {
+    "id": "Kamu lagi cooldown!<br/>Ntar coba lagi aja.",
+    "en": "You're on cooldown!<br/>Too many requests. Try again later."
+  },
+  "req_not_valid": {
+    "id": "Data yang kamu minta ga ketemu",
+    "en": "Your request is not valid"
+  },
+  "ok": {
+    "id": "OKE",
+    "en": "OK"
+  },
+  "cancel": {
+    "id": "BATAL",
+    "en": "CANCEL"
+  },
+  "use_luna": {
+    "id": "Gunakan Akun Luna kamu",
+    "en": "Use your Luna Account"
+  },
+  "email_not_valid": {
+    "id": "<b>Alamat email gak valid</b><br />Periksa dulu aja dan coba lagi",
+    "en": "<b>Your email address is not valid</b><br />Please try again"
+  },
+  "auth_form_title": {
+    "en": "wants to access your Luna Account",
+    "id": "minta izin ke Akun Luna kamu"
+  },
+  "auth_email": {
+    "id": "Email",
+    "en": "Email"
+  },
+  "auth_otp_code": {
+    "id": "Kode",
+    "en": "Code"
+  },
+  "auth_verify": {
+    "id": "VERIFIKASI",
+    "en": "VERIFY"
+  },
+  "auth_login": {
+    "id": "MASUK",
+    "en": "LOGIN"
+  },
+  "auth_cancel": {
+    "id": "BATALKAN",
+    "en": "CANCEL"
+  },
+  "auth_with_provider": {
+    "id": "atau masuk dengan",
+    "en": "or continue with"
+  },
+  "auth_verification_otp": {
+    "id": "Kami udah kirim kode verifikasi 6-digit ke email tersebut. Cek folder spam kalo ga muncul di kontak masuk.",
+    "en": "We have sent you an email for your 6-digit verification code. Check the spam folder if it does not appear in your inbox."
+  },
+  "auth_headback_msg": {
+    "id": "Kembali dan mulai dari awal?",
+    "en": "Head back and start over?"
+  },
+  "auth_headback_btn": {
+    "id": "GANTI EMAIL",
+    "en": "CHANGE EMAIL"
+  },
+  "auth_link_headback": {
+    "id": "Balik atur email?",
+    "en": "Head back to set up email?"
+  },
+  "auth_login_rate_limit": {
+    "id": "Kamu udah ngelebihin batas percobaan login. Coba lagi nanti.",
+    "en": "You have reached the login request limit. Please try again later."
+  },
+  "auth_try_rate_limit": {
+    "id": "Kamu udah ngelebihin batas percobaan autentikasi. Coba lagi nanti.",
+    "en": "You have reached the authentication request limit. Please try again later."
+  },
+  "auth_user_notfound1": {
+    "id": "User gak ketemu - LTX01",
+    "en": "User not found - LTX01"
+  },
+  "auth_user_notfound2": {
+    "id": "User gak ketemu - LTX02",
+    "en": "User not found - LTX02"
+  },
+  "auth_user_notfound3": {
+    "id": "User gak ketemu - LTX03",
+    "en": "User not found - LTX03"
+  },
+  "auth_user_notfound4": {
+    "id": "User gak ketemu - LTX04",
+    "en": "User not found - LTX04"
+  },
+  "auth_otp_notfound": {
+    "id": "Kode verifikasi yang kamu kirim ga ada yang cocok sama akun manapun di Luna",
+    "en": "The verification code you sent doesn't match any account in Luna"
+  },
+  "auth_otp_expired": {
+    "id": "Kode verifikasi yang kamu kirim udah kadaluarsa.<br/>Coba ulang login dari awal.",
+    "en": "The verification code you sent has expired.<br/>Please try logging in again from the beginning."
+  },
+  "auth_notice": {
+    "id": "Kalo kamu putusin buat bikin akun, artinya kamu udah setuju sama <a href=\"/legal/terms\" target=\"_blank\">Ketentuan Layanan</a> dan <a href=\"/legal/privacy\" target=\"_blank\">Kebijakan Privasi</a> yang berlaku.",
+    "en": "By registering, you agree and accept the <a href=\"/legal/terms\" target=\"_blank\">Terms of Serivce</a> and  <a href=\"/legal/privacy\" target=\"_blank\">Privacy Policy</a>."
+  },
+  "auth_login_provider_maintenance": {
+    "id": "Metode login -{PROVIDER}- ini lagi dalam perbaikan<br />Coba pake metode login yang lain dulu aja",
+    "en": "This -{PROVIDER}- login method is under maintenance<br />Please choose other login method"
+  },
+  "auth_failed": {
+    "id": "Nampaknya percobaan autentikasi-mu gagal yaa.<br />Kalem, ntar coba lagi aja kalo udah readyy!",
+    "en": "It seems your authentication attempt failed.<br />Don't worry, just try again when you're ready!"
+  },
+  "turnstile_failed": {
+    "id": "Kami ga bisa mastiin kamu robot atau bukan. Coba lagi ya ntar.",
+    "en": "We couldn't verify that you're human. Please try again."
+  },
+  "label_error_back": {
+    "id": "KEMBALI",
+    "en": "BACK"
+  },
+  "connect_sign_label": {
+    "id": "Masuk sebagai",
+    "en": "Signed in as"
+  },
+  "connect_user_authorize": {
+    "id": "Lanjutkan",
+    "en": "Continue"
+  },
+  "connect_cancel": {
+    "id": "GA JADI",
+    "en": "CANCEL"
+  },
+  "connect_authorize": {
+    "id": "KASIH IZIN",
+    "en": "AUTHORIZE"
+  },
+  "connect_switch": {
+    "id": "Pake akun yang lain",
+    "en": "Use a different account"
+  },
+  "connect_divider": {
+    "id": "atau",
+    "en": "or"
+  },
+  "example_client": {
+    "en": "This is just an example and cannot be used publicly. Please create your own app on <a href=\"/luna/developers\">Luna for Developers</a>.",
+    "id": "Ini hanya contoh saja dan gabisa dipake publik. Mending bikin app kamu sendiri di <a href=\"/luna/developers\">Luna for Developers</a>."
+  },
+  "copied": {
+    "id": "Disalin",
+    "en": "Copied"
+  },
+  "not_found": {
+    "id": "Data engga ketemu",
+    "en": "Your requested data is not found"
+  },
+  "entity_too_large": {
+    "id": "Data kamu melebihi batas ukuran request",
+    "en": "Your data exceeded the request size limit"
+  },
+  "internal_server_error": {
+    "id": "Server lagi ngadepin masalah nih. Coba lagi nanti ya.",
+    "en": "Our server is currently experiencing an unexpected issue."
+  },
+  "invalid_redirect_uri": {
+    "id": "OAuth2 redirect_uri tidak valid",
+    "en": "Invalid OAuth2 redirect_uri "
+  },
+  "invalid_client_id": {
+    "id": "App tidak dikenali",
+    "en": "Unknown App"
+  }
+}

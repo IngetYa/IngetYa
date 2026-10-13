@@ -7,7 +7,7 @@ node_modules
 # compile/bundle
 dist
 public
-views
+views/*.json
 
 # self added
 ex

@@ -3,7 +3,8 @@ package.json
 package-lock.json
 **/tsconfig.json
 eslint.config.mjs
-vite.config.ts
+views/*
+# vite.config.ts
 .prettier*
 .vscode/**
 nodemon.json

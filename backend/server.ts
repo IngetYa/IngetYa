@@ -10,7 +10,6 @@ async function startServer(): Promise<void> {
   // start server
   app.listen(PORT, () => {
     logger.success(`HOME >> http://localhost:${PORT}`)
-    logger.success(`AUTH >> http://localhost:${PORT}/luna`)
     logger.success("Running ✔✔✔")
   })
 }

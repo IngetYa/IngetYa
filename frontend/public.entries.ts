@@ -1,3 +1,3 @@
-const publicEntries = ["home"]
+const publicEntries = ["home", "portal"]
 
 export default publicEntries

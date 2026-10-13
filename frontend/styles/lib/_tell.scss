@@ -1,0 +1,52 @@
+@use "../core/constants" as v;
+
+.tell {
+  position: fixed;
+  z-index: 99;
+  width: fit-content;
+  height: fit-content;
+  min-width: 0;
+  min-height: 0;
+  top: calc((v.$medPadding) + 22px);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100vw - (v.$bigPadding * 2));
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 0;
+  background-color: v.$px3;
+  border: 1px solid v.$pm1;
+  border-radius: 5px;
+  overflow: hidden;
+  animation: tell_anim 0.2s;
+  .ic {
+    flex-shrink: 0;
+    font-size: 1.3em;
+    padding: v.$smallPadding v.$medPadding;
+    color: v.$pm1;
+  }
+  .text {
+    max-width: 500px;
+    flex-grow: 1;
+    border-left: 1px solid v.$sgray;
+    padding: v.$smallPadding v.$medPadding;
+    font-size: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+  }
+}
+
+@keyframes tell_anim {
+  0% {
+    opacity: 0.5;
+    transform: translateY(-50%) translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}

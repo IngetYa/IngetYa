@@ -6,6 +6,15 @@
     "resolveJsonModule": true,
     "outDir": "dist",
     "rootDir": ".",
+    "paths": {
+      "@/scss/*": ["./styles/*"],
+      "@/types/*": ["./scripts/types/*"],
+      "@/locales/*": ["./locales/*"],
+      "@/core/*": ["./scripts/core/*"],
+      "@/main/*": ["./scripts/main/*"],
+      "@/lib/*": ["./scripts/lib/*"],
+      "@/pages/*": ["./scripts/pages/*"]
+    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

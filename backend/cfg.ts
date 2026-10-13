@@ -5,7 +5,7 @@ dotenv.config()
 
 export default {
   APP_PRODUCTION: process.env.APP_PRODUCTION?.toLowerCase() === "true",
-  APP_PORT: Number(process.env.APP_PORT ?? 7001),
+  APP_PORT: Number(process.env.APP_PORT ?? 9001),
   APP_HOST: process.env.APP_HOST ?? "localhost",
 
   DB_URI: process.env.DB_URI ?? "mongodb://localhost:27017",

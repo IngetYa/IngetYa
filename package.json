@@ -35,6 +35,7 @@
     "@types/node": "^26.6.4",
     "eslint": "^10.12.0",
     "globals": "^17.13.0",
+    "nodemon": "^3.1.14",
     "prettier": "^3.9.9",
     "sass": "^1.105.1",
     "tsx": "^4.23.15",
@@ -60,10 +61,11 @@
     "type-check": "tsc -p . --pretty --noEmit",
     "lint": "eslint --ext ts",
     "start": "node .",
-    "dev:server": "nodemon",
-    "dev:client": "vite build --config vite.config.ts --mode development",
-    "build": "npm run build:client && npm run build:server",
-    "build:server": "rm -rf ./dist/backend && tsc -p . --extendedDiagnostics",
-    "build:client": "vite build --config vite.config.ts --mode production"
+    "dev": "nodemon",
+    "dev-server": "nodemon",
+    "dev-client": "vite build --config vite.config.ts --mode development",
+    "build": "npm run build-client && npm run build-server",
+    "build-server": "rm -rf ./dist/* && tsc -p . --extendedDiagnostics",
+    "build-client": "vite build --config vite.config.ts --mode production"
   }
 }

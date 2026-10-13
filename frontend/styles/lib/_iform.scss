@@ -1,0 +1,680 @@
+@use "../core/constants" as v;
+
+.Loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: rgba(v.$black, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: v.$bigPadding;
+  .box {
+    animation: modal_in 0.2s;
+    padding: v.$hugePadding;
+    background-color: v.$px25;
+    border: 1px solid v.$px3;
+    text-align: center;
+    p {
+      line-height: 1.5;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.iform {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 95;
+  background-color: rgba(v.$black, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: v.$bigPadding;
+  font-size: 1rem;
+  .center {
+    text-align: center;
+  }
+  .box {
+    position: relative;
+    width: clamp(300px, 100vw, 800px);
+    max-height: calc(100% - v.$bigPadding);
+    background-color: v.$px1;
+    border: 1px solid v.$px3;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    animation: modal_in 0.2s;
+    .groups {
+      width: 100%;
+    }
+    .f {
+      padding: v.$medPadding v.$bigPadding;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: v.$medPadding;
+      .cy {
+        color: v.$yellow;
+        text-shadow: v.$textoutline;
+      }
+      .by {
+        color: v.$px1;
+        border-top-right-radius: v.$medPadding;
+        border-bottom-right-radius: v.$bigPadding;
+        padding: 0 v.$smallPadding;
+        background-color: v.$syellow;
+      }
+      &:has(.title) {
+        position: sticky;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: v.$bigPadding;
+        border-bottom: 1px solid v.$px3;
+        background-color: v.$px2;
+        .title {
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+        .btn-close {
+          font-size: 1.5rem;
+          color: v.$pm1;
+        }
+      }
+      &:has(.s) {
+        padding-top: 0;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+      }
+      .i {
+        width: 100%;
+        .tx {
+          line-height: 1.5;
+          padding-top: v.$medPadding;
+        }
+        .btn-find {
+          width: 100%;
+          padding: v.$medPadding;
+          background-color: v.$px3;
+          text-align: center;
+          &::after {
+            content: "\f0da";
+            font-family: "Font Awesome 7 Pro";
+            font-weight: 600;
+            margin-left: 3px;
+          }
+        }
+        .btn-add-evt {
+          color: v.$cgreen;
+        }
+        .btn-add-field {
+          position: relative;
+          margin-top: v.$smallPadding;
+          color: v.$pm1;
+          padding: v.$medPadding;
+          background-color: v.$px2;
+          text-align: center;
+          border-radius: v.$smallPadding;
+          overflow: hidden;
+        }
+        .btn-evt {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: v.$smallPadding;
+          padding: v.$medPadding;
+          background-color: v.$black;
+          margin-bottom: 2px;
+          .evt-name {
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            small {
+              &::before {
+                content: "\e7d1";
+                margin-right: 5px;
+                font-family: "Font Awesome 7 Pro";
+                font-weight: 600;
+                color: v.$pm1;
+              }
+            }
+            &::before {
+              content: "\e5ca";
+              margin-right: 5px;
+              font-family: "Font Awesome 7 Pro";
+              font-weight: 600;
+              color: v.$pm1;
+            }
+          }
+          .btn-delete {
+            flex-shrink: 0;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        .inp {
+          width: 100%;
+          overflow: hidden;
+          .evt-drop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: v.$smallPadding;
+            line-height: 1.5;
+            .btn {
+              flex-shrink: 0;
+              color: v.$cred;
+            }
+            label {
+              flex-grow: 1;
+            }
+          }
+          label:not(:has(input)) {
+            display: block;
+            width: 100%;
+            font-size: 1rem;
+            line-height: 1.5;
+          }
+          input[type="text"],
+          input[type="number"],
+          textarea {
+            border-radius: v.$smallPadding;
+            display: block;
+            min-width: 0;
+            width: 100%;
+            background-color: v.$px25;
+            color: v.$softwhite;
+            border: 1px solid v.$px2;
+            padding: v.$medPadding;
+            font-size: 0.8rem;
+            &::placeholder {
+              font-style: italic;
+            }
+            &:focus {
+              border-color: v.$pm1;
+            }
+            &.evt-state {
+              &:not(:focus) {
+                color: v.$pm1;
+                font-style: italic;
+              }
+            }
+            &.hide {
+              display: none;
+            }
+          }
+          textarea {
+            resize: none;
+          }
+          input[type="file"] {
+            display: none;
+          }
+          audio {
+            display: block;
+            width: 100%;
+            margin: v.$smallPadding 0;
+          }
+          .btn-delete {
+            display: block;
+            width: fit-content;
+            color: v.$cred;
+            margin-top: 3px;
+          }
+          .btn-see-full {
+            width: fit-content;
+            display: block;
+            text-decoration: none;
+            color: v.$pm1;
+            margin: 2px 0;
+          }
+          .btn-file {
+            width: 100%;
+            padding: v.$medPadding;
+            background-color: v.$px3;
+            font-weight: 600;
+            text-align: center;
+            &::before {
+              content: "\f574";
+              font-family: "Font Awesome 7 Pro";
+              font-weight: 600;
+              margin-right: 5px;
+              cursor: pointer;
+            }
+          }
+          .inp-ic {
+            border-radius: v.$smallPadding;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            background-color: v.$px25;
+            border: 1px solid v.$px2;
+            font-size: 0.8rem;
+            overflow: hidden;
+            span {
+              margin-left: v.$medPadding;
+              flex-shrink: 0;
+              color: v.$softwhite;
+            }
+            img {
+              margin-left: 5px;
+              flex-shrink: 0;
+              height: 26px;
+            }
+            input {
+              flex-grow: 1;
+              height: 100%;
+              border: none;
+              background-color: #00000000;
+              &:focus {
+                background-color: #00000000;
+              }
+            }
+            &:has(:focus) {
+              border-color: v.$pm1;
+              span,
+              i {
+                color: v.$pm1;
+              }
+            }
+          }
+        }
+        .rem {
+          color: v.$cred;
+          display: flex;
+          justify-content: right;
+          align-items: center;
+        }
+        .img {
+          display: block;
+          width: 100%;
+          margin: v.$smallPadding 0;
+          canvas {
+            display: block;
+            margin: 0 auto;
+          }
+          img {
+            margin: 0 auto;
+            width: fit-content;
+            height: fit-content;
+            max-width: 100%;
+            max-height: 100%;
+            image-rendering: pixelated;
+          }
+          .img-name {
+            flex-grow: 1;
+            .btn-delete {
+              display: block;
+              width: fit-content;
+              color: v.$cred;
+              margin-top: 3px;
+            }
+          }
+        }
+        .img-item-creation {
+          margin: v.$smallPadding 0;
+          gap: v.$smallPadding;
+          max-width: 100%;
+          overflow-x: auto;
+          scrollbar-width: thin;
+          background-color: v.$black;
+          canvas {
+            display: block;
+            margin: 0 auto;
+            image-rendering: pixelated;
+          }
+        }
+        .audio {
+          width: 100%;
+          audio {
+            width: 100%;
+            margin: 0 auto;
+          }
+        }
+        .validate-ol {
+          width: 100%;
+          ul,
+          ol {
+            width: 100%;
+            padding: v.$medPadding;
+            list-style-position: outside;
+            background-color: v.$px25;
+            li {
+              margin-left: 1.65em;
+              text-align: left;
+              line-height: 1.8;
+              span.mono {
+                padding: 2px 5px;
+                border-radius: 5px;
+                background-color: v.$px1;
+                color: v.$syellow;
+                font-size: 0.8rem;
+                border: 1px solid v.$px3;
+              }
+            }
+          }
+        }
+        ul {
+          display: block;
+          list-style-position: outside;
+          li {
+            margin-left: 1.25em;
+            word-break: break-all;
+            word-break: break-word;
+          }
+        }
+
+        table {
+          width: 100%;
+          border-spacing: 5px;
+          // border-collapse: collapse;
+          th,
+          td {
+            border-radius: v.$smallPadding;
+            padding: 8px;
+            vertical-align: middle;
+          }
+
+          td {
+            font-size: 0.9rem;
+            font-weight: 600;
+            background-color: v.$px2;
+            .btn-del-row {
+              color: v.$cred;
+              text-align: center;
+            }
+            &:nth-child(2) {
+              color: v.$syellow;
+            }
+            &:last-child {
+              background-color: v.$px2;
+            }
+            &.ex {
+              color: v.$swhite;
+            }
+          }
+
+          th {
+            background-color: v.$pm2;
+            text-align: center;
+            font-weight: 700;
+          }
+        }
+      }
+      .s {
+        .btn {
+          position: relative;
+          width: 100%;
+          display: block;
+          text-align: center;
+          padding: v.$medPadding;
+          font-weight: 700;
+          text-transform: uppercase;
+          border-radius: v.$smallPadding;
+          color: v.$softwhite;
+          &.btn-ok {
+            background-color: v.$pm2;
+          }
+          &.btn-prim {
+            text-transform: none;
+            font-weight: 700;
+            background-color: v.$pm1;
+            color: v.$px1;
+          }
+          &.btn-cancel {
+            background-color: v.$black;
+          }
+          &.btn-delete-object {
+            background-color: v.$black;
+            color: v.$sred;
+          }
+        }
+        &.hide {
+          display: none;
+        }
+      }
+
+      .summary {
+        font-size: 0.8rem;
+        padding: v.$medPadding;
+        background-color: v.$px25;
+        border: 1px solid v.$px2;
+        border-radius: v.$smallPadding;
+        .pricing {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: v.$medPadding;
+          line-height: 1.5;
+          .price {
+            font-weight: 700;
+            &.fee {
+              color: v.$syellow;
+            }
+            &.sub {
+              color: v.$cgreen;
+            }
+          }
+        }
+
+        .bold {
+          font-weight: 800;
+        }
+        .big {
+          font-size: 1.2rem;
+          .price {
+            font-weight: 800;
+          }
+        }
+        .pad {
+          padding-top: v.$smallPadding;
+          margin-top: v.$smallPadding;
+          border-top: 1px solid v.$px2;
+        }
+      }
+      &.p {
+        padding: 0;
+        margin-top: 3px;
+      }
+      &.lg {
+        padding: v.$hugePadding;
+      }
+      &.tp {
+        padding: 0 v.$bigPadding;
+        padding-top: v.$hugePadding;
+      }
+      &.bp {
+        padding: 0 v.$bigPadding;
+        padding-bottom: v.$hugePadding;
+      }
+      &.file-preview {
+        border-bottom: 1px solid v.$px3;
+        .file-actions {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: v.$medPadding;
+          padding-bottom: v.$bigPadding;
+          padding-top: v.$medPadding;
+        }
+        &:last-child {
+          border-bottom: none;
+          .file-actions {
+            padding-bottom: 0;
+          }
+        }
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+  }
+
+  &.inlined {
+    z-index: 0;
+    padding: 0;
+    border: none;
+    width: 100%;
+    height: fit-content;
+    .box {
+      padding: 0;
+      position: relative;
+      width: 100%;
+      max-height: unset;
+      border: none;
+      animation: none;
+    }
+
+    &.relative {
+      position: relative;
+    }
+
+    &.no-bg {
+      background: none;
+      .box {
+        background: none;
+      }
+    }
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+
+.radio {
+  margin: 3px 0;
+  width: 100%;
+  background-color: v.$px25;
+  border: 1px solid v.$px2;
+  overflow: hidden;
+  border-radius: v.$smallPadding;
+  label {
+    width: 100%;
+    padding: v.$medPadding;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    input[type="radio"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: v.$px3;
+      margin: 0;
+      font: inherit;
+      color: v.$pm1;
+      width: 1.15em;
+      height: 1.15em;
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+    }
+    input[type="radio"]::before {
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50%;
+      transform: scale(1);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em v.$px3;
+      background-color: v.$px3;
+    }
+    input[type="radio"]:checked {
+      background-color: v.$pm1;
+      transform: scale(1);
+    }
+    input[type="radio"]:checked::before {
+      transform: scale(1);
+    }
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: calc(100% - (1.15em + 10px));
+    }
+  }
+  &:has(:checked) {
+    background-image: url(../abstracts/letter-y-seamless.svg);
+    background-position: center center;
+    background-repeat: repeat;
+    span {
+      color: v.$pm1;
+    }
+  }
+}
+.check {
+  width: 100%;
+  padding: 3px 0;
+  label {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    input[type="checkbox"] {
+      appearance: none;
+      background-color: v.$px3;
+      border-radius: 72px;
+      border-style: none;
+      flex-shrink: 0;
+      height: 20px;
+      margin: 0;
+      position: relative;
+      width: 30px;
+      cursor: pointer;
+    }
+    input[type="checkbox"]::before {
+      bottom: -6px;
+      content: "";
+      left: -6px;
+      position: absolute;
+      right: -6px;
+      top: -6px;
+    }
+    input[type="checkbox"],
+    input[type="checkbox"]::after {
+      transition: all 90ms ease-out;
+    }
+    input[type="checkbox"]::after {
+      background-color: v.$softwhite;
+      border-radius: 50%;
+      content: "";
+      height: 14px;
+      left: 3px;
+      position: absolute;
+      top: 3px;
+      width: 14px;
+    }
+
+    input[type="checkbox"]:checked {
+      background-color: v.$pm1;
+    }
+
+    input[type="checkbox"]:checked::after {
+      background-color: v.$px2;
+      left: 13px;
+    }
+  }
+}

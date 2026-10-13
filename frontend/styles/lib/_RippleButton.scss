@@ -1,0 +1,21 @@
+@use "../core/constants" as v;
+
+span.ripples {
+  position: absolute;
+  background-color: v.$white;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: ripples 0.5s ease-out forwards;
+}
+
+@keyframes ripples {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}

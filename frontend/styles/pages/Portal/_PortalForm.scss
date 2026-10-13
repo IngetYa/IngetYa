@@ -1,0 +1,318 @@
+@use "../../core/constants" as v;
+
+$fontProviderIcon: 1.1rem;
+
+.PortalCheck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100dvh;
+  .box {
+    padding: v.$hugePadding;
+    max-width: calc(100% - v.$bigPadding);
+    background-color: v.$px25;
+    border: 1px solid v.$px3;
+    text-align: center;
+    animation: modal_in 0.2s;
+    p {
+      line-height: 1.5;
+      font-size: 1.5rem;
+      word-break: break-all;
+      word-break: break-word;
+    }
+  }
+}
+
+.PortalLogin {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: modal_in 0.2s;
+  .PortalForms {
+    width: 100%;
+    padding: v.$bigPadding;
+    .portal-other-divider {
+      display: flex;
+      align-items: center;
+      margin-bottom: v.$bigPadding;
+      font-size: 0.8rem;
+      &.divider-authorize {
+        margin-top: v.$bigPadding;
+      }
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background-color: rgba(v.$white, 0.2);
+      }
+      span {
+        padding: 0 v.$medPadding;
+        color: v.$softwhite;
+      }
+    }
+    .PortalEmail {
+      background-color: v.$px2;
+      display: block;
+      width: 100%;
+      padding: v.$bigPadding;
+      border: 1px solid v.$px3;
+      border-bottom: none;
+      .f {
+        width: 100%;
+        margin-bottom: v.$medPadding;
+        .title-icons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: v.$bigPadding 0;
+          gap: v.$medPadding;
+          color: v.$pm1;
+          span {
+            transform: translateY(v.$smallPadding);
+          }
+          img {
+            display: block;
+            max-height: 75px;
+          }
+        }
+        .title-title {
+          text-align: center;
+          font-size: 1.1rem;
+          font-weight: 700;
+        }
+        .title-desc {
+          text-align: center;
+          font-size: 0.8rem;
+        }
+        .btn-language {
+          display: block;
+          font-size: 0.8rem;
+          width: fit-content;
+          margin: v.$bigPadding auto;
+          border-bottom: 1px solid v.$softwhite;
+          padding-bottom: v.$medPadding;
+        }
+        .sm {
+          line-height: 1.5;
+          font-size: 0.7rem;
+          font-style: italic;
+          text-align: justify;
+          text-align-last: left;
+        }
+        label {
+          display: block;
+          line-height: 1.5;
+        }
+        input {
+          line-height: 1.5;
+        }
+        .inp {
+          background-color: v.$px25;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          gap: 0;
+          border: 1px solid v.$px1;
+          .inp-icon {
+            padding-left: v.$medPadding;
+          }
+          input {
+            background-color: #00000000;
+            width: fit-content;
+            min-width: 0;
+            flex-grow: 1;
+            padding: v.$medPadding;
+            color: v.$softwhite;
+            &.otp {
+              letter-spacing: 5px;
+            }
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus {
+              -webkit-box-shadow: 0 0 0 1000px v.$px25 inset !important;
+              -webkit-text-fill-color: v.$softwhite !important;
+              transition: none;
+            }
+          }
+          &:has(:focus) {
+            border-color: v.$pm1;
+          }
+        }
+
+        &.form-btn-actions {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: v.$medPadding;
+          .btn {
+            flex: auto;
+            text-align: center;
+            display: block;
+            padding: v.$medPadding;
+            font-weight: 600;
+            &.btn-restart {
+              background-color: v.$pm2;
+              flex-shrink: 0;
+              flex-grow: 0;
+              &.hide {
+                display: none;
+              }
+            }
+            &.btn-login {
+              flex-shrink: 0;
+              flex-grow: 1;
+              background-color: v.$pm1;
+              color: v.$px1;
+            }
+            &.btn-cancel {
+              flex-grow: 0;
+              flex-shrink: 0;
+              background-color: v.$px25;
+              width: calc(100% / 2);
+            }
+            &.btn-change {
+              background-color: v.$px25;
+              color: v.$pm1;
+            }
+            &.btn-authorize {
+              flex-grow: 0;
+              flex-shrink: 0;
+              background-color: v.$cgreen;
+              color: v.$px1;
+              width: calc(100% / 2);
+            }
+          }
+        }
+
+        &.field-user {
+          width: 100%;
+          .card {
+            padding: v.$medPadding;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: v.$medPadding;
+            border: 1px solid v.$px1;
+            background-color: v.$px3;
+            background-image: url(./abstracts/mosaic-seamless.svg);
+            background-position: top left;
+            background-repeat: repeat;
+            .card-meta {
+              .card-name {
+                font-weight: 700;
+                word-break: break-all;
+                word-break: break-word;
+              }
+            }
+            .card-actions {
+              .btn-action-authorize {
+                padding: v.$medPadding;
+                background-color: v.$px25;
+                text-align: center;
+              }
+            }
+          }
+        }
+
+        &.turnstile-field {
+          margin-top: calc(v.$medPadding + 3px);
+          .card-turnstile.no-turnstile {
+            width: 100%;
+            margin-bottom: calc(v.$bigPadding + 3px);
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: v.$smallPadding;
+          }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .PortalOthers {
+      background-color: v.$px2;
+      display: block;
+      width: 100%;
+      padding: v.$bigPadding;
+      padding-top: 0;
+      border: 1px solid v.$px3;
+      border-top: none;
+      .login-providers {
+        display: block;
+        .btn {
+          width: 100%;
+          padding: v.$medPadding v.$bigPadding;
+          margin-bottom: v.$medPadding;
+          border: 1px solid rgba(v.$px1, 0.7);
+          background-color: rgba(v.$px1, 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
+          text-decoration: none;
+          color: v.$softwhite;
+          i {
+            font-size: $fontProviderIcon;
+          }
+          .provider-icon {
+            display: block;
+            width: $fontProviderIcon;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+          &:hover {
+            background-color: v.$black;
+          }
+        }
+      }
+    }
+  }
+  .PortalAcceptTerms {
+    font-size: 0.8rem;
+    padding: v.$bigPadding;
+    padding-top: 0;
+    text-align: center;
+  }
+}
+
+@media (min-width: 700px) {
+  .PortalLogin {
+    .PortalForms {
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      gap: v.$bigPadding;
+      .PortalEmail {
+        flex-grow: 1;
+        max-width: 700px;
+        border-bottom: 1px solid v.$px3;
+      }
+      .PortalOthers {
+        flex-shrink: 0;
+        max-width: 250px;
+        border-top: 1px solid v.$px3;
+        .portal-other-divider {
+          margin-top: v.$bigPadding;
+        }
+        .login-providers {
+          .btn {
+            &:hover {
+              border-color: v.$pm1;
+              background-color: v.$px3;
+            }
+          }
+        }
+      }
+    }
+  }
+}

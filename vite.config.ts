@@ -1,6 +1,7 @@
 import path from "path"
 import { defineConfig } from "vite"
 import publicEntries from "./frontend/public.entries"
+import { moveManifestPlugin } from "./frontend/moveManifest"
 
 const root = import.meta.dirname
 
@@ -19,6 +20,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@/scss": path.resolve(root, "frontend/styles"),
         "@/types": path.resolve(root, "frontend/scripts/types"),
+        "@/locales": path.resolve(root, "frontend/locales"),
         "@/core": path.resolve(root, "frontend/scripts/core"),
         "@/main": path.resolve(root, "frontend/scripts/main"),
         "@/lib": path.resolve(root, "frontend/scripts/lib"),
@@ -26,13 +28,14 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
+      manifest: ".xxxmanifest.json",
       watch: mode === "production" ? undefined : { clearScreen: true },
       outDir: path.resolve(root, "public"),
       emptyOutDir: true,
       cssCodeSplit: true,
       cssMinify: true,
       rollupOptions: {
-        input: Object.fromEntries(entries.map((name) => [name, path.resolve(root, `frontend/${name}.html`)])),
+        input: Object.fromEntries(entries.map((name) => [name, path.resolve(root, `frontend/scripts/${name}.ts`)])),
         output: {
           format: "cjs",
           comments: false,
@@ -48,6 +51,7 @@ export default defineConfig(({ mode }) => {
           }
         }
       }
-    }
+    },
+    plugins: [moveManifestPlugin()]
   }
 })

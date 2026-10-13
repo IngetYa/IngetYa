@@ -1,3 +1,4 @@
+import fs from "fs"
 import express, { type Request, type Response, type NextFunction } from "express"
 import expressWs from "express-ws"
 import { WebSocket } from "ws"
@@ -22,17 +23,19 @@ const storePromise = mongoose.connection.asPromise().then((conn) => conn.getClie
 
 app.use(
   session({
-    name: "luna",
+    name: "ingetya",
     secret: cfg.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30, sameSite: "strict" },
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 28, // expire setelah 28 hari
+      sameSite: "strict"
+    },
     store: MongoStore.create({
-      // append dari koneksi mongodb yang udah ada
-      clientPromise: storePromise as IAny,
+      clientPromise: storePromise, // append dari koneksi mongodb yang udah ada
       dbName: cfg.DB_NAME,
       collectionName: "sessions",
-      stringify: false,
+      stringify: false, // biar bisa dibaca sebagai BSON
       autoRemove: "native"
     })
   })
@@ -46,6 +49,9 @@ app.use(express.static("public"))
 
 // view engine, tadinya html biasa
 app.set("view engine", "ejs")
+
+// ambil manifest buat hash file
+const manifest = JSON.parse(fs.readFileSync("./views/manifest.json", "utf-8"))
 
 // endpoint buat websocket
 app.ws("/socket", (wsClient, req: Request) => {
@@ -70,16 +76,20 @@ const interval = setInterval(() => {
 
 getWss().on("close", () => {
   clearInterval(interval)
-  // end process and send webhook
+  // [!TODO] end process and send webhook
 })
 
 getWss().on("error", () => {
   clearInterval(interval)
-  // end process and send webhook
+  // [!TODO] end process and send webhook
+})
+
+app.get("/portal", (req: Request, res: Response) => {
+  res.render("portal", { manifest: manifest["scripts/portal.ts"] })
 })
 
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile("./public/home.html", { root: "./" })
+  res.render("home", { manifest: manifest["scripts/home.ts"] })
 })
 
 // endpoint ga ketemu
