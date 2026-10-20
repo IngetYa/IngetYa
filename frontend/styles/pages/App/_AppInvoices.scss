@@ -1,0 +1,133 @@
+@use "../../core/constants" as v;
+
+.Invoices {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+  .FlatList {
+    .Search {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin-bottom: v.$bigPadding;
+      .inp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: v.$input-bg;
+        border: 1px solid v.$input-border;
+        .icon {
+          margin-left: v.$medPadding;
+          flex-shrink: 0;
+          color: v.$text-primary;
+        }
+        .btn {
+          font-size: 0.7rem;
+          flex-shrink: 0;
+          padding: v.$smallPadding v.$medPadding;
+          border-radius: 5px;
+          margin-right: 5px;
+          background-color: v.$btn-primary-bg;
+          color: v.$btn-primary-text;
+        }
+        input {
+          background-color: #00000000;
+          padding: v.$medPadding;
+          min-width: 0;
+          flex-grow: 1;
+          color: v.$text-primary;
+          &::placeholder {
+            color: v.$text-muted;
+          }
+        }
+        &:has(:focus) {
+          border-color: v.$input-border-focus;
+        }
+      }
+    }
+
+    .table-container {
+      max-width: 100%;
+      border: 2px solid v.$primary;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      .table {
+        width: 100%;
+        border-spacing: v.$smallPadding;
+        border-collapse: separate;
+        table-layout: auto;
+        tr {
+          width: 100%;
+          th,
+          td {
+            padding: v.$medPadding;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+          }
+
+          td {
+            overflow: hidden;
+            cursor: pointer;
+            font-size: 0.9rem;
+            .paid,
+            .unpaid,
+            .expired {
+              color: v.$btn-primary-text;
+              font-size: 0.7rem;
+              padding: 2px 5px;
+              border-radius: 3px;
+            }
+            .paid {
+              background-color: v.$sgreen;
+            }
+            .unpaid {
+              background-color: v.$accent-gold;
+            }
+            .expired {
+              background-color: v.$sred;
+            }
+            &.name {
+              font-weight: 500;
+              display: block;
+              white-space: wrap;
+              text-align: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+          th {
+            background-color: v.$primary;
+            color: v.$btn-primary-text;
+            font-weight: 600;
+            font-size: 0.8rem;
+          }
+        }
+
+        .thead {
+          width: 100%;
+        }
+
+        .tbody {
+          width: 100%;
+          background-color: v.$card-bg;
+          background-image: url("./abstracts/moon-seamless.svg");
+          background-position: top left;
+          background-repeat: repeat;
+        }
+      }
+    }
+  }
+}

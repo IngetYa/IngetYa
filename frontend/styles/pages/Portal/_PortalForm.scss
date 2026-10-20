@@ -154,7 +154,6 @@ $fontProviderIcon: 1.1rem;
           }
           &:has(:focus) {
             border-color: v.$input-border-focus;
-            box-shadow: 0 0 0 2px v.$input-focus-ring;
           }
         }
 

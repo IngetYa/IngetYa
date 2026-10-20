@@ -1,0 +1,183 @@
+@use "../../core/constants" as v;
+
+.Cart {
+  .FlatList {
+    padding: 0;
+    .iform {
+      height: 100%;
+      .box {
+        height: 100%;
+        border-radius: 0;
+        padding-bottom: calc(v.$hugePadding * 2.5);
+        .f {
+          max-width: 1280px;
+          margin: 0 auto;
+          .order-meta {
+            position: relative;
+            width: 100%;
+            height: 226px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .order-item-thumbnail {
+              position: absolute;
+              z-index: -1;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+                -o-object-fit: cover;
+                -o-object-position: center center;
+                border-radius: 10px;
+              }
+            }
+            .order-item-name {
+              color: v.$white;
+              text-shadow: v.$textshadow;
+              font-weight: 700;
+              font-size: 1.4rem;
+            }
+            .order-item-price {
+              font-size: 1.25rem;
+              color: v.$white;
+              font-weight: 600;
+              text-shadow: v.$textshadow;
+            }
+          }
+          .check {
+            padding-top: 2px;
+            margin-bottom: v.$medPadding;
+          }
+
+          .Payment {
+            border: 1px solid v.$card-border;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: rgba(v.$card-bg, 0.5);
+            margin-bottom: v.$smallPadding;
+            background-image: url("./abstracts/mosaic-seamless.svg");
+            background-position: center center;
+            background-repeat: repeat;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            .PaymentName {
+              padding: v.$bigPadding;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+              gap: v.$bigPadding;
+              cursor: pointer;
+              .title-text {
+                font-weight: 700;
+                text-align: center;
+              }
+              .arrow-openclose {
+                rotate: 0;
+                transition: rotate 0.3s;
+              }
+            }
+            .PaymentDetail {
+              padding: 0;
+              max-height: 0;
+              opacity: 0;
+              transition:
+                padding 0.5s ease,
+                opacity 0.3s ease,
+                max-height 0.5s ease-in-out;
+              .fee {
+                font-size: 0.8rem;
+                font-style: italic;
+              }
+              .btn-buy {
+                background-color: v.$primary-dark;
+                padding: v.$medPadding;
+                border-radius: 5px;
+                color: v.$white;
+                font-weight: 600;
+                margin-bottom: v.$medPadding;
+              }
+              .PaymentHelp {
+                width: 100%;
+                border-radius: 5px;
+                padding: v.$medPadding;
+                margin-bottom: v.$medPadding;
+                background-color: v.$card-bg;
+                border: 1px solid v.$card-border;
+                &:last-child {
+                  margin-bottom: 0;
+                }
+                .step-name {
+                  font-weight: 600;
+                }
+                .step-guide {
+                  width: 100%;
+                  ul {
+                    li {
+                      margin-left: 1.65rem;
+                      text-align: justify;
+                      text-align-last: left;
+                    }
+                  }
+                }
+              }
+            }
+            &.show {
+              .PaymentName {
+                .arrow-openclose {
+                  rotate: 90deg;
+                }
+              }
+              .PaymentDetail {
+                display: block;
+                padding: v.$medPadding;
+                max-height: 3000px;
+                opacity: 1;
+                .fee {
+                  margin-bottom: v.$medPadding;
+                  p {
+                    margin: v.$smallPadding 0;
+                  }
+                }
+              }
+            }
+          }
+
+          &.total {
+            max-width: none;
+            position: sticky;
+            z-index: 1;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(v.$primary-dark, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            .total-meta {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: v.$medPadding;
+              .total-title {
+                color: v.$white;
+                font-weight: 600;
+              }
+              .total-price {
+                color: v.$white;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

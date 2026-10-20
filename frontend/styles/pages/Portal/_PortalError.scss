@@ -1,0 +1,74 @@
+@use "../../core/constants" as v;
+
+.PortalError {
+  width: 100%;
+  min-height: 100dvh;
+  padding: v.$bigPadding;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .box {
+    min-width: 40vw;
+    max-width: 800px;
+    padding: v.$bigPadding;
+    background-color: rgba(v.$card-bg, 0.6);
+    border-radius: 10px;
+    .text {
+      width: 100%;
+      .title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: v.$bigPadding 0;
+        font-size: 0.8rem;
+        &::before,
+        &::after {
+          content: "";
+          flex: 1;
+          height: 1px;
+          background-color: rgba(v.$primary-dark, 0.6);
+        }
+        span {
+          padding: 0 v.$medPadding;
+        }
+      }
+
+      .desc {
+        margin: v.$bigPadding 0;
+        p {
+          line-height: 1.5;
+          text-align: justify;
+          text-align-last: center;
+          &.reason {
+            color: v.$sred;
+            font-weight: 600;
+            a {
+              color: v.$sred;
+            }
+          }
+        }
+      }
+    }
+    .action {
+      width: 100%;
+      .btn-back {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+        color: v.$btn-primary-text;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: v.$medPadding;
+        border-radius: 10px;
+        background-color: v.$btn-primary-bg;
+      }
+    }
+  }
+}

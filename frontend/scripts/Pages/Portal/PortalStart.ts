@@ -28,7 +28,7 @@ export async function startAppContent(): Promise<void> {
   if (user.status !== 200) return createSignInForm()
 
   // kalo udah, redirect ke '/app'
-  window.location.href = "/app"
+  window.location.href = findQuery("redirect") || "/app"
 }
 
 // awal dari segala awal

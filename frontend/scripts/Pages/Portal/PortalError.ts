@@ -1,6 +1,7 @@
 import type { IPortalClass } from "@/types/PortalTypes"
 import { eroot, futor, kel } from "@/core/kel"
 import { lang } from "@/core/languages"
+import { delQuery } from "@/core/queries"
 
 export class PortalError implements IPortalClass {
   readonly id: string = "portal-error"
@@ -58,6 +59,7 @@ export class PortalError implements IPortalClass {
   }
 
   destroy(): void {
+    delQuery("error")
     this.el.remove()
     if (this.onUserBack) {
       this.onUserBack()

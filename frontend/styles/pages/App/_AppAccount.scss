@@ -1,0 +1,44 @@
+@use "../../core/constants" as v;
+
+.Account {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+  .Title {
+    flex-shrink: 0;
+    width: 100%;
+    padding: v.$medPadding;
+    border-bottom: 1px solid v.$text-muted;
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+  .FlatList {
+    .iform {
+      max-width: 800px;
+      margin: 0 auto;
+      .box {
+        .f {
+          .i {
+            .cus-img {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: v.$medPadding;
+              i {
+                font-size: 2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

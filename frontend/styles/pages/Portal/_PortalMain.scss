@@ -29,6 +29,7 @@ body {
   color: v.$text-primary;
   font-size: 1rem;
   background-color: v.$bg-primary;
+  scrollbar-width: thin;
 }
 
 ::selection {
@@ -108,7 +109,7 @@ img {
   display: none !important;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 666px) {
   html {
     font-size: 20px;
   }

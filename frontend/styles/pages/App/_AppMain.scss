@@ -1,0 +1,116 @@
+@use "../../core/constants" as v;
+@use "../../core/animations";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scrollbar-color: v.$text-muted v.$primary-dark;
+  scrollbar-width: thin;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  font-family: v.$sansfont;
+}
+
+body {
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: v.$text-primary;
+  font-size: 1rem;
+  background-color: v.$bg-primary;
+  scrollbar-width: thin;
+}
+
+::selection {
+  background: v.$primary-dark;
+  color: v.$primary-light;
+}
+
+a,
+a:visited {
+  color: v.$primary;
+}
+
+button,
+.btn {
+  cursor: pointer;
+}
+
+button,
+input,
+textarea,
+select,
+.btn {
+  outline: none;
+  border: none;
+  font-family: v.$sansfont;
+  font-size: 0.8rem;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+textarea {
+  resize: vertical;
+  scrollbar-width: thin;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+img {
+  pointer-events: none;
+  display: block;
+}
+
+.app {
+  width: 100%;
+  min-height: 100dvh;
+  background-color: rgba(v.$bg-primary, 0.2);
+  background: linear-gradient(120deg, rgba(v.$bg-primary, 0.1), rgba(v.$bg-secondary, 0.5), rgba(v.$bg-primary, 0.7));
+}
+
+.bg-wedding {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100dvh;
+  background-size: cover;
+  background-image: url("./images/bg-wedding.avif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.hide {
+  display: none !important;
+}
+
+@media (min-width: 666px) {
+  html {
+    font-size: 20px;
+  }
+}

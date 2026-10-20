@@ -1,0 +1,46 @@
+@use "../../core/constants" as v;
+
+.AppMain {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+  .Title {
+    flex-shrink: 0;
+    width: 100%;
+    padding: v.$medPadding;
+    border-bottom: 1px solid v.$text-muted;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: v.$medPadding;
+    .header-left {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: v.$medPadding;
+      .btn-back {
+        font-size: 1.4rem;
+      }
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+  .FlatList {
+    flex-grow: 1;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: v.$bigPadding;
+    padding-bottom: calc(v.$hugePadding * 2.5);
+    scrollbar-width: thin;
+  }
+}

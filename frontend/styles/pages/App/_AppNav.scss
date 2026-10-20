@@ -1,0 +1,96 @@
+@use "../../core/constants" as v;
+
+.Nav {
+  position: absolute;
+  bottom: v.$bigPadding;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 0;
+  background-color: v.$card-bg;
+  background-image: url("./abstracts/nature-seamless.svg");
+  background-position: center center;
+  background-repeat: repeat;
+  padding: v.$smallPadding;
+  border-radius: 10px;
+  border: 1px solid v.$primary;
+  overflow: hidden;
+  .btn {
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    color: v.$text-primary;
+    overflow: hidden;
+    .icon {
+      font-size: 1.25rem;
+    }
+    .name {
+      font-weight: 600;
+      transform: translateY(calc((v.$smallPadding * -1) / 2));
+      padding: v.$smallPadding;
+      font-size: 0.7rem;
+      border-radius: 5px;
+    }
+    &.active {
+      .icon {
+        color: v.$primary;
+      }
+      .name {
+        background-color: v.$btn-primary-bg;
+        color: v.$btn-primary-text;
+      }
+    }
+  }
+}
+
+@media (min-width: 666px) {
+  .Nav {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 180px;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid v.$card-border;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    .btn {
+      width: 100%;
+      flex-direction: row;
+      justify-content: start;
+      gap: v.$medPadding;
+      padding: v.$smallPadding v.$medPadding;
+      .name {
+        transform: none;
+        padding: v.$medPadding v.$bigPadding;
+      }
+      .icon {
+        position: relative;
+      }
+      &.active {
+        .name {
+          flex-grow: 1;
+          color: v.$card-bg;
+          border-top-right-radius: v.$medPadding;
+          border-bottom-right-radius: v.$hugePadding;
+          border-bottom-left-radius: v.$medPadding;
+          border-top-left-radius: v.$hugePadding;
+          background-color: transparent;
+          background-color: v.$primary;
+          color: v.$btn-primary-text;
+        }
+        .icon {
+          flex-shrink: 0;
+          color: v.$primary;
+        }
+      }
+    }
+  }
+}

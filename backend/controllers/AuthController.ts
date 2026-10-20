@@ -3,12 +3,30 @@ import { isProd, parseBase64, rNumber, toBase64 } from "#lib/gen"
 import { webhook } from "#main/webhook/webhook"
 import UserModel from "#models/UserModel"
 import { IAny, IResTemp } from "#types/LibTypes"
-import { IExternalUser, IUser } from "#types/UserTypes"
+import { IExternalUser, IUser, IUserTemp } from "#types/UserTypes"
 import { Colors } from "discord.js"
 
 const HOST: string = isProd ? `https://${cfg.APP_HOST}` : `http://localhost:${cfg.APP_PORT}`
 
-const PROV_HOST = "https://devanka.id"
+const PROV_HOST = "https://devanka.id/luna"
+
+export async function getMe(uid: string): Promise<IResTemp> {
+  // cari user berdasarkan id
+  const user = await UserModel.findOne({ id: uid }).lean()
+  // kalo ga ketemu, berarti belum login
+  if (!user) return { status: 401, code: "unauthorized", error: "Unauthorized" }
+
+  // siapin return data
+  const userData: IUserTemp = {
+    id: user.id,
+    luna: user.luna,
+    email: user.email,
+    access: user.access
+  }
+
+  // kirim data
+  return { status: 200, code: "ok", data: userData }
+}
 
 export async function authLogin(s: IAny, query: IAny): Promise<IResTemp> {
   // pastiin email itu string
@@ -36,7 +54,7 @@ export async function authLogin(s: IAny, query: IAny): Promise<IResTemp> {
   // jadiin query ({url}?client_id={string}&redirect_uri={string})
   const queryString = new URLSearchParams(stateData).toString()
 
-  const url = `${PROV_HOST}/luna/authorize?${queryString}`
+  const url = `${PROV_HOST}/authorize?${queryString}`
 
   return { status: 200, code: "ok", data: { url } }
 }

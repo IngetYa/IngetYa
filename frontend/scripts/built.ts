@@ -1,0 +1,6 @@
+import "webfont-awesome-pro/css/fontawesome.css"
+import "webfont-awesome-pro/css/solid.css"
+import "webfont-awesome-pro/css/light.css"
+import "webfont-awesome-pro/css/jelly-duo-regular.css"
+import "@/scss/lib/_iform.scss"
+import "@/scss/app.scss"

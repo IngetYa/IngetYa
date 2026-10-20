@@ -7,8 +7,9 @@ node_modules
 # compile/bundle
 dist
 public
-views/*.json
+views
 
 # self added
 ex
 mytemp
+temp

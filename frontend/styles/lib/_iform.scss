@@ -57,7 +57,7 @@
       width: 100%;
     }
     .f {
-      padding: v.$bigPadding;
+      padding: v.$medPadding v.$bigPadding;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: v.$medPadding;
@@ -94,7 +94,6 @@
         }
       }
       &:has(.s) {
-        padding-top: 0;
         position: sticky;
         bottom: 0;
         left: 0;
@@ -299,6 +298,20 @@
                 color: v.$input-border-focus;
               }
             }
+
+            .btn {
+              flex-shrink: 0;
+              margin-right: v.$medPadding;
+              padding: 2px 5px;
+              font-size: 0.7rem;
+              font-weight: 500;
+              border-radius: 5px;
+              background-color: v.$primary;
+              color: v.$btn-primary-text;
+              i {
+                color: v.$btn-primary-text !important;
+              }
+            }
           }
         }
         .rem {
@@ -424,7 +437,9 @@
         }
       }
       .s {
+        width: 100%;
         .btn {
+          text-decoration: none;
           position: relative;
           width: 100%;
           display: block;
@@ -495,7 +510,6 @@
       }
       &.p {
         padding: 0;
-        margin-top: 3px;
       }
       &.lg {
         padding: v.$hugePadding;
@@ -545,17 +559,31 @@
       max-height: unset;
       border: none;
       animation: none;
-    }
-
-    &.relative {
-      position: relative;
-    }
-
-    &.no-bg {
-      background: none;
-      .box {
-        background: none;
+      .f {
+        &:has(.s) {
+          position: static;
+          bottom: unset;
+          left: unset;
+          backdrop-filter: none;
+          backdrop-filter: unset;
+          -webkit-backdrop-filter: none;
+        }
       }
+    }
+  }
+
+  &.no-pad {
+    padding: 0;
+  }
+
+  &.relative {
+    position: relative;
+  }
+
+  &.no-bg {
+    background: none;
+    .box {
+      background: none;
     }
   }
 
@@ -583,7 +611,7 @@
     input[type="radio"] {
       -webkit-appearance: none;
       appearance: none;
-      background-color: v.$input-bg-disabled;
+      background-color: v.$text-muted;
       margin: 0;
       font: inherit;
       color: v.$input-bg;
@@ -601,8 +629,8 @@
       border-radius: 50%;
       transform: scale(1);
       transition: 120ms transform ease-in-out;
-      box-shadow: inset 1em 1em v.$input-bg-disabled;
-      background-color: v.$input-bg-disabled;
+      box-shadow: inset 1em 1em v.$input-bg;
+      background-color: v.$input-bg;
     }
     input[type="radio"]:checked {
       background-color: v.$primary;
@@ -681,6 +709,12 @@
     input[type="checkbox"]:checked::after {
       background-color: v.$surface;
       left: 13px;
+    }
+
+    &:has(:checked) {
+      span {
+        color: v.$primary-dark;
+      }
     }
   }
 }

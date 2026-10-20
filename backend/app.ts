@@ -10,6 +10,7 @@ import { IAny } from "#types/LibTypes"
 import { startSocketApp } from "#routes/SocketRouter"
 import authRouter from "#routes/AuthRouter"
 import { webhook } from "#main/webhook/webhook"
+import { isProd } from "#lib/gen"
 
 // express server ambil dari express websocket
 // yang diambil dari express server itu sendiri
@@ -83,6 +84,12 @@ getWss().on("error", () => {
 
 // set auth router, endpoint /auth
 app.use("/x/auth", authRouter)
+
+app.get("/build", (req: Request, res: Response, next: NextFunction) => {
+  if (isProd) return next()
+
+  return res.render("built")
+})
 
 app.get("/portal", (req: Request, res: Response) => {
   res.render("portal")
