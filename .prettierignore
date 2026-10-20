@@ -8,5 +8,6 @@ views/*
 .vscode/**
 nodemon.json
 public
+views/*
 dist
 ex

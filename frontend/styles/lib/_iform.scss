@@ -15,8 +15,8 @@
   .box {
     animation: modal_in 0.2s;
     padding: v.$hugePadding;
-    background-color: v.$px25;
-    border: 1px solid v.$px3;
+    background-color: v.$card-bg;
+    border: 1px solid v.$card-border;
     text-align: center;
     p {
       line-height: 1.5;
@@ -33,7 +33,7 @@
   width: 100%;
   height: 100%;
   z-index: 95;
-  background-color: rgba(v.$black, 0.6);
+  background-color: rgba(v.$black, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,8 +46,9 @@
     position: relative;
     width: clamp(300px, 100vw, 800px);
     max-height: calc(100% - v.$bigPadding);
-    background-color: v.$px1;
-    border: 1px solid v.$px3;
+    background-color: rgba(v.$card-bg, 0.9);
+    border: 1px solid v.$card-border;
+    border-radius: 10px;
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -56,7 +57,7 @@
       width: 100%;
     }
     .f {
-      padding: v.$medPadding v.$bigPadding;
+      padding: v.$bigPadding;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: v.$medPadding;
@@ -65,7 +66,7 @@
         text-shadow: v.$textoutline;
       }
       .by {
-        color: v.$px1;
+        color: v.$card-bg;
         border-top-right-radius: v.$medPadding;
         border-bottom-right-radius: v.$bigPadding;
         padding: 0 v.$smallPadding;
@@ -81,15 +82,15 @@
         justify-content: space-between;
         align-items: center;
         gap: v.$bigPadding;
-        border-bottom: 1px solid v.$px3;
-        background-color: v.$px2;
+        border-bottom: 1px solid v.$text-muted;
+        background-color: rgba(v.$surface, 0.5);
         .title {
           font-size: 1.1rem;
           font-weight: 600;
         }
         .btn-close {
           font-size: 1.5rem;
-          color: v.$pm1;
+          color: v.$primary-dark;
         }
       }
       &:has(.s) {
@@ -109,7 +110,7 @@
         .btn-find {
           width: 100%;
           padding: v.$medPadding;
-          background-color: v.$px3;
+          background-color: v.$primary;
           text-align: center;
           &::after {
             content: "\f0da";
@@ -119,14 +120,14 @@
           }
         }
         .btn-add-evt {
-          color: v.$cgreen;
+          color: v.$sgreen;
         }
         .btn-add-field {
           position: relative;
           margin-top: v.$smallPadding;
-          color: v.$pm1;
+          color: v.$text-primary;
           padding: v.$medPadding;
-          background-color: v.$px2;
+          background-color: v.$bg-primary;
           text-align: center;
           border-radius: v.$smallPadding;
           overflow: hidden;
@@ -137,7 +138,7 @@
           align-items: center;
           gap: v.$smallPadding;
           padding: v.$medPadding;
-          background-color: v.$black;
+          background-color: v.$surface;
           margin-bottom: 2px;
           .evt-name {
             flex-grow: 1;
@@ -150,7 +151,7 @@
                 margin-right: 5px;
                 font-family: "Font Awesome 7 Pro";
                 font-weight: 600;
-                color: v.$pm1;
+                color: v.$primary;
               }
             }
             &::before {
@@ -158,7 +159,7 @@
               margin-right: 5px;
               font-family: "Font Awesome 7 Pro";
               font-weight: 600;
-              color: v.$pm1;
+              color: v.$primary;
             }
           }
           .btn-delete {
@@ -179,7 +180,7 @@
             line-height: 1.5;
             .btn {
               flex-shrink: 0;
-              color: v.$cred;
+              color: v.$sred;
             }
             label {
               flex-grow: 1;
@@ -198,20 +199,22 @@
             display: block;
             min-width: 0;
             width: 100%;
-            background-color: v.$px25;
-            color: v.$softwhite;
-            border: 1px solid v.$px2;
+            background-color: v.$input-bg;
+            color: v.$text-primary;
+            border: 1px solid v.$input-border;
             padding: v.$medPadding;
             font-size: 0.8rem;
             &::placeholder {
               font-style: italic;
+              color: v.$input-placeholder;
             }
             &:focus {
-              border-color: v.$pm1;
+              border-color: v.$input-border-focus;
+              box-shadow: 0 0 0 2px v.$input-focus-ring;
             }
             &.evt-state {
               &:not(:focus) {
-                color: v.$pm1;
+                color: v.$primary;
                 font-style: italic;
               }
             }
@@ -240,13 +243,13 @@
             width: fit-content;
             display: block;
             text-decoration: none;
-            color: v.$pm1;
+            color: v.$primary;
             margin: 2px 0;
           }
           .btn-file {
             width: 100%;
             padding: v.$medPadding;
-            background-color: v.$px3;
+            background-color: v.$primary;
             font-weight: 600;
             text-align: center;
             &::before {
@@ -264,14 +267,14 @@
             align-items: center;
             gap: 0;
             width: 100%;
-            background-color: v.$px25;
-            border: 1px solid v.$px2;
+            background-color: v.$card-bg;
+            border: 1px solid v.$card-border;
             font-size: 0.8rem;
             overflow: hidden;
             span {
               margin-left: v.$medPadding;
               flex-shrink: 0;
-              color: v.$softwhite;
+              color: v.$text-primary;
             }
             img {
               margin-left: 5px;
@@ -285,13 +288,15 @@
               background-color: #00000000;
               &:focus {
                 background-color: #00000000;
+                box-shadow: none;
               }
             }
             &:has(:focus) {
-              border-color: v.$pm1;
+              border-color: v.$input-border-focus;
+              box-shadow: 0 0 0 2px v.$input-focus-ring;
               span,
               i {
-                color: v.$pm1;
+                color: v.$input-border-focus;
               }
             }
           }
@@ -355,7 +360,7 @@
             width: 100%;
             padding: v.$medPadding;
             list-style-position: outside;
-            background-color: v.$px25;
+            background-color: v.$surface;
             li {
               margin-left: 1.65em;
               text-align: left;
@@ -363,10 +368,10 @@
               span.mono {
                 padding: 2px 5px;
                 border-radius: 5px;
-                background-color: v.$px1;
+                background-color: v.$card-bg;
                 color: v.$syellow;
                 font-size: 0.8rem;
-                border: 1px solid v.$px3;
+                border: 1px solid v.$card-border;
               }
             }
           }
@@ -395,24 +400,24 @@
           td {
             font-size: 0.9rem;
             font-weight: 600;
-            background-color: v.$px2;
+            background-color: v.$surface;
             .btn-del-row {
-              color: v.$cred;
+              color: v.$sred;
               text-align: center;
             }
             &:nth-child(2) {
               color: v.$syellow;
             }
             &:last-child {
-              background-color: v.$px2;
+              background-color: #00000000;
             }
             &.ex {
-              color: v.$swhite;
+              color: v.$black;
             }
           }
 
           th {
-            background-color: v.$pm2;
+            background-color: v.$primary;
             text-align: center;
             font-weight: 700;
           }
@@ -428,15 +433,14 @@
           font-weight: 700;
           text-transform: uppercase;
           border-radius: v.$smallPadding;
-          color: v.$softwhite;
+          color: v.$btn-primary-text;
           &.btn-ok {
-            background-color: v.$pm2;
+            background-color: v.$btn-primary-bg;
           }
           &.btn-prim {
             text-transform: none;
             font-weight: 700;
-            background-color: v.$pm1;
-            color: v.$px1;
+            background-color: v.$btn-primary-bg;
           }
           &.btn-cancel {
             background-color: v.$black;
@@ -454,8 +458,8 @@
       .summary {
         font-size: 0.8rem;
         padding: v.$medPadding;
-        background-color: v.$px25;
-        border: 1px solid v.$px2;
+        background-color: v.$surface;
+        border: 1px solid v.$card-border;
         border-radius: v.$smallPadding;
         .pricing {
           display: flex;
@@ -469,7 +473,7 @@
               color: v.$syellow;
             }
             &.sub {
-              color: v.$cgreen;
+              color: v.$sgreen;
             }
           }
         }
@@ -486,7 +490,7 @@
         .pad {
           padding-top: v.$smallPadding;
           margin-top: v.$smallPadding;
-          border-top: 1px solid v.$px2;
+          border-top: 1px solid v.$card-border;
         }
       }
       &.p {
@@ -505,7 +509,7 @@
         padding-bottom: v.$hugePadding;
       }
       &.file-preview {
-        border-bottom: 1px solid v.$px3;
+        border-bottom: 1px solid v.$card-border;
         .file-actions {
           display: flex;
           justify-content: center;
@@ -563,8 +567,8 @@
 .radio {
   margin: 3px 0;
   width: 100%;
-  background-color: v.$px25;
-  border: 1px solid v.$px2;
+  background-color: v.$input-bg;
+  border: 1px solid v.$card-border;
   overflow: hidden;
   border-radius: v.$smallPadding;
   label {
@@ -579,10 +583,10 @@
     input[type="radio"] {
       -webkit-appearance: none;
       appearance: none;
-      background-color: v.$px3;
+      background-color: v.$input-bg-disabled;
       margin: 0;
       font: inherit;
-      color: v.$pm1;
+      color: v.$input-bg;
       width: 1.15em;
       height: 1.15em;
       border-radius: 50%;
@@ -597,15 +601,16 @@
       border-radius: 50%;
       transform: scale(1);
       transition: 120ms transform ease-in-out;
-      box-shadow: inset 1em 1em v.$px3;
-      background-color: v.$px3;
+      box-shadow: inset 1em 1em v.$input-bg-disabled;
+      background-color: v.$input-bg-disabled;
     }
     input[type="radio"]:checked {
-      background-color: v.$pm1;
+      background-color: v.$primary;
       transform: scale(1);
     }
     input[type="radio"]:checked::before {
       transform: scale(1);
+      background-color: v.$input-bg;
     }
     span {
       overflow: hidden;
@@ -618,8 +623,9 @@
     background-image: url("../abstracts/letter-y-seamless.svg");
     background-position: center center;
     background-repeat: repeat;
+    box-shadow: 0 0 0 2px v.$input-focus-ring;
     span {
-      color: v.$pm1;
+      color: v.$primary-dark;
     }
   }
 }
@@ -635,7 +641,7 @@
     cursor: pointer;
     input[type="checkbox"] {
       appearance: none;
-      background-color: v.$px3;
+      background-color: v.$text-muted;
       border-radius: 72px;
       border-style: none;
       flex-shrink: 0;
@@ -658,7 +664,7 @@
       transition: all 90ms ease-out;
     }
     input[type="checkbox"]::after {
-      background-color: v.$softwhite;
+      background-color: v.$surface;
       border-radius: 50%;
       content: "";
       height: 14px;
@@ -669,11 +675,11 @@
     }
 
     input[type="checkbox"]:checked {
-      background-color: v.$pm1;
+      background-color: v.$primary;
     }
 
     input[type="checkbox"]:checked::after {
-      background-color: v.$px2;
+      background-color: v.$surface;
       left: 13px;
     }
   }

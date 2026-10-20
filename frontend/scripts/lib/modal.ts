@@ -4,6 +4,9 @@ import { eroot, futor, kel } from "@/core/kel"
 import { lang } from "@/core/languages"
 import waittime from "@/lib/waittime"
 
+// JUJUR DEFAULT ALERT/CONFIRM/PROMPT AGAK KEK ANJING
+// JADINYA CUMA BIKIN SWEETALERT ALA-ALA, KEARIFAN LOKALL
+
 type STATUS_TITLE = "no-status" | undefined
 
 interface IFormAlertConfig {
@@ -40,6 +43,7 @@ interface IFormSelectConfig extends IFormConfirmConfig {
 
 let _onFormAbort: (() => void) | undefined
 
+// buat promise yg aktif, contoh: xhr, fetch, http request
 export async function formLoading(refunc: Promise<IResponse>, msg?: string | null, ts?: number): Promise<IResponse> {
   const loadingText = msg || lang("loading")
 
@@ -50,6 +54,7 @@ export async function formLoading(refunc: Promise<IResponse>, msg?: string | nul
 
   await waittime(ts)
 
+  // tunggu sampe promise di kirim balik
   return await refunc
     .then((res) => {
       el.remove()
@@ -63,12 +68,14 @@ export async function formLoading(refunc: Promise<IResponse>, msg?: string | nul
 
 export async function formAlert(message: string | IFormAlertConfig, status: STATUS_TITLE = undefined): Promise<void> {
   return await new Promise((resolve) => {
+    // default config
     const config: IFormAlertConfig = {
       header: "Oops",
       xok: lang("ok"),
       status
     }
 
+    // manual object assign
     if (typeof message === "string") {
       config.msg = message
     } else {
@@ -100,11 +107,13 @@ export async function formAlert(message: string | IFormAlertConfig, status: STAT
     </div>
     `)
 
+    // batalin
     const btnClose = futor(".btn-close", form)
     btnClose.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve()
+      // kalo ada config 'ok', tetep jalanin
       if (config.ok) config.ok()
     }
 
@@ -118,11 +127,13 @@ export async function formAlert(message: string | IFormAlertConfig, status: STAT
       form.remove()
       _onFormAbort = undefined
       resolve()
+      // kalo ada config 'ok', tetep jalanin
       if (config.ok) config.ok()
     }
 
     const btnOk = futor(".btn-ok", form)
 
+    // global abort
     _onFormAbort = () => {
       btnOk.click()
       _onFormAbort = undefined
@@ -134,6 +145,7 @@ export async function formAlert(message: string | IFormAlertConfig, status: STAT
 
 export async function formConfirm(message: string | IFormConfirmConfig, status: STATUS_TITLE = undefined): Promise<boolean> {
   return await new Promise((resolve) => {
+    // default config
     const config: IFormConfirmConfig = {
       header: "",
       xok: lang("ok"),
@@ -141,6 +153,7 @@ export async function formConfirm(message: string | IFormConfirmConfig, status: 
       status
     }
 
+    // manual object assign
     if (typeof message === "string") {
       config.msg = message
     } else {
@@ -180,21 +193,26 @@ export async function formConfirm(message: string | IFormConfirmConfig, status: 
     `)
 
     const btnClose = futor(".btn-close", form)
+    // batalin
     btnClose.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve(false)
+      // kalo ada config 'cancel', tetep jalanin
       if (config.cancel) config.cancel()
     }
 
     const btnCancel = futor(".btn-cancel", form)
+    // batalin
     btnCancel.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve(false)
+      // kalo ada config 'cancel', tetep jalanin
       if (config.cancel) config.cancel()
     }
 
+    // global abort
     _onFormAbort = () => {
       btnCancel.click()
       _onFormAbort = undefined
@@ -210,6 +228,7 @@ export async function formConfirm(message: string | IFormConfirmConfig, status: 
       form.remove()
       _onFormAbort = undefined
       resolve(true)
+      // kalo ada config 'ok', tetep jalanin
       if (config.ok) config.ok()
     }
 
@@ -219,6 +238,7 @@ export async function formConfirm(message: string | IFormConfirmConfig, status: 
 
 export async function formPrompt(message: string | IFormPromptConfig, status: STATUS_TITLE = undefined): Promise<string | null> {
   return await new Promise((resolve) => {
+    // default config
     const config: IFormPromptConfig = {
       header: "",
       xok: lang("ok"),
@@ -230,6 +250,7 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
       status
     }
 
+    // manual object assign
     if (typeof message === "string") {
       config.msg = message
     } else {
@@ -249,6 +270,7 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
 
     if (status) config.status = status
 
+    // bikin id buat unique form
     const formId = `form-${Date.now()}`
 
     const form = iform(`
@@ -281,6 +303,7 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
 
     const field = futor(".inp", form)
 
+    // textarea/input berdasarkan value 'boolean' properti 'textarea'
     const inp = kel(config.textarea ? "textarea" : "input")
 
     if (inp instanceof HTMLInputElement) inp.type = "text"
@@ -293,6 +316,7 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
     inp.value = config.value!
     if (config.max && config.max >= 1) inp.maxLength = config.max
 
+    // regex replacer pas lagi ngetik
     if (config.iregex) {
       const tpRegex = config.iregex!
       inp.oninput = () => (inp.value = inp.value.replace(tpRegex, ""))
@@ -306,21 +330,26 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
     setTimeout(() => (inp.readOnly = false), 100)
 
     const btnClose = futor(".btn-close", form)
+    // batalin
     btnClose.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve(null)
+      // kalo ada config 'cancel', tetep jalanin
       if (config.cancel) config.cancel()
     }
 
     const btnCancel = futor(".btn-cancel", form)
+    // batalin
     btnCancel.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve(null)
+      // kalo ada config 'cancel', tetep jalanin
       if (config.cancel) config.cancel()
     }
 
+    // global abort
     _onFormAbort = () => {
       btnCancel.click()
       _onFormAbort = undefined
@@ -331,11 +360,13 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
       statusField.remove()
     }
 
+    // kirim inp value
     form.onsubmit = (e) => {
       e.preventDefault()
       _onFormAbort = undefined
       resolve(inp.value)
       form.remove()
+      // kalo ada config 'ok', tetep jalanin
       if (config.ok) config.ok()
     }
   })
@@ -343,6 +374,7 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
 
 export async function formSelect(message: string | IFormSelectConfig, status: STATUS_TITLE = undefined): Promise<string | null> {
   return await new Promise((resolve) => {
+    // default config
     const config: IFormSelectConfig = {
       header: "",
       xok: lang("ok"),
@@ -351,6 +383,7 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
       status
     }
 
+    // manual object assign
     if (typeof message === "string") {
       config.msg = message
     } else {
@@ -366,6 +399,7 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
 
     if (status) config.status = status
 
+    // bikin id buat unique form
     const formId = `form-${Date.now()}`
 
     const form = iform(`
@@ -398,6 +432,7 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
 
     const group = futor(".group-radio", form)
 
+    // render item sebagai radio element
     config.items.forEach((itm) => {
       const field = kel("div", "f p")
 
@@ -428,21 +463,26 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
     eroot().append(form)
 
     const btnClose = futor(".btn-close", form)
+    // batalin
     btnClose.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve(null)
+      // kalo ada config 'cancel', tetep jalanin
       if (config.cancel) config.cancel()
     }
 
     const btnCancel = futor(".btn-cancel", form)
+    // batalin
     btnCancel.onclick = () => {
       form.remove()
       _onFormAbort = undefined
       resolve(null)
+      // kalo ada config 'cancel', tetep jalanin
       if (config.cancel) config.cancel()
     }
 
+    // global alert
     _onFormAbort = () => {
       btnCancel.click()
       _onFormAbort = undefined
@@ -453,17 +493,21 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
       statusField.remove()
     }
 
+    // kirim radio inp value
     form.onsubmit = (e) => {
       e.preventDefault()
       const formData = new FormData(form)
       form.remove()
       _onFormAbort = undefined
+      // kalo ga dipilih, kirim kosongan
       resolve(formData.get(formId)?.toString() || null)
+      // kalo ada config 'ok', tetep jalanin
       if (config.ok) config.ok()
     }
   })
 }
 
+// batalin tanpa kirim data
 export function formAbort(): void {
   if (_onFormAbort) {
     _onFormAbort()

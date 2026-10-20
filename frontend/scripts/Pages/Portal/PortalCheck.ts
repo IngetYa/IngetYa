@@ -9,13 +9,16 @@ import type { IUser } from "@/types/UserTypes"
 async function checkUser(useAuth?: string): Promise<IResponse> {
   const authStr = useAuth === "1" ? `?apps=${useAuth}` : ""
 
+  // cek kalo user udah login
   const user = await xhr.get(`/x/auth/get-user${authStr}`)
 
+  // kalo too many request, ulangi setelah semenit. aowkwk
   if (user.status === 429) {
     await waittime(1000)
     return await checkUser(useAuth)
   }
 
+  // kalo gagal, kirim apa adanya
   if (!user.ok) return user
 
   return user
@@ -45,6 +48,7 @@ export class PortalCheck implements IPortalClass {
   async getUser(useAuth?: string): Promise<IResponse> {
     this.createElement()
 
+    // kirim info user
     const userData = await checkUser(useAuth)
 
     await waittime(1000)

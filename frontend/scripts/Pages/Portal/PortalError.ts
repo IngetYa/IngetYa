@@ -8,6 +8,7 @@ export class PortalError implements IPortalClass {
 
   private el!: HTMLDivElement
 
+  // next function setelah user klik kembali
   private onUserBack?: () => void
 
   private msg: string

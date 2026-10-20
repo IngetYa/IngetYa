@@ -73,10 +73,10 @@
     "lint": "eslint --ext ts",
     "start": "node .",
     "dev": "nodemon",
-    "dev:be": "nodemon",
-    "dev:fe": "npx --node-options=\"--import tsx\" webpack --disable-interpret --config frontend/webpack.dev.ts",
-    "build": "npm run build:fe && npm run build:be",
-    "build:be": "rm -rf ./dist/* && tsc -p . --extendedDiagnostics",
-    "build:fe": "npx --node-options=\"--import tsx\" webpack --disable-interpret --config frontend/webpack.prod.ts"
+    "dev:start": "nodemon",
+    "dev:build": "npx --node-options=\"--import tsx\" webpack --disable-interpret --config frontend/webpack.dev.ts",
+    "build": "npm run build:client && npm run build:server",
+    "build:server": "rm -rf ./dist/* && tsc -p . --extendedDiagnostics",
+    "build:client": "npx --node-options=\"--import tsx\" webpack --disable-interpret --config frontend/webpack.prod.ts"
   }
 }

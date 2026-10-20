@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../../core/constants" as v;
 
 $fontProviderIcon: 1.1rem;
@@ -11,8 +12,8 @@ $fontProviderIcon: 1.1rem;
   .box {
     padding: v.$hugePadding;
     max-width: calc(100% - v.$bigPadding);
-    background-color: v.$px25;
-    border: 1px solid v.$px3;
+    background-color: rgba(v.$card-bg, 0.6);
+    border: 1px solid v.$card-border;
     text-align: center;
     animation: modal_in 0.2s;
     border-radius: 20px;
@@ -49,19 +50,19 @@ $fontProviderIcon: 1.1rem;
         content: "";
         flex: 1;
         height: 1px;
-        background-color: rgba(v.$white, 0.2);
+        background-color: rgba(v.$primary-dark, 0.2);
       }
       span {
         padding: 0 v.$medPadding;
-        color: v.$softwhite;
+        color: v.$text-muted;
       }
     }
     .PortalEmail {
-      background-color: v.$px2;
+      background-color: rgba(v.$card-bg, 0.6);
       display: block;
       width: 100%;
       padding: v.$bigPadding;
-      border: 1px solid v.$px3;
+      border: 1px solid v.$card-border;
       border-bottom: none;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
@@ -75,7 +76,7 @@ $fontProviderIcon: 1.1rem;
           align-items: center;
           padding: v.$bigPadding 0;
           gap: v.$medPadding;
-          color: v.$pm1;
+          color: v.$text-primary;
           width: 100%;
           span {
             transform: translateY(v.$smallPadding);
@@ -100,8 +101,10 @@ $fontProviderIcon: 1.1rem;
           font-size: 0.8rem;
           width: fit-content;
           margin: v.$bigPadding auto;
-          border-bottom: 1px solid v.$softwhite;
-          padding-bottom: v.$medPadding;
+          border-bottom: 1px solid v.$text-primary;
+          padding: v.$medPadding;
+          padding-top: 0;
+          border-radius: 10px;
         }
         .sm {
           line-height: 1.5;
@@ -118,12 +121,12 @@ $fontProviderIcon: 1.1rem;
           line-height: 1.5;
         }
         .inp {
-          background-color: v.$px25;
+          background-color: v.$input-bg;
           display: flex;
           justify-content: start;
           align-items: center;
           gap: 0;
-          border: 1px solid v.$px1;
+          border: 1px solid v.$input-border;
           border-radius: 5px;
           .inp-icon {
             padding-left: v.$medPadding;
@@ -134,20 +137,24 @@ $fontProviderIcon: 1.1rem;
             min-width: 0;
             flex-grow: 1;
             padding: v.$medPadding;
-            color: v.$softwhite;
+            color: v.$text-primary;
             &.otp {
               letter-spacing: 5px;
+            }
+            &::placeholder {
+              color: v.$input-placeholder;
             }
             &:-webkit-autofill,
             &:-webkit-autofill:hover,
             &:-webkit-autofill:focus {
-              -webkit-box-shadow: 0 0 0 1000px v.$px25 inset !important;
+              -webkit-box-shadow: 0 0 0 1000px v.$input-bg inset !important;
               -webkit-text-fill-color: v.$softwhite !important;
               transition: none;
             }
           }
           &:has(:focus) {
-            border-color: v.$pm1;
+            border-color: v.$input-border-focus;
+            box-shadow: 0 0 0 2px v.$input-focus-ring;
           }
         }
 
@@ -166,8 +173,13 @@ $fontProviderIcon: 1.1rem;
             &.btn-login {
               flex-shrink: 0;
               flex-grow: 1;
-              background-color: v.$pm1;
-              color: v.$px1;
+              background-color: v.$btn-primary-bg;
+              color: v.$btn-primary-text;
+              font-weight: 500;
+              &:hover {
+                background-color: v.$btn-primary-hover;
+                transform: translateY(-1px);
+              }
             }
           }
         }
@@ -178,31 +190,34 @@ $fontProviderIcon: 1.1rem;
       }
     }
     .PortalOthers {
-      background-color: v.$px2;
+      background-color: rgba(v.$card-bg, 0.6);
       display: block;
       width: 100%;
       padding: v.$bigPadding;
       padding-top: 0;
-      border: 1px solid v.$px3;
+      border: 1px solid v.$card-border;
       border-top: none;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       .login-providers {
         display: block;
         .btn {
+          position: relative;
+          overflow: hidden;
           width: 100%;
           padding: v.$medPadding v.$bigPadding;
           margin-bottom: v.$medPadding;
-          border: 1px solid rgba(v.$px1, 0.7);
-          background-color: rgba(v.$px1, 0.8);
+          background-color: v.$btn-secondary-bg;
+          border: 1px solid v.$btn-secondary-border;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
           cursor: pointer;
           text-decoration: none;
-          color: v.$softwhite;
+          color: v.$btn-secondary-text;
           border-radius: 5px;
+          font-weight: 500;
           i {
             font-size: $fontProviderIcon;
           }
@@ -215,7 +230,8 @@ $fontProviderIcon: 1.1rem;
             margin-bottom: 0;
           }
           &:hover {
-            background-color: v.$black;
+            background-color: color.scale(v.$btn-secondary-bg, $blackness: 10%);
+            border-color: v.$primary-dark;
           }
         }
       }
@@ -240,26 +256,18 @@ $fontProviderIcon: 1.1rem;
         flex-grow: 1;
         padding-bottom: v.$largePadding;
         max-width: 700px;
-        border-bottom: 1px solid v.$px3;
+        border-bottom: 1px solid v.$card-border;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
       }
       .PortalOthers {
         flex-shrink: 0;
         max-width: 250px;
-        border-top: 1px solid v.$px3;
+        border-top: 1px solid v.$card-border;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         .portal-other-divider {
           margin-top: v.$bigPadding;
-        }
-        .login-providers {
-          .btn {
-            &:hover {
-              border-color: v.$pm1;
-              background-color: v.$px3;
-            }
-          }
         }
       }
     }

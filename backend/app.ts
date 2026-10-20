@@ -8,6 +8,7 @@ import cfg from "#cfg"
 import { sessionUserBinder } from "#core/binder"
 import { IAny } from "#types/LibTypes"
 import { startSocketApp } from "#routes/SocketRouter"
+import authRouter from "#routes/AuthRouter"
 import { webhook } from "#main/webhook/webhook"
 
 // express server ambil dari express websocket
@@ -79,6 +80,9 @@ getWss().on("error", () => {
   clearInterval(interval)
   // [!TODO] end process and send webhook
 })
+
+// set auth router, endpoint /auth
+app.use("/x/auth", authRouter)
 
 app.get("/portal", (req: Request, res: Response) => {
   res.render("portal")

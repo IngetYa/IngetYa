@@ -33,13 +33,13 @@ Buka 2 terminal atau 1 terminal dengan 2 tabs
 1. Watch dev bundling
 
 ```shell
-npm run dev:fe
+npm run dev:build
 ```
 
 2. Watch dev server
 
 ```shell
-npm run dev:be
+npm run dev:start
 ```
 
 ### B. Production

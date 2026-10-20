@@ -1,16 +1,10 @@
-export type UserProvider = "luna"
-
-export interface IExternalUserData {
-  externalId: string
-  email: string
-  provider: UserProvider
-  name?: string
-}
+export type UserProvider = "google" | "discord" | "github" | "tiktok" | "facebook" | "luna"
 
 export interface IExternalUser {
+  ok: true
   id: string
-  data: IExternalUserData[]
-  created: number
+  name: string
+  email?: string
 }
 
 export interface IUserSession {
@@ -24,7 +18,7 @@ export interface IUserAuth {
   nickname?: string
 }
 
-export type UserAccess = "ADMIN" | "LUNA_DEV"
+export type UserAccess = "ADMIN" | "DEV"
 
 export interface IUser {
   id: string

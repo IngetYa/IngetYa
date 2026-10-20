@@ -158,5 +158,9 @@
   "internal_server_error": {
     "id": "Server lagi ngadepin masalah nih. Coba lagi nanti ya.",
     "en": "Our server is currently experiencing an unexpected issue."
+  },
+  "request_timeout": {
+    "id": "Request Timeout - 408",
+    "en": "Request Timeout - 408"
   }
 }

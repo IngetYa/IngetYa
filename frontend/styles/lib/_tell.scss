@@ -15,8 +15,8 @@
   justify-content: right;
   align-items: center;
   gap: 0;
-  background-color: v.$px3;
-  border: 1px solid v.$pm1;
+  // background-color: v.$px3;
+  // border: 1px solid v.$pm1;
   border-radius: 5px;
   overflow: hidden;
   animation: tell_anim 0.2s;
@@ -24,7 +24,7 @@
     flex-shrink: 0;
     font-size: 1.3em;
     padding: v.$smallPadding v.$medPadding;
-    color: v.$pm1;
+    // color: v.$pm1;
   }
   .text {
     max-width: 500px;

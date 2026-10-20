@@ -10,7 +10,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  scrollbar-color: v.$pm1 v.$px1;
+  scrollbar-color: v.$primary-dark v.$bg-primary;
   scrollbar-width: thin;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -26,19 +26,19 @@ body {
   height: auto;
   overflow-x: hidden;
   overflow-y: auto;
-  color: v.$softwhite;
+  color: v.$text-primary;
   font-size: 1rem;
-  background-color: v.$px1;
+  background-color: v.$bg-primary;
 }
 
 ::selection {
-  background: v.$pm1;
-  color: v.$px1;
+  background: v.$primary-dark;
+  color: v.$primary-light;
 }
 
 a,
 a:visited {
-  color: v.$pm1;
+  color: v.$primary;
 }
 
 button,
@@ -87,8 +87,8 @@ img {
 .app {
   width: 100%;
   min-height: 100dvh;
-  // background-color: rgba(v.$px1, 0.8);
-  background: linear-gradient(120deg, rgba(v.$px1, 0.5), rgba(v.$px2, 0.94), rgba(v.$px1, 0.8));
+  background-color: rgba(v.$bg-primary, 0.2);
+  background: linear-gradient(120deg, rgba(v.$bg-primary, 0.1), rgba(v.$bg-secondary, 0.5), rgba(v.$bg-primary, 0.7));
 }
 
 .bg-wedding {
