@@ -43,7 +43,7 @@ class CoolDown {
         const item = this.data[key]
 
         if (item && (item.get(userId) || 0) > Date.now()) {
-          return res.status(429).json({ ok: false, code: 429, msg: "too_many_request" })
+          return res.status(429).json({ ok: false, status: 429, code: "too_many_request", msg: "Too Many Request" })
         }
 
         if (item && item.has(userId)) {

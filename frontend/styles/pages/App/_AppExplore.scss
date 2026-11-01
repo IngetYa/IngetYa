@@ -32,12 +32,26 @@
       border: 1px solid #00000000;
       background-color: v.$card-bg;
       padding: v.$smallPadding v.$medPadding;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: v.$smallPadding;
       border-radius: 10px;
       cursor: pointer;
+      i {
+        font-size: 0.6rem;
+        font-style: normal;
+        color: v.$primary;
+        font-weight: 700;
+        transform: translateY(-4px);
+      }
       &.active {
         background-color: v.$primary;
         color: v.$btn-primary-text;
         border-color: v.$primary-dark;
+        i {
+          color: v.$yellow;
+        }
       }
     }
   }
@@ -70,6 +84,13 @@
             object-position: center center;
             -o-object-fit: cover;
             -o-object-position: center center;
+          }
+          &.thumbnail-empty {
+            background-color: v.$card-border;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
         .tags {
@@ -118,6 +139,7 @@ $bgContext: #503c43;
   padding: v.$bigPadding;
   box-shadow: v.$glow-dark;
   border-radius: 10px;
+  animation: modal_in 0.3s;
   .thumbnail {
     img {
       display: block;
@@ -145,6 +167,9 @@ $bgContext: #503c43;
         font-weight: 600;
       }
     }
+  }
+  &.out {
+    animation: modal_out 0.3s forwards;
   }
 }
 

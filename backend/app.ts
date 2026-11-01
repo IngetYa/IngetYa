@@ -9,6 +9,7 @@ import { sessionUserBinder } from "#core/binder"
 import { IAny } from "#types/LibTypes"
 import { startSocketApp } from "#routes/SocketRouter"
 import authRouter from "#routes/AuthRouter"
+import exploreRouter from "#routes/ExploreRouter"
 import { webhook } from "#main/webhook/webhook"
 import { isProd } from "#lib/gen"
 
@@ -82,8 +83,9 @@ getWss().on("error", () => {
   // [!TODO] end process and send webhook
 })
 
-// set auth router, endpoint /auth
+// set each router endpoint
 app.use("/x/auth", authRouter)
+app.use("/x/explore", exploreRouter)
 
 app.get("/build", (req: Request, res: Response, next: NextFunction) => {
   if (isProd) return next()
@@ -93,6 +95,10 @@ app.get("/build", (req: Request, res: Response, next: NextFunction) => {
 
 app.get("/portal", (req: Request, res: Response) => {
   res.render("portal")
+})
+
+app.get("/app", (req: Request, res: Response) => {
+  res.render("app")
 })
 
 app.get("/", (req: Request, res: Response) => {

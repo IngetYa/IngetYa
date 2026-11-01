@@ -46,3 +46,9 @@ export interface ILocale {
 export type ILocaleData = Record<string, ILocale>
 
 export type ILanguage = "id" | "en"
+
+export enum STATENUM {
+  FORWARD = 2,
+  REPLACE = 1,
+  BACK = 0
+}

@@ -58,21 +58,21 @@ async function efetch(method: IRequestType, url: string, s?: IAny, isFile?: bool
 }
 
 // paksa retry
-async function forceFetchGet(ref: string): Promise<IResponse> {
+async function forceFetchGet(ref: string, ms: number): Promise<IResponse> {
   const response = await efetch("GET", ref)
-  if (response.errors) {
-    await waittime(300)
-    return forceFetchGet(ref)
+  if (!response.ok) {
+    await waittime(ms)
+    return forceFetchGet(ref, ms)
   }
   return response
 }
 
 // paksa retry
-async function forceFetchPost(ref: string, s?: IAny): Promise<IResponse> {
+async function forceFetchPost(ref: string, ms: number, s?: IAny): Promise<IResponse> {
   const response = await efetch("POST", ref, s)
-  if (response.errors) {
-    await waittime(300)
-    return forceFetchPost(ref, s)
+  if (!response.ok) {
+    await waittime(ms)
+    return forceFetchPost(ref, s, ms)
   }
   return response
 }
@@ -84,10 +84,10 @@ export default {
   async post(ref: string, s?: IAny, isFile?: boolean): Promise<IResponse> {
     return await efetch("POST", ref, s, isFile)
   },
-  async forceGet(ref: string): Promise<IResponse> {
-    return await forceFetchGet(ref)
+  async forceGet(ref: string, ms: number = 2000): Promise<IResponse> {
+    return await forceFetchGet(ref, ms)
   },
-  async forcePost(ref: string, s?: IAny): Promise<IResponse> {
-    return await forceFetchPost(ref, s)
+  async forcePost(ref: string, ms: number = 2000, s?: IAny): Promise<IResponse> {
+    return await forceFetchPost(ref, s, ms)
   }
 }

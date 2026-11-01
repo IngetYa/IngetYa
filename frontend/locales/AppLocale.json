@@ -1,0 +1,94 @@
+{
+  "processing": {
+    "id": "Memproses",
+    "en": "Processing"
+  },
+  "loading": {
+    "id": "Memuat",
+    "en": "Loading"
+  },
+  "type_here": {
+    "id": "Tulis Sesuatu",
+    "en": "Type Here"
+  },
+  "error": {
+    "id": "Terjadi kesalahan",
+    "en": "Something went wrong"
+  },
+  "connecting": {
+    "id": "Menghubungkan",
+    "en": "Connecting"
+  },
+  "please_wait": {
+    "id": "Tunggu Bentar",
+    "en": "Please Wait"
+  },
+  "waiting_for_network": {
+    "id": "Menunggu Jaringan",
+    "en": "Waiting for Network"
+  },
+  "too_many_request": {
+    "id": "Kamu lagi cooldown!<br/>Ntar coba lagi aja.",
+    "en": "You're on cooldown!<br/>Too many requests. Try again later."
+  },
+  "req_not_valid": {
+    "id": "Data yang kamu minta ga ketemu",
+    "en": "Your request is not valid"
+  },
+  "ok": {
+    "id": "OKE",
+    "en": "OK"
+  },
+  "cancel": {
+    "id": "BATAL",
+    "en": "CANCEL"
+  },
+  "copied": {
+    "id": "Disalin",
+    "en": "Copied"
+  },
+  "not_found": {
+    "id": "Data engga ketemu",
+    "en": "Your requested data is not found"
+  },
+  "entity_too_large": {
+    "id": "Data kamu melebihi batas ukuran request",
+    "en": "Your data exceeded the request size limit"
+  },
+  "internal_server_error": {
+    "id": "Server lagi ngadepin masalah nih. Coba lagi nanti ya.",
+    "en": "Our server is currently experiencing an unexpected issue."
+  },
+  "request_timeout": {
+    "id": "Request Timeout - 408",
+    "en": "Request Timeout - 408"
+  },
+  "tab_explore": {
+    "id": "Eksplor",
+    "en": "Explore"
+  },
+  "tab_orders": {
+    "id": "Pesanan",
+    "en": "Orders"
+  },
+  "tab_invoices": {
+    "id": "Tagihan",
+    "en": "Invoices"
+  },
+  "tab_account": {
+    "id": "Akun",
+    "en": "Account"
+  },
+  "explore_category_all": {
+    "id": "Semua",
+    "en": "All"
+  },
+  "explore_context_see": {
+    "id": "Lihat Contoh",
+    "en": "See Preview"
+  },
+  "explore_context_buy": {
+    "id": "Pilih",
+    "en": "Choose"
+  }
+}

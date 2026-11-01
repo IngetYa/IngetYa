@@ -64,7 +64,7 @@ const config: Configuration = {
       "@/core": path.resolve(__dirname, "scripts/core"),
       "@/main": path.resolve(__dirname, "scripts/main"),
       "@/lib": path.resolve(__dirname, "scripts/lib"),
-      "@/pages": path.resolve(__dirname, "scripts/pages")
+      "@/Pages": path.resolve(__dirname, "scripts/Pages")
     },
     extensions: [".ts", ".js", ".scss"]
   },

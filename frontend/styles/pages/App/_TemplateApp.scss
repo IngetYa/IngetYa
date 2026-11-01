@@ -43,4 +43,22 @@
     padding-bottom: calc(v.$hugePadding * 2.5);
     scrollbar-width: thin;
   }
+  &.rootIn1 {
+    animation: rootIn1 0.3s;
+  }
+  &.rootIn2 {
+    animation: rootIn2 0.3s;
+  }
+  &.rootOut1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: rootOut1 0.3s forwards;
+  }
+  &.rootOut2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: rootOut2 0.3s forwards;
+  }
 }

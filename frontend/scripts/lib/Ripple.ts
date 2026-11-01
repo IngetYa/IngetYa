@@ -1,13 +1,12 @@
 import "@/scss/lib/_RippleButton.scss"
 import { Colors } from "@/core/Colors"
 import { kel } from "@/core/kel"
-import type { IAny } from "@/types/LibTypes"
 
 // ANDROID RIPPLE ALA-ALA
 
 export interface IRipplesOptions {
   color?: string
-  run?: (e: IAny) => void
+  run?: (e: PointerEvent) => void
 }
 
 export interface IRippleReturn {

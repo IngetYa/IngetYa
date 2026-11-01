@@ -13,7 +13,7 @@
       "@/core/*": ["./scripts/core/*"],
       "@/main/*": ["./scripts/main/*"],
       "@/lib/*": ["./scripts/lib/*"],
-      "@/pages/*": ["./scripts/pages/*"]
+      "@/Pages/*": ["./scripts/Pages/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

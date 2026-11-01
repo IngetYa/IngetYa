@@ -1,5 +1,5 @@
 import type { IAny } from "@/types/LibTypes"
-import type portalLang from "@/locales/PortalLocale.json"
+import type appLang from "@/locales/AppLocale.json"
 
 export interface IPortalClass {
   locked: boolean
@@ -7,4 +7,4 @@ export interface IPortalClass {
   id: string
 }
 
-export type ILocaleKey = /* keyof typeof lunaLang */ keyof typeof portalLang | ({} & string)
+export type ILocaleKey = /* keyof typeof lunaLang */ keyof typeof appLang | ({} & string)

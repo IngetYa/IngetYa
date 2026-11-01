@@ -7,7 +7,7 @@ export async function isUser(req: Request, res: Response, next: NextFunction) {
 
   if (noCookie) {
     if (isJsonRequest) {
-      return res.status(401).json({ ok: false, code: 401, msg: "unauthorized" })
+      return res.status(401).json({ ok: false, status: 401, code: "unauthorized", msg: "Unauthorized" })
     }
 
     return res.redirect("/portal")
