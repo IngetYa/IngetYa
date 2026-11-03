@@ -4,5 +4,4 @@ export interface IUser {
   email: string
   name: string
   createdAt: number
-  updatedAt: number
 }

@@ -47,6 +47,14 @@
     "id": "Disalin",
     "en": "Copied"
   },
+  "close": {
+    "id": "Tutup",
+    "en": "Close"
+  },
+  "free": {
+    "id": "Gratis",
+    "en": "Free"
+  },
   "not_found": {
     "id": "Data engga ketemu",
     "en": "Your requested data is not found"
@@ -79,6 +87,14 @@
     "id": "Akun",
     "en": "Account"
   },
+  "header_explore": {
+    "id": "Ambil Tema",
+    "en": "Explore Themes"
+  },
+  "header_cart": {
+    "id": "Bikin Undangan",
+    "en": "Create New"
+  },
   "explore_category_all": {
     "id": "Semua",
     "en": "All"
@@ -90,5 +106,81 @@
   "explore_context_buy": {
     "id": "Pilih",
     "en": "Choose"
+  },
+  "label_cart_sub_total": {
+    "id": "Sub-Total",
+    "en": "Sub-Total"
+  },
+  "label_cart_total": {
+    "id": "Total",
+    "en": "Total"
+  },
+  "label_cart_order_name": {
+    "id": "Nama Order (opsional)",
+    "en": "Order Name (optional)"
+  },
+  "placeholder_cart_order_name": {
+    "id": "Contoh: Stefani & Santoso - Wedding",
+    "en": "Ex: Stephanie & Santoso - Wedding"
+  },
+  "label_cart_theme": {
+    "id": "Tema",
+    "en": "Theme"
+  },
+  "label_cart_package": {
+    "id": "Paket",
+    "en": "Package"
+  },
+  "label_cart_month-1": {
+    "id": "1 Bulan",
+    "en": "1 Month"
+  },
+  "label_cart_month-2": {
+    "id": "10 Bulan",
+    "en": "10 Months"
+  },
+  "label_cart_guests": {
+    "id": "Tamu",
+    "en": "Guests"
+  },
+  "label_cart_guest-1": {
+    "id": "56 Tamu",
+    "en": "56 Guests"
+  },
+  "label_cart_guest-2": {
+    "id": "128 Tamu",
+    "en": "128 Guests"
+  },
+  "label_cart_guest-3": {
+    "id": "1.024 Tamu",
+    "en": "1.024 Guests"
+  },
+  "label_cart_guest-4": {
+    "id": "5.120 Tamu",
+    "en": "5.120 Guests"
+  },
+  "label_cart_addon": {
+    "id": "Tambahan",
+    "en": "Add-on"
+  },
+  "label_cart_book-1": {
+    "id": "Buku Tamu",
+    "en": "Guest Book"
+  },
+  "label_cart_free_guest_book": {
+    "id": "Buku Tamu Gratis",
+    "en": "Free Guest Book"
+  },
+  "label_cart_payment_method": {
+    "id": "Metode Pembayaran",
+    "en": "Payment Method"
+  },
+  "label_cart_pay_with": {
+    "id": "Bayar dengan",
+    "en": "Continue with"
+  },
+  "label_cart_fee": {
+    "id": "Biaya Layanan",
+    "en": "Service Fee"
   }
 }

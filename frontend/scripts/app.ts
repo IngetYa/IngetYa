@@ -7,6 +7,8 @@ import "@/scss/app.scss"
 import { StateManager } from "./Pages/App/core/StateManager"
 import { addLocaleData, loadLocale, setLanguage } from "./core/languages"
 import appLocaleData from "@/locales/AppLocale.json"
+import { Splash } from "./Pages/App/Splash"
+import { eroot } from "./core/kel"
 
 function startApp(): void {
   // load kode 'locale'
@@ -15,9 +17,17 @@ function startApp(): void {
   // tambahin ke data locale
   addLocaleData(appLocaleData)
 
-  // langsung cek history state
-  const stateManager = new StateManager()
-  stateManager.init()
+  const splash = new Splash()
+  eroot().append(splash.html)
+
+  splash.onComplete(() => {
+    // langsung cek history state
+    const stateManager = new StateManager()
+    stateManager.init()
+  })
+
+  // langsung load data app
+  splash.loadData()
 }
 
 window.addEventListener("DOMContentLoaded", () => startApp())

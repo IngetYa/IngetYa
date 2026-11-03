@@ -25,6 +25,7 @@ export class TagCard {
     this.createElement()
     this.onClick()
   }
+  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "cat")
     const text = kel("span")
@@ -36,9 +37,11 @@ export class TagCard {
       this.el.append(amount)
     }
   }
+
+  // listener click buat element
   private onClick(): void {
     const btnRipple = SetRipple(this.el, {
-      color: Colors.primaryDark,
+      color: Colors.yellow,
       run: () => {
         if (this._onSelected) this._onSelected(this.text)
       }
@@ -57,6 +60,8 @@ export class TagCard {
 
     if (scroll) this.el.scrollIntoView({ behavior: "smooth", block: "center" })
   }
+
+  // setup callback method, buat onclick
   onSelected(newFunc: (text: string) => void): void {
     this._onSelected = newFunc
   }

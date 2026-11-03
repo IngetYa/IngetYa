@@ -7,8 +7,8 @@
     "type": "git",
     "url": "git+https://github.com/IngetYa/IngetYa.git"
   },
-  "keywords": [],
-  "author": "HiccupsRaven <hiccusraven@devanka.id> (https://devanka.id/)",
+  "keywords": [ "digital-invitation-service", "online-invitation-service" ],
+  "author": "IngetYa <contact@ingetya.net> (https://ingetya.net/)",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/IngetYa/IngetYa/issues"
@@ -24,6 +24,7 @@
     "#main/*": "./dist/main/*.js",
     "#bot/*": "./dist/bot/*.js",
     "#lib/*": "./dist/lib/*.js",
+    "#data/*": "./dist/data/*",
     "#cfg": "./dist/cfg.js"
   },
   "devDependencies": {

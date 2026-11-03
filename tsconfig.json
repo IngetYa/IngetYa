@@ -15,6 +15,7 @@
       "#main/*": ["./backend/main/*"],
       "#bot/*": ["./backend/bot/*"],
       "#lib/*": ["./backend/lib/*"],
+      "#data/*": ["./backend/data/*"],
       "#cfg": ["./backend/cfg"]
     },
     "esModuleInterop": true,

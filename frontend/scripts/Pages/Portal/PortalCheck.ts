@@ -35,8 +35,10 @@ export class PortalCheck implements IPortalClass {
 
   private createElement(): void {
     this.el = kel("div", "PortalCheck")
-    this.el.innerHTML = `
-    <div class="box"><p><i class="fa-solid fa-circle-notch fa-spin"></i> ${this.text || lang("connecting")}</p></div>`
+
+    // one line biar ga menuhin editor wkwk
+    // format aja atau pake beautifier biar rapi
+    this.el.innerHTML = `<div class="box"><p><i class="fa-solid fa-circle-notch fa-spin"></i> ${this.text || lang("connecting")}</p></div>`
 
     eroot().append(this.el)
   }

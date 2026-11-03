@@ -64,6 +64,7 @@ const config: Configuration = {
       "@/locales": path.resolve(__dirname, "locales"),
       "@/core": path.resolve(__dirname, "scripts/core"),
       "@/main": path.resolve(__dirname, "scripts/main"),
+      "@/data": path.resolve(__dirname, "scripts/data"),
       "@/lib": path.resolve(__dirname, "scripts/lib"),
       "@/Pages": path.resolve(__dirname, "scripts/Pages")
     }

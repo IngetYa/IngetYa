@@ -68,8 +68,11 @@ export async function processThirdParty(usr: IExternalUser): Promise<IResTemp> {
     return { status: 200, data: { user: existingAccount } }
   }
 
+  // jumlah semua user
+  const userSize = await UserModel.countDocuments()
+
   // bikin Id baru
-  const userId = "7" + rNumber(5).toString() + UserModel.countDocuments()
+  const userId = "7" + rNumber(5).toString() + userSize
 
   // bikin doc user baru
   const newUser: IUser = {

@@ -12,6 +12,7 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
 
   if (oldRoot === "explore") {
     if (newRoot !== "explore") return STATENUM.FORWARD
+
     if (oldSection === "peek") {
       if (newSection === "peek") return STATENUM.REPLACE
     }

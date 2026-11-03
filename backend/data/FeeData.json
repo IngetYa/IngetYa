@@ -1,0 +1,34 @@
+[
+  {
+    "id": "qris",
+    "fee": { "charge": 0.7, "type": "percent" }
+  },
+  {
+    "id": "bca",
+    "fee": { "charge": 4000, "type": "flat" }
+  },
+  {
+    "id": "mandiri",
+    "fee": { "charge": 4000, "type": "flat" }
+  },
+  {
+    "id": "bni",
+    "fee": { "charge": 4000, "type": "flat" }
+  },
+  {
+    "id": "bri",
+    "fee": { "charge": 4000, "type": "flat" }
+  },
+  {
+    "id": "permata",
+    "fee": { "charge": 4000, "type": "flat" }
+  },
+  {
+    "id": "cimb",
+    "fee": { "charge": 4000, "type": "flat" }
+  },
+  {
+    "id": "other_va",
+    "fee": { "charge": 4000, "type": "flat" }
+  }
+]

@@ -108,6 +108,10 @@ export class StateManager {
     this.processQueue()
   }
 
+  get busy(): boolean {
+    return this.isProcessing
+  }
+
   init(): void {
     // bikin stack baru
     const stack = new Stack(this)
@@ -120,14 +124,14 @@ export class StateManager {
     // BUAT EXPLORE JADI ROOT HISTORY STATE
 
     // kalo bukan explore, berarti bikin jadi explore
-    if (hash !== "#explore") {
-      // jadiin hash-nya jadi nomor 2
-      history.replaceState({ path: "#explore", data: { first: true } }, "", "#explore")
-      this.next({ path, data: { first: false } })
-    } else {
+    if (hash === "#explore") {
       // paksa jalanin handlernya (biar function ditrigger)
       history.replaceState({ path: "#explore", data: { first: true } }, "", "#explore")
       this.next({ path, data: { first: true, force: true } })
+    } else {
+      // jadiin hash-nya jadi nomor 2
+      history.replaceState({ path: "#explore", data: { first: true } }, "", "#explore")
+      this.next({ path, data: { first: false } })
     }
   }
 }

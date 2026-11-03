@@ -140,6 +140,20 @@ $bgContext: #503c43;
   box-shadow: v.$glow-dark;
   border-radius: 10px;
   animation: modal_in 0.3s;
+  .btn-close {
+    position: relative;
+    font-size: 0.7rem;
+    padding: v.$smallPadding v.$medPadding;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: rgba(v.$primary, 0.4);
+    color: v.$btn-primary-text;
+    border-radius: 5px;
+    margin-bottom: v.$medPadding;
+    width: fit-content;
+    border: 1px solid v.$black;
+    overflow: hidden;
+  }
   .thumbnail {
     img {
       display: block;
@@ -149,9 +163,11 @@ $bgContext: #503c43;
     }
   }
   .menu {
+    position: relative;
     color: v.$btn-primary-text;
     border-bottom: 1px solid rgba(v.$sgray, 0.8);
     padding: v.$medPadding 0;
+    overflow: hidden;
     &.meta {
       display: flex;
       justify-content: space-between;

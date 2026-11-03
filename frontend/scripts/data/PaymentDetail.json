@@ -1,0 +1,85 @@
+[
+  { "id": "qris", "name": { "id": "QRIS", "en": "QRIS" }, "guides": { "id": [{ "name": "Scan QRIS", "steps": ["Buka aplikasi yang mendukung pembayaran dengan QRIS.", "Download atau pindai QRIS pada layar.", "Konfirmasi pembayaran pada aplikasi.", "Pembayaran berhasil."] }], "en": [{ "name": "Scan QRIS", "steps": ["Open an app that supports QRIS payments.", "Download or scan the QRIS on the screen.", "Confirm the payment on the app.", "Payment successful."] }] } },
+  {
+    "name": { "id": "Bank BCA", "en": "Bank BCA" },
+    "guides": {
+      "id": [
+        { "name": "ATM BCA", "steps": ["Pilih transaksi lainnya pada menu utama.", "Pilih transfer.", "Pilih ke rekening BCA virtual account.", "Masukkan nomor BCA virtual account.", "Masukkan jumlah yang akan dibayar, lalu konfirmasi.", "Pembayaran berhasil."] },
+        { "name": "Klik BCA", "steps": ["Pilih Transfer Dana.", "Pilih Transfer ke BCA virtual account.", "Masukkan nomor BCA virtual account.", "Masukkan jumlah yang akan dibayar, lalu konfirmasi.", "Pembayaran berhasil."] },
+        { "name": "m-BCA", "steps": ["Pilih m-Transfer.", "Pilih BCA virtual account.", "Masukkan nomor BCA virtual account.", "Masukkan jumlah yang akan dibayar, lalu konfirmasi.", "Konfirmasi pembayaran.", "Pembayaran berhasil."] }
+      ],
+      "en": [
+        { "name": "ATM BCA", "steps": ["Select other transactions on the main menu.", "Select transfer.", "Select to BCA virtual account.", "Enter the BCA virtual account number.", "Enter the amount to be paid, then confirm.", "Payment successful."] },
+        { "name": "Klik BCA", "steps": ["Select Fund Transfer.", "Select Transfer to BCA virtual account.", "Enter the BCA virtual account number.", "Enter the amount to be paid, then confirm.", "Payment successful."] },
+        { "name": "m-BCA", "steps": ["Select m-Transfer.", "Select BCA virtual account.", "Enter the BCA virtual account number.", "Enter the amount to be paid, then confirm.", "Confirm payment.", "Payment successful."] }
+      ]
+    },
+    "id": "bca"
+  },
+  {
+    "name": { "id": "Bank Mandiri", "en": "Bank Mandiri" },
+    "guides": {
+      "id": [
+        { "name": "Livin' by Mandiri", "steps": ["Pilih bayar pada menu utama.", "Pilih Ecommerce.", "Pilih Midtrans di bagian penyedia jasa.", "Masukkan nomor virtual account pada bagian kode bayar.", "Klik lanjutkan untuk konfirmasi.", "Pembayaran selesai."] },
+        { "name": "ATM Mandiri", "steps": ["Pilih bayar/beli pada menu utama.", "Pilih lainnya.", "Pilih multi payment.", "Masukkan kode perusahaan terlebih dahulu.", "Masukkan kode pembayaran, lalu konfirmasi.", "Pembayaran selesai."] },
+        { "name": "Mandiri Internet Banking", "steps": ["Pilih bayar pada menu utama.", "Pilih multi payment.", "Pilih dari rekening.", "Pilih Midtrans di bagian penyedia jasa.", "Masukkan kode pembayaran, lalu konfirmasi.", "Pembayaran selesai."] }
+      ],
+      "en": [
+        { "name": "Livin' by Mandiri", "steps": ["Select pay on the main menu.", "Select Ecommerce.", "Select Midtrans in the service provider section.", "Enter the virtual account number in the payment code section.", "Click continue to confirm.", "Payment completed."] },
+        { "name": "ATM Mandiri", "steps": ["Select pay/buy on the main menu.", "Select others.", "Select multi payment.", "Enter the company code first.", "Enter the payment code, then confirm.", "Payment completed."] },
+        { "name": "Mandiri Internet Banking", "steps": ["Select pay on the main menu.", "Select multi payment.", "Select from account.", "Select Midtrans in the service provider section.", "Enter the payment code, then confirm.", "Payment completed."] }
+      ]
+    },
+    "id": "mandiri"
+  },
+  {
+    "name": { "id": "Bank BNI", "en": "Bank BNI" },
+    "guides": {
+      "id": [
+        { "name": "ATM BNI", "steps": ["Pilih menu lain pada menu utama.", "Pilih transfer.", "Pilih ke rekening BNI.", "Masukkan nomor rekening pembayaran.", "Masukkan jumlah yang akan dibayar, lalu konfirmasi.", "Pembayaran berhasil."] },
+        { "name": "Internet Banking", "steps": ["Pilih transaksi, lalu info & administrasi transfer.", "Pilih atur rekening tujuan.", "Masukkan informasi rekening, lalu konfirmasi.", "Pilih transfer, lalu transfer ke rekening BNI.", "Masukkan detail pembayaran, lalu konfirmasi.", "Pembayaran berhasil."] },
+        { "name": "Mobile Banking", "steps": ["Pilih transfer.", "Pilih virtual account billing.", "Pilih rekening debit yang akan digunakan.", "Masukkan nomor virtual account, lalu konfirmasi.", "Pembayaran berhasil."] }
+      ],
+      "en": [
+        { "name": "BNI ATM", "steps": ["Select other menu on the main menu.", "Select transfer.", "Select to BNI account.", "Enter the payment account number.", "Enter the amount to be paid, then confirm.", "Payment successful."] },
+        { "name": "Internet Banking", "steps": ["Select transaction, then transfer info & administration.", "Select set destination account.", "Enter account information, then confirm.", "Select transfer, then transfer to BNI account.", "Enter payment details, then confirm.", "Payment successful."] },
+        { "name": "Mobile Banking", "steps": ["Select transfer.", "Select virtual account billing.", "Select the debit account to be used.", "Enter the virtual account number, then confirm.", "Payment successful."] }
+      ]
+    },
+    "id": "bni"
+  },
+  {
+    "name": { "id": "Bank BRI", "en": "Bank BRI" },
+    "guides": {
+      "id": [
+        { "name": "ATM BRI", "steps": ["Pilih transaksi lainnya pada menu utama.", "Pilih pembayaran.", "Pilih lainnya.", "Pilih BRIVA.", "Masukkan nomor BRIVA, lalu konfirmasi.", "Pembayaran berhasil."] },
+        { "name": "Internet Banking BRI", "steps": ["Pilih pembayaran & pembelian.", "Pilih BRIVA.", "Masukkan nomor BRIVA, lalu konfirmasi.", "Pembayaran berhasil."] },
+        { "name": "BRImo", "steps": ["Pilih pembayaran.", "Pilih BRIVA.", "Masukkan nomor BRIVA, lalu konfirmasi.", "Pembayaran berhasil."] }
+      ],
+      "en": [
+        { "name": "BRI ATM", "steps": ["Select other transactions on the main menu.", "Select payment.", "Select others.", "Select BRIVA.", "Enter the BRIVA number, then confirm.", "Payment successful."] },
+        { "name": "Internet Banking BRI", "steps": ["Select payment & purchase.", "Select BRIVA.", "Enter the BRIVA number, then confirm.", "Payment successful."] },
+        { "name": "BRImo", "steps": ["Select payment.", "Select BRIVA.", "Enter the BRIVA number, then confirm.", "Payment successful."] }
+      ]
+    },
+    "id": "bri"
+  },
+  { "name": { "id": "Bank Permata", "en": "Bank Permata" }, "guides": { "id": [{ "name": "ATM Permata/ALTO", "steps": ["Pilih transaksi lainnya pada menu utama.", "Pilih pembayaran.", "Pilih pembayaran lainnya.", "Pilih virtual account.", "Masukkan nomor virtual account Permata, lalu konfirmasi.", "Pembayaran berhasil."] }], "en": [{ "name": "Permata/ALTO ATM", "steps": ["Select other transactions on the main menu.", "Select payment.", "Select other payments.", "Select virtual account.", "Enter the Permata virtual account number, then confirm.", "Payment successful."] }] }, "id": "permata" },
+  {
+    "name": { "id": "Bank CIMB Niaga", "en": "Bank CIMB Niaga" },
+    "guides": {
+      "id": [
+        { "name": "ATM CIMB Niaga", "steps": ["Pilih pembayaran pada menu utama.", "Pilih virtual account.", "Masukkan nomor virtual account, lalu konfirmasi.", "Pembayaran selesai."] },
+        { "name": "OCTO Clicks", "steps": ["Pilih pembayaran tagihan pada menu utama.", "Pilih mobile rekening virtual.", "Masukkan nomor virtual account, lalu klik lanjut untuk verifikasi detail.", "Pilih kirim OTP untuk lanjut.", "Masukkan OTP yang dikirimkan ke nomor HP Anda, lalu konfirmasi.", "Pembayaran selesai."] },
+        { "name": "OCTO Mobile", "steps": ["Pilih menu transfer.", "Pilih transfer to other CIMB Niaga account.", "Pilih sumber dana: CASA atau rekening ponsel.", "Masukkan nomor virtual account.", "Masukkan jumlah yang akan dibayar.", "Ikuti instruksi untuk menyelesaikan pembayaran.", "Pembayaran selesai."] }
+      ],
+      "en": [
+        { "name": "CIMB Niaga ATM", "steps": ["Select payment on the main menu.", "Select virtual account.", "Enter the virtual account number, then confirm.", "Payment completed."] },
+        { "name": "OCTO Clicks", "steps": ["Select bill payment on the main menu.", "Select mobile virtual account.", "Enter the virtual account number, then click continue to verify details.", "Select send OTP to continue.", "Enter the OTP sent to your mobile number, then confirm.", "Payment completed."] },
+        { "name": "OCTO Mobile", "steps": ["Select transfer menu.", "Select transfer to other CIMB Niaga account.", "Select source of funds: CASA or mobile account.", "Enter the virtual account number.", "Enter the amount to be paid.", "Follow the instructions to complete the payment.", "Payment completed."] }
+      ]
+    },
+    "id": "cimb"
+  },
+  { "name": { "id": "Bank Lain", "en": "Other Bank" }, "guides": { "id": [{ "name": "Transfer Bank", "steps": ["Pilih transfer antar bank atau transfer ke bank lain.", "Pilih Bank BNI atau masukkan 009 sebagai kode bank.", "Masukkan nomor rekening pembayaran.", "Masukkan jumlah yang akan dibayar.", "Konfirmasi pembayaran", "Pembayaran berhasil."] }], "en": [{ "name": "Bank Transfer", "steps": ["Select transfer to other bank accounts.", "Select Bank BNI or enter 009 as the bank code.", "Enter the payment account number.", "Enter the amount to be paid.", "Confirm the payment.", "Payment successful."] }] }, "id": "other_va" }
+]

@@ -12,6 +12,7 @@ const schema = new Schema(
     price: { type: Number, required: true },
     image: { type: String, required: true },
     categories: { type: [String], required: true },
+    previewUrl: { type: String, required: true },
     isActive: { type: Boolean, required: true, default: false },
     updatedAt: { type: Date, required: true, default: new Date() }
     // access: { type: [String], enum: ["ADMIN", "DEV"] }

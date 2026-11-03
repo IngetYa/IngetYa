@@ -12,6 +12,7 @@
       "@/locales/*": ["./locales/*"],
       "@/core/*": ["./scripts/core/*"],
       "@/main/*": ["./scripts/main/*"],
+      "@/data/*": ["./scripts/data/*"],
       "@/lib/*": ["./scripts/lib/*"],
       "@/Pages/*": ["./scripts/Pages/*"]
     },

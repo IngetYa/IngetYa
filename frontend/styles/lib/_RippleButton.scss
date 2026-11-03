@@ -12,7 +12,7 @@ span.ripples {
 @keyframes ripples {
   0% {
     transform: translate(-50%, -50%) scale(0.25);
-    opacity: 0.5;
+    opacity: 0.65;
   }
   100% {
     opacity: 0;
