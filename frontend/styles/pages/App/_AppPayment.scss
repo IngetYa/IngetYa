@@ -1,0 +1,128 @@
+@use "../../core/constants" as v;
+
+.Payment {
+  width: 100%;
+  border: 1px solid v.$card-border;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(v.$card-bg, 0.5);
+  margin-bottom: v.$smallPadding;
+  background-image: url("./abstracts/mosaic-seamless.svg");
+  background-position: center center;
+  background-repeat: repeat;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .PaymentName {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: v.$bigPadding;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: v.$bigPadding;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    .title-text {
+      font-weight: 700;
+      text-align: center;
+    }
+    .arrow-openclose {
+      rotate: 0deg;
+      transition: rotate 0.3s;
+    }
+  }
+  .PaymentDetail {
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    transition:
+      padding 0.5s ease,
+      opacity 0.3s ease,
+      max-height 0.5s ease-in-out;
+    .fee {
+      font-size: 0.8rem;
+      .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: v.$medPadding;
+        border-bottom: 3px dashed rgba(v.$text-primary, 0.14);
+        padding-bottom: v.$smallPadding;
+        margin-bottom: v.$smallPadding;
+        &:last-child {
+          margin-bottom: 0;
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+        .fee-label {
+          span {
+            display: block;
+          }
+          .item-title {
+            font-weight: 600;
+          }
+        }
+        .fee-price {
+          font-size: 0.9rem;
+          text-align: right;
+          font-weight: 700;
+          color: v.$sgreen;
+        }
+      }
+    }
+    .btn-buy {
+      position: relative;
+      overflow: hidden;
+      background-color: v.$primary-dark;
+      padding: v.$medPadding;
+      border-radius: 5px;
+      color: v.$white;
+      font-weight: 600;
+      margin-bottom: v.$medPadding;
+    }
+    .PaymentHelp {
+      width: 100%;
+      border-radius: 5px;
+      padding: v.$medPadding;
+      margin-bottom: v.$medPadding;
+      background-color: v.$card-bg;
+      border: 1px solid v.$card-border;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .step-name {
+        font-weight: 600;
+      }
+      .step-guide {
+        width: 100%;
+        ul {
+          li {
+            margin-left: 1.65rem;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+  &.show {
+    .PaymentName {
+      .arrow-openclose {
+        rotate: 90deg;
+      }
+    }
+    .PaymentDetail {
+      display: block;
+      padding: v.$medPadding;
+      max-height: 3000px;
+      opacity: 1;
+      .fee {
+        margin-bottom: v.$medPadding;
+        p {
+          margin: v.$smallPadding 0;
+        }
+      }
+    }
+  }
+}

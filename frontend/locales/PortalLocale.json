@@ -100,8 +100,8 @@
     "en": "Enter Guest Key"
   },
   "auth_hex_notfound": {
-    "id": "Kunci tamu yang kamu kirim ga ada yang cocok sama akun manapun di Luna",
-    "en": "The guest key you sent doesn't match any account in Luna"
+    "id": "Kunci tamu yang kamu kirim ga ada yang cocok sama akun manapun di IngetYa",
+    "en": "The guest key you sent doesn't match any account in IngetYa"
   },
   "auth_login_rate_limit": {
     "id": "Kamu udah ngelebihin batas percobaan login. Coba lagi nanti.",
@@ -146,6 +146,18 @@
   "auth_failed": {
     "id": "Nampaknya percobaan autentikasi-mu gagal yaa.<br />Kalem, ntar coba lagi aja kalo udah readyy!",
     "en": "It seems your authentication attempt failed.<br />Don't worry, just try again when you're ready!"
+  },
+  "auth_success_1": {
+    "id": "Terima kasih udah login!",
+    "en": "Thank you, you have successfully logged in!"
+  },
+  "auth_success_2": {
+    "id": "Sekarang kamu bisa lanjut masuk dashboard",
+    "en": "You can now proceed to the dashboard."
+  },
+  "next": {
+    "id": "Lanjut",
+    "en": "Next"
   },
   "label_error_back": {
     "id": "KEMBALI",

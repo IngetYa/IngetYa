@@ -1,0 +1,66 @@
+{
+  "sdate_years": {
+    "id": "tahun",
+    "en": "year(s)"
+  },
+  "sdate_months": {
+    "id": "bulan",
+    "en": "month(s)"
+  },
+  "sdate_weeks": {
+    "id": "minggu",
+    "en": "week(s)"
+  },
+  "sdate_days": {
+    "id": "hari",
+    "en": "day(s)"
+  },
+  "sdate_hours": {
+    "id": "jam",
+    "en": "hour(s)"
+  },
+  "sdate_minutes": {
+    "id": "menit",
+    "en": "minute(s)"
+  },
+  "sdate_seconds": {
+    "id": "detik",
+    "en": "second(s)"
+  },
+  "sdate_justnow": {
+    "id": "Baru saja",
+    "en": "Just now"
+  },
+  "sdate_syears": {
+    "id": "t",
+    "en": "y"
+  },
+  "sdate_smonths": {
+    "id": "b",
+    "en": "mo"
+  },
+  "sdate_sweeks": {
+    "id": "mi",
+    "en": "w"
+  },
+  "sdate_sdays": {
+    "id": "h",
+    "en": "d"
+  },
+  "sdate_shours": {
+    "id": "j",
+    "en": "h"
+  },
+  "sdate_sminutes": {
+    "id": "m",
+    "en": "m"
+  },
+  "sdate_sseconds": {
+    "id": "d",
+    "en": "s"
+  },
+  "sdate_ago": {
+    "id": "yang lalu",
+    "en": "ago"
+  }
+}

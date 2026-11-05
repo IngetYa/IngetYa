@@ -1,8 +1,7 @@
-import { eroot, futor } from "@/core/kel"
-import type { IAny, ILanguage, ILocaleData } from "@/types/LibTypes"
+import type { IAny, ILanguage, ILocale, ILocaleData } from "@/types/LibTypes"
 import { findQuery, setQueries } from "@/core/queries"
-import { iform } from "@/lib/iform"
 import type { ILocaleKey } from "@/types/PortalTypes"
+import { formSelect } from "@/lib/modal"
 
 const langKey = "locale"
 
@@ -11,6 +10,12 @@ let currentLanguage: ILanguage = "en"
 
 // memory
 const locales: ILocaleData = {}
+
+// sementara hard coded
+export const LangName: ILocale = {
+  id: "Bahasa Indonesia (Acak Kadut)",
+  en: "English"
+}
 
 // baca locale browser
 export function browserLocale(): ILanguage {
@@ -64,8 +69,8 @@ export function saveLocale(): void {
 }
 
 // assign data locale ke memory
-export function addLocaleData(localeData: ILocaleData): void {
-  Object.keys(localeData).forEach((k) => (locales[k] = localeData[k]))
+export function addLocaleData(...localeData: ILocaleData[]): void {
+  localeData.forEach((data) => Object.assign(locales, data))
 }
 
 // ambil kode locale
@@ -104,84 +109,20 @@ export function lang(key: ILocaleKey): string {
 
 // modal switch lang
 export async function changeLang(): Promise<ILanguage | undefined> {
-  return new Promise((resolve) => {
-    const langId = currentLanguage === "id"
-    const langEn = currentLanguage === "en"
-
-    const langForm = iform(`
-    <div class="box">
-      <div class="f">
-        <div class="title">
-          <p class="tx center"><i class="fa-jelly-fill fa-regular fa-language"></i> Language</p>
-        </div>
-        <div class="btn btn-close"><i class="fa-jelly-fill fa-regular fa-circle-xmark"></i></div>
-      </div>
-      <div class="f tp">
-        <div class="i">
-          <div class="tx center">Pilih Bahasa | Choose Language</div>
-        </div>
-      </div>
-      <div class="f bp">
-        <div class="i">
-          <div class="f p">
-            <div class="radio">
-              <label for="luna-lang-id">
-                <input type="radio" name="luna-lang" id="luna-lang-id" value="luna-lang-id"${langId ? " checked" : ""} />
-                <span>Bahasa Indonesia (Simplified)</span>
-              </label>
-            </div>
-          </div>
-          <div class="f p">
-            <div class="radio">
-              <label for="luna-lang-en">
-                <input type="radio" name="luna-lang" id="luna-lang-en" value="luna-lang-en"${langEn ? " checked" : ""} />
-                <span>English</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="f">
-        <div class="s">
-          <div class="btn btn-cancel">${lang("cancel")}</div>
-        </div>
-        <div class="s">
-          <button class="btn btn-ok">${lang("ok")}</button>
-        </div>
-      </div>
-    </div>`)
-
-    // batalin
-    const btnClose = futor(".btn-close", langForm)
-    btnClose.onclick = () => {
-      langForm.remove()
-      resolve(currentLanguage)
-    }
-
-    // batalin
-    const btnCancel = futor(".btn-cancel", langForm)
-    btnCancel.onclick = () => {
-      langForm.remove()
-      resolve(currentLanguage)
-    }
-
-    // kirim ke localstorage
-    langForm.onsubmit = (e) => {
-      e.preventDefault()
-
-      const formData = new FormData(langForm)
-
-      const submittedLang = formData.get("luna-lang")?.toString()
-
-      const newLanguage: ILanguage = submittedLang === "luna-lang-id" ? "id" : "en"
-
-      setLanguage(newLanguage)
-
-      langForm.remove()
-
-      return resolve(newLanguage)
-    }
-
-    eroot().append(langForm)
+  const langResult = await formSelect({
+    header: '<i class="fa-jelly-fill fa-regular fa-language"></i> Language',
+    msg: "Pilih Bahasa | Choose Language",
+    items: [
+      { id: "luna-lang-id", label: LangName.id, checked: currentLanguage === "id" },
+      { id: "luna-lang-en", label: LangName.en, checked: currentLanguage === "en" }
+    ]
   })
+
+  if (!langResult) return currentLanguage
+
+  const newLanguage: ILanguage = langResult === "luna-lang-id" ? "id" : "en"
+
+  setLanguage(newLanguage)
+
+  return newLanguage
 }

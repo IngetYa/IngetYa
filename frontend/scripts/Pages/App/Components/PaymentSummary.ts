@@ -5,10 +5,14 @@ import { toCurrency, toObject } from "@/lib/gen"
 import type { ILanguage } from "@/types/LibTypes"
 import type { FeeType, IBankFee, IBundlePrice, IPayment, IPaymentGuide } from "@/types/PaymentTypes"
 import { Cart } from "./Explore/Cart"
-import { formAlert } from "@/lib/modal"
+import { formAlert, formLoading } from "@/lib/modal"
+import { type IRippleReturn, SetRipple } from "@/lib/Ripple"
+import { Colors } from "@/core/Colors"
+import waittime from "@/lib/waittime"
+import xhr from "@/lib/xhr"
 
 // reusable bikin elemen guides
-function createGuides(guides: IPaymentGuide): HTMLDivElement {
+export function createGuides(guides: IPaymentGuide): HTMLDivElement {
   const el = kel("div", "PaymentHelp")
 
   const ename = kel("div", "step-name")
@@ -102,6 +106,8 @@ export class PaymentSummary {
 
   private currLang: ILanguage
 
+  private _rippleCaches: IRippleReturn[] = []
+
   constructor(
     private cart: Cart,
     private fee: IBankFee
@@ -156,12 +162,17 @@ export class PaymentSummary {
   }
 
   private paymentNameClickListener(): void {
-    this.ename.onclick = () => {
-      // next status pasti kebalikan kondisi saat ini
-      const nextStatus = !this._isActive
+    const nameRipple = SetRipple(this.ename, {
+      color: Colors.textMuted,
+      run: () => {
+        // next status pasti kebalikan kondisi saat ini
+        const nextStatus = !this._isActive
 
-      this.activate(nextStatus)
-    }
+        this.activate(nextStatus)
+      }
+    })
+
+    this._rippleCaches.push(nameRipple)
   }
 
   // update detail harga
@@ -213,27 +224,65 @@ export class PaymentSummary {
       this.efee.append(item)
     }
   }
-  private btnBuyListener(): void {
-    this.btnBuy.onclick = async () => {
-      // kalo history-nya lagi frustasi, stop dulu
-      if (this.cart.locked) return
-      if (this.cart.manager.busy) return
 
-      // lock cart biar dapet kondisi true
-      this.cart.lock()
+  private async onBuy(): Promise<void> {
+    // kalo history-nya lagi frustasi, stop dulu
+    if (this.cart.locked) return
+    if (this.cart.manager.busy) return
 
-      // hehe sabar ges
-      await formAlert("Under Development LOL XD")
+    // lock cart biar dapet kondisi true
+    this.cart.lock()
 
-      // unlock cart
+    await waittime(140)
+
+    // ambil data order
+    const bundle = this.cart.getOrderData()
+
+    if (!bundle.orderName || bundle.orderName.length > 100) {
+      await formAlert(lang("alert_order_name_length"))
       this.cart.lock(false)
+      this.cart.scrollToOrderName()
+      return
     }
+
+    // kirim properti payment
+    bundle.paymentId = this.payment.id
+
+    // request order ke server
+    const order = await formLoading(xhr.post("/x/order/create", bundle), lang("processing"))
+
+    // kalo gagal, kasih modal pesan error
+    if (!order.ok) {
+      await formAlert(lang(order.code || "error"))
+      this.cart.lock(false)
+      return
+    }
+
+    // hehe sabar ges
+    await formAlert("Under Development LOL XD")
+
+    // unlock cart
+    this.cart.lock(false)
+  }
+
+  private btnBuyListener(): void {
+    const ripple = SetRipple(this.btnBuy, {
+      color: Colors.yellow,
+      run: () => this.onBuy()
+    })
+
+    this._rippleCaches.push(ripple)
   }
 
   activate(status: boolean = true): void {
     // tampilkan detail
     this.el.classList[status ? "add" : "remove"]("show")
     this._isActive = status
+  }
+
+  destroy(): void {
+    this._rippleCaches.forEach((ripple) => ripple.stopListener())
+    this._rippleCaches.splice(0, this._rippleCaches.length)
   }
 
   get id(): string {

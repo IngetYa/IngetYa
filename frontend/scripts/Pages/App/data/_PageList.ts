@@ -10,12 +10,12 @@ export const PagesRoot = [
     group: "primary"
   },
   {
-    id: "invoices",
+    id: "bills",
     n: 3,
     group: "primary"
   },
   {
-    id: "account",
+    id: "me",
     n: 4,
     group: "primary"
   }

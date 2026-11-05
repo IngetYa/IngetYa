@@ -6,10 +6,10 @@ import { IResTemp } from "#types/LibTypes"
 import { IBankFee, IPriceDetail } from "#types/PaymentTypes"
 import { IUserTemp } from "#types/UserTypes"
 import UserModel from "#models/UserModel"
+import OrderModel from "#models/OrderModel"
+import BillModel from "#models/BillModel"
 
-export async function getMe(uid?: string): Promise<IUserTemp | undefined> {
-  if (!uid) return undefined
-
+export async function getMe(uid: string): Promise<IUserTemp | undefined> {
   const user = await UserModel.findOne({ id: uid }).lean()
 
   if (!user) return undefined
@@ -24,8 +24,12 @@ export async function getMe(uid?: string): Promise<IUserTemp | undefined> {
   }
 }
 
-export async function getExploreDetail(uid?: string): Promise<IResTemp> {
+export async function getExploreDetail(uid: string): Promise<IResTemp> {
   const products = await ProductModel.find({ isActive: true }).lean()
+
+  const orders = await OrderModel.find({ userId: uid }).lean()
+
+  const bills = await BillModel.find({ userId: uid }).lean()
 
   const price = priceDetail as IPriceDetail
   const fee = feeData as IBankFee[]
@@ -34,6 +38,8 @@ export async function getExploreDetail(uid?: string): Promise<IResTemp> {
 
   const data: Partial<IExploreDetail> = {
     products,
+    orders,
+    bills,
     price: price,
     me,
     fee: fee

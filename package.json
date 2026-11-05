@@ -7,7 +7,10 @@
     "type": "git",
     "url": "git+https://github.com/IngetYa/IngetYa.git"
   },
-  "keywords": [ "digital-invitation-service", "online-invitation-service" ],
+  "keywords": [
+    "digital-invitation-service",
+    "online-invitation-service"
+  ],
   "author": "IngetYa <contact@ingetya.net> (https://ingetya.net/)",
   "license": "UNLICENSED",
   "bugs": {
@@ -32,6 +35,7 @@
     "@babel/preset-env": "^8.0.7",
     "@babel/preset-typescript": "^8.0.7",
     "@eslint/js": "^10.0.1",
+    "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/express-ws": "^3.0.6",
@@ -72,7 +76,7 @@
     "check": "prettier --check .",
     "type-check": "tsc -p . --pretty --noEmit",
     "lint": "eslint --ext ts",
-    "init": "npx tsx ./backend/initService.ts",
+    "init-service": "npx tsx ./backend/initService.ts",
     "start": "node .",
     "dev": "nodemon",
     "dev:start": "nodemon",

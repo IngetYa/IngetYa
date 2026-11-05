@@ -31,7 +31,7 @@ export async function getMe(uid: string): Promise<IResTemp> {
 export async function authHex(s: IAny): Promise<IResTemp> {
   if (typeof s?.hex !== "string") return { status: 400, code: "auth_hex_notfound" }
 
-  const hex = s.hex.toString().trim() as string
+  const hex = s.hex.toString().toUpperCase().trim() as string
 
   const user = await UserModel.findOne({ hex }).lean()
   if (!user) return { status: 400, code: "auth_hex_notfound" }
@@ -91,7 +91,7 @@ export async function processThirdParty(usr: IExternalUser): Promise<IResTemp> {
     luna: usr.id,
     email: usr.email ? usr.email : `usr${usr.id}@luna.devanka.id`,
     name: usr.name,
-    hex: genhex(16),
+    hex: genhex(2).toUpperCase(),
     createdAt: Date.now(),
     updatedAt: Date.now()
   }

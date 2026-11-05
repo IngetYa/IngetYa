@@ -1,6 +1,6 @@
 @use "../../core/constants" as v;
 
-.Invoices {
+.Bills {
   width: 100%;
   height: 100dvh;
   display: flex;
@@ -81,22 +81,23 @@
             overflow: hidden;
             cursor: pointer;
             font-size: 0.9rem;
-            .paid,
-            .unpaid,
-            .expired {
+            .status {
               color: v.$btn-primary-text;
               font-size: 0.7rem;
               padding: 2px 5px;
               border-radius: 3px;
-            }
-            .paid {
-              background-color: v.$sgreen;
-            }
-            .unpaid {
-              background-color: v.$accent-gold;
-            }
-            .expired {
-              background-color: v.$sred;
+              &.settlement {
+                background-color: v.$sgreen;
+              }
+              &.pending {
+                background-color: v.$accent-gold;
+              }
+              &.deny,
+              &.cancel,
+              &.expire,
+              &.failure {
+                background-color: v.$sred;
+              }
             }
             &.name {
               font-weight: 500;

@@ -1,6 +1,6 @@
 @use "../../core/constants" as v;
 
-.PortalError {
+.PortalFinal {
   width: 100%;
   min-height: 100dvh;
   padding: v.$bigPadding;
@@ -46,10 +46,13 @@
           text-align: justify;
           text-align-last: center;
           &.reason {
-            color: v.$sred;
+            color: v.$sgreen;
             font-weight: 600;
-            a {
+            &.reason-red {
               color: v.$sred;
+              a {
+                color: v.$sred;
+              }
             }
           }
         }

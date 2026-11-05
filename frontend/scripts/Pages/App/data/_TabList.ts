@@ -6,17 +6,17 @@ export const TabList = [
   },
   {
     id: "orders",
-    icon: "fajdr fa-bag-shopping fa-fw",
+    icon: "fadr fa-bag-shopping fa-fw",
     name: "orders"
   },
   {
-    id: "invoices",
+    id: "bills",
     icon: "fajdr fa-credit-card fa-fw",
-    name: "invoices"
+    name: "bills"
   },
   {
-    id: "account",
+    id: "me",
     icon: "fajdr fa-user fa-fw",
-    name: "account"
+    name: "me"
   }
 ]

@@ -1,6 +1,7 @@
 [
   { "id": "qris", "name": { "id": "QRIS", "en": "QRIS" }, "guides": { "id": [{ "name": "Scan QRIS", "steps": ["Buka aplikasi yang mendukung pembayaran dengan QRIS.", "Download atau pindai QRIS pada layar.", "Konfirmasi pembayaran pada aplikasi.", "Pembayaran berhasil."] }], "en": [{ "name": "Scan QRIS", "steps": ["Open an app that supports QRIS payments.", "Download or scan the QRIS on the screen.", "Confirm the payment on the app.", "Payment successful."] }] } },
   {
+    "id": "bca",
     "name": { "id": "Bank BCA", "en": "Bank BCA" },
     "guides": {
       "id": [
@@ -13,10 +14,10 @@
         { "name": "Klik BCA", "steps": ["Select Fund Transfer.", "Select Transfer to BCA virtual account.", "Enter the BCA virtual account number.", "Enter the amount to be paid, then confirm.", "Payment successful."] },
         { "name": "m-BCA", "steps": ["Select m-Transfer.", "Select BCA virtual account.", "Enter the BCA virtual account number.", "Enter the amount to be paid, then confirm.", "Confirm payment.", "Payment successful."] }
       ]
-    },
-    "id": "bca"
+    }
   },
   {
+    "id": "mandiri",
     "name": { "id": "Bank Mandiri", "en": "Bank Mandiri" },
     "guides": {
       "id": [
@@ -29,10 +30,10 @@
         { "name": "ATM Mandiri", "steps": ["Select pay/buy on the main menu.", "Select others.", "Select multi payment.", "Enter the company code first.", "Enter the payment code, then confirm.", "Payment completed."] },
         { "name": "Mandiri Internet Banking", "steps": ["Select pay on the main menu.", "Select multi payment.", "Select from account.", "Select Midtrans in the service provider section.", "Enter the payment code, then confirm.", "Payment completed."] }
       ]
-    },
-    "id": "mandiri"
+    }
   },
   {
+    "id": "bni",
     "name": { "id": "Bank BNI", "en": "Bank BNI" },
     "guides": {
       "id": [
@@ -45,10 +46,10 @@
         { "name": "Internet Banking", "steps": ["Select transaction, then transfer info & administration.", "Select set destination account.", "Enter account information, then confirm.", "Select transfer, then transfer to BNI account.", "Enter payment details, then confirm.", "Payment successful."] },
         { "name": "Mobile Banking", "steps": ["Select transfer.", "Select virtual account billing.", "Select the debit account to be used.", "Enter the virtual account number, then confirm.", "Payment successful."] }
       ]
-    },
-    "id": "bni"
+    }
   },
   {
+    "id": "bri",
     "name": { "id": "Bank BRI", "en": "Bank BRI" },
     "guides": {
       "id": [
@@ -61,11 +62,11 @@
         { "name": "Internet Banking BRI", "steps": ["Select payment & purchase.", "Select BRIVA.", "Enter the BRIVA number, then confirm.", "Payment successful."] },
         { "name": "BRImo", "steps": ["Select payment.", "Select BRIVA.", "Enter the BRIVA number, then confirm.", "Payment successful."] }
       ]
-    },
-    "id": "bri"
+    }
   },
-  { "name": { "id": "Bank Permata", "en": "Bank Permata" }, "guides": { "id": [{ "name": "ATM Permata/ALTO", "steps": ["Pilih transaksi lainnya pada menu utama.", "Pilih pembayaran.", "Pilih pembayaran lainnya.", "Pilih virtual account.", "Masukkan nomor virtual account Permata, lalu konfirmasi.", "Pembayaran berhasil."] }], "en": [{ "name": "Permata/ALTO ATM", "steps": ["Select other transactions on the main menu.", "Select payment.", "Select other payments.", "Select virtual account.", "Enter the Permata virtual account number, then confirm.", "Payment successful."] }] }, "id": "permata" },
+  { "id": "permata", "name": { "id": "Bank Permata", "en": "Bank Permata" }, "guides": { "id": [{ "name": "ATM Permata/ALTO", "steps": ["Pilih transaksi lainnya pada menu utama.", "Pilih pembayaran.", "Pilih pembayaran lainnya.", "Pilih virtual account.", "Masukkan nomor virtual account Permata, lalu konfirmasi.", "Pembayaran berhasil."] }], "en": [{ "name": "Permata/ALTO ATM", "steps": ["Select other transactions on the main menu.", "Select payment.", "Select other payments.", "Select virtual account.", "Enter the Permata virtual account number, then confirm.", "Payment successful."] }] } },
   {
+    "id": "cimb",
     "name": { "id": "Bank CIMB Niaga", "en": "Bank CIMB Niaga" },
     "guides": {
       "id": [
@@ -78,8 +79,7 @@
         { "name": "OCTO Clicks", "steps": ["Select bill payment on the main menu.", "Select mobile virtual account.", "Enter the virtual account number, then click continue to verify details.", "Select send OTP to continue.", "Enter the OTP sent to your mobile number, then confirm.", "Payment completed."] },
         { "name": "OCTO Mobile", "steps": ["Select transfer menu.", "Select transfer to other CIMB Niaga account.", "Select source of funds: CASA or mobile account.", "Enter the virtual account number.", "Enter the amount to be paid.", "Follow the instructions to complete the payment.", "Payment completed."] }
       ]
-    },
-    "id": "cimb"
+    }
   },
-  { "name": { "id": "Bank Lain", "en": "Other Bank" }, "guides": { "id": [{ "name": "Transfer Bank", "steps": ["Pilih transfer antar bank atau transfer ke bank lain.", "Pilih Bank BNI atau masukkan 009 sebagai kode bank.", "Masukkan nomor rekening pembayaran.", "Masukkan jumlah yang akan dibayar.", "Konfirmasi pembayaran", "Pembayaran berhasil."] }], "en": [{ "name": "Bank Transfer", "steps": ["Select transfer to other bank accounts.", "Select Bank BNI or enter 009 as the bank code.", "Enter the payment account number.", "Enter the amount to be paid.", "Confirm the payment.", "Payment successful."] }] }, "id": "other_va" }
+  { "id": "other_va", "name": { "id": "Bank Lain", "en": "Other Bank" }, "guides": { "id": [{ "name": "Transfer Bank", "steps": ["Pilih transfer antar bank atau transfer ke bank lain.", "Pilih Bank BRI atau masukkan 002 sebagai kode bank.", "Masukkan nomor rekening pembayaran.", "Masukkan jumlah yang akan dibayar.", "Konfirmasi pembayaran", "Pembayaran berhasil."] }], "en": [{ "name": "Bank Transfer", "steps": ["Select transfer to other bank accounts.", "Select Bank BRI or enter 002 as the bank code.", "Enter the payment account number.", "Enter the amount to be paid.", "Confirm the payment.", "Payment successful."] }] } }
 ]

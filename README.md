@@ -26,7 +26,7 @@ cp .env.example .env
 Bikin doc default buat database **Users** & **Products**
 
 ```shell
-npm run init
+npm run init-service
 ```
 
 ## Build and Run

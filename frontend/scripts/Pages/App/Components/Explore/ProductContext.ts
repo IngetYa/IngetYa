@@ -5,7 +5,6 @@ import { futor, kel } from "@/core/kel"
 import { toCurrency, toText } from "@/lib/gen"
 import { lang } from "@/core/languages"
 import waittime from "@/lib/waittime"
-import { Colors } from "@/core/Colors"
 import { StateManager } from "../../core/StateManager"
 import db from "../../data/db"
 
@@ -127,7 +126,6 @@ export class ProductContext {
     const btnClose = futor(".btn-close", this.el)
 
     const ripple = SetRipple(btnClose, {
-      color: Colors.bgSecondary,
       run: async () => {
         if (this.manager.busy) return
         if (this.locked) return
@@ -145,7 +143,6 @@ export class ProductContext {
     const btnPreview = futor(".btn-preview", this.el)
 
     const ripple = SetRipple(btnPreview, {
-      color: Colors.yellow,
       run: async () => {
         if (this.manager.busy) return
         if (this.locked) return
@@ -165,7 +162,6 @@ export class ProductContext {
     const btnBuy = futor(".btn-buy", this.el)
 
     const ripple = SetRipple(btnBuy, {
-      color: Colors.yellow,
       run: async () => {
         if (this.manager.busy) return
         if (this.locked) return
@@ -173,7 +169,7 @@ export class ProductContext {
         await this.close()
         this.explore.delContext(this._id)
 
-        this.manager.next({ path: `#explore/peek/${this.product.id}` })
+        this.manager.next({ path: `#explore/buy/${this.product.id}` })
       }
     })
 
@@ -184,7 +180,7 @@ export class ProductContext {
     if (this.locked) return
     if (this.explore.locked) return
 
-    await waittime(140)
+    await waittime(120)
 
     this.explore.lock()
 

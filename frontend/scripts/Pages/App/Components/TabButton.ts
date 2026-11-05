@@ -12,6 +12,8 @@ export interface ITabButtonConfig {
 export class TabButton {
   private el!: HTMLAnchorElement
 
+  private eName!: HTMLDivElement
+
   private ripple: IRippleReturn
 
   private setClick?: () => void
@@ -39,10 +41,10 @@ export class TabButton {
     const icon = kel("div", "icon")
     icon.innerHTML = `<i class="${this.config.icon}"></i>`
 
-    const name = kel("div", "name")
-    name.innerText = lang(`tab_${this.config.name}`)
+    this.eName = kel("div", "name")
+    this.eName.innerText = lang(`tab_${this.config.name}`)
 
-    this.el.append(icon, name)
+    this.el.append(icon, this.eName)
   }
 
   private _onBtnClick(): void {
@@ -70,6 +72,10 @@ export class TabButton {
   activate(status: boolean = true): void {
     // update warna button
     this.el.classList[status ? "add" : "remove"]("active")
+  }
+
+  updateString(): void {
+    this.eName.innerText = lang(`tab_${this.config.name}`)
   }
 
   destroy(): void {

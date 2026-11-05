@@ -71,6 +71,14 @@
     "id": "Request Timeout - 408",
     "en": "Request Timeout - 408"
   },
+  "splash_text_login": {
+    "id": "Sebelum lanjut, boleh login terlebih dahulu ya.",
+    "en": "Please log in before continuing"
+  },
+  "splash_btn_login": {
+    "id": "Login Sekarang",
+    "en": "Login Now"
+  },
   "tab_explore": {
     "id": "Eksplor",
     "en": "Explore"
@@ -79,11 +87,11 @@
     "id": "Pesanan",
     "en": "Orders"
   },
-  "tab_invoices": {
+  "tab_bills": {
     "id": "Tagihan",
-    "en": "Invoices"
+    "en": "Bills"
   },
-  "tab_account": {
+  "tab_me": {
     "id": "Akun",
     "en": "Account"
   },
@@ -116,12 +124,16 @@
     "en": "Total"
   },
   "label_cart_order_name": {
-    "id": "Nama Order (opsional)",
-    "en": "Order Name (optional)"
+    "id": "Nama Order",
+    "en": "Order Name"
   },
   "placeholder_cart_order_name": {
     "id": "Contoh: Stefani & Santoso - Wedding",
     "en": "Ex: Stephanie & Santoso - Wedding"
+  },
+  "label_order_id": {
+    "id": "ID Order",
+    "en": "Order ID"
   },
   "label_cart_theme": {
     "id": "Tema",
@@ -182,5 +194,125 @@
   "label_cart_fee": {
     "id": "Biaya Layanan",
     "en": "Service Fee"
+  },
+  "alert_order_name_length": {
+    "id": "Nama Order harus terdiri atas 1 - 100 karakter",
+    "en": "The order name must be between 1 and 100 characters long"
+  },
+  "status_unpaid": {
+    "id": "Belum Dibayar",
+    "en": "Unpaid"
+  },
+  "status_draft": {
+    "id": "Draft",
+    "en": "Draft"
+  },
+  "status_published": {
+    "id": "Dipublikasikan",
+    "en": "Published"
+  },
+  "status_paused": {
+    "id": "Dijeda",
+    "en": "Paused"
+  },
+  "status_expired": {
+    "id": "Kadaluarsa",
+    "en": "Expired"
+  },
+  "status_settlement": {
+    "id": "Sukses",
+    "en": "Success"
+  },
+  "status_deny": {
+    "id": "Ditolak",
+    "en": "Denied"
+  },
+  "status_pending": {
+    "id": "Menunggu",
+    "en": "Pending"
+  },
+  "status_cancel": {
+    "id": "Dibatalkan",
+    "en": "Canceled"
+  },
+  "status_expire": {
+    "id": "Kadaluarsa",
+    "en": "Expired"
+  },
+  "status_failure": {
+    "id": "Gagal",
+    "en": "Failed"
+  },
+  "label_me_id": {
+    "id": "ID User",
+    "en": "User ID"
+  },
+  "label_me_luna": {
+    "id": "ID Luna",
+    "en": "Luna ID"
+  },
+  "label_me_name": {
+    "id": "Nama Profil",
+    "en": "Display Name"
+  },
+  "btn_me_logout": {
+    "id": "KELUAR AKUN",
+    "en": "LOGOUT"
+  },
+  "confirm_logout_btn": {
+    "id": "KELUAR",
+    "en": "LOGOUT"
+  },
+  "confirm_logout_text": {
+    "id": "Mau keluar dari akun kamu sekarang juga?",
+    "en": "Logout from your account?"
+  },
+  "order_see_detail": {
+    "id": "Lihat Rincian",
+    "en": "See Detail"
+  },
+  "order_unsee_detail": {
+    "id": "Tutup Rincian",
+    "en": "Close Detail"
+  },
+  "order_chat_admin": {
+    "id": "Chat Developer",
+    "en": "Chat Developer"
+  },
+  "order_your_order": {
+    "id": "Edit",
+    "en": "Customize"
+  },
+  "order_pay_now": {
+    "id": "Bayar Sekarang",
+    "en": "Pay Now"
+  },
+  "order_open_link": {
+    "id": "Buka Link",
+    "en": "Open Link"
+  },
+  "bill_expire_at": {
+    "id": "Bayar Sebelum",
+    "en": "Expires at"
+  },
+  "bill_label_qr_desc": {
+    "id": "Scan pake aplikasi bank atau e-wallet yang support QRIS",
+    "en": "Scan using a bank app or e-wallet that supports QRIS payments"
+  },
+  "bill_label_qr_save": {
+    "id": "Simpan Gambar",
+    "en": "Save as Image"
+  },
+  "bill_label_va_number": {
+    "id": "Nomor Virtual Akun / Kode Pembayaran",
+    "en": "Virtual Account Number / Payment Code"
+  },
+  "bill_label_biller": {
+    "id": "Kode Perusahaan",
+    "en": "Biller Code"
+  },
+  "bill_label_send_to_bank": {
+    "id": "Bank Tujuan",
+    "en": "Bank Information"
   }
 }

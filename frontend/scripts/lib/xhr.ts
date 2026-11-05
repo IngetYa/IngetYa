@@ -60,6 +60,9 @@ async function efetch(method: IRequestType, url: string, s?: IAny, isFile?: bool
 // paksa retry
 async function forceFetchGet(ref: string, ms: number): Promise<IResponse> {
   const response = await efetch("GET", ref)
+
+  if (response.status === 401) return response
+
   if (!response.ok) {
     await waittime(ms)
     return forceFetchGet(ref, ms)

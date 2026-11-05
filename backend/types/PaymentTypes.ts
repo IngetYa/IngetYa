@@ -20,3 +20,14 @@ export interface IBankFee {
   id: string
   fee: IFeeDetail
 }
+
+export type PaymentMethod = "qris" | "bca" | "mandiri" | "bni" | "bri" | "permata" | "cimb" | "other_va" | ({} & string)
+
+export interface IOrderData {
+  orderName?: string
+  orderProduct: string
+  orderPackage: "month-1" | "month-2"
+  orderGuest: "guest-1" | "guest-2" | "guest-3" | "guest-4"
+  orderBook?: "book-1" | ({} & string)
+  paymentId: PaymentMethod
+}

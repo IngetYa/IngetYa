@@ -90,7 +90,7 @@ export async function formAlert(message: string | IFormAlertConfig, status: STAT
     <div class="box">
       <div class="f status-title">
         <p class="title">${config.header}</p>
-        <div class="btn btn-close"><i class="fa-jelly-fill fa-light fa-circle-xmark"></i></div>
+        <div class="btn btn-close"><i class="fas fa-circle-xmark"></i></div>
       </div>
 
       <div class="f lg">
@@ -172,7 +172,7 @@ export async function formConfirm(message: string | IFormConfirmConfig, status: 
     <div class="box">
       <div class="f status-title">
         <p class="title">${config.header}</p>
-        <div class="btn btn-close"><i class="fa-jelly-fill fa-light fa-circle-xmark"></i></div>
+        <div class="btn btn-close"><i class="fas fa-circle-xmark"></i></div>
       </div>
 
       <div class="f lg">
@@ -277,7 +277,7 @@ export async function formPrompt(message: string | IFormPromptConfig, status: ST
     <div class="box">
       <div class="f status-title">
         <p class="title">${config.header}</p>
-        <div class="btn btn-close"><i class="fa-jelly-fill fa-light fa-circle-xmark"></i></div>
+        <div class="btn btn-close"><i class="fas fa-circle-xmark"></i></div>
       </div>
 
       <div class="f">
@@ -406,7 +406,7 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
     <div class="box">
       <div class="f status-title">
         <p class="title">${config.header}</p>
-        <div class="btn btn-close"><i class="fa-jelly-fill fa-light fa-circle-xmark"></i></div>
+        <div class="btn btn-close"><i class="fas fa-circle-xmark"></i></div>
       </div>
 
       <div class="f">
@@ -451,7 +451,7 @@ export async function formSelect(message: string | IFormSelectConfig, status: ST
       radioInput.checked = !!itm.checked
 
       const radioSpan = kel("span")
-      radioSpan.innerText = itm.value ?? itm.id
+      radioSpan.innerText = itm.label
 
       radioLabel.append(radioInput, radioSpan)
 

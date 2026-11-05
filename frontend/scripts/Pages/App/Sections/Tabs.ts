@@ -63,6 +63,10 @@ export class Tabs {
     }
   }
 
+  updateString(): void {
+    this.buttons.forEach((btn) => btn.updateString())
+  }
+
   async destroy(): Promise<void> {
     // unset semua button
     this.buttons.forEach((btn) => btn.destroy())

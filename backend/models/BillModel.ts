@@ -1,7 +1,7 @@
 import { model, Model, Schema } from "mongoose"
-import type { IInvoice } from "#types/ServiceTypes"
+import type { IBill } from "#types/ServiceTypes"
 
-export type IInvoiceModel = Model<IInvoice>
+export type IBillModel = Model<IBill>
 
 const schema = new Schema(
   {
@@ -15,20 +15,24 @@ const schema = new Schema(
     transaction_status: { type: String },
     permata_va_number: { type: String },
     va_numbers: {
-      type: {
-        bank: { type: String },
-        va_number: { type: String }
-      },
+      type: [
+        {
+          bank: { type: String },
+          va_number: { type: String }
+        }
+      ],
       _id: false
     },
     bill_key: { type: String },
     biller_code: { type: String },
     actions: {
-      type: {
-        name: { type: String },
-        method: { type: String },
-        url: { type: String }
-      },
+      type: [
+        {
+          name: { type: String },
+          method: { type: String },
+          url: { type: String }
+        }
+      ],
       _id: false
     },
     qr_string: { type: String },
@@ -40,6 +44,6 @@ const schema = new Schema(
   }
 )
 
-const InvoiceModel: IInvoiceModel = model<IInvoice>("Invoice", schema)
+const BillModel: IBillModel = model<IBill>("Bill", schema)
 
-export default InvoiceModel
+export default BillModel

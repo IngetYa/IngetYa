@@ -37,15 +37,14 @@ export function getOAuthUrl(provider: UserProvider, query: IAny) {
   // copy ke variable baru, biar ga ke-assign ke object lama
   const states = JSON.parse(JSON.stringify(query || {}))
 
-  const stateData = {
-    ...states,
+  const stateData: IAny = {
     client_id: cfg.LUNA_CLIENT_ID,
     redirect_uri: `${HOST}/x/auth/redirect`,
     lang: typeof states.lang === "string" && states.lang === "id" ? "id" : "en"
   }
 
   // state "state" masuk url, jadiin string base64 dulu
-  if (states.state) stateData.state = toBase64(states.state)
+  stateData.state = toBase64(states)
 
   // jadiin query ({url}?client_id={string}&redirect_uri={string})
   const queryString = new URLSearchParams(stateData).toString()

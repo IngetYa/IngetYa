@@ -69,3 +69,28 @@ export function sanitizeName(filename: string): string {
   const noExtension = filename.replace(/\.[^/.]+$|[^a-z0-9_-]/gi, "")
   return noExtension
 }
+
+export function createRedirect(urlString?: string): string {
+  const url = urlString || window.location.href
+
+  const encoded = encodeURIComponent(url)
+
+  return encoded
+}
+
+export function chunkString(target: string | number, chunkSize: number = 4): string {
+  const regex = new RegExp(`(.{${chunkSize}})`, "g")
+
+  return target.toString().replace(regex, "$1 ").trim()
+}
+
+let curNum = 0
+
+type UniqType = "string" | "number"
+type UniqReturn = string | number
+
+export function genUniq(type: UniqType = "string"): UniqReturn {
+  curNum++
+
+  return type === "number" ? curNum : curNum.toString(36)
+}

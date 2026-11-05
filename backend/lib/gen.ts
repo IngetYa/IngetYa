@@ -33,6 +33,10 @@ export function rUid(): string {
   return rstring + Date.now().toString(36)
 }
 
+export function formatDigit(target: string | number, length: number): string {
+  return target.toString().padStart(length, "0")
+}
+
 // transpile cepet response.status sama response.json
 export function rep(options: IResTemp): IResponse {
   const repData: IResponse = {

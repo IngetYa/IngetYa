@@ -224,29 +224,18 @@ export class Explore implements IPrimary {
     if (this.cart) {
       // hapus dulu cart-nya
       await this.cart.destroy()
-      // kalo gada path section, stop
-      if (!section) return
+    }
 
-      // kalo section-nya adalah peek
-      if (section === "peek") {
-        // tapi gada sub-nya, stop
-        if (!sub) return
+    // kalo gada path section, stop
+    if (!section) return
 
-        // jalanin pembuatan cart
-        await this.startCart(sub)
-      }
-    } else {
-      // kalo gada path section, stop
-      if (!section) return
+    // kalo section-nya adalah buy
+    if (section === "buy") {
+      // tapi gada sub-nya, stop
+      if (!sub) return
 
-      // kalo section-nya adalah peek
-      if (section === "peek") {
-        // tapi gada sub-nya, stop
-        if (!sub) return
-
-        // jalanin pembuatan cart
-        await this.startCart(sub)
-      }
+      // jalanin pembuatan cart
+      await this.startCart(sub)
     }
   }
 

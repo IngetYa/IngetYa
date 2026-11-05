@@ -6,6 +6,9 @@ import { type IStackHierarchy } from "@/core/hierarchy"
 import waittime from "@/lib/waittime"
 import { PagesRoot } from "../data/_PageList"
 import { Explore } from "../Tabs/Explore"
+import { Orders } from "../Tabs/Orders"
+import { Bills } from "../Tabs/Bills"
+import { Account } from "../Tabs/Account"
 
 export interface IContentConfig {
   king: StackPrimary
@@ -91,6 +94,18 @@ export class Content {
       this.sectNum = 1
       this.sectName = "explore"
       await this.addSect(new Explore({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
+    } else if (rootName === "orders") {
+      this.sectNum = 2
+      this.sectName = "orders"
+      await this.addSect(new Orders({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
+    } else if (rootName === "bills") {
+      this.sectNum = 3
+      this.sectName = "bills"
+      await this.addSect(new Bills({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
+    } else if (rootName === "me") {
+      this.sectNum = 4
+      this.sectName = "me"
+      await this.addSect(new Account({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
     }
   }
 

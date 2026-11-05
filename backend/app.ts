@@ -4,12 +4,14 @@ import { WebSocket } from "ws"
 import mongoose from "mongoose"
 import session from "express-session"
 import MongoStore from "connect-mongo"
+import ejs from "ejs"
 import cfg from "#cfg"
 import { sessionUserBinder } from "#core/binder"
 import { IAny } from "#types/LibTypes"
 import { startSocketApp } from "#routes/SocketRouter"
 import authRouter from "#routes/AuthRouter"
 import exploreRouter from "#routes/ExploreRouter"
+import orderRouter from "#routes/OrderRouter"
 import { webhook } from "#main/webhook/webhook"
 import { isProd } from "#lib/gen"
 import logger from "#lib/logger"
@@ -87,23 +89,31 @@ getWss().on("error", () => {
 // set each router endpoint
 app.use("/x/auth", authRouter)
 app.use("/x/explore", exploreRouter)
+app.use("/x/order", orderRouter)
 
 app.get("/build", (req: Request, res: Response, next: NextFunction) => {
   if (isProd) return next()
+
+  res.setHeader("Content-Type", "text/html")
 
   return res.render("built")
 })
 
 app.get("/portal", (req: Request, res: Response) => {
-  res.render("portal")
+  res.setHeader("Content-Type", "text/html")
+
+  return res.render("portal")
 })
 
 app.get("/app", (req: Request, res: Response) => {
-  res.render("app")
+  res.setHeader("Content-Type", "text/html")
+
+  return res.render("app")
 })
 
 app.get("/", (req: Request, res: Response) => {
-  res.render("home")
+  res.setHeader("Content-Type", "text/html")
+  return res.render("home")
 })
 
 // endpoint ga ketemu

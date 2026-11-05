@@ -1,6 +1,9 @@
 @use "../../core/constants" as v;
 
 .AppMain {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100dvh;
   display: flex;
@@ -25,6 +28,9 @@
       align-items: center;
       gap: v.$medPadding;
       .btn-back {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.65rem;
         font-size: 1.4rem;
       }
     }

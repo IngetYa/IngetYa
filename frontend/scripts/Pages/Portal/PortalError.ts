@@ -21,11 +21,11 @@ export class PortalError implements IPortalClass {
   }
 
   private createElement(): void {
-    this.el = kel("div", "PortalError")
+    this.el = kel("div", "PortalFinal")
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="box"> <div class="text"> <div class="title">Oops!</div> <div class="desc"> <p class="reason">${lang(this.msg)}</p> <div class="divider"><span>Sorry :(</span></div> <p class="failed-p">${lang("auth_failed")}</p> </div> </div> <div class="action"> <div class="btn btn-back"><i class="fa-solid fa-face-disappointed"></i> </div> </div> </div>`
+    this.el.innerHTML = `<div class="box"> <div class="text"> <div class="title">Oops!</div> <div class="desc"> <p class="reason reason-red">${lang(this.msg)}</p> <div class="divider"><span>Sorry :(</span></div> <p class="failed-p">${lang("auth_failed")}</p> </div> </div> <div class="action"> <div class="btn btn-back"><i class="fa-solid fa-face-disappointed"></i> </div> </div> </div>`
 
     eroot().append(this.el)
   }

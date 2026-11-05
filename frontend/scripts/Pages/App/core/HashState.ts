@@ -13,16 +13,21 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
   if (oldRoot === "explore") {
     if (newRoot !== "explore") return STATENUM.FORWARD
 
-    if (oldSection === "peek") {
-      if (newSection === "peek") return STATENUM.REPLACE
+    if (oldSection === "buy") {
+      if (newSection === "buy") return STATENUM.REPLACE
     }
 
-    if (newSection === "peek") return STATENUM.FORWARD
+    if (newSection === "buy") return STATENUM.FORWARD
   }
 
   if (oldRoot === "orders") {
     if (newRoot === "explore") return STATENUM.BACK
 
+    if (oldSection === "pay") {
+      if (newSection === "pay") return STATENUM.REPLACE
+    }
+
+    if (newSection === "pay") return STATENUM.FORWARD
     // if (oldSection === "edit") {
     //   if (newSection === "edit") return STATENUM.REPLACE
     // }
@@ -30,11 +35,17 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
     // if (newSection === "edit") return STATENUM.FORWARD
   }
 
-  if (oldRoot === "invoices") {
+  if (oldRoot === "bills") {
     if (newRoot === "explore") return STATENUM.BACK
+
+    if (oldSection === "peek") {
+      if (newSection === "peek") return STATENUM.REPLACE
+    }
+
+    if (newSection === "peek") return STATENUM.FORWARD
   }
 
-  if (oldRoot === "account") {
+  if (oldRoot === "me") {
     if (newRoot === "explore") return STATENUM.BACK
   }
 

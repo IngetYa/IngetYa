@@ -17,6 +17,7 @@
     padding: v.$hugePadding;
     background-color: v.$card-bg;
     border: 1px solid v.$card-border;
+    border-radius: 10px;
     text-align: center;
     p {
       line-height: 1.5;
@@ -169,6 +170,7 @@
           }
         }
         .inp {
+          position: relative;
           width: 100%;
           overflow: hidden;
           .evt-drop {
@@ -449,6 +451,8 @@
           text-transform: uppercase;
           border-radius: v.$smallPadding;
           color: v.$btn-primary-text;
+          position: relative;
+          overflow: hidden;
           &.btn-ok {
             background-color: v.$btn-primary-bg;
           }
@@ -462,7 +466,7 @@
           }
           &.btn-delete-object {
             background-color: v.$black;
-            color: v.$sred;
+            color: v.$cred;
           }
         }
         &.hide {

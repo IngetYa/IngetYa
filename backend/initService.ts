@@ -53,7 +53,7 @@ async function createUser(): Promise<IUserOutput> {
   console.log(" ")
 
   const newUserId = "7" + rNumber(5).toString() + userSize
-  const newUserHex = genhex(16)
+  const newUserHex = genhex(2).toUpperCase()
 
   const userData: IUser = {
     id: newUserId,

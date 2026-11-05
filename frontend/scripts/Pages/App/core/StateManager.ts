@@ -121,13 +121,22 @@ export class StateManager {
     const hash = window.location.hash
     const path = hash.length >= 1 ? hash : "#explore"
 
+    const hierarchy = getHierarchy(path)
+    const { root, section } = hierarchy
+
     // BUAT EXPLORE JADI ROOT HISTORY STATE
 
-    // kalo bukan explore, berarti bikin jadi explore
-    if (hash === "#explore") {
+    if (root === "explore" && !section) {
       // paksa jalanin handlernya (biar function ditrigger)
       history.replaceState({ path: "#explore", data: { first: true } }, "", "#explore")
-      this.next({ path, data: { first: true, force: true } })
+      this.next({ path: "#explore", data: { first: true, force: true } })
+    } else if (root !== "explore" && section) {
+      // buat explore jadi root
+      history.replaceState({ path: "#explore", data: { first: true } }, "", "#explore")
+      // buat tab nomor 2
+      history.pushState({ path: `#${root}`, data: { first: false } }, "", `#${root}`)
+      // buat sub path
+      this.next({ path, data: { first: false } })
     } else {
       // jadiin hash-nya jadi nomor 2
       history.replaceState({ path: "#explore", data: { first: true } }, "", "#explore")

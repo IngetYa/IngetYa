@@ -4,6 +4,8 @@ import { PortalSignIn } from "./PortalSignIn"
 import { findQuery, findWininp } from "@/core/queries"
 import { PortalCheck } from "./PortalCheck"
 import { PortalError } from "./PortalError"
+import { PortalSuccess } from "./PortalSuccess"
+import waittime from "@/lib/waittime"
 
 // bikin portal
 export async function createSignInForm() {
@@ -27,8 +29,18 @@ export async function startAppContent(): Promise<void> {
   // kalo user ga ketemu (belum login), kasih portal
   if (user.status !== 200) return createSignInForm()
 
-  // kalo udah, redirect ke '/app'
-  window.location.href = findQuery("redirect") || "/app"
+  // kasih base success portal
+  const lunaSuccess = new PortalSuccess()
+  // next function
+  lunaSuccess.onAcknowledge(() => startAppContent())
+
+  // pindah ke next redirect
+  window.location.href = `${findQuery("redirect") || "/app"}`
+
+  await waittime(1000)
+
+  // render success
+  lunaSuccess.init()
 }
 
 // awal dari segala awal

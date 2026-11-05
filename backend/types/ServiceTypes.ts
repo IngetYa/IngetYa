@@ -14,22 +14,6 @@ export interface IProduct {
   updatedAt: Date
 }
 
-export interface ITemplate<TData = Record<string, unknown>> {
-  id: string
-  name: string
-  content: HtmlUrl
-  data: TData
-  createdAt: Date
-}
-
-export interface IDraft<TData = Record<string, unknown>> {
-  id: string
-  orderId: string
-  templateId: string
-  data: TData
-  updatedAt: Date
-}
-
 export interface IContent {
   id: string
   orderId: string
@@ -37,9 +21,11 @@ export interface IContent {
   url: HtmlUrl
 }
 
-export type IGuests = "free" | "plus" | "pro" | "ultra"
+export type IGuests = "guest-1" | "guest-2" | "guest-3" | "guest-4"
 
 export type OrderStatus = "unpaid" | "draft" | "published" | "paused" | "expired"
+
+export type AddOnIds = "book-1"
 
 export interface IOrder {
   id: string
@@ -49,11 +35,12 @@ export interface IOrder {
   contentId?: string | null
   name: string
   package: "month-1" | "month-2"
-  guests: IGuests[]
+  guests: IGuests
+  addOns?: AddOnIds[]
   status: OrderStatus
   expiresAt: Date
   createdAt: Date
-  deleteAt: Date
+  deleteAt?: Date
 }
 
 export interface IVirtualAccount {
@@ -67,19 +54,21 @@ export interface IPayAction {
   url: string
 }
 
-export interface IInvoice {
+export type ITransactionStatus = "authorize" | "capture" | "settlement" | "deny" | "pending" | "cancel" | "refund" | "partial_refund" | "chargeback" | "partial_chargeback" | "expire" | "failure" | ({} & string)
+
+export interface IBill {
   orderId: string
   price: number
   expiresAt: Date
   userId: string
   order_id: string
   gross_amount: string
-  transaction_status: string
+  transaction_status: ITransactionStatus
   permata_va_number: string
-  va_numbers: IVirtualAccount
+  va_numbers: IVirtualAccount[]
   bill_key: string
   biller_code: string
-  actions: IPayAction
+  actions: IPayAction[]
   qr_string: string
   expiry_time: string
   settlement_time: string

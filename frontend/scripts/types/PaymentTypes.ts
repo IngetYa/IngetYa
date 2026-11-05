@@ -33,6 +33,17 @@ export interface IBundlePrice {
   price: number
 }
 
+export type PaymentType = "qris" | "bca" | "mandiri" | "bni" | "bri" | "permata" | "cimb" | "other_va" | ({} & string)
+
+export interface IOrderData {
+  orderName?: string
+  orderProduct: string
+  orderPackage: "month-1" | "month-2" | ({} & string)
+  orderGuest: "guest-1" | "guest-2" | "guest-3" | "guest-4" | ({} & string)
+  orderBook?: "book-1" | ({} & string)
+  paymentId?: PaymentType
+}
+
 export type FeeType = "flat" | "percent"
 
 export interface IFeeDetail {

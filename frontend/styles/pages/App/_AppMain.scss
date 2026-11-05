@@ -1,6 +1,10 @@
 @use "../../core/constants" as v;
 @use "../../core/animations";
 
+:root {
+  color-scheme: light only;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +14,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  scrollbar-color: v.$text-muted v.$primary-dark;
+  scrollbar-color: rgba(v.$primary, 0.85) transparent;
   scrollbar-width: thin;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -119,6 +123,21 @@ img {
     width: 300px;
     max-width: calc(100% - v.$bigPadding);
   }
+  .loader {
+    margin-top: v.$medPadding;
+    text-align: center;
+    .btn-signin {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      margin-top: v.$smallPadding;
+      padding: v.$smallPadding v.$bigPadding;
+      color: v.$btn-primary-text;
+      background-color: v.$btn-primary-bg;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+  }
   &.out {
     animation: stackOut2 0.3s forwards;
   }
@@ -129,7 +148,7 @@ img {
   top: 0;
   left: 0;
   z-index: -1;
-  width: 100%;
+  width: 100dvw;
   height: 100dvh;
   background-size: cover;
   background-image: url("./images/bg-wedding.avif");

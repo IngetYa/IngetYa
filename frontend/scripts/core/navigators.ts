@@ -2,15 +2,15 @@
 export async function copyToClipboard(plaintext: string): Promise<boolean> {
   // kadang kalo browsernya kek anjing, ga bisa copy cuk
   // makanya dikasih catch biar gada state error
-  return await navigator.clipboard
-    .writeText(plaintext)
-    .then(() => {
-      return true
-    })
-    .catch((_err) => {
-      // console.log(err)
-      return false
-    })
+
+  if ("clipboard" in navigator) {
+    return await navigator.clipboard
+      .writeText(plaintext)
+      .then(() => true)
+      .catch(() => false)
+  }
+
+  return false
 }
 
 // permission push notification
@@ -24,4 +24,10 @@ export async function getPushPermission(): Promise<NotificationPermission> {
       return res
     })
     .catch(() => "denied")
+}
+
+export function openLink(url: string): void {
+  const canOpen = window.open(url, "_blank")
+
+  if (!canOpen) window.location.href = url
 }

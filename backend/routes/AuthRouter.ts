@@ -103,16 +103,14 @@ router.get("/:provider", (req: Request, res: Response, next: NextFunction) => {
 })
 
 router.get("/logout", (req: Request, res: Response) => {
+  const redirect = req.query.redirect?.toString() || "/"
+
   const isJsonRequest = req.headers.accept?.includes("application/json") || req.headers["x-requested-with"] === "XMLHttpRequest"
 
   req.session.destroy(() => {
     if (isJsonRequest) return res.status(200).json({ ok: true, status: 200 })
 
-    const q = req.query.i
-
-    const redirectURL = `/portal${q ? "?i=" + q : ""}`
-
-    return res.redirect(redirectURL)
+    return res.redirect(redirect)
   })
 })
 
