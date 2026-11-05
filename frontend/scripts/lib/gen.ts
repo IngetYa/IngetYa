@@ -35,14 +35,6 @@ export function toCurrency(num: string | number, locales?: Intl.LocalesArgument)
   return number < 1 ? "" : new Intl.NumberFormat(locales ?? "id-ID").format(number)
 }
 
-const PRICE_BASE = 49000
-
-export function parsePrice(itemPrice: number): string {
-  const price = itemPrice + PRICE_BASE
-
-  return toCurrency(price)
-}
-
 // base64 to object
 export function parseBase64(query: IAny): IQueries {
   try {

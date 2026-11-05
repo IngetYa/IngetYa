@@ -32,7 +32,7 @@ export default class MongoConnection {
 
     // coba login
     mongoose.connect(this.mongoUrl, { dbName: this.dbName }).catch((err) => {
-      console.error("error ges")
+      logger.error("error connecting to MongoDB")
 
       // kalo error, process.exit(n)
       throw new Error(err)
@@ -60,7 +60,7 @@ export default class MongoConnection {
   }
 
   private onError = () => {
-    console.error(`Could not connect to MongoDB at ${this.mongoUrl}`)
+    logger.error(`Could not connect to MongoDB at ${this.mongoUrl}`)
   }
 
   private onDisconnected = () => {

@@ -2,8 +2,9 @@ import type { IProduct } from "@/types/ServiceTypes"
 import { Explore } from "../../Tabs/Explore"
 import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
 import { futor, kel } from "@/core/kel"
-import { parsePrice, toText } from "@/lib/gen"
+import { toCurrency, toText } from "@/lib/gen"
 import { Colors } from "@/core/Colors"
+import db from "../../data/db"
 
 export interface ProductCardConfig {
   explore: Explore
@@ -33,7 +34,7 @@ export class ProductCard {
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="tags"></div> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${parsePrice(this.product.price)}</div>`
+    this.el.innerHTML = `<div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="tags"></div> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div>`
   }
 
   // render semua kategori

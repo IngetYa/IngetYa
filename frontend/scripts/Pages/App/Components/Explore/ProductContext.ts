@@ -2,11 +2,12 @@ import type { IProduct } from "@/types/ServiceTypes"
 import { Explore } from "../../Tabs/Explore"
 import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
 import { futor, kel } from "@/core/kel"
-import { parsePrice, toText } from "@/lib/gen"
+import { toCurrency, toText } from "@/lib/gen"
 import { lang } from "@/core/languages"
 import waittime from "@/lib/waittime"
 import { Colors } from "@/core/Colors"
 import { StateManager } from "../../core/StateManager"
+import db from "../../data/db"
 
 export interface ProductContextConfig {
   product: IProduct
@@ -59,7 +60,7 @@ export class ProductContext {
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="btn btn-close"> ${lang("close")} <i class="fajdr fa-xmark fa-fw"></i> </div> <div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="menu meta"> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${parsePrice(this.product.price)}</div> </div> <div class="btn menu btn-preview"> <i class="fal fa-earth-asia fa-fw"></i> ${lang("explore_context_see")} </div> <div class="btn menu btn-buy"> <i class="fal fa-cart-circle-plus fa-fw"></i> ${lang("explore_context_buy")} </div>`
+    this.el.innerHTML = `<div class="btn btn-close"> ${lang("close")} <i class="fajdr fa-xmark fa-fw"></i> </div> <div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="menu meta"> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div> </div> <div class="btn menu btn-preview"> <i class="fal fa-earth-asia fa-fw"></i> ${lang("explore_context_see")} </div> <div class="btn menu btn-buy"> <i class="fal fa-cart-circle-plus fa-fw"></i> ${lang("explore_context_buy")} </div>`
   }
 
   // posisi atas

@@ -1,5 +1,5 @@
 import cfg from "#cfg"
-import { isProd, parseBase64, rNumber, toBase64 } from "#lib/gen"
+import { genhex, isProd, parseBase64, rNumber, toBase64 } from "#lib/gen"
 import { webhook } from "#main/webhook/webhook"
 import UserModel from "#models/UserModel"
 import { IAny, IResTemp } from "#types/LibTypes"
@@ -26,6 +26,17 @@ export async function getMe(uid: string): Promise<IResTemp> {
 
   // kirim data
   return { status: 200, code: "ok", data: userData }
+}
+
+export async function authHex(s: IAny): Promise<IResTemp> {
+  if (typeof s?.hex !== "string") return { status: 400, code: "auth_hex_notfound" }
+
+  const hex = s.hex.toString().trim() as string
+
+  const user = await UserModel.findOne({ hex }).lean()
+  if (!user) return { status: 400, code: "auth_hex_notfound" }
+
+  return { status: 200, data: { user } }
 }
 
 export async function authLogin(s: IAny, query: IAny): Promise<IResTemp> {
@@ -80,6 +91,7 @@ export async function processThirdParty(usr: IExternalUser): Promise<IResTemp> {
     luna: usr.id,
     email: usr.email ? usr.email : `usr${usr.id}@luna.devanka.id`,
     name: usr.name,
+    hex: genhex(16),
     createdAt: Date.now(),
     updatedAt: Date.now()
   }

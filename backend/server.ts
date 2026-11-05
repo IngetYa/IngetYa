@@ -9,7 +9,9 @@ const PORT = cfg.APP_PORT
 async function startServer(): Promise<void> {
   // start server
   app.listen(PORT, () => {
-    logger.success(`HOME >> http://localhost:${PORT}`)
+    logger.success(`HOME (wip) >> http://localhost:${PORT}`)
+    logger.success(`PORTAL (works) >> http://localhost:${PORT}/portal`)
+    logger.success(`APP (partial works) >> http://localhost:${PORT}/app`)
     logger.success("Running ✔✔✔")
   })
 }

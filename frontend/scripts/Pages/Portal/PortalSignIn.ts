@@ -1,4 +1,4 @@
-import { formAlert } from "@/lib/modal"
+import { formAlert, formLoading, formPrompt } from "@/lib/modal"
 import { toBase64 } from "@/lib/gen"
 import { eroot, futor, kel } from "@/core/kel"
 import { changeLang, lang } from "@/core/languages"
@@ -20,7 +20,8 @@ const strings: Record<string, () => string> = {
   discord: () => `<img src="/assets/providers/discord.svg" class="provider-icon" /> <span>Discord</span>`,
   github: () => `<img src="/assets/providers/github_black.svg" class="provider-icon" /> <span>GitHub</span>`,
   tiktok: () => `<img src="/assets/providers/tiktok.svg" class="provider-icon" /> <span>TikTok</span>`,
-  facebook: () => `<img src="/assets/providers/facebook.svg" class="provider-icon" /> <span>Facebook</span>`
+  facebook: () => `<img src="/assets/providers/facebook.svg" class="provider-icon" /> <span>Facebook</span>`,
+  hex: () => `<i class="fas fa-key"></i> <span>${lang("auth_label_guest")}</span>`
 }
 
 // client email validation
@@ -48,7 +49,7 @@ export class PortalSignIn implements IPortalClass {
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="PortalForms"> <form action="/x/auth/login" class="PortalEmail" id="login-form"> <div class="f"> <div class="title-icons"> <img src="/assets/icons/ingetya.svg" alt="[IngetYa Logo]" /> </div> <div class="title-title"></div> <div class="title-desc form-title"><i class="fa-solid fa-circle-notch fa-spin"></i></div> </div> <div class="f"> <div class="btn btn-language"> <i class="fa-jelly-fill fa-regular fa-language fa-fw"></i> <span>Bahasa/Language</span> <i class="fa-solid fa-chevron-down fa-fw"></i> </div> </div> <div class="f"> <label for="login-email" class="label-email"><i class="fa-solid fa-circle-notch fa-spin"></i></label> <div class="inp"> <div class="inp-icon"> <i class="fa-jelly-fill fa-regular fa-envelope"></i> </div> <input type="email" name="login-email" id="login-email" placeholder="yourmail@email.com" autocomplete="email" maxlength="1000" required /> </div> </div> <div class="group group-code"> </div> <div class="f form-btn-actions"> <button class="btn btn-login"><i class="fa-solid fa-arrow-right-to-arc"></i> <span><i class="fa-solid fa-circle-notch fa-spin"></i></span></button> </div> </form> <div class="PortalOthers"> <div class="portal-other-divider"> <span><i class="fa-solid fa-circle-notch fa-spin"></i></span> </div> <div class="login-providers"> <a href="/x/auth/luna" class="btn btn-luna" id="luna-login"> <img src="/assets/providers/luna.svg" class="provider-icon" /> <span>Luna</span> </a> <a href="/x/auth/google" class="btn btn-google" id="google-login"> <img src="/assets/providers/google.svg" class="provider-icon" /> <span>Google</span> </a> <a href="/x/auth/github" class="btn btn-github" id="github-login"> <img src="/assets/providers/github_black.svg" class="provider-icon" /> <span>GitHub</span> </a> <a href="/x/auth/discord" class="btn btn-discord" id="discord-login"> <img src="/assets/providers/discord.svg" class="provider-icon" /> <span>Discord</span> </a> <a href="/x/auth/tiktok" class="btn btn-tiktok" id="tiktok-login"> <img src="/assets/providers/tiktok.svg" class="provider-icon" /> <span>TikTok</span> </a> <a href="/x/auth/facebook" class="btn btn-facebook" id="facebook-login"> <img src="/assets/providers/facebook.svg" class="provider-icon" /> <span>Facebook</span> </a> </div> </div> </div> <div class="PortalAcceptTerms"> <p>By registering, you agree and accept the <a href="/legal/terms" target="_blank">Terms of Serivce</a> and <a href="/legal/privacy" target="_blank">Privacy Policy</a>.</p> </div>`
+    this.el.innerHTML = `<div class="PortalForms"> <form action="/x/auth/login" class="PortalEmail" id="login-form"> <div class="f"> <div class="title-icons"> <img src="/assets/icons/ingetya.svg" alt="[IngetYa Logo]" /> </div> <div class="title-title"></div> <div class="title-desc form-title"><i class="fa-solid fa-circle-notch fa-spin"></i></div> </div> <div class="f"> <div class="btn btn-language"> <i class="fa-jelly-fill fa-regular fa-language fa-fw"></i> <span>Bahasa/Language</span> <i class="fa-solid fa-chevron-down fa-fw"></i> </div> </div> <div class="f"> <label for="login-email" class="label-email"><i class="fa-solid fa-circle-notch fa-spin"></i></label> <div class="inp"> <div class="inp-icon"> <i class="fa-jelly-fill fa-regular fa-envelope"></i> </div> <input type="email" name="login-email" id="login-email" placeholder="yourmail@email.com" autocomplete="email" maxlength="1000" required /> </div> </div> <div class="group group-code"> </div> <div class="f form-btn-actions"> <button class="btn btn-login"><i class="fa-solid fa-arrow-right-to-arc"></i> <span><i class="fa-solid fa-circle-notch fa-spin"></i></span></button> </div> </form> <div class="PortalOthers"> <div class="portal-other-divider"> <span><i class="fa-solid fa-circle-notch fa-spin"></i></span> </div> <div class="login-providers"> <a href="/x/auth/google" class="btn btn-google" id="google-login"> <img src="/assets/providers/google.svg" class="provider-icon" /> <span>Google</span> </a> <a href="/x/auth/luna" class="btn btn-luna" id="luna-login"> <img src="/assets/providers/luna.svg" class="provider-icon" /> <span>Luna</span> </a> <a href="/x/auth/github" class="btn btn-github" id="github-login"> <img src="/assets/providers/github_black.svg" class="provider-icon" /> <span>GitHub</span> </a> <a href="/x/auth/discord" class="btn btn-discord" id="discord-login"> <img src="/assets/providers/discord.svg" class="provider-icon" /> <span>Discord</span> </a> <a href="/x/auth/tiktok" class="btn btn-tiktok" id="tiktok-login"> <img src="/assets/providers/tiktok.svg" class="provider-icon" /> <span>TikTok</span> </a> <a href="/x/auth/facebook" class="btn btn-facebook" id="facebook-login"> <img src="/assets/providers/facebook.svg" class="provider-icon" /> <span>Facebook</span> </a> <a href="/x/auth/hex" class="btn btn-hex" id="hex-login"> <i class="fas fa-key"></i> <span>${lang("auth_label_guest")}</span> </a> </div> </div> </div> <div class="PortalAcceptTerms"> <p>By registering, you agree and accept the <a href="/legal/terms" target="_blank">Terms of Serivce</a> and <a href="/legal/privacy" target="_blank">Privacy Policy</a>.</p> </div>`
 
     this.btnLogin = futor(".btn-login", this.el, "button")
     this.inpEmail = futor("#login-email", this.el, "input")
@@ -73,6 +74,9 @@ export class PortalSignIn implements IPortalClass {
 
     const termText = futor(".PortalAcceptTerms p", this.el)
     termText.innerHTML = lang("auth_notice")
+
+    const btnHex = futor(".btn-hex", this.el)
+    btnHex.innerHTML = strings.hex()
   }
 
   // tombol lang switcher
@@ -192,6 +196,10 @@ export class PortalSignIn implements IPortalClass {
           if (this.locked) return
           this.locked = true
 
+          if (btnId === "hex") {
+            return await this.hexLogin()
+          }
+
           if (IN_DEVELOPMENTS.find((k) => k === btnId)) {
             await formAlert(lang("auth_login_provider_maintenance").replace(/{PROVIDER}/, btnId))
             this.locked = false
@@ -213,6 +221,28 @@ export class PortalSignIn implements IPortalClass {
 
       this.ripples.push(toRipple)
     })
+  }
+
+  async hexLogin(): Promise<void> {
+    const hexCode = await formPrompt({
+      msg: lang("auth_label_hex"),
+      header: lang("auth_label_guest")
+    })
+
+    if (!hexCode) {
+      this.locked = false
+      return
+    }
+
+    const userLogin = await formLoading(xhr.post("/x/auth/user-hex", { hex: hexCode }))
+    if (!userLogin.ok) {
+      await formAlert(lang(userLogin.code || "error"))
+      return await this.hexLogin()
+    }
+
+    window.location.reload()
+
+    this.locked = false
   }
 
   onSuccessLogin(newFunc: (s?: IAny) => IAny): void {

@@ -12,6 +12,7 @@ import authRouter from "#routes/AuthRouter"
 import exploreRouter from "#routes/ExploreRouter"
 import { webhook } from "#main/webhook/webhook"
 import { isProd } from "#lib/gen"
+import logger from "#lib/logger"
 
 // express server ambil dari express websocket
 // yang diambil dari express server itu sendiri
@@ -137,7 +138,7 @@ app.use((err: IAny, req: Request, res: Response, next: NextFunction) => {
   // padahal gada endpoint selanjutnya. kek anjing kan? but it works!
   if (res.headersSent) return next(err)
 
-  console.error(err)
+  logger.error(err)
 
   // kalo errornya berhasil disanitasi, coba kirim webhook
   webhook("errors", {

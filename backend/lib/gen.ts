@@ -3,6 +3,7 @@ import crypto from "crypto"
 import cfg from "#cfg"
 import { IAny, IReplacerType, IResponse, IResTemp, IQueryParam } from "#types/LibTypes"
 import waittime from "#core/waittime"
+import logger from "./logger"
 
 export const isProd: boolean = cfg.APP_PRODUCTION
 export const isMidtransProd: boolean = cfg.MIDTRANS_PRODUCTION
@@ -147,7 +148,7 @@ export function parseBase64(query: IAny): IQueryParam {
     const data = JSON.parse(Buffer.from(query.toString(), "base64").toString()) as IQueryParam
     return data
   } catch (err) {
-    console.error(err)
+    logger.error(err)
     return { errorParse: "1" }
   }
 }
@@ -158,7 +159,7 @@ export function toBase64(query: IAny): string {
     const data = Buffer.from(JSON.stringify(query)).toString("base64")
     return data
   } catch (err) {
-    console.error(err)
+    logger.error(err)
     const data = Buffer.from(JSON.stringify({ errorParse: true })).toString("base64")
     return data
   }

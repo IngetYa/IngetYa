@@ -72,6 +72,7 @@
     "check": "prettier --check .",
     "type-check": "tsc -p . --pretty --noEmit",
     "lint": "eslint --ext ts",
+    "init": "npx tsx ./backend/initService.ts",
     "start": "node .",
     "dev": "nodemon",
     "dev:start": "nodemon",

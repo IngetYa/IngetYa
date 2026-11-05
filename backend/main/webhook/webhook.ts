@@ -51,7 +51,7 @@ async function processWebhook({ channelKey, message, onSent }: QueueItem): Promi
     // callback kosongan kalo pesan ga terkirim ke discord
     return onSent?.()
   } catch (err) {
-    console.error(err)
+    logger.error(err)
     return onSent?.()
   }
 }

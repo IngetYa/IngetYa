@@ -53,7 +53,8 @@ export function startSocketApp(ws: WebSocket, req: Request) {
       // coba kirim ke penanganan pesan socket
       processSocketMessages({ ...msg, clientId, userId })
     } catch (err) {
-      console.error("Failed to parse JSON.", err)
+      logger.error("Failed to parse JSON.")
+      logger.error(err)
     }
   })
 
@@ -73,7 +74,7 @@ export function startSocketApp(ws: WebSocket, req: Request) {
   ws.on("error", (err: Error) => {
     // kalo socketnya error, matiin isAlive-nya
     ws.isAlive = false
-    console.error(err)
+    logger.error(err)
   })
 
   ws.on("pong", () => {

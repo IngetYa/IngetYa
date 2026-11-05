@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response, Router } from "express"
 import { parseBase64, rep } from "#lib/gen"
-import { authLogin, getMe, processThirdParty } from "#controllers/AuthController"
+import { authHex, authLogin, getMe, processThirdParty } from "#controllers/AuthController"
 import { getOAuthUrl, getOAuthUser, isProviderValid } from "#main/OAuthFind"
 import { IUser, UserProvider } from "#types/UserTypes"
 import { isUser } from "#core/middlewares"
@@ -18,9 +18,24 @@ router.get("/get-user", cooldown.user("user", 1000), isUser, async (req: Request
 
 router.post("/sign-in", async (req: Request, res: Response) => {
   const signIn = rep(await authLogin(req.body, req.query))
-  res.status(signIn.status).json(signIn)
 
-  return
+  return res.status(signIn.status).json(signIn)
+})
+
+router.post("/user-hex", async (req: Request, res: Response) => {
+  const signHex = rep(await authHex(req.body))
+
+  if (signHex.ok) {
+    const userData = signHex.data.user as IUser
+
+    // set cookie (req.session.user.<data>)
+    req.user = {
+      id: userData.id,
+      createdAt: userData.createdAt
+    }
+  }
+
+  return res.status(signHex.status).json(signHex)
 })
 
 router.get("/redirect", async (req: Request, res: Response) => {

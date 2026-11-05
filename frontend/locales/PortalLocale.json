@@ -91,6 +91,18 @@
     "id": "atau masuk dengan",
     "en": "or continue with"
   },
+  "auth_label_guest": {
+    "id": "Kunci Tamu",
+    "en": "Guest Key"
+  },
+  "auth_label_hex": {
+    "id": "Masukkan Kunci Tamu",
+    "en": "Enter Guest Key"
+  },
+  "auth_hex_notfound": {
+    "id": "Kunci tamu yang kamu kirim ga ada yang cocok sama akun manapun di Luna",
+    "en": "The guest key you sent doesn't match any account in Luna"
+  },
   "auth_login_rate_limit": {
     "id": "Kamu udah ngelebihin batas percobaan login. Coba lagi nanti.",
     "en": "You have reached the login request limit. Please try again later."

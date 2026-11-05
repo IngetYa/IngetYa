@@ -2,33 +2,44 @@
 
 Gas keun
 
-## 1. Clean Install Packages
+1. [Install Project Deps](#install-project-deps)
+2. [Initialize Service](#initialize-service)
+3. [Build and Run](#build-and-run)
 
-> pake ref `package-lock.json`
+## Install Project Deps
+
+Instal pake clean-install (base: `package-lock.json`) biar deps tetep sama di tiap clone.
 
 ```shell
 npm ci
 ```
 
-## 2. Copy dan Edit `.env`
+Copy & edit `.env`
 
 ```shell
-# copy
+# command buat copy
 cp .env.example .env
-
-# (optional) in-terminal editing
-# edit di mana aja bisa
-nano .env
 ```
 
-## 4. Run
+## Initialize Service
+
+Bikin doc default buat database **Users** & **Products**
+
+```shell
+npm run init
+```
+
+## Build and Run
 
 > [!TIP]
-> Abis build di bawah ini, bakal muncul 2 folder baru: `public` (dev & prod) sama `dist` (prod). `public` itu folder static (hasil bundle) yang bisa diakses user (read-only). `dist` itu hasil compile code backend yang bakal dipake saat production.
+> Abis build di bawah ini, bakal muncul 3 folder baru: `public` (dev & prod), `views` (dev & prod), dan `dist` (prod).
+> `public` itu folder static (hasil bundle) yang bisa diakses user (read-only).
+> `views` itu hasil compile code .ejs buat dibaca view enine server.
+> `dist` itu hasil compile code backend yang bakal dipake saat production.
 
 ### A. Development
 
-Buka 2 terminal atau 1 terminal dengan 2 tabs
+Buka 2 terminal atau 1 terminal dengan 2 tabs. Jalanin barengan.
 
 1. Watch dev bundling
 
@@ -44,13 +55,15 @@ npm run dev:start
 
 ### B. Production
 
+> Bundle dan run secara bergantian
+
 Bundle dan compile source
 
 ```shell
 npm run build
 ```
 
-Tunggu sampe kelar, baru start server setelahnya
+Tunggu sampe berhasil, baru start server setelahnya
 
 ```shell
 npm run start

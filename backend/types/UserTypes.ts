@@ -27,6 +27,7 @@ export interface IUser {
   name: string
   createdAt: number
   updatedAt: number
+  hex: string
   access?: UserAccess[]
 }
 

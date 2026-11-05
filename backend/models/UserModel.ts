@@ -10,7 +10,8 @@ const schema = new Schema(
     email: { type: String, required: true },
     name: { type: String },
     createdAt: { type: Number, required: true },
-    updatedAt: { type: Number },
+    updatedAt: { type: Number, required: true },
+    hex: { type: String, required: true },
     access: { type: [String], enum: ["ADMIN", "DEV"] }
   },
   {
