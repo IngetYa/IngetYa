@@ -1,0 +1,112 @@
+@use "../../core/constants" as v;
+
+.StaffUsers {
+  .users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: v.$bigPadding;
+
+    .user-card-staff {
+      background-color: v.$header-bg;
+      box-shadow: v.$glass-shadow, v.$glass-inset;
+      border: 1px solid v.$card-border;
+      border-radius: 14px;
+      padding: v.$bigPadding;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: v.$medPadding;
+      transition: all 0.2s;
+
+      .user-card-head {
+        display: flex;
+        align-items: start;
+        gap: v.$medPadding;
+
+        .avatar-circle {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background-color: v.$primary-dark;
+          color: v.$white;
+          font-weight: 700;
+          font-size: 0.95rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-shrink: 0;
+        }
+
+        .user-core {
+          flex-grow: 1;
+          .user-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: v.$text-primary;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .user-id {
+            font-size: 0.75rem;
+            font-family: v.$monofont;
+            color: v.$text-muted;
+          }
+        }
+
+        .badge-user-status {
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: v.$text-secondary;
+          &.online {
+            color: v.$sgreen;
+          }
+        }
+      }
+
+      .user-card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 0.75rem;
+        color: v.$text-secondary;
+        padding: v.$smallPadding 0;
+        .meta-line {
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          i {
+            color: v.$text-secondary;
+            font-size: 0.85rem;
+          }
+        }
+      }
+
+      .user-card-footer {
+        padding-top: v.$medPadding;
+        border-top: 1px dashed rgba(v.$card-border, 0.7);
+        display: flex;
+        gap: 8px;
+
+        .btn {
+          padding: v.$smallPadding v.$medPadding;
+          border-radius: 10px;
+        }
+
+        .btn-chat-user {
+          flex: 1;
+          background-color: v.$primary;
+          color: v.$btn-primary-text;
+          justify-content: center;
+        }
+
+        .btn-moderation {
+          background-color: v.$sgray;
+          color: v.$white;
+        }
+      }
+    }
+  }
+}

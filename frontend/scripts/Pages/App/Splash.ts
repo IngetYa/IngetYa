@@ -19,7 +19,7 @@ export class Splash {
 
   private createElement(): void {
     this.el = kel("div", "Splash")
-    this.el.innerHTML = `<img src="/assets/icons/ingetya.svg" alt="IngetYa Logo" /><div class="loader"><i class="fas fa-circle-notch fa-spin"></i> Memuat</div>`
+    this.el.innerHTML = `<img src="/assets/icons/ingetya-text.svg" alt="IngetYa Logo" /><div class="loader"><i class="fas fa-circle-notch fa-spin"></i> ${lang("initializing")}</div>`
   }
 
   private renderSignButton(url: string): void {

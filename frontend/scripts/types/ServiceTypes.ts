@@ -39,12 +39,12 @@ export interface IOrder {
   paymentId: string
   name: string
   package: "month-1" | "month-2"
-  guests: IGuests[]
+  guests: IGuests
   addOns?: AddOnIds[]
   status: OrderStatus
   expiresAt: Date
   createdAt: Date
-  deleteAt: Date
+  deleteAt?: Date
 }
 
 export interface IVirtualAccount {

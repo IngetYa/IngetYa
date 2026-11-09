@@ -49,5 +49,5 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
     if (newRoot === "explore") return STATENUM.BACK
   }
 
-  return 1
+  return STATENUM.REPLACE
 }

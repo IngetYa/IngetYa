@@ -31,7 +31,10 @@ export class StackPrimary {
   private createElement(): void {
     this.el = kel("div", "Stack Stack-Primary")
 
-    if (this.anim) this.el.classList.add(this.anim)
+    if (this.anim) {
+      this.el.classList.add(this.anim)
+      setTimeout(() => this.el.classList.remove(this.anim!), 300)
+    }
 
     this.tabs = new Tabs({ king: this, manager: this.stack.manager })
     this.content = new Content({ king: this, manager: this.stack.manager })
@@ -42,6 +45,21 @@ export class StackPrimary {
   // jalanin children-nya
   async setContent(id: string, hierarchy: IStackHierarchy): Promise<void> {
     await this.content.update(id, hierarchy)
+  }
+
+  async hide(status: boolean = true): Promise<void> {
+    if (status) {
+      this.el.classList.add("stackOut2")
+      await waittime()
+      this.el.classList.add("hide")
+      this.el.classList.remove("stackOut2")
+      return
+    }
+
+    this.el.classList.add("stackIn2")
+    this.el.classList.remove("hide")
+    await waittime()
+    this.el.classList.remove("stackIn2")
   }
 
   // hapus stack saat ini only

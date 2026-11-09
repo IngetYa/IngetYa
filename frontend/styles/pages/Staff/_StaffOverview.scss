@@ -1,0 +1,89 @@
+@use "../../core/constants" as v;
+
+.StaffOverview {
+  .staff-hero-banner {
+    position: relative;
+    overflow: hidden;
+    padding: v.$largePadding;
+    border-radius: v.$bigPadding;
+    background-color: v.$primary-dark;
+    background-image: url("./abstracts/nature-seamless.svg");
+    background-position: top center;
+    background-repeat: repeat;
+    box-shadow: v.$glass-shadow, v.$glass-inset;
+    color: v.$white;
+    margin-bottom: v.$largePadding;
+    h2 {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: v.$bigPadding;
+    .item-card {
+      background-color: v.$header-bg;
+      box-shadow: v.$glass-shadow, v.$glass-inset;
+      border: 1px solid v.$card-border;
+      border-radius: 14px;
+      padding: v.$bigPadding;
+      display: flex;
+      flex-direction: column;
+      gap: v.$smallPadding;
+
+      .item-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .item-title {
+          font-size: 0.75rem;
+          color: v.$text-secondary;
+          font-weight: 500;
+        }
+
+        .item-icon {
+          border-radius: 8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1rem;
+        }
+      }
+
+      .item-value {
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: v.$text-primary;
+      }
+
+      .item-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 4px;
+        .item-open {
+          font-size: 0.8rem;
+          width: 100%;
+          background-color: v.$primary;
+          border-radius: 10px;
+          color: v.$btn-primary-text;
+          text-align: center;
+          padding: v.$smallPadding v.$medPadding;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+@use "../../core/constants" as v;
+
+.StaffAccount {
+  .staff-profile-card {
+    background-color: v.$primary-dark;
+    background-image: url("./abstracts/nature-seamless.svg");
+    background-position: top center;
+    background-repeat: repeat;
+    box-shadow: v.$glass-shadow, v.$glass-inset;
+    border: 1px solid rgba(v.$card-border, 0.8);
+    border-radius: 18px;
+    padding: v.$largePadding;
+    margin-bottom: v.$largePadding;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: v.$bigPadding;
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .profile-avatar-wrap {
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+
+      .profile-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: v.$primary;
+        color: v.$white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.2rem;
+      }
+
+      .badge-staff-role {
+        font-size: 0.65rem;
+        font-weight: 700;
+        background-color: v.$primary;
+        color: v.$white;
+        padding: 2px 8px;
+        border-radius: 10px;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .profile-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .profile-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: v.$btn-primary-text;
+      }
+
+      .profile-roles {
+        span {
+          font-style: normal;
+          font-size: 0.65rem;
+          font-weight: 500;
+          display: inline;
+          padding: 2px v.$smallPadding;
+          border-radius: 4px;
+          background-color: rgba(v.$white, 0.3);
+          color: v.$white;
+        }
+      }
+    }
+  }
+
+  .iform {
+    .box {
+      background-color: v.$item-card-bg;
+    }
+  }
+}

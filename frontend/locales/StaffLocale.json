@@ -1,0 +1,122 @@
+{
+  "processing": {
+    "id": "Memproses",
+    "en": "Processing"
+  },
+  "loading": {
+    "id": "Memuat",
+    "en": "Loading"
+  },
+  "initializing": {
+    "id": "Initializing~",
+    "en": "Sabar Yaww~"
+  },
+  "type_here": {
+    "id": "Tulis Sesuatu",
+    "en": "Type Here"
+  },
+  "error": {
+    "id": "Terjadi kesalahan",
+    "en": "Something went wrong"
+  },
+  "connecting": {
+    "id": "Menghubungkan",
+    "en": "Connecting"
+  },
+  "please_wait": {
+    "id": "Tunggu Bentar",
+    "en": "Please Wait"
+  },
+  "waiting_for_network": {
+    "id": "Menunggu Jaringan",
+    "en": "Waiting for Network"
+  },
+  "too_many_request": {
+    "id": "Kamu lagi cooldown!<br/>Ntar coba lagi aja.",
+    "en": "You're on cooldown!<br/>Too many requests. Try again later."
+  },
+  "req_not_valid": {
+    "id": "Data yang kamu minta ga ketemu",
+    "en": "Your request is not valid"
+  },
+  "ok": {
+    "id": "OKE",
+    "en": "OK"
+  },
+  "cancel": {
+    "id": "BATAL",
+    "en": "CANCEL"
+  },
+  "copied": {
+    "id": "Disalin",
+    "en": "Copied"
+  },
+  "close": {
+    "id": "Tutup",
+    "en": "Close"
+  },
+  "free": {
+    "id": "Gratis",
+    "en": "Free"
+  },
+  "search": {
+    "id": "Cari",
+    "en": "Find"
+  },
+  "not_found": {
+    "id": "Data engga ketemu",
+    "en": "Your requested data is not found"
+  },
+  "entity_too_large": {
+    "id": "Data kamu melebihi batas ukuran request",
+    "en": "Your data exceeded the request size limit"
+  },
+  "internal_server_error": {
+    "id": "Server lagi ngadepin masalah nih. Coba lagi nanti ya.",
+    "en": "Our server is currently experiencing an unexpected issue."
+  },
+  "request_timeout": {
+    "id": "Request Timeout - 408",
+    "en": "Request Timeout - 408"
+  },
+  "splash_text_login": {
+    "id": "Sebelum lanjut, boleh login terlebih dahulu ya.",
+    "en": "Please log in before continuing"
+  },
+  "splash_btn_login": {
+    "id": "Login Sekarang",
+    "en": "Login Now"
+  },
+  "tab_overview": {
+    "id": "Ringkasan",
+    "en": "Overview"
+  },
+  "tab_balance": {
+    "id": "Saldo",
+    "en": "Balance"
+  },
+  "tab_products": {
+    "id": "Produk",
+    "en": "Products"
+  },
+  "tab_chats": {
+    "id": "Chat",
+    "en": "Chats"
+  },
+  "tab_orders": {
+    "id": "Pesanan",
+    "en": "Orders"
+  },
+  "tab_bills": {
+    "id": "Tagihan",
+    "en": "Bills"
+  },
+  "tab_users": {
+    "id": "User",
+    "en": "Users"
+  },
+  "tab_me": {
+    "id": "Akun",
+    "en": "Account"
+  }
+}

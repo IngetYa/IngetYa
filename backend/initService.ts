@@ -63,7 +63,7 @@ async function createUser(): Promise<IUserOutput> {
     hex: newUserHex,
     updatedAt: Date.now(),
     createdAt: Date.now(),
-    access: ["ADMIN", "DEV"]
+    access: ["staff", "support", "products", "orders", "bills", "accounts"]
   }
 
   const user = await UserModel.create(userData)

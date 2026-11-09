@@ -9,13 +9,15 @@
   justify-content: center;
   align-items: start;
   gap: 0;
-  background-color: v.$card-bg;
   background-image: url("./abstracts/nature-seamless.svg");
   background-position: center center;
   background-repeat: repeat;
+  background-color: v.$nav-bg;
+  // backdrop-filter: blur(v.$backdrop-card);
+  // -webkit-backdrop-filter: blur(v.$backdrop-card);
+  box-shadow: v.$glass-shadow, v.$glass-inset;
   padding: v.$smallPadding;
   border-radius: 10px;
-  border: 1px solid v.$primary;
   overflow: hidden;
   .btn {
     position: relative;
@@ -30,9 +32,11 @@
       font-size: 1.25rem;
     }
     .name {
+      min-width: 50px;
       font-weight: 600;
       transform: translateY(calc((v.$smallPadding * -1) / 2));
       padding: v.$smallPadding;
+      text-align: center;
       font-size: 0.7rem;
       border-radius: 5px;
     }
@@ -46,21 +50,31 @@
       }
     }
   }
+
+  &.navIn1 {
+    animation: navIn1 0.3s;
+  }
+
+  &.navOut1 {
+    animation: navOut1 0.3s forwards;
+  }
 }
 
 @media (min-width: 666px) {
   .Nav {
-    top: 0;
-    left: 0;
+    top: v.$medPadding;
+    left: v.$medPadding;
     transform: none;
-    width: 180px;
-    height: 100%;
-    border-radius: 0;
-    border: none;
-    border-right: 1px solid v.$card-border;
+    width: calc(180px + (v.$medPadding * 2));
+    height: calc(100dvh - (v.$medPadding * 2));
     flex-direction: column;
     align-items: center;
     justify-content: start;
+    background-color: rgba(v.$card-bg, 0.4);
+    border-top-left-radius: 1.65rem;
+    border-bottom-left-radius: 1.65rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     .btn {
       width: 100%;
       flex-direction: row;
@@ -68,6 +82,7 @@
       gap: v.$medPadding;
       padding: v.$smallPadding v.$medPadding;
       .name {
+        text-align: left;
         transform: none;
         padding: v.$medPadding v.$bigPadding;
       }
@@ -89,6 +104,25 @@
         .icon {
           flex-shrink: 0;
           color: v.$primary;
+        }
+      }
+    }
+    &.navIn1 {
+      animation: none;
+    }
+
+    &.navOut1 {
+      animation: none;
+    }
+    &.hide {
+      display: flex !important;
+      .btn {
+        .name {
+          background-color: transparent;
+          color: v.$text-muted;
+        }
+        .icon {
+          color: v.$text-muted;
         }
       }
     }

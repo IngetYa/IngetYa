@@ -18,7 +18,7 @@ export interface IUserAuth {
   nickname?: string
 }
 
-export type UserAccess = "ADMIN" | "DEV"
+export type UserAccess = "staff" | "support" | "products" | "orders" | "bills" | "accounts" | "balance"
 
 export interface IUser {
   id: string

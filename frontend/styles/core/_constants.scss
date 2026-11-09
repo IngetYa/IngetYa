@@ -1,9 +1,15 @@
 $bg-primary: #faf6f4;
 $bg-secondary: #f3eae6;
 
+$nav-bg: #f2e8e9;
+$header-bg: #f5f0ed;
+$search-inp-bg: #f5efed;
+$item-card-bg: #efe5e0;
+$context-bg: #f3eceb;
+
 $surface: #fffefd;
 $card-bg: #fffdfc;
-$card-border: #ebdcd7;
+$card-border: #ddcbc5;
 
 $primary: #b23a54;
 $primary-dark: #6a1728;
@@ -20,6 +26,14 @@ $shadow-romantic: 0 10px 30px rgba(106, 23, 40, 0.08);
 $glow-primary: 0 4px 18px rgba(178, 58, 84, 0.28);
 $glow-dark: 0 4px 18px rgba(54, 19, 27, 0.8);
 
+$glass-shadow:
+  0 12px 32px -10px #6d243433,
+  0 2px 6px -1px #36131b1a;
+
+$glass-inset: inset 0 1px 1px #fefefed9;
+
+$backdrop-card: 5px;
+
 $input-bg: $surface;
 $input-border: $card-border;
 $input-border-focus: $primary;
@@ -29,7 +43,7 @@ $input-placeholder: $text-muted;
 
 $btn-primary-bg: $primary;
 $btn-primary-hover: $primary-dark;
-$btn-primary-text: #ffffff;
+$btn-primary-text: #fefefe;
 
 $btn-secondary-bg: $surface;
 $btn-secondary-border: $card-border;
@@ -42,9 +56,9 @@ $btn-ghost-hover-bg: $primary-light;
 
 $btn-gold-bg: $accent-gold;
 $btn-gold-hover: #b38553;
-$btn-gold-text: #ffffff;
+$btn-gold-text: #fefefe;
 
-$white: #dedede;
+$white: #fefefe;
 $softwhite: #abadaf;
 $swhite: #888b91;
 $black: #00000b;

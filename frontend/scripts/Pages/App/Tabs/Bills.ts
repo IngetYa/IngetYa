@@ -1,4 +1,4 @@
-import type { IPrimary, IPrimaryConfig } from "@/types/StackTypes"
+import type { IPrimary, IPrimaryConfig } from "@/Pages/App/types/StackTypes"
 import { StackPrimary } from "../main/StackPrimary"
 import { StateManager } from "../core/StateManager"
 import { eroot, futor, kel } from "@/core/kel"
@@ -6,10 +6,12 @@ import { formAbort } from "@/lib/modal"
 import { type IStackHierarchy } from "@/core/hierarchy"
 import waittime from "@/lib/waittime"
 import db from "../data/db"
-import { CellRow } from "../Components/Bills/CellRow"
+import { CellRow, NoDataCellRow } from "../Components/Bills/CellRow"
 import { genUniq } from "@/lib/gen"
 import { lang } from "@/core/languages"
 import { Bill } from "../Components/Bills/Bill"
+import { debounce, searchOrders } from "@/core/Search"
+import type { IBill } from "@/types/ServiceTypes"
 
 export class Bills implements IPrimary {
   private el!: HTMLDivElement
@@ -23,12 +25,13 @@ export class Bills implements IPrimary {
   private king: StackPrimary
   manager: StateManager
 
-  private list: CellRow[] = []
+  private list: (CellRow | NoDataCellRow)[] = []
 
   private efield!: HTMLDivElement
 
   private bill?: Bill
 
+  private inp!: HTMLInputElement
   // private contexts: ProductContext[] = []
 
   constructor(config: IPrimaryConfig) {
@@ -38,41 +41,51 @@ export class Bills implements IPrimary {
 
     this.createElement()
     this.writeData()
+    this.searchListener()
   }
 
   // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppMain Bills")
-    if (this.anim) this.el.classList.add(this.anim)
+
+    if (this.anim) {
+      this.el.classList.add(this.anim)
+      setTimeout(() => this.el.classList.remove(this.anim!), 300)
+    }
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
-    <div class="Title">
-      <h1><i class="fajdr fa-credit-card"></i> ${lang("tab_bills")}</h1>
-    </div>
-
-
-    <div class="FlatList">
+    <div class="Header">
+      <div class="HeaderMain">
+        <div class="Title">
+          <h1><i class="fajdr fa-credit-card"></i> ${lang("tab_bills")}</h1>
+        </div>
+      </div>
 
       <div class="Search">
         <div class="inp">
           <div class="icon">
             <i class="fajdr fa-magnifying-glass"></i>
           </div>
-          <input type="text" name="Search" id="search-${genUniq()}" placeholder="Cari di sini..." />
-          <div class="btn">Cari</div>
+          <input type="text" name="Search" id="search-${genUniq()}" placeholder="${lang("bill_search_text")}" />
+          <div class="btn">${lang("search")}</div>
         </div>
       </div>
+    </div>
+
+
+    <div class="FlatList">
+
 
       <div class="table-container">
         <table class="table">
           <thead class="thead">
             <tr>
-              <th>ID</th>
-              <th>Status</th>
-              <th>Name</th>
-              <th>Time</th>
+              <th>${lang("bill_cell_id")}</th>
+              <th>${lang("bill_cell_status")}</th>
+              <th>${lang("bill_cell_name")}</th>
+              <th>${lang("bill_cell_time")}</th>
             </tr>
           </thead>
           <tbody class="tbody">
@@ -97,6 +110,24 @@ export class Bills implements IPrimary {
       // render element
       this.efield.prepend(tr.html)
     }
+
+    this.writeNoData(bills)
+  }
+
+  private writeNoData(bills: IBill[]): void {
+    const oldCard = this.list.find((k) => k.orderId === "nodata")
+
+    if (bills.length < 1) {
+      if (oldCard) return
+
+      const nodataCard = new NoDataCellRow({ bills: this })
+
+      this.list.push(nodataCard)
+
+      return this.efield.prepend(nodataCard.html)
+    }
+
+    if (oldCard) oldCard.destroy()
   }
 
   private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
@@ -109,6 +140,8 @@ export class Bills implements IPrimary {
     // kalo lagi buka cart
     if (this.bill) {
       // hapus dulu cart-nya
+      this.hide(false)
+      this.king.tabs.hide(false)
       await this.bill.destroy()
     }
 
@@ -120,6 +153,8 @@ export class Bills implements IPrimary {
       // tapi gada sub-nya, stop
       if (!sub) return
 
+      this.hide()
+      this.king.tabs.hide()
       // jalanin pembuatan cart
       await this.startBill(sub)
     }
@@ -147,6 +182,46 @@ export class Bills implements IPrimary {
     this.bill = bill
   }
 
+  private searchListener(): void {
+    this.inp = futor('input[name="Search"]', this.el, "input")
+
+    const handleSearch = debounce((text) => {
+      const orderMinData = this.list.map((itm) => ({ id: itm.orderId, name: itm.orderName }))
+
+      const orderIds = searchOrders(text, orderMinData)
+
+      this.filterOrders(orderIds)
+    }, 500)
+
+    this.inp.oninput = () => handleSearch(this.inp.value)
+  }
+
+  private filterOrders(ids?: string[]): void {
+    for (const cellRow of this.list) {
+      cellRow.activate(!ids || ids.some((id) => id === cellRow.orderId))
+    }
+
+    if (!ids) return
+
+    this.showEmpty(ids.length < 1)
+  }
+
+  private showEmpty(status: boolean = true): void {
+    const oldEmpty = futor(".cell-empty-search")
+
+    if (!status) {
+      if (oldEmpty) oldEmpty.remove()
+      return
+    }
+
+    if (oldEmpty) return
+
+    const emptyCard = kel("tr", "cell-empty cell-empty-search")
+    emptyCard.innerHTML = `<td colspan="4">${lang("bill_find_404_title")}</td>`
+
+    this.efield.append(emptyCard)
+  }
+
   lock(status: boolean = true): void {
     this.locked = status
   }
@@ -154,7 +229,24 @@ export class Bills implements IPrimary {
     return this.el
   }
 
+  async hide(status: boolean = true): Promise<void> {
+    if (status) {
+      this.el.classList.add("stackOut2")
+      await waittime()
+      this.el.classList.add("hide")
+      this.el.classList.remove("stackOut2")
+      return
+    }
+
+    this.el.classList.add("stackIn2")
+    this.el.classList.remove("hide")
+    await waittime()
+    this.el.classList.remove("stackIn2")
+  }
+
   async destroy(anim?: string): Promise<void> {
+    this.inp.oninput = null
+
     if (anim) {
       this.el.classList.add(anim)
       await waittime()

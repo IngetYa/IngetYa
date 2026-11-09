@@ -5,128 +5,128 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(v.$black, 0.5);
-  .bill-box {
-    background-color: v.$bg-secondary;
-    margin-left: auto;
-    margin-right: 0;
-    width: 100%;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: 0;
-    overflow: hidden;
-    min-height: 0;
-    animation: rootIn2 0.3s;
-    .FlatList {
-      padding: 0;
-      .iform {
+  .FlatList {
+    padding: 0;
+    .iform {
+      height: 100%;
+      .box {
         height: 100%;
-        .box {
-          height: 100%;
-          border-radius: 0;
-          // padding-bottom: calc(v.$hugePadding * 2.5);
-          .f {
-            max-width: 1280px;
-            margin: 0 auto;
-
-            label {
+        border-radius: 0;
+        .f {
+          max-width: 1280px;
+          margin: 0 auto;
+          label {
+            font-size: 0.8rem;
+          }
+          .due {
+            width: 100%;
+            padding: v.$medPadding;
+            border-radius: 10px;
+            background-color: v.$bg-primary;
+            background-image: url("./abstracts/moon-seamless.svg");
+            background-position: center center;
+            background-repeat: repeat;
+            background-size: 50%;
+            .due-id,
+            .due-expiry {
               font-size: 0.8rem;
-            }
-            .due {
               width: 100%;
-              padding: v.$medPadding;
-              border-radius: 10px;
-              background-color: v.$bg-primary;
-              background-image: url("./abstracts/moon-seamless.svg");
-              background-position: center center;
-              background-repeat: repeat;
-              background-size: 50%;
-              .due-id,
-              .due-expiry {
-                font-size: 0.8rem;
-                width: 100%;
-                color: v.$text-secondary;
-              }
-              .due-expiry {
-                text-align: right;
-              }
-              .due-price {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: v.$smallPadding;
-                margin: v.$medPadding 0;
-                .due-amount {
-                  color: v.$primary;
-                  font-weight: 700;
-                  font-size: 1.4rem;
-                }
-                .btn-copy-amount {
-                  color: v.$primary-dark;
-                }
-              }
+              color: v.$text-secondary;
             }
-
-            .bank-meta {
+            .due-expiry {
+              text-align: right;
+            }
+            .due-price {
               width: 100%;
               display: flex;
               justify-content: center;
               align-items: center;
-              gap: v.$medPadding;
-              img {
-                flex-shrink: 0;
-                height: 24px;
-              }
-              .bank-name {
-                text-align: center;
-                width: fit-content;
-                font-weight: 600;
+              gap: v.$smallPadding;
+              margin: v.$medPadding 0;
+              .due-amount {
+                color: v.$primary;
+                font-weight: 700;
+                font-size: 1.4rem;
               }
             }
+          }
 
-            .qr-pay {
-              width: 100%;
-              .qr-desc {
-                text-align: center;
-              }
-              .btn-qr-download {
-                width: fit-content;
-                margin: 0 auto;
-                padding: v.$smallPadding v.$bigPadding;
-                border-radius: 10px;
-                background-color: v.$primary;
-                color: v.$white;
-                font-weight: 500;
-              }
-              .qr-code {
-                margin: 0 auto;
-                width: 100%;
-                img {
-                  margin: 0 auto;
-                  max-width: 300px;
-                }
-              }
+          .bank-meta {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: v.$medPadding;
+            border-radius: 10px;
+            img {
+              flex-shrink: 0;
+              height: 24px;
             }
+            .bank-name {
+              text-align: center;
+              width: fit-content;
+              font-weight: 600;
+            }
+          }
 
-            .bank-number {
-              letter-spacing: 1px;
+          .qr-pay {
+            width: 100%;
+            .qr-desc {
+              text-align: center;
+            }
+            .btn-qr-download {
+              width: fit-content;
+              margin: 0 auto;
+              padding: v.$smallPadding v.$bigPadding;
+              border-radius: 10px;
+              background-color: v.$primary;
+              color: v.$white;
               font-weight: 500;
             }
-
-            .Payment {
+            .qr-code {
+              margin: v.$medPadding auto;
               width: 100%;
+              canvas {
+                display: block;
+                border-radius: 10px;
+                margin: 0 auto;
+                max-width: 300px;
+                box-shadow: v.$glass-shadow, v.$glass-inset;
+              }
+            }
+          }
+
+          .bank-number {
+            letter-spacing: 1px;
+            font-weight: 500;
+          }
+
+          .Payment {
+            width: 100%;
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            .PaymentDetail {
+              padding: 0;
+              .PaymentHelp {
+                background-image: url("./abstracts/nature-seamless.svg");
+                background-position: center center;
+                background-repeat: repeat;
+                // background-color: v.$header-bg;
+                box-shadow: v.$glass-shadow, v.$glass-inset;
+                border: 1px solid v.$card-bg;
+                border-radius: 10px;
+              }
             }
           }
         }
       }
     }
   }
+
   &.out {
-    .bill-box {
+    .AppMain-Box {
       animation: rootOut2 0.3s forwards;
     }
   }
@@ -134,8 +134,11 @@
 
 @media (min-width: 666px) {
   .Bill {
-    .bill-box {
-      max-width: 600px;
+    .Header {
+      max-width: 1000px;
+    }
+    .FlatList {
+      max-width: 1000px;
     }
   }
 }

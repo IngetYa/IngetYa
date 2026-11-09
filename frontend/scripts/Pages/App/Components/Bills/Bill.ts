@@ -1,10 +1,11 @@
+import qrcode from "qrcode"
 import paymentDetail from "@/data/PaymentDetail.json"
 import type { IBill } from "@/types/ServiceTypes"
 import { StateManager } from "../../core/StateManager"
 import { Bills } from "../../Tabs/Bills"
 import { Orders } from "../../Tabs/Orders"
 import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
-import type { IPrimary } from "@/types/StackTypes"
+import type { IPrimary } from "@/Pages/App/types/StackTypes"
 import { futor, kel } from "@/core/kel"
 import { Colors } from "@/core/Colors"
 import waittime from "@/lib/waittime"
@@ -69,18 +70,21 @@ export class Bill {
 
   // bikin element utama
   private createElement(): void {
-    this.el = kel("div", "AppMain Bill")
+    this.el = kel("div", "AppSec Bill")
 
     this.el.innerHTML = `
-    <div class="bill-box">
+    <div class="AppMain-Box">
 
-      <div class="Title">
-        <div class="header-left">
-          <div class="btn btn-back">
+      <div class="Header">
+        <div class="HeaderMain">
+          <div class="btn btn-back HistoryBack">
             <i class="far fa-arrow-left fa-fw"></i>
           </div>
-          <h1><i class="fadr fa-file-invoice"></i> ${lang("tab_bills")}</h1>
+          <div class="Title">
+            <h1><i class="fadr fa-file-invoice"></i> ${lang("tab_bills")}</h1>
+          </div>
         </div>
+
       </div>
 
       <div class="FlatList">
@@ -95,7 +99,6 @@ export class Bill {
                   <div class="due-id">${lang("label_order_id")} #${this.bill.orderId}</div>
                   <div class="due-price">
                     <div class="due-amount">Rp${toCurrency(this.bill.price)}</div>
-                    <div class="btn btn-copy-amount"><i class="fas fa-copy"></i></div>
                   </div>
                   <div class="due-expiry">${lang("bill_expire_at")} ${sdate.parseTime(this.bill.expiresAt)}</div>
                 </div>
@@ -110,7 +113,7 @@ export class Bill {
                 </div>
               </div>
             </div>
-            
+
             <div class="groups group-pay-meta">
             </div>
 
@@ -154,7 +157,7 @@ export class Bill {
 
     this._rippleCaches.push(rippleBack)
 
-    const box = futor(".bill-box", this.el)
+    const box = futor(".AppMain-Box", this.el)
 
     this.el.onclick = (e) => {
       const target = e.target
@@ -307,7 +310,7 @@ export class Bill {
 
     parent.prepend(fieldBillerCode)
   }
-  private writeQRISDetail(parent: HTMLDivElement): void {
+  private async writeQRISDetail(parent: HTMLDivElement): Promise<void> {
     const field = kel("div", "f")
 
     field.innerHTML = `
@@ -315,11 +318,37 @@ export class Bill {
       <div class="qr-pay">
         <div class="qr-desc">${lang("bill_label_qr_desc")}</div>
         <div class="qr-code">
-          <img src="/assets/example/qr-example.svg" alt="qr-code" />
+          <canvas class="qr-canvas" width="200" height="200">${lang("loading")}</canvas>
         </div>
         <div class="btn btn-qr-download"><i class="fadr fa-download"></i> ${lang("bill_label_qr_save")}</div>
       </div>
     </div>`
+
+    const qrCanvas = futor(".qr-canvas", field, "canvas")
+
+    const qrString = this.bill.qr_string || this.bill.actions[0].url
+
+    await qrcode.toCanvas(qrCanvas, qrString, {
+      width: 300,
+      color: {
+        light: Colors.cardBg,
+        dark: Colors.primary
+      }
+    })
+
+    qrCanvas.innerHTML = ""
+
+    const btnSave = futor(".btn-qr-download", field)
+    btnSave.onclick = () => {
+      const a = kel("a")
+
+      const dataURL = qrCanvas.toDataURL()
+
+      a.href = dataURL
+      a.download = `IngetYa_QRIS_${this.orderId}`
+
+      a.click()
+    }
 
     parent.append(field)
   }

@@ -1,54 +1,122 @@
 @use "../../core/constants" as v;
 
-.AppMain {
+.AppMain,
+.AppSec {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  gap: 0;
-  overflow: hidden;
-  min-height: 0;
-  .Title {
-    flex-shrink: 0;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  .AppMain-Box {
     width: 100%;
-    padding: v.$medPadding;
-    border-bottom: 1px solid v.$text-muted;
+    height: 100dvh;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
-    gap: v.$medPadding;
-    .header-left {
+    gap: 0;
+    overflow-y: auto;
+    animation: rootIn2 0.3s;
+    scrollbar-width: thin;
+  }
+  .Header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    .HeaderMain {
       display: flex;
-      justify-content: start;
+      justify-content: space-between;
       align-items: center;
       gap: v.$medPadding;
-      .btn-back {
+      padding: v.$medPadding;
+      .HistoryBack {
         position: relative;
         overflow: hidden;
-        border-radius: 1.65rem;
         font-size: 1.4rem;
+        padding: v.$medPadding;
+        background-color: v.$header-bg;
+        border-radius: 1.65rem;
+        // backdrop-filter: blur(v.$backdrop-card);
+        // -webkit-backdrop-filter: blur(v.$backdrop-card);
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+      }
+      .Title {
+        flex-grow: 1;
+        padding: v.$medPadding;
+        text-align: center;
+        border-radius: 1.65rem;
+        background-color: v.$header-bg;
+        // backdrop-filter: blur(v.$backdrop-card);
+        // -webkit-backdrop-filter: blur(v.$backdrop-card);
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        h1 {
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
       }
     }
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 600;
+
+    .Search {
+      width: 100%;
+      .inp {
+        width: calc(100% - (v.$medPadding * 2));
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        background-color: v.$search-inp-bg;
+        // backdrop-filter: blur(v.$backdrop-card);
+        // -webkit-backdrop-filter: blur(v.$backdrop-card);
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        .icon {
+          margin-left: v.$medPadding;
+          flex-shrink: 0;
+          color: v.$text-primary;
+        }
+        .btn {
+          font-size: 0.7rem;
+          flex-shrink: 0;
+          padding: v.$smallPadding v.$medPadding;
+          border-radius: 5px;
+          margin-right: 5px;
+          background-color: v.$btn-primary-bg;
+          color: v.$btn-primary-text;
+        }
+        input {
+          background-color: v.$search-inp-bg;
+          padding: v.$medPadding;
+          min-width: 0;
+          flex-grow: 1;
+          color: v.$text-primary;
+          &::placeholder {
+            color: v.$text-secondary;
+          }
+        }
+        &:has(:focus) {
+          border-color: v.$input-border-focus;
+        }
+      }
     }
   }
   .FlatList {
-    flex-grow: 1;
-    min-height: 0;
+    // flex-grow: 1;
+    height: fit-content;
     width: 100%;
-    overflow: hidden;
-    overflow-y: auto;
+    // overflow-x: hidden;
+    // overflow-y: hidden;
     padding: v.$bigPadding;
     padding-bottom: calc(v.$hugePadding * 2.5);
     scrollbar-width: thin;
   }
+
   &.rootIn1 {
     animation: rootIn1 0.3s;
   }
@@ -68,3 +136,31 @@
     animation: rootOut2 0.3s forwards;
   }
 }
+
+.AppMain {
+  overflow-y: auto;
+  &.hide {
+    display: none;
+  }
+  &.stackIn1 {
+    animation: stackIn1 0.3s;
+  }
+  &.stackOut1 {
+    animation: stackOut1 0.3s forwards;
+  }
+  &.stackIn2 {
+    animation: stackIn2 0.3s;
+  }
+  &.stackOut2 {
+    animation: stackOut2 0.3s forwards;
+  }
+}
+
+// @media (min-width: 666px) {
+//   .AppMain,
+//   .AppSec {
+//     .AppMain-Box {
+//       max-width: 600px;
+//     }
+//   }
+// }

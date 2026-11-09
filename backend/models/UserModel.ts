@@ -12,7 +12,7 @@ const schema = new Schema(
     createdAt: { type: Number, required: true },
     updatedAt: { type: Number, required: true },
     hex: { type: String, required: true },
-    access: { type: [String], enum: ["ADMIN", "DEV"] }
+    access: { type: [String], enum: ["staff", "support", "products", "orders", "bills", "accounts", "balance"] }
   },
   {
     versionKey: false

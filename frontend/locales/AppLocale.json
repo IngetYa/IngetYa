@@ -7,6 +7,10 @@
     "id": "Memuat",
     "en": "Loading"
   },
+  "initializing": {
+    "id": "Initializing~",
+    "en": "Sabar Yaww~"
+  },
   "type_here": {
     "id": "Tulis Sesuatu",
     "en": "Type Here"
@@ -54,6 +58,10 @@
   "free": {
     "id": "Gratis",
     "en": "Free"
+  },
+  "search": {
+    "id": "Cari",
+    "en": "Find"
   },
   "not_found": {
     "id": "Data engga ketemu",
@@ -144,8 +152,8 @@
     "en": "Package"
   },
   "label_cart_month-1": {
-    "id": "1 Bulan",
-    "en": "1 Month"
+    "id": "3 Bulan",
+    "en": "3 Month"
   },
   "label_cart_month-2": {
     "id": "10 Bulan",
@@ -267,6 +275,22 @@
     "id": "Mau keluar dari akun kamu sekarang juga?",
     "en": "Logout from your account?"
   },
+  "order_create_new": {
+    "id": "Bikin Undangan Baru",
+    "en": "Create New"
+  },
+  "order_card_new_text": {
+    "id": "Ayo bikin undangan pertama kamu!",
+    "en": "Let's create your first invitation!"
+  },
+  "order_card_new_btn": {
+    "id": "Lihat-lihat tema",
+    "en": "Explore themes"
+  },
+  "order_search_text": {
+    "id": "Cari ID atau nama pesanan..",
+    "en": "Find order name or ID.."
+  },
   "order_see_detail": {
     "id": "Lihat Rincian",
     "en": "See Detail"
@@ -276,8 +300,8 @@
     "en": "Close Detail"
   },
   "order_chat_admin": {
-    "id": "Chat Developer",
-    "en": "Chat Developer"
+    "id": "Konsultasi",
+    "en": "Consult with us"
   },
   "order_your_order": {
     "id": "Edit",
@@ -290,6 +314,18 @@
   "order_open_link": {
     "id": "Buka Link",
     "en": "Open Link"
+  },
+  "order_find_404_title": {
+    "id": "Pesanan yang kamu cari ga ketemu",
+    "en": "No matching search result"
+  },
+  "order_find_404_reset": {
+    "id": "Reset Pencarian",
+    "en": "Reset Search"
+  },
+  "bill_search_text": {
+    "id": "Cari ID atau nama pesanan..",
+    "en": "Find order name or ID.."
   },
   "bill_expire_at": {
     "id": "Bayar Sebelum",
@@ -314,5 +350,29 @@
   "bill_label_send_to_bank": {
     "id": "Bank Tujuan",
     "en": "Bank Information"
+  },
+  "bill_nodata": {
+    "id": "Belum ada transaksi",
+    "en": "No data"
+  },
+  "bill_find_404_title": {
+    "id": "Tagihan yang kamu cari ga ketemu",
+    "en": "No matching search result"
+  },
+  "bill_cell_id": {
+    "id": "ID",
+    "en": "ID"
+  },
+  "bill_cell_status": {
+    "id": "Status",
+    "en": "Status"
+  },
+  "bill_cell_name": {
+    "id": "Nama",
+    "en": "Name"
+  },
+  "bill_cell_time": {
+    "id": "Waktu",
+    "en": "Time"
   }
 }

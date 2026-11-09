@@ -11,6 +11,7 @@ import db from "../../data/db"
 import { Orders } from "../../Tabs/Orders"
 import { formAlert } from "@/lib/modal"
 import { openLink } from "@/core/navigators"
+import { Colors } from "@/core/Colors"
 
 export interface OrderContextConfig {
   order: IOrder
@@ -240,12 +241,19 @@ export class OrderContext {
 
     this._rippleCaches.push(
       SetRipple(btnDetail, {
-        run: () => {
+        color: Colors.white,
+        run: async () => {
           this.isDetailShown = !this.isDetailShown
 
           itemList.classList[this.isDetailShown ? "add" : "remove"]("show")
 
           textDetail.innerText = lang(`order_${this.isDetailShown ? "un" : ""}see_detail`)
+
+          if (this.isDetailShown) {
+            await waittime(500)
+
+            this.updatePosition()
+          }
         }
       })
     )
@@ -315,6 +323,7 @@ export class OrderContext {
     const btnClose = futor(".btn-close", this.el)
 
     const ripple = SetRipple(btnClose, {
+      color: Colors.white,
       run: async () => {
         if (this.manager.busy) return
         if (this.locked) return

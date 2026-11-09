@@ -111,6 +111,12 @@ app.get("/app", (req: Request, res: Response) => {
   return res.render("app")
 })
 
+app.get("/staff", (req: Request, res: Response) => {
+  res.setHeader("Content-Type", "text/html")
+
+  return res.render("staff")
+})
+
 app.get("/", (req: Request, res: Response) => {
   res.setHeader("Content-Type", "text/html")
   return res.render("home")

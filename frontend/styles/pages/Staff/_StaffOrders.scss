@@ -1,0 +1,130 @@
+@use "../../core/constants" as v;
+
+.StaffOrders {
+  .orders-toolbar {
+    margin-bottom: v.$medPadding;
+  }
+
+  .page-bar {
+    margin-bottom: v.$medPadding;
+  }
+
+  .orders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: v.$bigPadding;
+
+    .order-card-staff {
+      background-color: v.$header-bg;
+      box-shadow: v.$glass-shadow, v.$glass-inset;
+      border: 1px solid v.$card-border;
+      border-radius: 14px;
+      padding: v.$bigPadding;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: v.$medPadding;
+
+      .order-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .order-id {
+          font-family: v.$monofont;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: v.$primary;
+        }
+
+        .status-badge {
+          background-color: v.$accent-gold;
+          color: v.$btn-primary-text;
+          font-weight: 500;
+          width: fit-content;
+          max-width: 100%;
+          padding: 3px 5px;
+          font-size: 0.7rem;
+          border-radius: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          &.draft,
+          &.published {
+            background-color: v.$sgreen;
+          }
+          &.expired {
+            background-color: v.$sred;
+          }
+        }
+      }
+
+      .order-card-body {
+        .order-title {
+          font-size: 1rem;
+          font-weight: 700;
+          color: v.$text-primary;
+          margin-bottom: v.$medPadding;
+          text-align: center;
+        }
+
+        .order-meta-list {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          color: v.$text-secondary;
+          .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: v.$medPadding;
+            border-bottom: 2px dashed rgba(v.$text-primary, 0.14);
+            padding-bottom: 2px;
+            margin-bottom: 2px;
+            .item-label {
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+            .item-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .order-card-footer {
+        padding-top: v.$medPadding;
+        border-top: 1px dashed v.$card-border;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .price-box {
+          display: flex;
+          flex-direction: column;
+
+          .price-val {
+            font-size: 1rem;
+            font-weight: 700;
+            color: v.$primary;
+          }
+        }
+
+        .card-action-btns {
+          font-size: 0.8rem;
+          display: flex;
+          gap: 6px;
+          .btn-detail {
+            padding: v.$smallPadding v.$medPadding;
+            border-radius: 10px;
+            background-color: v.$primary;
+            color: v.$btn-primary-text;
+          }
+        }
+      }
+    }
+  }
+}

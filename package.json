@@ -41,6 +41,7 @@
     "@types/express-ws": "^3.0.6",
     "@types/multer": "^2.3.0",
     "@types/node": "^26.6.4",
+    "@types/qrcode": "^1.5.6",
     "babel-loader": "^10.1.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.5",
@@ -69,6 +70,7 @@
     "express-ws": "^5.0.2",
     "mongoose": "^9.11.1",
     "multer": "^2.4.0",
+    "qrcode": "^1.5.4",
     "webfont-awesome-pro": "7.3.2-wip.10"
   },
   "scripts": {

@@ -3,6 +3,7 @@ import { TabButton } from "../Components/TabButton"
 import { StateManager } from "../core/StateManager"
 import { StackPrimary } from "../main/StackPrimary"
 import { TabList } from "../data/_TabList"
+import waittime from "@/lib/waittime"
 
 export interface ITabsConfig {
   king: StackPrimary
@@ -65,6 +66,21 @@ export class Tabs {
 
   updateString(): void {
     this.buttons.forEach((btn) => btn.updateString())
+  }
+
+  async hide(status: boolean = true): Promise<void> {
+    if (status) {
+      this.el.classList.add("navOut1")
+      await waittime()
+      this.el.classList.add("hide")
+      this.el.classList.remove("navOut1")
+      return
+    }
+
+    this.el.classList.add("navIn1")
+    this.el.classList.remove("hide")
+    await waittime()
+    this.el.classList.remove("navIn1")
   }
 
   async destroy(): Promise<void> {

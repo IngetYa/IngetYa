@@ -1,4 +1,4 @@
-import type { IPrimary, IPrimaryConfig } from "@/types/StackTypes"
+import type { IPrimary, IPrimaryConfig } from "@/Pages/App/types/StackTypes"
 import { StackPrimary } from "../main/StackPrimary"
 import { StateManager } from "../core/StateManager"
 import { eroot, futor, kel } from "@/core/kel"
@@ -66,11 +66,14 @@ export class Explore implements IPrimary {
   // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppMain Explore")
-    if (this.anim) this.el.classList.add(this.anim)
+    if (this.anim) {
+      this.el.classList.add(this.anim)
+      setTimeout(() => this.el.classList.remove(this.anim!), 300)
+    }
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="Title"> <h1><i class="fajdr fa-house"></i> ${lang("header_explore")}</h1> </div> <div class="Categories"></div> <div class="FlatList"> <div class="List"> </div> </div>`
+    this.el.innerHTML = `<div class="Header"><div class="HeaderMain"><div class="Title"><h1><i class="fajdr fa-house"></i> ${lang("header_explore")}</h1></div></div><div class="Categories"></div></div> <div class="FlatList"> <div class="List"> </div> </div>`
 
     this.efield = futor(".FlatList .List", this.el, "div")
     this.ecats = futor(".Categories", this.el, "div")
@@ -223,6 +226,8 @@ export class Explore implements IPrimary {
     // kalo lagi buka cart
     if (this.cart) {
       // hapus dulu cart-nya
+      this.king.tabs.hide(false)
+      this.hide(false)
       await this.cart.destroy()
     }
 
@@ -235,6 +240,9 @@ export class Explore implements IPrimary {
       if (!sub) return
 
       // jalanin pembuatan cart
+      this.hide()
+      this.king.tabs.hide()
+
       await this.startCart(sub)
     }
   }
@@ -330,6 +338,21 @@ export class Explore implements IPrimary {
       const context = this.contexts.shift()
       if (context) await context.destroy()
     }
+  }
+
+  async hide(status: boolean = true): Promise<void> {
+    if (status) {
+      this.el.classList.add("stackOut2")
+      await waittime()
+      this.el.classList.add("hide")
+      this.el.classList.remove("stackOut2")
+      return
+    }
+
+    this.el.classList.add("stackIn2")
+    this.el.classList.remove("hide")
+    await waittime()
+    this.el.classList.remove("stackIn2")
   }
 
   async destroy(anim?: string): Promise<void> {

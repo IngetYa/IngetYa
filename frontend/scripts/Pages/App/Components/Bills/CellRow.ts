@@ -64,6 +64,68 @@ export class CellRow {
     return this.bill.orderId
   }
 
+  get orderName(): string {
+    return this.order.name
+  }
+
+  activate(status: boolean = true): void {
+    this.el.classList[status ? "remove" : "add"]("hide")
+  }
+
+  destroy(): void {
+    // hapus ripplenya dari cache
+    this._rippleCaches.forEach((btn) => btn.stopListener())
+    this._rippleCaches.splice(0, this._rippleCaches.length)
+
+    // hapus element
+    this.el.remove()
+  }
+
+  hide(status: boolean = true): void {
+    this.el.classList[status ? "add" : "remove"]("hide")
+  }
+
+  get html(): HTMLDivElement {
+    return this.el
+  }
+}
+
+export class NoDataCellRow {
+  private el!: HTMLDivElement
+
+  private bills: Bills
+
+  private _rippleCaches: IRippleReturn[] = []
+
+  constructor(config: Partial<CellRowConfig>) {
+    this.bills = config.bills!
+
+    this.createElement()
+  }
+
+  // bikin element utama
+  private createElement(): void {
+    this.el = kel("tr", "cell-empty")
+
+    // transaction_status
+
+    // one line biar ga menuhin editor wkwk
+    // format aja atau pake beautifier biar rapi
+    this.el.innerHTML = `<td colspan="4">${lang("bill_nodata")}</td>`
+  }
+
+  get orderId(): string {
+    return "nodata"
+  }
+
+  get orderName(): string {
+    return "nodata"
+  }
+
+  activate(status: boolean = true): void {
+    this.el.classList[status ? "remove" : "add"]("hide")
+  }
+
   destroy(): void {
     // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())

@@ -50,22 +50,17 @@ $fontProviderIcon: 1.1rem;
         content: "";
         flex: 1;
         height: 1px;
-        background-color: rgba(v.$primary-dark, 0.2);
+        background-color: v.$text-secondary;
       }
       span {
         padding: 0 v.$medPadding;
-        color: v.$text-muted;
+        color: v.$text-secondary;
       }
     }
     .PortalEmail {
-      background-color: rgba(v.$card-bg, 0.6);
       display: block;
       width: 100%;
       padding: v.$bigPadding;
-      border: 1px solid v.$card-border;
-      border-bottom: none;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
       .f {
         display: block;
         width: 100%;
@@ -121,13 +116,18 @@ $fontProviderIcon: 1.1rem;
           line-height: 1.5;
         }
         .inp {
-          background-color: v.$input-bg;
           display: flex;
           justify-content: start;
           align-items: center;
           gap: 0;
           border: 1px solid v.$input-border;
           border-radius: 5px;
+
+          background-color: v.$item-card-bg;
+          // backdrop-filter: blur(v.$backdrop-card);
+          // -webkit-backdrop-filter: blur(v.$backdrop-card);
+          box-shadow: v.$glass-shadow, v.$glass-inset;
+
           .inp-icon {
             padding-left: v.$medPadding;
           }
@@ -189,15 +189,10 @@ $fontProviderIcon: 1.1rem;
       }
     }
     .PortalOthers {
-      background-color: rgba(v.$card-bg, 0.6);
       display: block;
       width: 100%;
       padding: v.$bigPadding;
       padding-top: 0;
-      border: 1px solid v.$card-border;
-      border-top: none;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
       .login-providers {
         display: block;
         .btn {
@@ -206,7 +201,6 @@ $fontProviderIcon: 1.1rem;
           width: 100%;
           padding: v.$medPadding v.$bigPadding;
           margin-bottom: v.$medPadding;
-          background-color: v.$btn-secondary-bg;
           border: 1px solid v.$btn-secondary-border;
           display: flex;
           align-items: center;
@@ -217,6 +211,7 @@ $fontProviderIcon: 1.1rem;
           color: v.$btn-secondary-text;
           border-radius: 5px;
           font-weight: 500;
+          background-color: v.$search-inp-bg;
           i {
             font-size: $fontProviderIcon;
           }
@@ -230,7 +225,6 @@ $fontProviderIcon: 1.1rem;
           }
           &:hover {
             background-color: color.scale(v.$btn-secondary-bg, $blackness: 10%);
-            border-color: v.$primary-dark;
           }
         }
       }
@@ -247,27 +241,28 @@ $fontProviderIcon: 1.1rem;
 
 @media (min-width: 700px) {
   .PortalLogin {
+    gap: v.$bigPadding;
     .PortalForms {
       display: flex;
       justify-content: center;
-      align-items: start;
+      align-items: end;
       gap: v.$bigPadding;
+      padding-bottom: v.$medPadding;
       .PortalEmail {
         flex-grow: 1;
-        padding-bottom: v.$largePadding;
         max-width: 700px;
-        border-bottom: 1px solid v.$card-border;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        padding-bottom: 0;
       }
       .PortalOthers {
+        background-color: rgba(v.$card-bg, 0.2);
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        padding-bottom: v.$bigPadding;
+        border: none;
+        border-radius: 10px;
         flex-shrink: 0;
         max-width: 250px;
-        border-top: 1px solid v.$card-border;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
         .portal-other-divider {
-          margin-top: v.$bigPadding;
+          margin-top: v.$medPadding;
         }
       }
     }

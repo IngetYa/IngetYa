@@ -1,4 +1,4 @@
-import { type IPrimary } from "@/types/StackTypes"
+import { type IPrimary } from "@/Pages/App/types/StackTypes"
 import { StateManager } from "../core/StateManager"
 import { StackPrimary } from "../main/StackPrimary"
 import { kel } from "@/core/kel"

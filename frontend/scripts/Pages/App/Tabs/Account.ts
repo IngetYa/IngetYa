@@ -1,4 +1,4 @@
-import type { IPrimary, IPrimaryConfig } from "@/types/StackTypes"
+import type { IPrimary, IPrimaryConfig } from "@/Pages/App/types/StackTypes"
 import { StackPrimary } from "../main/StackPrimary"
 import { StateManager } from "../core/StateManager"
 import { futor, kel } from "@/core/kel"
@@ -44,13 +44,21 @@ export class Account implements IPrimary {
   // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppMain Account")
-    if (this.anim) this.el.classList.add(this.anim)
+
+    if (this.anim) {
+      this.el.classList.add(this.anim)
+      setTimeout(() => this.el.classList.remove(this.anim!), 300)
+    }
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
-    <div class="Title">
-      <h1><i class="fajdr fa-user"></i> ${lang("tab_me")}</h1>
+    <div class="Header">
+      <div class="HeaderMain">
+        <div class="Title">
+          <h1><i class="fajdr fa-user"></i> ${lang("tab_me")}</h1>
+        </div>
+      </div>
     </div>
 
     <div class="FlatList">
@@ -116,7 +124,7 @@ export class Account implements IPrimary {
               <div class="btn btn-delete-object btn-logout">LOGOUT</div>
             </div>
             <div class="s">
-              <a href="https://devanka.id/luna/me" target="_blank" class="btn btn-prim">LUNA <i class="fajdr fa-arrow-up-right-from-square"></i></a>
+              <a href="https://devanka.id/luna/me" target="_blank" class="btn btn-prim"><i class="fajdr fa-arrow-up-right-from-square"></i> LUNA</a>
             </div>
           </div>
 
@@ -158,7 +166,7 @@ export class Account implements IPrimary {
     labelName.innerHTML = lang("label_me_name")
 
     const btnLogout = futor(".btn-logout", this.el)
-    btnLogout.innerHTML = lang("btn_me_logout")
+    btnLogout.innerHTML = `<i class="fadr fa-right-from-bracket"></i> ${lang("btn_me_logout")}`
 
     this.king.tabs.updateString()
   }
@@ -195,10 +203,8 @@ export class Account implements IPrimary {
         if (this.locked) return
         if (this.manager.busy) return
         this.locked = true
-
         const copied = await copyToClipboard(db.me.id)
         if (copied) doTell(db.me.id, "jelly-duo regular clipboard")
-
         this.locked = false
       }
     })

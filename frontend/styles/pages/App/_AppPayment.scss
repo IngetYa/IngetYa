@@ -2,14 +2,14 @@
 
 .Payment {
   width: 100%;
-  border: 1px solid v.$card-border;
   border-radius: 10px;
   overflow: hidden;
-  background-color: rgba(v.$card-bg, 0.5);
   margin-bottom: v.$smallPadding;
-  background-image: url("./abstracts/mosaic-seamless.svg");
-  background-position: center center;
+  border: 1px solid v.$card-border;
+  background-image: url("./abstracts/nature-seamless.svg");
+  background-position: top center;
   background-repeat: repeat;
+  background-color: rgba(v.$card-bg, 0.9);
   &:last-child {
     margin-bottom: 0;
   }

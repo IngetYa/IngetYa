@@ -47,7 +47,7 @@
     position: relative;
     width: clamp(300px, 100vw, 800px);
     max-height: calc(100% - v.$bigPadding);
-    background-color: rgba(v.$card-bg, 0.9);
+    background-color: v.$header-bg;
     border: 1px solid v.$card-border;
     border-radius: 10px;
     overflow-x: hidden;
@@ -98,15 +98,13 @@
         position: sticky;
         bottom: 0;
         left: 0;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
       }
       .i {
         width: 100%;
-        .tx {
-          line-height: 1.5;
-          padding-top: v.$medPadding;
-        }
+        // .tx {
+        //   line-height: 1.5;
+        //   padding-top: v.$medPadding;
+        // }
         .btn-find {
           width: 100%;
           padding: v.$medPadding;
@@ -170,9 +168,11 @@
           }
         }
         .inp {
+          border-radius: v.$smallPadding;
           position: relative;
           width: 100%;
           overflow: hidden;
+          box-shadow: v.$glass-shadow, v.$glass-inset;
           .evt-drop {
             display: flex;
             justify-content: space-between;
@@ -191,7 +191,7 @@
             display: block;
             width: 100%;
             font-size: 1rem;
-            line-height: 1.5;
+            // line-height: 1.5;
           }
           input[type="text"],
           input[type="number"],
@@ -200,7 +200,7 @@
             display: block;
             min-width: 0;
             width: 100%;
-            background-color: v.$input-bg;
+            background-color: v.$search-inp-bg;
             color: v.$text-primary;
             border: 1px solid v.$input-border;
             padding: v.$medPadding;
@@ -268,7 +268,7 @@
             align-items: center;
             gap: 0;
             width: 100%;
-            background-color: v.$card-bg;
+            background-color: v.$search-inp-bg;
             border: 1px solid v.$card-border;
             font-size: 0.8rem;
             overflow: hidden;
@@ -465,8 +465,8 @@
             background-color: v.$black;
           }
           &.btn-delete-object {
-            background-color: v.$black;
-            color: v.$cred;
+            background-color: v.$sred;
+            color: v.$white;
           }
         }
         &.hide {
@@ -568,9 +568,6 @@
           position: static;
           bottom: unset;
           left: unset;
-          backdrop-filter: none;
-          backdrop-filter: unset;
-          -webkit-backdrop-filter: none;
         }
       }
     }
@@ -652,9 +649,11 @@
     }
   }
   &:has(:checked) {
-    background-image: url("../abstracts/letter-y-seamless.svg");
+    background-image: url("../abstracts/mosaic-seamless.svg");
     background-position: center center;
     background-repeat: repeat;
+    background-color: #fff5f7;
+
     box-shadow: 0 0 0 2px v.$input-focus-ring;
     span {
       color: v.$primary-dark;

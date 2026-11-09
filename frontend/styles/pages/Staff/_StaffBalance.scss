@@ -1,0 +1,152 @@
+@use "../../core/constants" as v;
+
+.StaffBalance {
+  .hero-balance-card {
+    background-color: v.$primary-dark;
+    border: 1px solid v.$card-border;
+    border-radius: 18px;
+    padding: v.$largePadding;
+    background-image: url("./abstracts/nature-seamless.svg");
+    background-position: top center;
+    background-repeat: repeat;
+    box-shadow: v.$glass-shadow, v.$glass-inset;
+    margin-bottom: v.$largePadding;
+
+    .hero-main {
+      margin-bottom: v.$bigPadding;
+      .hero-label {
+        font-size: 0.8rem;
+        color: v.$btn-primary-text;
+        font-weight: 500;
+      }
+      .hero-amount {
+        font-size: 2rem;
+        font-weight: 800;
+        color: v.$cgreen;
+        margin: 4px 0;
+      }
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: v.$medPadding;
+      margin-bottom: v.$bigPadding;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      @media (min-width: 500px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-box {
+        display: flex;
+        flex-direction: column;
+
+        .stat-label {
+          font-weight: 500;
+          font-size: 0.75rem;
+          color: v.$btn-primary-text;
+        }
+
+        .stat-value {
+          font-size: 1.15rem;
+          font-weight: 700;
+        }
+
+        &.income {
+          .stat-label i,
+          .stat-value {
+            color: v.$cgreen;
+          }
+        }
+
+        &.expense {
+          .stat-label i,
+          .stat-value {
+            color: v.$cred;
+          }
+        }
+      }
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: v.$medPadding;
+      .btn-balance-action {
+        position: relative;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: v.$medPadding v.$bigPadding;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        overflow: hidden;
+        &.btn-recap {
+          background-color: rgba(v.$white, 0.3);
+          color: v.$btn-primary-text;
+        }
+      }
+    }
+  }
+
+  .page-bar {
+    margin-bottom: v.$medPadding;
+  }
+
+  .records-container {
+    display: flex;
+    flex-direction: column;
+    gap: v.$medPadding;
+
+    .record-card {
+      background-color: v.$header-bg;
+      box-shadow: v.$glass-shadow, v.$glass-inset;
+      border: 1px solid v.$card-border;
+      border-radius: 12px;
+      padding: v.$bigPadding;
+
+      .record-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .record-header {
+          .record-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: v.$text-primary;
+          }
+
+          .record-amount {
+            font-size: 1.2rem;
+            font-weight: 700;
+
+            &.income {
+              color: v.$sgreen;
+            }
+
+            &.expense {
+              color: v.$sred;
+            }
+          }
+        }
+
+        .record-meta {
+          font-size: 0.75rem;
+          color: v.$text-secondary;
+          .record-date {
+            margin-top: v.$medPadding;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
