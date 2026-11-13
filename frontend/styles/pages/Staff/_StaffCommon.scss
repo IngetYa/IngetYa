@@ -39,6 +39,7 @@
     overflow-y: auto;
     animation: rootIn2 0.3s;
     scrollbar-width: thin;
+    overflow-x: hidden;
   }
   .Header {
     position: sticky;
@@ -46,15 +47,18 @@
     left: 0;
     z-index: 1;
     width: 100%;
-
+    overflow: hidden;
     .HeaderMain {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: v.$medPadding;
       padding: v.$medPadding;
+      min-width: 0;
+      overflow: hidden;
 
       .HistoryBack {
+        flex-shrink: 0;
         position: relative;
         overflow: hidden;
         font-size: 1.4rem;
@@ -67,6 +71,7 @@
       }
       .Title {
         flex-grow: 1;
+        min-width: 0;
         padding: v.$medPadding;
         text-align: center;
         border-radius: 1.65rem;
@@ -74,9 +79,33 @@
         // backdrop-filter: blur(v.$backdrop-card);
         // -webkit-backdrop-filter: blur(v.$backdrop-card);
         box-shadow: v.$glass-shadow, v.$glass-inset;
+        overflow: hidden;
         h1 {
+          width: 100%;
           font-size: 1.4rem;
           font-weight: 600;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      .Actions {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: v.$medPadding;
+        .btn {
+          flex-shrink: 0;
+          position: relative;
+          overflow: hidden;
+          font-size: 1.4rem;
+          padding: v.$medPadding;
+          background-color: v.$header-bg;
+          border-radius: 1.65rem;
+          // backdrop-filter: blur(v.$backdrop-card);
+          // -webkit-backdrop-filter: blur(v.$backdrop-card);
+          box-shadow: v.$glass-shadow, v.$glass-inset;
         }
       }
     }

@@ -107,7 +107,7 @@ export class Overview implements IPrimary {
           <div class="item-head">
             <span class="item-title">Live Chat Menunggu</span>
             <div class="item-icon">
-              <i class="fajdr fa-credit-card"></i>
+              <i class="fajdr fa-comments"></i>
             </div>
           </div>
           <div class="item-value">3 Chat</div>
@@ -120,7 +120,7 @@ export class Overview implements IPrimary {
           <div class="item-head">
             <span class="item-title">User Terdaftar</span>
             <div class="item-icon">
-              <i class="fajdr fa-credit-card"></i>
+              <i class="fajdr fa-users"></i>
             </div>
           </div>
           <div class="item-value">3.200 User</div>

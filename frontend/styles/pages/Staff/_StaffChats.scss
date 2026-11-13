@@ -1,6 +1,370 @@
 @use "../../core/constants" as v;
 
 .StaffChats {
+  overflow-y: hidden;
+  .ChatSideBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    .FlatList {
+      display: block;
+      width: 100%;
+      height: 100%;
+      .List {
+        padding-bottom: calc(v.$hugePadding * 2);
+        .UserCard {
+          width: 100%;
+          padding: v.$smallPadding v.$medPadding;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: v.$medPadding;
+          background-color: v.$item-card-bg;
+          border: 1px solid v.$card-border;
+          box-shadow: v.$glass-shadow, v.$glass-inset;
+          border-radius: 10px;
+          margin-bottom: v.$medPadding;
+          cursor: pointer;
+          overflow: hidden;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .UserProfile {
+            flex-grow: 1;
+            min-width: 0;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: v.$medPadding;
+            overflow: hidden;
+            .avatar {
+              flex-shrink: 0;
+              position: relative;
+              width: 42px;
+              height: 42px;
+              background-color: v.$primary;
+              border-radius: 50%;
+              color: v.$white;
+              font-weight: 600;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .dot {
+                position: absolute;
+                bottom: -2px;
+                right: -2px;
+                width: 10px;
+                height: 10px;
+                background-color: v.$sgray;
+                border: 2px solid v.$item-card-bg;
+                border-radius: 50%;
+              }
+            }
+            .info {
+              flex-grow: 1;
+              min-width: 0;
+              overflow: hidden;
+              .name {
+                width: 100%;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: v.$text-primary;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              .snippet {
+                width: 100%;
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: v.$text-secondary;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
+          .UserStatus {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: end;
+            .time {
+              color: v.$text-secondary;
+              font-weight: 500;
+              font-size: 0.65rem;
+            }
+            .unread {
+              width: fit-content;
+              background-color: v.$primary;
+              color: v.$white;
+              font-size: 0.65rem;
+              font-weight: 500;
+              min-width: 18px;
+              height: 18px;
+              border-radius: 9px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 0 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ChatPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    .ChatActions {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: v.$medPadding;
+      .ChatEmbed {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: v.$medPadding;
+        background-color: v.$header-bg;
+        border-radius: 10px;
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        border: 1px solid v.$card-border;
+        .attach {
+          width: 100%;
+          height: fit-content;
+          display: flex;
+          justify-content: space-between;
+          align-items: start;
+          gap: v.$medPadding;
+          padding: v.$smallPadding;
+          .attach-file {
+            height: fit-content;
+            flex-grow: 1;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: v.$smallPadding;
+            img,
+            video {
+              flex-shrink: 0;
+              width: 50px;
+              height: 50px;
+              margin-right: v.$smallPadding;
+              object-fit: cover;
+              object-position: center;
+              -o-object-fit: cover;
+              -o-object-position: center;
+            }
+            .icon {
+              flex-shrink: 0;
+            }
+            .file-meta {
+              .file-title {
+                font-weight: 600;
+                font-size: 0.6rem;
+              }
+              .file-name {
+                font-size: 0.8rem;
+                word-break: break-all;
+              }
+            }
+          }
+          .btn-attach-cancel {
+            flex-shrink: 0;
+          }
+        }
+      }
+      .ChatForm {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: v.$medPadding;
+        textarea {
+          $minInpHeight: calc(1rem + (v.$smallPadding * 5));
+          font-size: 0.8rem;
+          clip-path: inset(0 round 20px);
+          flex-grow: 1;
+          min-width: unset;
+          max-width: unset;
+          padding: v.$medPadding v.$bigPadding;
+          background-color: v.$header-bg;
+          resize: vertical;
+          scrollbar-width: thin;
+          max-height: 200px;
+          min-height: $minInpHeight;
+          height: $minInpHeight;
+        }
+        .btn {
+          flex-shrink: 0;
+          font-size: 1rem;
+          padding: v.$smallPadding v.$medPadding;
+          background-color: v.$header-bg;
+          border-radius: 1.65rem;
+        }
+      }
+    }
+    .ChatMessages {
+      width: 100%;
+      height: fit-content;
+      padding: v.$medPadding;
+      .card {
+        $cardMaxWidth: 370px;
+        width: fit-content;
+        padding: v.$medPadding;
+        max-width: calc(100% - (v.$bigPadding * 4));
+        margin-bottom: v.$medPadding;
+        animation: slide_down_in 0.35s;
+        color: v.$text-primary;
+        border: 1px solid v.$card-border;
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        border-radius: 5px;
+        .card-name {
+          font-size: 0.7rem;
+          font-weight: 600;
+        }
+        &:not(.me) {
+          margin-left: 0;
+          margin-right: auto;
+          background-color: v.$item-card-bg;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          .card-name {
+            color: v.$primary;
+          }
+          .card-text {
+            color: v.$text-primary;
+          }
+        }
+        &.me {
+          margin-right: 0;
+          margin-left: auto;
+          background-color: v.$primary;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+          .card-name {
+            color: rgba(v.$white, 0.8);
+          }
+          .card-text {
+            color: v.$white;
+          }
+        }
+        .card-media {
+          margin-bottom: v.$medPadding;
+          width: 100%;
+          max-width: $cardMaxWidth;
+          overflow: hidden;
+          background-color: rgba(v.$black, 0.3);
+          padding: v.$smallPadding;
+          border-radius: 14px;
+
+          a {
+            display: block;
+            width: 100%;
+            height: fit-content;
+            text-decoration: none;
+          }
+          .ofile {
+            background-color: v.$primary-dark;
+            width: 100%;
+            padding: v.$medPadding;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: v.$medPadding;
+            color: v.$white;
+            border-radius: 14px;
+            &:before {
+              flex-shrink: 0;
+              content: "\f15c";
+              font-family: "Font Awesome 7 Pro";
+              font-weight: 600;
+              font-size: 1.65rem;
+            }
+            &:after {
+              flex-shrink: 0;
+              content: "\f33d";
+              font-family: "Font Awesome 7 Pro";
+              font-weight: 600;
+              font-size: 1.65rem;
+            }
+            .ofile-meta {
+              flex-grow: 1;
+              min-width: 0;
+              .ofile-title {
+                font-size: 0.6rem;
+              }
+              .ofile-name {
+                max-width: 100%;
+                font-size: 0.7rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
+          img {
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            width: fit-content;
+            height: fit-content;
+            max-width: 100%;
+            max-height: 300px;
+          }
+          video {
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            width: fit-content;
+            height: fit-content;
+            max-width: 100%;
+            max-height: 300px;
+          }
+        }
+
+        .card-text {
+          max-width: $cardMaxWidth;
+          margin-bottom: v.$smallPadding;
+          text-align: left;
+          font-size: 0.8rem;
+          line-height: 1.25;
+        }
+        .card-meta {
+          max-width: $cardMaxWidth;
+          font-size: 0.6rem;
+          color: v.$text-secondary;
+          display: flex;
+          justify-content: end;
+          align-items: center;
+          gap: v.$smallPadding;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1111px) {
+    $sideBarSize: 420px;
+    .ChatSideBar {
+      width: $sideBarSize;
+    }
+    .ChatPanel {
+      left: $sideBarSize;
+      width: calc(100% - $sideBarSize);
+    }
+  }
+
   .chats-workspace {
     display: grid;
     grid-template-columns: 1fr;
@@ -414,7 +778,6 @@
           padding: 8px 12px;
           font-size: 0.85rem;
           color: v.$text-primary;
-
           &:focus {
             border-color: v.$primary;
           }

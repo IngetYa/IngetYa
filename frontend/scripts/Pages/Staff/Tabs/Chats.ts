@@ -31,23 +31,197 @@ export class Chats implements IPrimary {
     }
 
     this.el.innerHTML = `
-    <div class="Header">
-      <div class="HeaderMain">
-        <div class="Title">
-          <h1><i class="fajdr fa-comment-dots"></i> ${lang("tab_chats")}</h1>
+    <div class="ChatSideBar">
+      <div class="Header">
+        <div class="HeaderMain">
+          <div class="Title">
+            <h1><i class="fadr fa-comment-dots"></i> Chats</h1>
+          </div>
+        </div>
+        <div class="Search">
+          <div class="inp">
+            <div class="icon"><i class="fajdr fa-magnifying-glass"></i></div>
+            <input type="text" class="input-search-orders" placeholder="Cari nama user atau ID" />
+            <div class="btn btn-search-orders">Cari</div>
+          </div>
         </div>
       </div>
-      <div class="Search">
-        <div class="inp">
-          <div class="icon"><i class="fajdr fa-magnifying-glass"></i></div>
-          <input type="text" class="input-search-chats" placeholder="Cari nama user atau pesan..." />
-          <div class="btn btn-search-chats">${lang("search")}</div>
-        </div>
-      </div>
-    </div>
 
-    <div class="FlatList">
-      Yg ini agak ribet jinkkkk :)
+      <div class="FlatList">
+        <div class="List">
+          <div class="UserCard">
+            <div class="UserProfile">
+              <div class="avatar">
+                <div class="initial-name">SF</div>
+                <div class="dot"></div>
+              </div>
+              <div class="info">
+                <div class="name">Stephanie Floriska</div>
+                <div class="snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nesciunt?</div>
+              </div>
+            </div>
+            <div class="UserStatus">
+              <div class="time">11 Des 2017</div>
+              <div class="unread">99</div>
+            </div>
+          </div>
+          <div class="UserCard">
+            <div class="UserProfile">
+              <div class="avatar">
+                <div class="initial-name">SF</div>
+                <div class="dot"></div>
+              </div>
+              <div class="info">
+                <div class="name">Stephanie Floriska</div>
+                <div class="snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nesciunt?</div>
+              </div>
+            </div>
+            <div class="UserStatus">
+              <div class="time">11 Des 2017</div>
+              <div class="unread">99</div>
+            </div>
+          </div>
+          <div class="UserCard">
+            <div class="UserProfile">
+              <div class="avatar">
+                <div class="initial-name">SF</div>
+                <div class="dot"></div>
+              </div>
+              <div class="info">
+                <div class="name">Stephanie Floriska</div>
+                <div class="snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nesciunt?</div>
+              </div>
+            </div>
+            <div class="UserStatus">
+              <div class="time">11 Des 2017</div>
+              <div class="unread">99</div>
+            </div>
+          </div>
+          <div class="UserCard">
+            <div class="UserProfile">
+              <div class="avatar">
+                <div class="initial-name">SF</div>
+                <div class="dot"></div>
+              </div>
+              <div class="info">
+                <div class="name">Stephanie Floriska</div>
+                <div class="snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nesciunt?</div>
+              </div>
+            </div>
+            <div class="UserStatus">
+              <div class="time">11 Des 2017</div>
+              <div class="unread">99</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ChatPanel">
+
+      <div class="Header">
+        <div class="HeaderMain">
+          <div class="HistoryBack">
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <div class="Title">
+            <h1>Stephanie Floriska</h1>
+          </div>
+          <div class="Actions">
+            <div class="btn btn-close-ticket">
+              <i class="fadr fa-door-open"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="ChatMessages">
+
+
+
+        <div class="card">
+
+          <div class="card-name">Staff IngetYa</div>
+          <div class="card-media">
+            <img src="/assets/example/olive.png" alt="Image Attachment">
+            <div class="ofile">
+              <div class="ofile-meta">
+                <div class="ofile-title">Send File</div>
+                <div class="ofile-name">hahaha.jpg</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis nesciunt unde ab ad minima harum, amet repellat cumque, ullam ea quae. Labore unde repudiandae recusandae ut odit, nesciunt vero officiis!
+          </div>
+
+          <div class="card-meta">
+            <span>11 Des 2017, 09:00</span>
+          </div>
+
+        </div>
+
+
+        <div class="card me">
+
+          <div class="card-name">Rachel Amabel</div>
+          <div class="card-media">
+            <div class="ofile">
+              <div class="ofile-meta">
+                <div class="ofile-title">Send File</div>
+                <div class="ofile-name">hahaha.jpg</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis nesciunt unde ab ad minima harum, amet repellat cumque, ullam ea quae. Labore unde repudiandae recusandae ut odit, nesciunt vero officiis!
+          </div>
+
+          <div class="card-meta">
+            <span>11 Des 2017, 09:00</span>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div class="ChatActions">
+        <div class="ChatEmbed">
+          <div class="attach">
+            <div class="attach-file">
+              <div class="icon">
+                <i class="fas fa-file"></i>
+              </div>
+              <div class="file-meta">
+                <div class="file-title">File</div>
+                <div class="file-name">HahahaLOLXD.docx</div>
+              </div>
+            </div>
+            <div class="btn btn-attach-cancel">
+              <i class="fadr fa-circle-xmark"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="ChatForm">
+          <div class="btn btn-attach">
+            <i class="fajdr fa-paperclip"></i>
+          </div>
+
+          <textarea name="chat-text" id="chat-text" placeholder="Type Something" maxlength="300"></textarea>
+
+          <div class="btn btn-send">
+            <i class="fajdr fa-paper-plane"></i>
+          </div>
+
+        </div>
+      </div>
+
     </div>`
   }
 
