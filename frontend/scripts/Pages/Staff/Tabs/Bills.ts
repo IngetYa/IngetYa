@@ -1,11 +1,16 @@
 import type { IPrimary, IPrimaryConfig } from "@/Pages/Staff/types/StackTypes"
 import { StackPrimary } from "../main/StackPrimary"
 import { StateManager } from "../core/StateManager"
-import { kel } from "@/core/kel"
+import { futor, kel } from "@/core/kel"
 import { type IStackHierarchy } from "@/core/hierarchy"
 import waittime from "@/lib/waittime"
 import { lang } from "@/core/languages"
 import { type IRippleReturn } from "@/lib/Ripple"
+import { PageBar } from "@/lib/PageBar"
+import { CellRow, NoDataCellRow } from "../Components/Bills/CellRow"
+import db from "../data/db"
+import xhr from "@/lib/xhr"
+import type { IBillStaff, PaginatedResult } from "../types/EmbededAPITypes"
 
 export class Bills implements IPrimary {
   private el!: HTMLDivElement
@@ -15,12 +20,27 @@ export class Bills implements IPrimary {
   manager: StateManager
   private _rippleCaches: IRippleReturn[] = []
 
+  private isDestroyed: boolean = false
+
+  private isLoaded: boolean = false
+
+  private onLoaded?: () => void
+
+  private efield!: HTMLTableSectionElement
+
+  private list: (CellRow | NoDataCellRow)[] = []
+
+  private pageBar: PageBar
+
   constructor(config: IPrimaryConfig) {
     this.king = config.king
     this.manager = config.manager
     this.anim = config.anim
 
+    this.pageBar = new PageBar({ manager: this.manager, title: lang("page_info") })
+
     this.createElement()
+    this.writeData()
   }
 
   private createElement(): void {
@@ -31,110 +51,175 @@ export class Bills implements IPrimary {
     }
 
     this.el.innerHTML = `
-      <div class="Header">
-        <div class="HeaderMain">
-          <div class="Title">
-            <h1><i class="fajdr fa-credit-card"></i> ${lang("tab_bills")}</h1>
-          </div>
-        </div>
-        <div class="Search">
-          <div class="inp">
-            <div class="icon"><i class="fajdr fa-magnifying-glass"></i></div>
-            <input type="text" class="input-search-bills" placeholder="Cari ID tagihan, nama pemesan, atau metode bayar..." />
-            <div class="btn btn-search-bills">${lang("search")}</div>
-          </div>
+    <div class="Header">
+      <div class="HeaderMain">
+        <div class="Title">
+          <h1><i class="fajdr fa-credit-card"></i> ${lang("tab_bills")}</h1>
         </div>
       </div>
-
-      <div class="FlatList">
-
-      
-        <div class="page-bar">
-
-          <div class="page-meta">
-            <div class="page-group page-month">
-              <div class="page-arrow arrow-left"><i class="fajdr fa-arrow-left"></i></div>
-              <div class="item">Januari</div>
-              <div class="item">Februari</div>
-              <div class="item">Maret</div>
-              <div class="item">April</div>
-              <div class="item">Mei</div>
-              <div class="item">Juni</div>
-              <div class="item">Juli</div>
-              <div class="item">Agustus</div>
-              <div class="item">September</div>
-              <div class="item">Oktober</div>
-              <div class="item active">November</div>
-              <div class="item">Desember</div>
-              <div class="page-arrow arrow-right"><i class="fajdr fa-arrow-right"></i></div>
-            </div>
-            <div class="page-group page-year">
-              <div class="page-arrow arrow-left"><i class="fajdr fa-arrow-left"></i></div>
-              <div class="item">2024</div>
-              <div class="item">2025</div>
-              <div class="item active">2026</div>
-              <div class="page-arrow arrow-right"><i class="fajdr fa-arrow-right"></i></div>
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="table-container">
-          <table class="table">
-            <thead class="thead">
-              <tr>
-                <th>Bill ID</th>
-                <th>User</th>
-                <th>Nama Pesanan</th>
-                <th>Metode</th>
-                <th>Nominal</th>
-                <th>Batas Pembayaran</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody class="tbody">
-              <tr>
-                <td colspan="8" style="text-align: center; padding: 24px;">Tidak ada tagihan yang cocok dengan pencarian.</td>
-              </tr>
-
-              <tr>
-                <td>#8123XA</td>
-                <td>@stephanieflo</td>
-                <td>Wedding Stephanie</td>
-                <td class="payment-provider"><img src="/assets/payments/qris-icon.svg" alt="QRIS Logo" /></td>
-                <td class="bold text-price">Rp420.000</td>
-                <td><span class="text-muted">11 Des 2017, 17.30</span></td>
-                <td><span class="status settlement">Berhasil</span></td>
-              </tr>
-              <tr>
-                <td>#8123XA</td>
-                <td>@stephanieflo</td>
-                <td>Wedding Stephanie</td>
-                <td class="payment-provider"><img src="/assets/payments/bca-icon.svg" alt="BCA Logo" /></td>
-                <td class="bold text-price">Rp420.000</td>
-                <td><span class="text-muted">11 Des 2017, 17.30</span></td>
-                <td><span class="status pending">Menunggu Pembayaran</span></td>
-              </tr>
-
-
-            </tbody>
-          </table>
+      <div class="Search">
+        <div class="inp">
+          <div class="icon"><i class="fajdr fa-magnifying-glass"></i></div>
+          <input type="text" name="bill-search-query" id="bill-search-query-${Date.now()}" class="input-search-bills" placeholder="Cari ID tagihan atau nama pemesan" readonly />
+          <div class="btn btn-search-bills">${lang("search")}</div>
         </div>
       </div>
-    `
+    </div>
+
+    <div class="FlatList">
+
+      <div class="pagination-container"></div>
+
+      <div class="table-container">
+        <table class="table">
+          <thead class="thead">
+            <tr>
+              <th>${lang("bill_cell_id")}</th>
+              <th>${lang("bill_cell_user")}</th>
+              <th>${lang("bill_cell_amount")}</th>
+              <th>${lang("bill_cell_payment")}</th>
+              <th>${lang("bill_cell_name")}</th>
+              <th>${lang("bill_cell_expiry")}</th>
+              <th>${lang("bill_cell_status")}</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+            <tr>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+            </tr>
+            <tr>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+              <td><div class="skeleton"></div></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>`
+
+    this.efield = futor(".tbody", this.el, "tbody")
+  }
+
+  private async writeData(): Promise<void> {
+    if (!db.bills.isLoaded) {
+      await waittime(1000)
+      await this.changePage(1)
+
+      db.bills.isLoaded = true
+    } else {
+      this.deleteList()
+
+      while (this.efield.firstChild) {
+        this.efield.firstChild.remove()
+      }
+
+      this.renderPageBar()
+      this.renderItems()
+    }
+
+    this.isLoaded = true
+
+    if (this.onLoaded) {
+      this.onLoaded()
+      this.onLoaded = undefined
+    }
+  }
+
+  private renderPageBar(): void {
+    const parent = futor(".pagination-container", this.el)
+
+    this.pageBar.setMeta(db.bills.Meta!)
+
+    this.pageBar.onPageChange(async (pageNum) => {
+      await this.changePage(pageNum)
+    })
+
+    parent.append(this.pageBar.html)
+  }
+
+  private async changePage(n: number): Promise<void> {
+    await waittime(1000)
+    const res = await xhr.forceGet(`/x/staff/data/bills/${n}`)
+
+    const data = res.data as PaginatedResult<IBillStaff>
+
+    db.bills.Meta = data.meta
+    db.bills.set(...data.data)
+
+    if (!this.isLoaded) this.renderPageBar()
+
+    this.pageBar.setMeta(data.meta)
+
+    this.deleteList()
+
+    while (this.efield.firstChild) {
+      this.efield.firstChild.remove()
+    }
+
+    this.renderItems()
+  }
+
+  private deleteList(): void {
+    this.list.forEach((card) => card.destroy())
+    this.list.splice(0, this.list.length)
+  }
+
+  private renderItems(): void {
+    const items = db.bills.getAll()
+
+    for (const item of items) {
+      const card = new CellRow({ bills: this, item })
+
+      this.list.push(card)
+
+      this.efield.append(card.html)
+    }
+
+    this.writeNoData(items)
+  }
+
+  private writeNoData(bills: IBillStaff[]): void {
+    const oldCard = this.list.find((k) => k.orderId === "nodata")
+
+    if (bills.length < 1) {
+      if (oldCard) return
+
+      const nodataCard = new NoDataCellRow({ bills: this })
+
+      this.list.push(nodataCard)
+
+      return this.efield.prepend(nodataCard.html)
+    }
+
+    if (oldCard) oldCard.destroy()
   }
 
   async handleHistory(_hierarchy: IStackHierarchy): Promise<void> {}
 
   async destroy(anim?: string): Promise<void> {
     this._rippleCaches.forEach((r) => r.stopListener())
-    this._rippleCaches.length = 0
+    this._rippleCaches.splice(0, this._rippleCaches.length)
 
     if (anim) {
       this.el.classList.add(anim)
       await waittime()
     }
+
+    this.deleteList()
+
+    this.pageBar.destroy()
+
     this.el.remove()
   }
 

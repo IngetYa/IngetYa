@@ -79,6 +79,102 @@
     "id": "Request Timeout - 408",
     "en": "Request Timeout - 408"
   },
+  "status_unpaid": {
+    "id": "Belum Dibayar",
+    "en": "Unpaid"
+  },
+  "status_draft": {
+    "id": "Draft",
+    "en": "Draft"
+  },
+  "status_published": {
+    "id": "Dipublikasikan",
+    "en": "Published"
+  },
+  "status_bundling": {
+    "id": "Proses Bundle",
+    "en": "Bundling"
+  },
+  "status_paused": {
+    "id": "Dijeda",
+    "en": "Paused"
+  },
+  "status_expired": {
+    "id": "Kadaluarsa",
+    "en": "Expired"
+  },
+  "status_settlement": {
+    "id": "Sukses",
+    "en": "Success"
+  },
+  "status_deny": {
+    "id": "Ditolak",
+    "en": "Denied"
+  },
+  "status_pending": {
+    "id": "Menunggu",
+    "en": "Pending"
+  },
+  "status_cancel": {
+    "id": "Dibatalkan",
+    "en": "Canceled"
+  },
+  "status_expire": {
+    "id": "Kadaluarsa",
+    "en": "Expired"
+  },
+  "status_failure": {
+    "id": "Gagal",
+    "en": "Failed"
+  },
+  "label_theme": {
+    "id": "Tema",
+    "en": "Theme"
+  },
+  "label_package": {
+    "id": "Paket",
+    "en": "Package"
+  },
+  "label_month-1": {
+    "id": "3 Bulan",
+    "en": "3 Month"
+  },
+  "label_month-2": {
+    "id": "10 Bulan",
+    "en": "10 Months"
+  },
+  "label_guests": {
+    "id": "Tamu",
+    "en": "Guests"
+  },
+  "label_guest-1": {
+    "id": "56 Tamu",
+    "en": "56 Guests"
+  },
+  "label_guest-2": {
+    "id": "128 Tamu",
+    "en": "128 Guests"
+  },
+  "label_guest-3": {
+    "id": "1.024 Tamu",
+    "en": "1.024 Guests"
+  },
+  "label_guest-4": {
+    "id": "5.120 Tamu",
+    "en": "5.120 Guests"
+  },
+  "label_addon": {
+    "id": "Tambahan",
+    "en": "Add-on"
+  },
+  "label_book-1": {
+    "id": "Buku Tamu",
+    "en": "Guest Book"
+  },
+  "label_created_at": {
+    "id": "Waktu pemesanan",
+    "en": "Ordered at"
+  },
   "splash_text_login": {
     "id": "Sebelum lanjut, boleh login terlebih dahulu ya.",
     "en": "Please log in before continuing"
@@ -86,6 +182,10 @@
   "splash_btn_login": {
     "id": "Login Sekarang",
     "en": "Login Now"
+  },
+  "page_info": {
+    "id": "Halaman",
+    "en": "Page"
   },
   "tab_overview": {
     "id": "Ringkasan",
@@ -118,5 +218,145 @@
   "tab_me": {
     "id": "Akun",
     "en": "Account"
+  },
+  "overview_panel_title": {
+    "id": "IngetYa Staff Panel",
+    "en": "IngetYa Staff Panel"
+  },
+  "overview_gretting": {
+    "id": "Masuk sebagai <b>{}</b>",
+    "en": "Logged in as <b>{}</b>"
+  },
+  "overview_balance_text": {
+    "id": "Income Bulan {mo}",
+    "en": "{mo} Income"
+  },
+  "overview_balance_value": {
+    "id": "Rp{val}",
+    "en": "Rp{val}"
+  },
+  "overview_products_text": {
+    "id": "Produk Aktif",
+    "en": "Active Products"
+  },
+  "overview_products_value": {
+    "id": "{val} Produk",
+    "en": "{val} Products"
+  },
+  "overview_orders_text": {
+    "id": "Order Lagi Diproses",
+    "en": "Orders In Progress"
+  },
+  "overview_orders_value": {
+    "id": "{val} Order",
+    "en": "{val} Orders"
+  },
+  "overview_bills_text": {
+    "id": "Tagihan Belum Lunas",
+    "en": "Unpaid Bills"
+  },
+  "overview_bills_value": {
+    "id": "{val} Tagihan",
+    "en": "{val} Bills"
+  },
+  "overview_chats_text": {
+    "id": "Live Chat Menunggu",
+    "en": "Live Chats Are Waiting"
+  },
+  "overview_chats_value": {
+    "id": "{val} Chat",
+    "en": "{val} Chats"
+  },
+  "overview_users_text": {
+    "id": "User Terdaftar",
+    "en": "Registered Users"
+  },
+  "overview_users_value": {
+    "id": "{val} User",
+    "en": "{val} Users"
+  },
+  "overview_see_detail": {
+    "id": "Lihat",
+    "en": "See Detail"
+  },
+  "balance_current": {
+    "id": "Saldo Org",
+    "en": "Org Balance"
+  },
+  "balance_income_month_text": {
+    "id": "Income Bulan {mo}",
+    "en": "{mo} Income"
+  },
+  "balance_expense_month_text": {
+    "id": "Expense Bulan {mo}",
+    "en": "{mo} Expense"
+  },
+  "balance_income_total_text": {
+    "id": "Seluruh Income",
+    "en": "Total Income"
+  },
+  "balance_expense_total_text": {
+    "id": "Seluruh Expense",
+    "en": "Total Expense"
+  },
+  "balance_report_download": {
+    "id": "Download Laporan",
+    "en": "Export Data"
+  },
+  "balance_no_data": {
+    "id": "Engga ada",
+    "en": "No data"
+  },
+  "explore_category_all": {
+    "id": "Semua",
+    "en": "All"
+  },
+  "orders_no_data": {
+    "id": "Engga ada",
+    "en": "No data"
+  },
+  "bill_no_data": {
+    "id": "Engga ada",
+    "en": "No data"
+  },
+  "bill_cell_id": {
+    "id": "ID Tagihan",
+    "en": "Bill ID"
+  },
+  "bill_cell_user": {
+    "id": "User",
+    "en": "User"
+  },
+  "bill_cell_name": {
+    "id": "Nama Pesanan",
+    "en": "Order Name"
+  },
+  "bill_cell_payment": {
+    "id": "Metode Pembayaran",
+    "en": "Payment Method"
+  },
+  "bill_cell_amount": {
+    "id": "Nominal",
+    "en": "Amount"
+  },
+  "bill_cell_expiry": {
+    "id": "Batas Pembayaran",
+    "en": "Expire Time"
+  },
+  "bill_cell_status": {
+    "id": "Status",
+    "en": "Status"
+  },
+  "user_no_data": {
+    "id": "Engga ada",
+    "en": "No data"
+  },
+  "user_joined_text": {
+    "id": "Bergabung",
+    "en": "Joined"
+  },
+  "user_order_total": {
+    "id": "Total Pesanan",
+    "en": "Orders Total"
   }
 }

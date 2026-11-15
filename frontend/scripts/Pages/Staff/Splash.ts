@@ -7,6 +7,7 @@ import type { IUser } from "@/types/UserTypes"
 import type { IPriceDetail } from "@/types/PaymentTypes"
 import { lang } from "@/core/languages"
 import { createRedirect } from "@/lib/gen"
+import { socket } from "@/core/Socket"
 
 export class Splash {
   private el!: HTMLDivElement
@@ -40,7 +41,7 @@ export class Splash {
   }
 
   async loadData(): Promise<void> {
-    const res = await xhr.forceGet("/x/explore/detail")
+    const res = await xhr.forceGet("/x/staff/details")
 
     if (res.status === 401) {
       await waittime(1000)
@@ -49,6 +50,14 @@ export class Splash {
       window.location.replace(`/portal?redirect=${redirectUrl}`)
       return
     }
+
+    if (res.status === 403) {
+      console.log("aowkwk gagal")
+      return
+    }
+
+    const socketId: string = res.data.socket
+    socket.updateData(socketId)
 
     const products = res.data.products as IProduct[]
     const me = res.data.me as IUser

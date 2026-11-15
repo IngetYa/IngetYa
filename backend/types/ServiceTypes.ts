@@ -23,7 +23,7 @@ export interface IContent {
 
 export type IGuests = "guest-1" | "guest-2" | "guest-3" | "guest-4"
 
-export type OrderStatus = "unpaid" | "draft" | "published" | "paused" | "expired"
+export type OrderStatus = "unpaid" | "draft" | "published" | "paused" | "expired" | "bundling"
 
 export type AddOnIds = "book-1"
 
@@ -33,6 +33,7 @@ export interface IOrder {
   productId: string
   paymentId: string
   contentId?: string | null
+  slug?: string
   name: string
   package: "month-1" | "month-2"
   guests: IGuests

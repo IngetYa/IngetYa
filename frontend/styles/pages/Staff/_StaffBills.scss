@@ -1,7 +1,7 @@
 @use "../../core/constants" as v;
 
 .StaffBills {
-  .page-bar {
+  .pagination-container {
     margin-bottom: v.$medPadding;
   }
 
@@ -45,6 +45,12 @@
 
         td {
           color: v.$text-primary;
+
+          .skeleton {
+            width: 100%;
+            height: 30px;
+            animation: none;
+          }
 
           &.payment-provider {
             img {

@@ -1,11 +1,16 @@
 import type { IPrimary, IPrimaryConfig } from "@/Pages/Staff/types/StackTypes"
 import { StackPrimary } from "../main/StackPrimary"
 import { StateManager } from "../core/StateManager"
-import { kel } from "@/core/kel"
+import { futor, kel } from "@/core/kel"
 import { type IStackHierarchy } from "@/core/hierarchy"
 import waittime from "@/lib/waittime"
 import { lang } from "@/core/languages"
 import { type IRippleReturn } from "@/lib/Ripple"
+import { NoDataOrderCard, OrderCard } from "../Components/Orders/OrderCard"
+import { PageBar } from "@/lib/PageBar"
+import db from "../data/db"
+import xhr from "@/lib/xhr"
+import type { IOrderStaff, PaginatedResult } from "../types/EmbededAPITypes"
 
 export class Orders implements IPrimary {
   private el!: HTMLDivElement
@@ -15,12 +20,27 @@ export class Orders implements IPrimary {
   manager: StateManager
   private _rippleCaches: IRippleReturn[] = []
 
+  private isDestroyed: boolean = false
+
+  private isLoaded: boolean = false
+
+  private onLoaded?: () => void
+
+  private efield!: HTMLDivElement
+
+  private list: (OrderCard | NoDataOrderCard)[] = []
+
+  private pageBar: PageBar
+
   constructor(config: IPrimaryConfig) {
     this.king = config.king
     this.manager = config.manager
     this.anim = config.anim
 
+    this.pageBar = new PageBar({ manager: this.manager, title: lang("page_info") })
+
     this.createElement()
+    this.writeData()
   }
 
   private createElement(): void {
@@ -40,7 +60,7 @@ export class Orders implements IPrimary {
       <div class="Search">
         <div class="inp">
           <div class="icon"><i class="fajdr fa-magnifying-glass"></i></div>
-          <input type="text" class="input-search-orders" placeholder="Cari ID pesanan, nama klien, atau judul..." />
+          <input type="text" name="order-search-query" id="order-search-query-${Date.now()}" class="input-search-orders" placeholder="Cari ID pesanan, nama klien, atau judul" readonly />
           <div class="btn btn-search-orders">${lang("search")}</div>
         </div>
       </div>
@@ -48,34 +68,7 @@ export class Orders implements IPrimary {
 
     <div class="FlatList">
 
-      <div class="page-bar">
-
-        <div class="page-meta">
-          <div class="page-group page-month">
-            <div class="page-arrow arrow-left"><i class="fajdr fa-arrow-left"></i></div>
-            <div class="item">Januari</div>
-            <div class="item">Februari</div>
-            <div class="item">Maret</div>
-            <div class="item">April</div>
-            <div class="item">Mei</div>
-            <div class="item">Juni</div>
-            <div class="item">Juli</div>
-            <div class="item">Agustus</div>
-            <div class="item">September</div>
-            <div class="item">Oktober</div>
-            <div class="item active">November</div>
-            <div class="item">Desember</div>
-            <div class="page-arrow arrow-right"><i class="fajdr fa-arrow-right"></i></div>
-          </div>
-          <div class="page-group page-year">
-            <div class="page-arrow arrow-left"><i class="fajdr fa-arrow-left"></i></div>
-            <div class="item">2024</div>
-            <div class="item">2025</div>
-            <div class="item active">2026</div>
-            <div class="page-arrow arrow-right"><i class="fajdr fa-arrow-right"></i></div>
-          </div>
-        </div>
-
+      <div class="pagination-container">
       </div>
 
 
@@ -83,108 +76,149 @@ export class Orders implements IPrimary {
 
         <div class="order-card-staff">
           <div class="order-card-header">
-            <span class="order-id">#882XA</span>
-            <span class="status-badge unpaid">Belum Bayar</span>
+            <div class="skeleton"></div>
           </div>
           <div class="order-card-body">
-            <h3 class="order-title">The Wedding of Stephanie</h3>
+            <div class="order-title"><div class="skeleton"></div></div>
             <div class="order-meta-list">
-              <div class="item">
-                <div class="item-label">User</div>
-                <div class="item-name">ID 761761 (@stephanieeeflooo)</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Theme</div>
-                <div class="item-name">Olive</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Package</div>
-                <div class="item-name">1 Month</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Guests</div>
-                <div class="item-name">128 Guests</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Add-ons</div>
-                <div class="item-name">Guest Book</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Created At</div>
-                <div class="item-name">11 Nov 2026</div>
-              </div>
+              <div class="skeleton"></div>
             </div>
           </div>
           <div class="order-card-footer">
-            <div class="price-box">
-              <span class="price-val">Rp420.000</span>
-            </div>
-            <div class="card-action-btns">
-              <div class="btn btn-detail">Detail <i class="fas fa-arrow-right"></i></div>
-            </div>
+            <div class="skeleton"></div>
           </div>
         </div>
-
         <div class="order-card-staff">
           <div class="order-card-header">
-            <span class="order-id">#882XB</span>
-            <span class="status-badge draft">Draft</span>
+            <div class="skeleton"></div>
           </div>
           <div class="order-card-body">
-            <h3 class="order-title">Nikahan Dalia & Aji</h3>
+            <div class="order-title"><div class="skeleton"></div></div>
             <div class="order-meta-list">
-              <div class="item">
-                <div class="item-label">User</div>
-                <div class="item-name">ID 761761 (@stephanieeeflooo)</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Theme</div>
-                <div class="item-name">Olive</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Package</div>
-                <div class="item-name">1 Month</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Guests</div>
-                <div class="item-name">128 Guests</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Add-ons</div>
-                <div class="item-name">Guest Book</div>
-              </div>
-              <div class="item">
-                <div class="item-label">Created At</div>
-                <div class="item-name">11 Nov 2026</div>
-              </div>
+              <div class="skeleton"></div>
             </div>
           </div>
           <div class="order-card-footer">
-            <div class="price-box">
-              <span class="price-val">Rp420.000</span>
-            </div>
-            <div class="card-action-btns">
-              <div class="btn btn-detail">Detail <i class="fas fa-arrow-right"></i></div>
-            </div>
+            <div class="skeleton"></div>
           </div>
         </div>
-
 
       </div>
 
     </div>`
+
+    this.efield = futor(".orders-grid", this.el, "div")
+  }
+
+  private async writeData(): Promise<void> {
+    if (!db.orders.isLoaded) {
+      await waittime(1000)
+      await this.changePage(1)
+
+      db.orders.isLoaded = true
+    } else {
+      this.deleteList()
+
+      while (this.efield.firstChild) {
+        this.efield.firstChild.remove()
+      }
+
+      this.renderPageBar()
+      this.renderItems()
+    }
+
+    this.isLoaded = true
+
+    if (this.onLoaded) {
+      this.onLoaded()
+      this.onLoaded = undefined
+    }
+  }
+
+  private renderPageBar(): void {
+    const parent = futor(".pagination-container", this.el)
+
+    this.pageBar.setMeta(db.orders.Meta!)
+
+    this.pageBar.onPageChange(async (pageNum) => {
+      await this.changePage(pageNum)
+    })
+
+    parent.append(this.pageBar.html)
+  }
+
+  private async changePage(n: number): Promise<void> {
+    await waittime(1000)
+    const res = await xhr.forceGet(`/x/staff/data/orders/${n}`)
+
+    const data = res.data as PaginatedResult<IOrderStaff>
+
+    db.orders.Meta = data.meta
+    db.orders.set(...data.data)
+
+    if (!this.isLoaded) this.renderPageBar()
+
+    this.pageBar.setMeta(data.meta)
+
+    this.deleteList()
+
+    while (this.efield.firstChild) {
+      this.efield.firstChild.remove()
+    }
+
+    this.renderItems()
+  }
+
+  private deleteList(): void {
+    this.list.forEach((card) => card.destroy())
+    this.list.splice(0, this.list.length)
+  }
+
+  private renderItems(): void {
+    const items = db.orders.getAll()
+
+    for (const item of items) {
+      const card = new OrderCard({ orders: this, item })
+
+      this.list.push(card)
+
+      this.efield.append(card.html)
+    }
+
+    this.writeNoData(items)
+  }
+
+  private writeNoData(orders: IOrderStaff[]): void {
+    const oldCard = this.list.find((k) => k.id === "nodata")
+
+    if (orders.length < 1) {
+      if (oldCard) return
+
+      const nodataCard = new NoDataOrderCard({ orders: this })
+
+      this.list.push(nodataCard)
+
+      return this.efield.prepend(nodataCard.html)
+    }
+
+    if (oldCard) oldCard.destroy()
   }
 
   async handleHistory(_hierarchy: IStackHierarchy): Promise<void> {}
 
   async destroy(anim?: string): Promise<void> {
-    this._rippleCaches.forEach((r) => r.stopListener())
-    this._rippleCaches.length = 0
+    this._rippleCaches.forEach((ripple) => ripple.stopListener())
+    this._rippleCaches.splice(0, this._rippleCaches.length)
 
     if (anim) {
       this.el.classList.add(anim)
       await waittime()
     }
+
+    this.deleteList()
+
+    this.pageBar.destroy()
+
     this.el.remove()
   }
 

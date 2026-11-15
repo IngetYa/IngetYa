@@ -24,6 +24,11 @@
         font-weight: 800;
         color: v.$cgreen;
         margin: 4px 0;
+        .skeleton {
+          width: 100%;
+          max-width: 400px;
+          height: 34px;
+        }
       }
     }
 
@@ -49,11 +54,22 @@
           font-weight: 500;
           font-size: 0.75rem;
           color: v.$btn-primary-text;
+          .skeleton {
+            width: 100%;
+            max-width: 200px;
+            height: 22px;
+            margin-bottom: v.$medPadding;
+          }
         }
 
         .stat-value {
           font-size: 1.15rem;
           font-weight: 700;
+          .skeleton {
+            width: 100%;
+            max-width: 300px;
+            height: 30px;
+          }
         }
 
         &.income {
@@ -95,7 +111,7 @@
     }
   }
 
-  .page-bar {
+  .pagination-container {
     margin-bottom: v.$medPadding;
   }
 
@@ -110,23 +126,34 @@
       border: 1px solid v.$card-border;
       border-radius: 12px;
       padding: v.$bigPadding;
-
       .record-content {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
         gap: 4px;
-
         .record-header {
           .record-title {
             font-size: 0.9rem;
             font-weight: 500;
             color: v.$text-primary;
+            .skeleton {
+              width: 100;
+              max-width: 300px;
+              height: 22px;
+              margin-bottom: v.$medPadding;
+            }
           }
 
           .record-amount {
             font-size: 1.2rem;
             font-weight: 700;
+
+            .skeleton {
+              width: 100%;
+              max-width: 200px;
+              height: 32px;
+              margin-bottom: v.$medPadding;
+            }
 
             &.income {
               color: v.$sgreen;
@@ -141,9 +168,22 @@
         .record-meta {
           font-size: 0.75rem;
           color: v.$text-secondary;
+          .record-note {
+            .skeleton {
+              width: 100%;
+              height: 26px;
+              margin-bottom: v.$medPadding;
+            }
+          }
           .record-date {
             margin-top: v.$medPadding;
             text-align: right;
+            .skeleton {
+              margin-left: auto;
+              width: 100%;
+              max-width: 200px;
+              height: 22px;
+            }
           }
         }
       }

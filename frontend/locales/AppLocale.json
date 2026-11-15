@@ -219,6 +219,10 @@
     "id": "Dipublikasikan",
     "en": "Published"
   },
+  "status_bundling": {
+    "id": "Proses Bundle",
+    "en": "Bundling"
+  },
   "status_paused": {
     "id": "Dijeda",
     "en": "Paused"

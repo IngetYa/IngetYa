@@ -145,12 +145,6 @@ export class Chats implements IPrimary {
           <div class="card-name">Staff IngetYa</div>
           <div class="card-media">
             <img src="/assets/example/olive.png" alt="Image Attachment">
-            <div class="ofile">
-              <div class="ofile-meta">
-                <div class="ofile-title">Send File</div>
-                <div class="ofile-name">hahaha.jpg</div>
-              </div>
-            </div>
           </div>
 
           <div class="card-text">
@@ -170,8 +164,8 @@ export class Chats implements IPrimary {
           <div class="card-media">
             <div class="ofile">
               <div class="ofile-meta">
-                <div class="ofile-title">Send File</div>
-                <div class="ofile-name">hahaha.jpg</div>
+                <div class="ofile-title">File</div>
+                <div class="ofile-name">nama-file.zip</div>
               </div>
             </div>
           </div>
@@ -199,7 +193,7 @@ export class Chats implements IPrimary {
               </div>
               <div class="file-meta">
                 <div class="file-title">File</div>
-                <div class="file-name">HahahaLOLXD.docx</div>
+                <div class="file-name">file-laporan.csv</div>
               </div>
             </div>
             <div class="btn btn-attach-cancel">
@@ -229,7 +223,7 @@ export class Chats implements IPrimary {
 
   async destroy(anim?: string): Promise<void> {
     this._rippleCaches.forEach((r) => r.stopListener())
-    this._rippleCaches.length = 0
+    this._rippleCaches.splice(0, this._rippleCaches.length)
 
     if (anim) {
       this.el.classList.add(anim)

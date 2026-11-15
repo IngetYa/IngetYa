@@ -47,7 +47,6 @@
     left: 0;
     z-index: 1;
     width: 100%;
-    overflow: hidden;
     .HeaderMain {
       display: flex;
       justify-content: space-between;
@@ -55,7 +54,6 @@
       gap: v.$medPadding;
       padding: v.$medPadding;
       min-width: 0;
-      overflow: hidden;
 
       .HistoryBack {
         flex-shrink: 0;
@@ -65,6 +63,7 @@
         padding: v.$medPadding;
         background-color: v.$header-bg;
         border-radius: 1.65rem;
+        border: 1px solid v.$card-border;
         // backdrop-filter: blur(v.$backdrop-card);
         // -webkit-backdrop-filter: blur(v.$backdrop-card);
         box-shadow: v.$glass-shadow, v.$glass-inset;
@@ -76,10 +75,10 @@
         text-align: center;
         border-radius: 1.65rem;
         background-color: v.$header-bg;
+        border: 1px solid v.$card-border;
         // backdrop-filter: blur(v.$backdrop-card);
         // -webkit-backdrop-filter: blur(v.$backdrop-card);
         box-shadow: v.$glass-shadow, v.$glass-inset;
-        overflow: hidden;
         h1 {
           width: 100%;
           font-size: 1.4rem;
@@ -103,6 +102,7 @@
           padding: v.$medPadding;
           background-color: v.$header-bg;
           border-radius: 1.65rem;
+          border: 1px solid v.$card-border;
           // backdrop-filter: blur(v.$backdrop-card);
           // -webkit-backdrop-filter: blur(v.$backdrop-card);
           box-shadow: v.$glass-shadow, v.$glass-inset;
@@ -122,6 +122,7 @@
         overflow: hidden;
         border-radius: 10px;
         background-color: v.$search-inp-bg;
+        border: 1px solid v.$card-border;
         // backdrop-filter: blur(v.$backdrop-card);
         // -webkit-backdrop-filter: blur(v.$backdrop-card);
         box-shadow: v.$glass-shadow, v.$glass-inset;
@@ -177,69 +178,8 @@
     }
   }
 
-  .page-bar {
+  .pagination-container {
     width: 100%;
-    .page-label {
-      width: 100%;
-      text-align: center;
-    }
-    .page-meta {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: v.$medPadding;
-      .page-group {
-        min-width: 0;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: start;
-        align-items: center;
-        gap: v.$smallPadding;
-        overflow-x: auto;
-        scrollbar-width: none;
-        border-radius: 10px;
-        .page-arrow {
-          position: sticky;
-          top: 0;
-          flex-shrink: 0;
-          cursor: pointer;
-          padding: v.$smallPadding;
-          border-radius: 5px;
-          background-color: v.$primary-dark;
-          color: v.$btn-primary-text;
-          &.arrow-left {
-            left: 0;
-          }
-          &.arrow-right {
-            right: 0;
-          }
-        }
-        .item {
-          cursor: pointer;
-          flex-shrink: 0;
-          white-space: nowrap;
-          padding: v.$smallPadding v.$medPadding;
-          box-shadow: v.$glass-shadow, v.$glass-inset;
-          border-radius: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          background-color: v.$header-bg;
-          &.active {
-            cursor: not-allowed;
-            background-color: v.$primary;
-            color: v.$btn-primary-text;
-          }
-        }
-      }
-      .page-month {
-        flex-grow: 1;
-      }
-      .page-year {
-        flex-shrink: 0;
-        max-width: 140px;
-      }
-    }
   }
 
   &.rootIn1 {

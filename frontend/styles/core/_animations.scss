@@ -1,3 +1,5 @@
+@use "./constants" as v;
+
 @keyframes stackIn1 {
   0% {
     transform: translateX(100%);
@@ -134,5 +136,23 @@
   100% {
     opacity: 0;
     transform: translateY(60px) scale(0.4);
+  }
+}
+
+@keyframes skeletonBlack {
+  0% {
+    background-color: rgba(v.$black, 0.52);
+  }
+  100% {
+    background-color: rgba(v.$black, 0.22);
+  }
+}
+
+@keyframes skeletonWhite {
+  0% {
+    background-color: rgba(v.$white, 0.52);
+  }
+  50% {
+    background-color: rgba(v.$white, 0.22);
   }
 }

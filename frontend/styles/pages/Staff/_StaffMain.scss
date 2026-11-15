@@ -166,6 +166,18 @@ img {
   display: none !important;
 }
 
+.skeleton {
+  border-radius: 5px;
+  &:not(.light) {
+    background-color: rgba(v.$black, 0.22);
+    animation: skeletonBlack 1s ease infinite alternate;
+  }
+  &.light {
+    background-color: rgba(v.$white, 0.22);
+    animation: skeletonWhite 1s ease infinite alternate;
+  }
+}
+
 @media (min-width: 666px) {
   html {
     font-size: 20px;

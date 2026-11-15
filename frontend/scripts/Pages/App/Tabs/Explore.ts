@@ -6,8 +6,6 @@ import waittime from "@/lib/waittime"
 import { formAbort } from "@/lib/modal"
 import { type IStackHierarchy } from "@/core/hierarchy"
 import { lang } from "@/core/languages"
-import xhr from "@/lib/xhr"
-import type { IProduct } from "@/types/ServiceTypes"
 import { ProductCard } from "../Components/Explore/ProductCard"
 import db from "../data/db"
 import { TagCard } from "../Components/Explore/TagCard"
@@ -20,7 +18,7 @@ function loadingCard(): HTMLDivElement {
 
   // one line biar ga menuhin editor wkwk
   // format aja atau pake beautifier biar rapi
-  item.innerHTML = `<div class="thumbnail thumbnail-empty"> <i class="fas fa-circle-notch fa-spin"></i> </div> <div class="tags"> <div class="tag">-</div> </div> <div class="name">${lang("loading")}</div> <div class="price">Rp-</div>`
+  item.innerHTML = `<div class="thumbnail"><div class="skeleton"></div></div> <div class="tags"><div class="skeleton"></div></div> <div class="name"><div class="skeleton"></div></div> <div class="price"><div class="skeleton"></div></div>`
 
   return item
 }
@@ -48,10 +46,6 @@ export class Explore implements IPrimary {
   private contexts: ProductContext[] = []
 
   private cart?: Cart
-
-  private isLoaded: boolean = false
-
-  private onLoaded?: () => void
 
   constructor(config: IPrimaryConfig) {
     this.king = config?.king
@@ -85,7 +79,7 @@ export class Explore implements IPrimary {
     if (db.products.size > 0) return
 
     // loop sampe 6 kali
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 9; i++) {
       const eloader = loadingCard()
       this.loaders.push(eloader)
 
@@ -93,28 +87,7 @@ export class Explore implements IPrimary {
     }
   }
 
-  // incase ada loading (setelah reload), hapus semua placeholdernya
-  private deleteLoading(): void {
-    this.loaders.forEach((eloader) => eloader.remove())
-  }
-
   private async writeData(): Promise<void> {
-    // kalo gada di local db, req lagi ke server
-    // harusnya ini ga bakal kejadian, udah dihandle pas Splash
-    if (db.products.size < 1) {
-      const res = await xhr.forceGet("/x/explore/detail")
-
-      const products = res.data.products as IProduct[]
-
-      db.products.add(...products)
-    }
-
-    // kasih tanda, tadinya gada splash, so ngeceknya pake isLoaded
-    this.isLoaded = true
-
-    // kalo misal elementnya udah dihapus, tapi loadingnya baru selesai, cek dulu sebelum hapus loader
-    if (!this.isDestroyed) this.deleteLoading()
-
     // ambil data product
     const products = db.products.getAll()
 
@@ -130,12 +103,6 @@ export class Explore implements IPrimary {
 
       // render element
       this.efield.append(card.html)
-    }
-
-    // kalo ada callback method yang disisipin, jalanin sekarang, terus hapus
-    if (this.onLoaded) {
-      this.onLoaded()
-      this.onLoaded = undefined
     }
   }
 
@@ -248,14 +215,7 @@ export class Explore implements IPrimary {
   }
 
   async handleHistory(hierarchy: IStackHierarchy): Promise<void> {
-    if (this.isLoaded) return await this.runHistoryQueue(hierarchy)
-
-    return new Promise((resolve) => {
-      this.onLoaded = async () => {
-        await this.runHistoryQueue(hierarchy)
-        resolve()
-      }
-    })
+    return await this.runHistoryQueue(hierarchy)
   }
 
   private async startCart(sub: string): Promise<void> {

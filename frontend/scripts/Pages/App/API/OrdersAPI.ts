@@ -3,6 +3,16 @@ import type { IOrder } from "@/types/ServiceTypes"
 export class OrdersAPI {
   private _data: IOrder[] = []
 
+  private _loaded: boolean = false
+
+  get isLoaded(): boolean {
+    return this._loaded
+  }
+
+  set isLoaded(status: boolean) {
+    this._loaded = status
+  }
+
   // ambil order pake id
   find(id: string): IOrder | null {
     const order = this._data.find((k) => k.id === id)

@@ -35,6 +35,10 @@ export function toCurrency(num: string | number, locales?: Intl.LocalesArgument)
   return number < 1 ? "" : new Intl.NumberFormat(locales ?? "id-ID").format(number)
 }
 
+export function formatDigit(target: string | number, length: number): string {
+  return target.toString().padStart(length, "0")
+}
+
 // base64 to object
 export function parseBase64(query: IAny): IQueries {
   try {

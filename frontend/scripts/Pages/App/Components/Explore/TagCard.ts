@@ -67,6 +67,10 @@ export class TagCard {
   }
 
   destroy(): void {
+    if (this._onSelected) {
+      this._onSelected = undefined
+    }
+
     this.rippleCache.stopListener()
     this.el.onclick = null
     this.el.remove()

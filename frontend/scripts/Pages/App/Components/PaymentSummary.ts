@@ -249,7 +249,7 @@ export class PaymentSummary {
     bundle.paymentId = this.payment.id
 
     // request order ke server
-    const order = await formLoading(xhr.post("/x/order/create", bundle), lang("processing"))
+    const order = await formLoading(xhr.post("/x/orders/create", bundle), lang("processing"))
 
     // kalo gagal, kasih modal pesan error
     if (!order.ok) {

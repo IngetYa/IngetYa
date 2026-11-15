@@ -10,6 +10,8 @@ import { sessionUserBinder } from "#core/binder"
 import { IAny } from "#types/LibTypes"
 import { startSocketApp } from "#routes/SocketRouter"
 import authRouter from "#routes/AuthRouter"
+import profileRouter from "#routes/ProfileRouter"
+import staffRouter from "#routes/StaffRouter"
 import exploreRouter from "#routes/ExploreRouter"
 import orderRouter from "#routes/OrderRouter"
 import { webhook } from "#main/webhook/webhook"
@@ -88,8 +90,10 @@ getWss().on("error", () => {
 
 // set each router endpoint
 app.use("/x/auth", authRouter)
+app.use("/x/profile", profileRouter)
+app.use("/x/staff", staffRouter)
 app.use("/x/explore", exploreRouter)
-app.use("/x/order", orderRouter)
+app.use("/x/orders", orderRouter)
 
 app.get("/build", (req: Request, res: Response, next: NextFunction) => {
   if (isProd) return next()

@@ -3,6 +3,16 @@ import type { IContent } from "@/types/ServiceTypes"
 export class ContentsAPI {
   private _data: IContent[] = []
 
+  private _loaded: boolean = false
+
+  get isLoaded(): boolean {
+    return this._loaded
+  }
+
+  set isLoaded(status: boolean) {
+    this._loaded = status
+  }
+
   // ambil product pake id
   find(id: string): IContent | null {
     const product = this._data.find((k) => k.id === id)

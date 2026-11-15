@@ -164,6 +164,18 @@ img {
   }
 }
 
+.skeleton {
+  border-radius: 5px;
+  &:not(.light) {
+    background-color: rgba(v.$black, 0.1);
+    animation: skeletonBlack 1s ease infinite alternate;
+  }
+  .light {
+    background-color: rgba(v.$white, 0.1);
+    animation: skeletonWhite 1s ease infinite alternate;
+  }
+}
+
 .hide {
   display: none !important;
 }

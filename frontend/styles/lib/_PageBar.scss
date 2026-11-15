@@ -1,0 +1,107 @@
+@use "../core/constants" as v;
+
+.page-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: v.$medPadding;
+  .page-label {
+    width: fit-content;
+    flex-shrink: 0;
+    text-align: center;
+    background-color: v.$primary-dark;
+    color: v.$white;
+    font-weight: 500;
+    padding: v.$smallPadding v.$medPadding;
+    border-radius: 5px;
+    font-size: 0.8rem;
+  }
+  .page-meta {
+    flex-grow: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: v.$medPadding;
+    .page-group {
+      min-width: 0;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: start;
+      align-items: center;
+      gap: v.$smallPadding;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-radius: 10px;
+      .page-arrow {
+        position: sticky;
+        top: 0;
+        flex-shrink: 0;
+        overflow: hidden;
+        cursor: pointer;
+        padding: v.$smallPadding;
+        border-radius: 5px;
+        background-color: v.$primary-dark;
+        color: v.$btn-primary-text;
+        &.arrow-left {
+          left: 0;
+        }
+        &.arrow-right {
+          right: 0;
+        }
+        &.disabled {
+          background-color: v.$softwhite;
+          color: v.$swhite;
+          cursor: not-allowed;
+        }
+      }
+      .page-items {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        gap: v.$smallPadding;
+        width: fit-content;
+        .item {
+          cursor: pointer;
+          flex-shrink: 0;
+          white-space: nowrap;
+          padding: v.$smallPadding v.$medPadding;
+          box-shadow: v.$glass-shadow, v.$glass-inset;
+          border-radius: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          background-color: v.$header-bg;
+          &.active {
+            cursor: not-allowed;
+            background-color: v.$primary;
+            color: v.$btn-primary-text;
+          }
+        }
+      }
+    }
+  }
+  &.disabled {
+    .page-label {
+      background-color: v.$softwhite;
+      color: v.$swhite;
+    }
+    .page-meta {
+      .page-group {
+        .page-arrow {
+          background-color: v.$softwhite;
+          color: v.$swhite;
+          cursor: not-allowed;
+        }
+        .page-items {
+          .item {
+            background-color: v.$softwhite;
+            color: v.$swhite;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}

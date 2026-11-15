@@ -1,6 +1,10 @@
 @use "../../core/constants" as v;
 
 .StaffUsers {
+  .pagination-container {
+    margin-bottom: v.$medPadding;
+  }
+
   .users-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -23,6 +27,10 @@
         align-items: start;
         gap: v.$medPadding;
 
+        &:has(.skeleton) {
+          align-items: center;
+        }
+
         .avatar-circle {
           width: 44px;
           height: 44px;
@@ -35,6 +43,11 @@
           justify-content: center;
           align-items: center;
           flex-shrink: 0;
+          &.skeleton {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(v.$black, 0.22);
+          }
         }
 
         .user-core {
@@ -46,12 +59,23 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            .skeleton {
+              width: 100%;
+              max-width: 200px;
+              height: 28px;
+            }
           }
 
           .user-id {
             font-size: 0.75rem;
             font-family: v.$monofont;
             color: v.$text-muted;
+            .skeleton {
+              margin-top: v.$smallPadding;
+              width: 100%;
+              max-width: 120px;
+              height: 22px;
+            }
           }
         }
 
@@ -72,6 +96,11 @@
         font-size: 0.75rem;
         color: v.$text-secondary;
         padding: v.$smallPadding 0;
+
+        .skeleton {
+          width: 100%;
+          height: 100px;
+        }
         .meta-line {
           font-weight: 500;
           display: flex;
@@ -89,6 +118,12 @@
         border-top: 1px dashed rgba(v.$card-border, 0.7);
         display: flex;
         gap: 8px;
+
+        .skeleton {
+          width: 100%;
+          max-width: 140px;
+          height: 36px;
+        }
 
         .btn {
           padding: v.$smallPadding v.$medPadding;

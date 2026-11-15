@@ -3,6 +3,16 @@ import type { IProduct, IProductCategories } from "@/types/ServiceTypes"
 export class ProductsAPI {
   private _data: IProduct[] = []
 
+  private _loaded: boolean = false
+
+  get isLoaded(): boolean {
+    return this._loaded
+  }
+
+  set isLoaded(status: boolean) {
+    this._loaded = status
+  }
+
   // ambil product pake id
   find(id: string): IProduct | null {
     const product = this._data.find((k) => k.id === id)

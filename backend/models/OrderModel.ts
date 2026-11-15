@@ -10,11 +10,12 @@ const schema = new Schema(
     productId: { type: String, required: true },
     paymentId: { type: String, required: true },
     contentId: { type: String },
+    slug: { type: String },
     name: { type: String, required: true },
     package: { type: String, enum: ["month-1", "month-2"], required: true },
     guests: { type: String, enum: ["guest-1", "guest-2", "guest-3", "guest-4"], required: true },
     addOns: { type: [String], enum: ["book-1"] },
-    status: { type: String, enum: ["unpaid", "draft", "published", "paused", "expired"], required: true },
+    status: { type: String, enum: ["unpaid", "draft", "published", "paused", "expired", "bundling"], required: true },
     createdAt: { type: Date, required: true, default: new Date() },
     expiresAt: { type: Date, required: true },
     deleteAt: { type: Date, expires: 0 }

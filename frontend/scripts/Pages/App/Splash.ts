@@ -1,12 +1,13 @@
 import { futor, kel } from "@/core/kel"
 import db from "./data/db"
 import xhr from "@/lib/xhr"
-import type { IBill, IOrder, IProduct } from "@/types/ServiceTypes"
 import waittime from "@/lib/waittime"
 import type { IUser } from "@/types/UserTypes"
 import type { IPriceDetail } from "@/types/PaymentTypes"
 import { lang } from "@/core/languages"
 import { createRedirect } from "@/lib/gen"
+import type { IBill, IOrder, IProduct } from "@/types/ServiceTypes"
+import { socket } from "@/core/Socket"
 
 export class Splash {
   private el!: HTMLDivElement
@@ -40,7 +41,7 @@ export class Splash {
   }
 
   async loadData(): Promise<void> {
-    const res = await xhr.forceGet("/x/explore/detail")
+    const res = await xhr.forceGet("/x/profile/details")
 
     if (res.status === 401) {
       await waittime(1000)
@@ -49,6 +50,9 @@ export class Splash {
       window.location.replace(`/portal?redirect=${redirectUrl}`)
       return
     }
+
+    const socketId: string = res.data.socket
+    socket.updateData(socketId)
 
     const products = res.data.products as IProduct[]
     const orders = res.data.orders as IOrder[]

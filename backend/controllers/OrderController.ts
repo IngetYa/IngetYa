@@ -223,3 +223,9 @@ export async function createOrder(uid: string, s: IOrderData): Promise<IResTemp>
 
   return { status: 200, data: { order: orderData, bill: billData } }
 }
+
+export async function getUserOrdersDetail(uid: string): Promise<IResTemp> {
+  const orders = await OrderModel.find({ userId: uid }).lean()
+
+  return { status: 200, data: orders }
+}

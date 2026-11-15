@@ -3,11 +3,13 @@ import logger from "#lib/logger"
 import MongoConnection from "#core/database"
 import ProductModel from "#models/ProductModel"
 import { IProduct } from "#types/ServiceTypes"
-import { genhex, rNumber } from "#lib/gen"
+import { genhex, rNumber, rUid } from "#lib/gen"
 import { IUser } from "#types/UserTypes"
 import UserModel from "#models/UserModel"
 import waittime from "#core/waittime"
 import { question } from "#lib/question"
+import BalanceModel from "#models/BalanceModel"
+import TransactionModel from "#models/TransactionModel"
 
 interface IUserOutput {
   userId: string
@@ -53,7 +55,7 @@ async function createUser(): Promise<IUserOutput> {
   console.log(" ")
 
   const newUserId = "7" + rNumber(5).toString() + userSize
-  const newUserHex = "666666"
+  const newUserHex = genhex(2).toUpperCase()
 
   const userData: IUser = {
     id: newUserId,
@@ -138,12 +140,104 @@ async function createProducts(uid: string): Promise<void> {
   console.log(" ")
 }
 
+async function createBalance(): Promise<void> {
+  const balanceExists = await BalanceModel.exists({ isTotal: true })
+
+  if (balanceExists) {
+    logger.info("Balance had already existed")
+    await waittime(2000)
+    console.log(" ")
+    return
+  }
+
+  logger.info("Creating initial balance")
+  await waittime(1000)
+  console.log(" ")
+
+  await BalanceModel.create(
+    {
+      amount: 0,
+      type: "none",
+      isRoot: true,
+      isOrg: true,
+      createdAt: new Date()
+    },
+    {
+      amount: 0,
+      type: "income",
+      isRoot: true,
+      createdAt: new Date()
+    },
+    {
+      amount: 0,
+      type: "expense",
+      isRoot: true,
+      createdAt: new Date()
+    }
+  )
+
+  logger.success(`Initial balance created.`)
+
+  await waittime(2000)
+  console.log(" ")
+}
+
+// async function createTransaction(): Promise<void> {
+//   await TransactionModel.create(
+//     {
+//       amount: 90000,
+//       author: "761761",
+//       name: "1 Uang Pegangan Pertama",
+//       desc: "Isi saldo organisasi pertama kali",
+//       id: rUid(),
+//       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4),
+//       type: "income"
+//     },
+//     {
+//       amount: 88000,
+//       author: "761761",
+//       name: "2 Bayar tagihan VPS",
+//       desc: "Pembayaran bulanan server dan database",
+//       id: rUid(),
+//       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3),
+//       type: "expense"
+//     },
+//     {
+//       amount: 130000,
+//       author: "761761",
+//       name: "3 Uang Pegangan Pertama",
+//       desc: "Isi saldo organisasi pertama kali",
+//       id: rUid(),
+//       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
+//       type: "income"
+//     },
+//     {
+//       amount: 132000,
+//       author: "761761",
+//       name: "4 Bayar tagihan VPS",
+//       desc: "Pembayaran bulanan server dan database",
+//       id: rUid(),
+//       timestamp: new Date(),
+//       type: "expense"
+//     }
+//   )
+// }
+
+// let dev: boolean = true
+
 async function createDatabase(): Promise<void> {
+  // await createTransaction()
+
+  // if (dev) return process.exit(0)
+
+  // dev = false
+
   await waittime(2000)
   console.log(" ")
 
   const { userId, userHex } = await createUser()
   await createProducts(userId)
+  await createBalance()
 
   logger.info("DONE!!")
   await waittime(1000)

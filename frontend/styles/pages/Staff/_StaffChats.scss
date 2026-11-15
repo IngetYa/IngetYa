@@ -247,6 +247,9 @@
           .card-text {
             color: v.$text-primary;
           }
+          .card-meta {
+            color: v.$text-secondary;
+          }
         }
         &.me {
           margin-right: 0;
@@ -259,6 +262,9 @@
           }
           .card-text {
             color: v.$white;
+          }
+          .card-meta {
+            color: v.$accent-gold-light;
           }
         }
         .card-media {
@@ -344,7 +350,6 @@
         .card-meta {
           max-width: $cardMaxWidth;
           font-size: 0.6rem;
-          color: v.$text-secondary;
           display: flex;
           justify-content: end;
           align-items: center;

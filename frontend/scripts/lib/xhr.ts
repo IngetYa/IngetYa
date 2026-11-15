@@ -61,7 +61,7 @@ async function efetch(method: IRequestType, url: string, s?: IAny, isFile?: bool
 async function forceFetchGet(ref: string, ms: number): Promise<IResponse> {
   const response = await efetch("GET", ref)
 
-  if (response.status === 401) return response
+  if (response.status === 401 || response.status === 403) return response
 
   if (!response.ok) {
     await waittime(ms)

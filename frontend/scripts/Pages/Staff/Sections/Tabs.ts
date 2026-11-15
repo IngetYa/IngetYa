@@ -60,32 +60,36 @@ export class Tabs {
 
           this.menuLocked = true
 
-          const winWidth = window.innerWidth >= 666
-          const isOpened = this.el.classList.contains("opened")
-
-          if (!isOpened && winWidth) {
-            this.menuLocked = false
-            return
-          }
-
-          if (isOpened) {
-            this.el.classList.add("out")
-          } else {
-            this.el.classList.add("opened")
-          }
-
-          this.menuUpdateString(isOpened)
-
-          await waittime(200)
-
-          if (isOpened) {
-            this.el.classList.remove("out", "opened")
-          }
+          await this.menuOpenClose()
 
           this.menuLocked = false
         }
       })
     )
+  }
+
+  private async menuOpenClose(): Promise<void> {
+    const winWidth = window.innerWidth >= 666
+    const isOpened = this.el.classList.contains("opened")
+
+    if (!isOpened && winWidth) {
+      this.menuLocked = false
+      return
+    }
+
+    if (isOpened) {
+      this.el.classList.add("out")
+    } else {
+      this.el.classList.add("opened")
+    }
+
+    this.menuUpdateString(isOpened)
+
+    await waittime(200)
+
+    if (isOpened) {
+      this.el.classList.remove("out", "opened")
+    }
   }
 
   private menuUpdateString(isOpened: boolean): void {
@@ -105,6 +109,8 @@ export class Tabs {
       btn.onClick(() => {
         // kalo udah aktif, ya jangan dilajut
         if (btn.isActive) return
+
+        this.menuOpenClose()
 
         // masukin ke queue
         this.manager.next({ path: tab.id }, tab.id === "overview")

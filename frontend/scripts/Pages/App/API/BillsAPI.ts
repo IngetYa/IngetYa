@@ -3,6 +3,16 @@ import type { IBill } from "@/types/ServiceTypes"
 export class BillsAPI {
   private _data: IBill[] = []
 
+  private _loaded: boolean = false
+
+  get isLoaded(): boolean {
+    return this._loaded
+  }
+
+  set isLoaded(status: boolean) {
+    this._loaded = status
+  }
+
   // ambil product pake id
   find(id: string): IBill | null {
     const product = this._data.find((k) => k.orderId === id)
