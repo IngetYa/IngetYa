@@ -47,7 +47,7 @@ export class ProductContext {
     this.createElement()
     this.btnCloseListener()
     this.btnPreviewListener()
-    this.btnBuyListener()
+    this.btnEditListener()
   }
 
   get id(): string {
@@ -60,7 +60,7 @@ export class ProductContext {
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="btn btn-close"> ${lang("close")} <i class="fajdr fa-xmark fa-fw"></i> </div> <div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="menu meta"> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div> </div> <div class="btn menu btn-preview"> <i class="fal fa-earth-asia fa-fw"></i> ${lang("explore_context_see")} </div> <div class="btn menu btn-chat"> <i class="fal fa-comment-dots fa-fw"></i> ${lang("order_chat_admin")} </div> <div class="btn menu btn-buy"> <i class="fal fa-cart-circle-plus fa-fw"></i> ${lang("explore_context_buy")} </div>`
+    this.el.innerHTML = `<div class="btn btn-close"> ${lang("close")} <i class="fajdr fa-xmark fa-fw"></i> </div> <div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="menu meta"> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div> </div> <div class="btn menu btn-preview"> <i class="fal fa-earth-asia fa-fw"></i> ${lang("explore_context_see")} </div> <div class="btn menu btn-edit"> <i class="fal fa-pencil fa-fw"></i> ${lang("explore_context_edit")} </div>`
   }
 
   // posisi atas
@@ -160,10 +160,10 @@ export class ProductContext {
   }
 
   // listener tombol buy
-  private btnBuyListener(): void {
-    const btnBuy = futor(".btn-buy", this.el)
+  private btnEditListener(): void {
+    const btnEdit = futor(".btn-edit", this.el)
 
-    const ripple = SetRipple(btnBuy, {
+    const ripple = SetRipple(btnEdit, {
       run: async () => {
         if (this.manager.busy) return
         if (this.locked) return

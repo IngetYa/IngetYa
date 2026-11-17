@@ -66,6 +66,14 @@
         .thumbnail {
           display: block;
           width: 100%;
+          .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-align: center;
+            &.public {
+              color: v.$sgreen;
+            }
+          }
           img {
             border-radius: 5px;
             width: 100%;

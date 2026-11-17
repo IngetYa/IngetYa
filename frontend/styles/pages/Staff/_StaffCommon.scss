@@ -200,4 +200,16 @@
     left: 0;
     animation: rootOut2 0.3s forwards;
   }
+  &.stackIn1 {
+    animation: stackIn1 0.3s;
+  }
+  &.stackOut1 {
+    animation: stackOut1 0.3s forwards;
+  }
+  &.stackIn2 {
+    animation: stackIn2 0.3s;
+  }
+  &.stackOut2 {
+    animation: stackOut2 0.3s forwards;
+  }
 }

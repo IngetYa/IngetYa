@@ -96,6 +96,28 @@
   }
 }
 
+@keyframes navCornerIn1 {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes navCornerOut1 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%) translateX(0);
+  }
+}
+
 @keyframes tabItemIn1 {
   0% {
     opacity: 0;

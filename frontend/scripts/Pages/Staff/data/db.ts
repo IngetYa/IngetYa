@@ -7,6 +7,8 @@ import { TransactionAPI } from "../API/TransactionAPI"
 import { OrderAPI } from "../API/OrderAPI"
 import { BillAPI } from "../API/BillAPI"
 import { UserAPI } from "../API/UserAPI"
+import { ConvoAPI } from "../API/ConvoAPI"
+import { MessageAPI } from "../API/MessagesAPI"
 
 type LocalDBType = {
   products: ProductsAPI
@@ -19,9 +21,10 @@ type LocalDBType = {
   orders: OrderAPI
   bills: BillAPI
   users: UserAPI
+  convo: ConvoAPI
+  messages: MessageAPI
 }
 
-// kasih nilai default
 const db: LocalDBType = {
   products: new ProductsAPI(),
   me: { name: "unknown", createdAt: Date.now(), email: "unknown", id: "unknown", luna: "unknown" },
@@ -40,7 +43,9 @@ const db: LocalDBType = {
   transaction: new TransactionAPI(),
   orders: new OrderAPI(),
   bills: new BillAPI(),
-  users: new UserAPI()
+  users: new UserAPI(),
+  convo: new ConvoAPI(),
+  messages: new MessageAPI()
 }
 
 export default db

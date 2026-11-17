@@ -2,20 +2,25 @@ import { futor, kel } from "@/core/kel"
 import { Orders } from "../../Tabs/Orders"
 import type { IOrderStaff } from "../../types/EmbededAPITypes"
 import { toCurrency, toText } from "@/lib/gen"
-import { type IRippleReturn } from "@/lib/Ripple"
+import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
 import sdate from "@/lib/sdate"
 import { lang } from "@/core/languages"
 import type { IProduct } from "@/types/ServiceTypes"
 import db from "../../data/db"
+import { formAlert } from "@/lib/modal"
+import { StateManager } from "../../core/StateManager"
+import { Colors } from "@/core/Colors"
 
 export interface IOrderCardConfig {
   orders: Orders
   item: IOrderStaff
+  manager: StateManager
 }
 
 export class OrderCard {
   private orders: Orders
   private item: IOrderStaff
+  private manager: StateManager
 
   private el!: HTMLDivElement
 
@@ -26,11 +31,13 @@ export class OrderCard {
   constructor(config: IOrderCardConfig) {
     this.orders = config.orders
     this.item = config.item
+    this.manager = config.manager
 
     this.product = db.products.find(config.item.productId)!
 
     this.createElement()
     this.writeData()
+    this.btnDetailListener()
   }
 
   get id(): string {
@@ -68,7 +75,7 @@ export class OrderCard {
           <div class="item-name item-addons-name"></div>
         </div>
         <div class="item">
-          <div class="item-label">${lang("label_created_at")}</div>
+          <div class="item-label"></div>
           <div class="item-name">${sdate.parseTime(this.item.createdAt)}</div>
         </div>
       </div>
@@ -78,7 +85,7 @@ export class OrderCard {
         <span class="price-val">Rp${toCurrency(this.item.price)}</span>
       </div>
       <div class="card-action-btns">
-        <div class="btn btn-detail">${lang("overview_see_detail")} <i class="fas fa-arrow-right"></i></div>
+        <div class="btn btn-detail">${lang("overview_see_detail")}</div>
       </div>
     </div>`
   }
@@ -93,6 +100,20 @@ export class OrderCard {
     } else {
       eaddon.innerText = "-"
     }
+  }
+
+  private btnDetailListener(): void {
+    const btnDetail = futor(".btn-detail", this.el)
+    this._rippleCaches.push(
+      SetRipple(btnDetail, {
+        color: Colors.white,
+        run: async () => {
+          if (this.manager.busy) return
+
+          await formAlert("Under Development LOL XD")
+        }
+      })
+    )
   }
 
   get html(): HTMLDivElement {

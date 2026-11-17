@@ -121,10 +121,19 @@ export class Account implements IPrimary {
 
           <div class="f">
             <div class="s">
-              <div class="btn btn-delete-object btn-logout">LOGOUT</div>
+              <div class="btn btn-delete-object btn-logout">
+                <i class="fadr fa-right-from-bracket"></i> <span>LOGOUT</span>
+              </div>
             </div>
-            <div class="s">
-              <a href="https://devanka.id/luna/me" target="_blank" class="btn btn-prim"><i class="fajdr fa-arrow-up-right-from-square"></i> LUNA</a>
+            <div class="s field-reseller hide">
+              <a href="/reseller#overview" class="btn btn-ok btn-reseller">
+                <i class="fajdr fa-shop"></i> <span>RESELLER PANEL</span>
+              </a>
+            </div>
+            <div class="s field-staff hide">
+              <a href="/staff#overview" class="btn btn-ok btn-staff">
+                <i class="fadr fa-headset"></i> <span>STAFF PANEL</span>
+              </a>
             </div>
           </div>
 
@@ -134,6 +143,14 @@ export class Account implements IPrimary {
   }
 
   private writeData(): void {
+    const fieldReseller = futor(".field-reseller", this.el)
+    const fieldStaff = futor(".field-staff", this.el)
+
+    const roles = db.me.access || []
+
+    if (roles.some((k) => k === "reseller")) fieldReseller.classList.remove("hide")
+    if (roles.some((k) => k === "staff")) fieldStaff.classList.remove("hide")
+
     this.updateUser()
     this.updateString()
   }

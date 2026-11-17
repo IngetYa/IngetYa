@@ -1,4 +1,4 @@
-import type { IBill, IOrder } from "@/types/ServiceTypes"
+import type { IBill, IMessage, IOrder } from "@/types/ServiceTypes"
 import type { IUser } from "@/types/UserTypes"
 
 export interface IOverview {
@@ -57,4 +57,9 @@ export interface IBillStaff extends IBill {
 
 export interface IUserStaff extends IUser {
   orderSize: number
+}
+
+export interface IMessageStaff extends IMessage {
+  userName: string
+  isSent?: boolean
 }

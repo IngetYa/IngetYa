@@ -1,12 +1,14 @@
 import { PaginatedResult, paginateQuery } from "#main/PaginateDoc"
 import BalanceModel from "#models/BalanceModel"
 import BillModel from "#models/BillModel"
+import MessageModel from "#models/MessageModel"
 import OrderModel from "#models/OrderModel"
 import ProductModel from "#models/ProductModel"
+import RoomModel from "#models/RoomModel"
 import TransactionModel from "#models/TransactionModel"
 import UserModel from "#models/UserModel"
 import { IResTemp } from "#types/LibTypes"
-import { IBill, IOrder } from "#types/ServiceTypes"
+import { IBill, IConvo, IMessage, IOrder } from "#types/ServiceTypes"
 import { IBalance, ITransaction } from "#types/StaffTypes"
 import { IUser } from "#types/UserTypes"
 
@@ -203,4 +205,76 @@ export async function getDataUsers(_uid: string, pageNum: string): Promise<IResT
   }
 
   return { status: 200, data: userStaff }
+}
+
+export async function getDataConvo(_uid: string, pageNum: string): Promise<IResTemp> {
+  const page = Number(pageNum)
+
+  if (isNaN(page) || page < 1 || page > 100) {
+    return { status: 404 }
+  }
+
+  const rooms = await paginateQuery(RoomModel, {}, { page: Number(page), limit: 50 })
+
+  const userIds = rooms.data.map((k) => k.userId)
+  const orderIds = rooms.data.filter((k) => k.type === "order").map((k) => k.id)
+  const messageIds = rooms.data.map((k) => k.latestChatId)
+
+  const users = await UserModel.find({ id: { $in: userIds } }, { _id: 0, id: 1, name: 1 }).lean()
+
+  const orders = await OrderModel.find({ id: { $in: orderIds } }, { _id: 0, id: 1, name: 1 }).lean()
+
+  const messages = await MessageModel.find({ id: { $in: messageIds } }, { _id: 0, __v: 0 }).lean()
+
+  const convos: IConvo[] = rooms.data.map((k) => {
+    const message = messages.find((snap) => snap.roomId === k.id)!
+
+    return {
+      id: k.id,
+      roomType: k.type,
+      roomName: orders.find((order) => order.id === k.id)?.name || `Order ${k.id}`,
+      userName: users.find((user) => user.id === k.userId)?.name || `User ${k.userId}`,
+      unreads: 0,
+      lastMessage: message
+    }
+  })
+
+  const convoStaff: PaginatedResult<IConvo> = {
+    data: convos,
+    meta: rooms.meta
+  }
+
+  return { status: 200, data: convoStaff }
+}
+
+export interface IMessageStaff extends IMessage {
+  userName: string
+}
+
+export async function getDataMessage(_uid: string, roomId: string, pageNum: string): Promise<IResTemp> {
+  const page = Number(pageNum)
+
+  if (isNaN(page) || page < 1 || page > 100) {
+    return { status: 404 }
+  }
+
+  const chats = await paginateQuery(MessageModel, { roomId }, { page: 1, limit: 100 })
+
+  const userIds = chats.data.map((k) => k.userId)
+
+  const users = await UserModel.find({ id: { $in: userIds } }, { _id: 0, id: 1, name: 1 }).lean()
+
+  const messages: PaginatedResult<IMessageStaff> = {
+    meta: chats.meta,
+    data: chats.data.map((k) => {
+      const user = users.find((usr) => usr.id === k.userId)!
+
+      return {
+        ...k,
+        userName: user.name
+      }
+    })
+  }
+
+  return { status: 200, data: messages }
 }

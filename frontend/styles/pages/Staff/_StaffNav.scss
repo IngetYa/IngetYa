@@ -99,11 +99,11 @@
     }
   }
   &.navIn1 {
-    animation: navIn1 0.3s;
+    animation: navCornerIn1 0.3s;
   }
 
   &.navOut1 {
-    animation: navOut1 0.3s forwards;
+    animation: navCornerOut1 0.3s forwards;
   }
 
   &.opened {

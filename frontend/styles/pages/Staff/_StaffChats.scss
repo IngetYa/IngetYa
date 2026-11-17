@@ -2,809 +2,423 @@
 
 .StaffChats {
   overflow-y: hidden;
-  .ChatSideBar {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .FlatList {
+    display: block;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    .FlatList {
-      display: block;
-      width: 100%;
-      height: 100%;
-      .List {
-        padding-bottom: calc(v.$hugePadding * 2);
-        .UserCard {
-          width: 100%;
-          padding: v.$smallPadding v.$medPadding;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: v.$medPadding;
-          background-color: v.$item-card-bg;
-          border: 1px solid v.$card-border;
-          box-shadow: v.$glass-shadow, v.$glass-inset;
-          border-radius: 10px;
-          margin-bottom: v.$medPadding;
-          cursor: pointer;
-          overflow: hidden;
-          &:last-child {
-            margin-bottom: 0;
-          }
-          .UserProfile {
-            flex-grow: 1;
-            min-width: 0;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: v.$medPadding;
-            overflow: hidden;
-            .avatar {
-              flex-shrink: 0;
-              position: relative;
-              width: 42px;
-              height: 42px;
-              background-color: v.$primary;
-              border-radius: 50%;
-              color: v.$white;
-              font-weight: 600;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              .dot {
-                position: absolute;
-                bottom: -2px;
-                right: -2px;
-                width: 10px;
-                height: 10px;
-                background-color: v.$sgray;
-                border: 2px solid v.$item-card-bg;
-                border-radius: 50%;
-              }
-            }
-            .info {
-              flex-grow: 1;
-              min-width: 0;
-              overflow: hidden;
-              .name {
-                width: 100%;
-                font-size: 0.8rem;
-                font-weight: 600;
-                color: v.$text-primary;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-              .snippet {
-                width: 100%;
-                font-size: 0.8rem;
-                font-weight: 500;
-                color: v.$text-secondary;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-            }
-          }
-          .UserStatus {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: end;
-            .time {
-              color: v.$text-secondary;
-              font-weight: 500;
-              font-size: 0.65rem;
-            }
-            .unread {
-              width: fit-content;
-              background-color: v.$primary;
-              color: v.$white;
-              font-size: 0.65rem;
-              font-weight: 500;
-              min-width: 18px;
-              height: 18px;
-              border-radius: 9px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 0 4px;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .ChatPanel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    .ChatActions {
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: v.$medPadding;
-      .ChatEmbed {
+    .List {
+      padding-bottom: calc(v.$hugePadding * 2);
+      .UserCard {
+        position: relative;
+        overflow: hidden;
         width: 100%;
-        height: fit-content;
-        margin-bottom: v.$medPadding;
-        background-color: v.$header-bg;
-        border-radius: 10px;
-        box-shadow: v.$glass-shadow, v.$glass-inset;
-        border: 1px solid v.$card-border;
-        .attach {
-          width: 100%;
-          height: fit-content;
-          display: flex;
-          justify-content: space-between;
-          align-items: start;
-          gap: v.$medPadding;
-          padding: v.$smallPadding;
-          .attach-file {
-            height: fit-content;
-            flex-grow: 1;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: v.$smallPadding;
-            img,
-            video {
-              flex-shrink: 0;
-              width: 50px;
-              height: 50px;
-              margin-right: v.$smallPadding;
-              object-fit: cover;
-              object-position: center;
-              -o-object-fit: cover;
-              -o-object-position: center;
-            }
-            .icon {
-              flex-shrink: 0;
-            }
-            .file-meta {
-              .file-title {
-                font-weight: 600;
-                font-size: 0.6rem;
-              }
-              .file-name {
-                font-size: 0.8rem;
-                word-break: break-all;
-              }
-            }
-          }
-          .btn-attach-cancel {
-            flex-shrink: 0;
-          }
-        }
-      }
-      .ChatForm {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        gap: v.$medPadding;
-        textarea {
-          $minInpHeight: calc(1rem + (v.$smallPadding * 5));
-          font-size: 0.8rem;
-          clip-path: inset(0 round 20px);
-          flex-grow: 1;
-          min-width: unset;
-          max-width: unset;
-          padding: v.$medPadding v.$bigPadding;
-          background-color: v.$header-bg;
-          resize: vertical;
-          scrollbar-width: thin;
-          max-height: 200px;
-          min-height: $minInpHeight;
-          height: $minInpHeight;
-        }
-        .btn {
-          flex-shrink: 0;
-          font-size: 1rem;
-          padding: v.$smallPadding v.$medPadding;
-          background-color: v.$header-bg;
-          border-radius: 1.65rem;
-        }
-      }
-    }
-    .ChatMessages {
-      width: 100%;
-      height: fit-content;
-      padding: v.$medPadding;
-      .card {
-        $cardMaxWidth: 370px;
-        width: fit-content;
-        padding: v.$medPadding;
-        max-width: calc(100% - (v.$bigPadding * 4));
-        margin-bottom: v.$medPadding;
-        animation: slide_down_in 0.35s;
-        color: v.$text-primary;
-        border: 1px solid v.$card-border;
-        box-shadow: v.$glass-shadow, v.$glass-inset;
-        border-radius: 5px;
-        .card-name {
-          font-size: 0.7rem;
-          font-weight: 600;
-        }
-        &:not(.me) {
-          margin-left: 0;
-          margin-right: auto;
-          background-color: v.$item-card-bg;
-          border-top-right-radius: 20px;
-          border-bottom-right-radius: 20px;
-          .card-name {
-            color: v.$primary;
-          }
-          .card-text {
-            color: v.$text-primary;
-          }
-          .card-meta {
-            color: v.$text-secondary;
-          }
-        }
-        &.me {
-          margin-right: 0;
-          margin-left: auto;
-          background-color: v.$primary;
-          border-top-left-radius: 20px;
-          border-bottom-left-radius: 20px;
-          .card-name {
-            color: rgba(v.$white, 0.8);
-          }
-          .card-text {
-            color: v.$white;
-          }
-          .card-meta {
-            color: v.$accent-gold-light;
-          }
-        }
-        .card-media {
-          margin-bottom: v.$medPadding;
-          width: 100%;
-          max-width: $cardMaxWidth;
-          overflow: hidden;
-          background-color: rgba(v.$black, 0.3);
-          padding: v.$smallPadding;
-          border-radius: 14px;
-
-          a {
-            display: block;
-            width: 100%;
-            height: fit-content;
-            text-decoration: none;
-          }
-          .ofile {
-            background-color: v.$primary-dark;
-            width: 100%;
-            padding: v.$medPadding;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: v.$medPadding;
-            color: v.$white;
-            border-radius: 14px;
-            &:before {
-              flex-shrink: 0;
-              content: "\f15c";
-              font-family: "Font Awesome 7 Pro";
-              font-weight: 600;
-              font-size: 1.65rem;
-            }
-            &:after {
-              flex-shrink: 0;
-              content: "\f33d";
-              font-family: "Font Awesome 7 Pro";
-              font-weight: 600;
-              font-size: 1.65rem;
-            }
-            .ofile-meta {
-              flex-grow: 1;
-              min-width: 0;
-              .ofile-title {
-                font-size: 0.6rem;
-              }
-              .ofile-name {
-                max-width: 100%;
-                font-size: 0.7rem;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-            }
-          }
-          img {
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            width: fit-content;
-            height: fit-content;
-            max-width: 100%;
-            max-height: 300px;
-          }
-          video {
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            width: fit-content;
-            height: fit-content;
-            max-width: 100%;
-            max-height: 300px;
-          }
-        }
-
-        .card-text {
-          max-width: $cardMaxWidth;
-          margin-bottom: v.$smallPadding;
-          text-align: left;
-          font-size: 0.8rem;
-          line-height: 1.25;
-        }
-        .card-meta {
-          max-width: $cardMaxWidth;
-          font-size: 0.6rem;
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          gap: v.$smallPadding;
-        }
-      }
-    }
-  }
-
-  @media (min-width: 1111px) {
-    $sideBarSize: 420px;
-    .ChatSideBar {
-      width: $sideBarSize;
-    }
-    .ChatPanel {
-      left: $sideBarSize;
-      width: calc(100% - $sideBarSize);
-    }
-  }
-
-  .chats-workspace {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: v.$bigPadding;
-    min-height: calc(100dvh - 180px);
-
-    @media (min-width: 768px) {
-      grid-template-columns: 320px 1fr;
-      height: calc(100dvh - 180px);
-    }
-
-    .chats-sidebar {
-      background-color: rgba(v.$card-bg, 0.7);
-      backdrop-filter: blur(v.$backdrop-card);
-      box-shadow: v.$glass-shadow, v.$glass-inset;
-      border: 1px solid rgba(v.$card-border, 0.6);
-      border-radius: 16px;
-      padding: v.$medPadding;
-      display: flex;
-      flex-direction: column;
-      gap: v.$medPadding;
-      max-height: 100%;
-      overflow: hidden;
-
-      .sidebar-header {
+        padding: v.$smallPadding v.$medPadding;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: v.$smallPadding;
-
-        .sidebar-title {
-          font-size: 0.9rem;
-          font-weight: 600;
-          color: v.$text-primary;
+        gap: v.$medPadding;
+        background-color: v.$item-card-bg;
+        border: 1px solid v.$card-border;
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        border-radius: 10px;
+        margin-bottom: v.$medPadding;
+        cursor: pointer;
+        overflow: hidden;
+        &:last-child {
+          margin-bottom: 0;
         }
-
-        .badge-unread-total {
-          font-size: 0.7rem;
-          background-color: rgba(v.$primary, 0.15);
-          color: v.$primary;
-          padding: 2px 8px;
-          border-radius: 10px;
-          font-weight: 600;
-        }
-      }
-
-      .thread-filter-tabs {
-        display: flex;
-        gap: 4px;
-
-        .filter-tab {
-          flex: 1;
-          font-size: 0.75rem;
-          padding: 5px 8px;
-          border-radius: 6px;
-          background-color: transparent;
-          color: v.$text-secondary;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.2s;
-
-          &.active {
-            background-color: v.$primary;
-            color: v.$btn-primary-text;
-          }
-        }
-      }
-
-      .threads-list {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        flex-grow: 1;
-
-        .thread-item {
+        .UserProfile {
+          flex-grow: 1;
+          min-width: 0;
           display: flex;
+          justify-content: start;
           align-items: center;
           gap: v.$medPadding;
-          padding: v.$medPadding;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: background-color 0.2s;
-
-          &:hover {
-            background-color: rgba(v.$card-border, 0.4);
-          }
-
-          &.active {
-            background-color: rgba(v.$primary-light, 0.9);
-            border-left: 3px solid v.$primary;
-          }
-
-          .avatar-wrap {
+          overflow: hidden;
+          .avatar {
+            flex-shrink: 0;
             position: relative;
-
-            .avatar-box {
-              width: 40px;
-              height: 40px;
-              border-radius: 10px;
-              background-color: v.$primary-dark;
-              color: v.$white;
-              font-weight: 600;
-              font-size: 0.85rem;
-              display: flex;
-              justify-content: center;
-              align-items: center;
+            width: 42px;
+            height: 42px;
+            background-color: v.$primary;
+            border-radius: 50%;
+            color: v.$white;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.skeleton {
+              background-color: rgba(v.$black, 0.22);
             }
-
-            .status-dot {
+            .dot {
               position: absolute;
-              bottom: -1px;
-              right: -1px;
+              bottom: -2px;
+              right: -2px;
               width: 10px;
               height: 10px;
+              background-color: v.$sgray;
+              border: 2px solid v.$item-card-bg;
               border-radius: 50%;
-              border: 2px solid v.$white;
-
-              &.online {
-                background-color: v.$cgreen;
+            }
+          }
+          .info {
+            flex-grow: 1;
+            min-width: 0;
+            overflow: hidden;
+            .name {
+              width: 100%;
+              font-size: 0.8rem;
+              font-weight: 600;
+              color: v.$text-primary;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              .skeleton {
+                width: 85%;
+                height: 24px;
               }
-
-              &.offline {
-                background-color: v.$softwhite;
+            }
+            .snippet {
+              width: 100%;
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: v.$text-secondary;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              .skeleton {
+                width: 100%;
+                height: 22px;
+                margin-top: 3px;
               }
             }
           }
-
-          .thread-info {
-            flex-grow: 1;
-            min-width: 0;
-
-            .thread-head {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 2px;
-
-              .user-name {
-                font-size: 0.85rem;
-                font-weight: 600;
-                color: v.$text-primary;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              }
-
-              .message-time {
-                font-size: 0.7rem;
-                color: v.$text-muted;
-              }
+        }
+        .UserStatus {
+          flex-shrink: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: end;
+          .time {
+            color: v.$text-secondary;
+            font-weight: 500;
+            font-size: 0.65rem;
+            .skeleton {
+              width: 60px;
+              height: 20px;
             }
-
-            .thread-snippet-row {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              gap: 4px;
-
-              .message-snippet {
-                font-size: 0.75rem;
-                color: v.$text-secondary;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 160px;
-              }
-
-              .badge-unread {
-                background-color: v.$primary;
-                color: v.$white;
-                font-size: 0.65rem;
-                font-weight: 700;
-                min-width: 18px;
-                height: 18px;
-                border-radius: 9px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 0 4px;
-              }
-            }
+          }
+          .unread {
+            width: fit-content;
+            background-color: v.$primary;
+            color: v.$white;
+            font-size: 0.65rem;
+            font-weight: 500;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 4px;
           }
         }
       }
     }
+  }
+}
 
-    .chats-main-pane {
-      background-color: rgba(v.$card-bg, 0.7);
-      backdrop-filter: blur(v.$backdrop-card);
-      box-shadow: v.$glass-shadow, v.$glass-inset;
-      border: 1px solid rgba(v.$card-border, 0.6);
-      border-radius: 16px;
+.ChatPanel {
+  .NoMessage {
+    width: 100%;
+    height: 100%;
+    padding: v.$bigPadding;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: v.$medPadding;
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
       display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      min-height: 480px;
-
-      .chat-partner-bar {
-        padding: v.$medPadding v.$bigPadding;
-        background-color: rgba(v.$surface, 0.8);
-        border-bottom: 1px solid rgba(v.$card-border, 0.6);
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: v.$smallPadding;
+      .icon,
+      .text {
+        text-align: center;
+      }
+    }
+    .desc {
+      color: v.$primary-dark;
+      font-weight: 500;
+      p {
+        text-align: center;
+      }
+    }
+  }
+  .ChatActions {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: v.$medPadding;
+    .ChatEmbed {
+      width: 100%;
+      height: fit-content;
+      margin-bottom: v.$medPadding;
+      background-color: v.$header-bg;
+      border-radius: 10px;
+      box-shadow: v.$glass-shadow, v.$glass-inset;
+      border: 1px solid v.$card-border;
+      .attach {
+        width: 100%;
+        height: fit-content;
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
+        align-items: start;
         gap: v.$medPadding;
-
-        .partner-meta {
-          display: flex;
-          align-items: center;
-          gap: v.$medPadding;
-
-          .avatar-box-lg {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background-color: v.$primary;
-            color: v.$white;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1rem;
-          }
-
-          .partner-details {
-            display: flex;
-            flex-direction: column;
-
-            .partner-name-row {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-
-              h4 {
-                font-size: 0.95rem;
-                font-weight: 600;
-                color: v.$text-primary;
-              }
-
-              .badge-user-id {
-                font-size: 0.7rem;
-                font-family: v.$monofont;
-                background-color: rgba(v.$primary, 0.1);
-                color: v.$primary;
-                padding: 1px 6px;
-                border-radius: 4px;
-              }
-            }
-
-            .partner-sub {
-              font-size: 0.75rem;
-              color: v.$text-muted;
-              display: flex;
-              align-items: center;
-              gap: 4px;
-
-              .color-online {
-                color: v.$cgreen;
-                font-size: 0.6rem;
-              }
-
-              .color-offline {
-                color: v.$softwhite;
-                font-size: 0.6rem;
-              }
-            }
-          }
-        }
-
-        .partner-actions {
-          display: flex;
-          gap: 6px;
-
-          .btn-tool {
-            background-color: rgba(v.$primary-light, 0.7);
-            color: v.$primary-dark;
-            font-size: 0.75rem;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-
-            &:hover {
-              background-color: v.$primary-light;
-            }
-          }
-        }
-      }
-
-      .chat-messages-scroll {
-        flex-grow: 1;
-        overflow-y: auto;
-        padding: v.$bigPadding;
-        background-image: url("./abstracts/moon-seamless.svg");
-        background-repeat: repeat;
-        scrollbar-width: thin;
-
-        .chat-messages-container {
-          display: flex;
-          flex-direction: column;
-          gap: v.$medPadding;
-
-          .message-row {
-            display: flex;
-            width: 100%;
-
-            &.user {
-              justify-content: flex-start;
-            }
-
-            &.staff {
-              justify-content: flex-end;
-            }
-
-            .message-bubble {
-              max-width: 75%;
-              padding: v.$medPadding v.$bigPadding;
-              border-radius: 14px;
-              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-              .bubble-sender {
-                font-size: 0.65rem;
-                font-weight: 600;
-                margin-bottom: 2px;
-              }
-
-              .bubble-text {
-                font-size: 0.85rem;
-                line-height: 1.4;
-                word-break: break-word;
-              }
-
-              .bubble-time {
-                font-size: 0.65rem;
-                margin-top: 4px;
-                text-align: right;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                gap: 4px;
-              }
-
-              &.user {
-                background-color: v.$card-bg;
-                color: v.$text-primary;
-                border: 1px solid rgba(v.$card-border, 0.6);
-                border-bottom-left-radius: 4px;
-
-                .bubble-sender {
-                  color: v.$primary;
-                }
-
-                .bubble-time {
-                  color: v.$text-muted;
-                }
-              }
-
-              &.staff {
-                background-color: v.$primary;
-                color: v.$white;
-                border-bottom-right-radius: 4px;
-
-                .bubble-sender {
-                  color: rgba(v.$white, 0.8);
-                }
-
-                .bubble-time {
-                  color: rgba(v.$white, 0.7);
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .chat-composer-bar {
-        padding: v.$medPadding;
-        background-color: rgba(v.$surface, 0.9);
-        border-top: 1px solid rgba(v.$card-border, 0.6);
-        display: flex;
-        align-items: center;
-        gap: v.$medPadding;
-
-        .btn-attach {
-          width: 38px;
-          height: 38px;
-          border-radius: 8px;
-          background-color: rgba(v.$card-border, 0.4);
-          color: v.$text-secondary;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-
-          &:hover {
-            color: v.$primary;
-          }
-        }
-
-        .chat-input {
+        padding: v.$smallPadding;
+        .attach-file {
+          height: fit-content;
           flex-grow: 1;
-          background-color: v.$card-bg;
-          border: 1px solid rgba(v.$card-border, 0.8);
-          border-radius: 8px;
-          padding: 8px 12px;
-          font-size: 0.85rem;
-          color: v.$text-primary;
-          &:focus {
-            border-color: v.$primary;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          gap: v.$smallPadding;
+          img,
+          video {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            margin-right: v.$smallPadding;
+            object-fit: cover;
+            object-position: center;
+            -o-object-fit: cover;
+            -o-object-position: center;
+          }
+          .icon {
+            flex-shrink: 0;
+          }
+          .file-meta {
+            .file-title {
+              font-weight: 600;
+              font-size: 0.6rem;
+            }
+            .file-name {
+              font-size: 0.8rem;
+              word-break: break-all;
+            }
           }
         }
-
-        .btn-send-message {
-          background-color: v.$btn-primary-bg;
-          color: v.$btn-primary-text;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-weight: 600;
-          font-size: 0.85rem;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          cursor: pointer;
-
-          &:hover {
-            background-color: v.$primary-dark;
-          }
+        .btn-attach-cancel {
+          flex-shrink: 0;
         }
       }
+    }
+    .ChatForm {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: v.$medPadding;
+      textarea {
+        $minInpHeight: calc(1rem + (v.$smallPadding * 5));
+        font-size: 0.8rem;
+        clip-path: inset(0 round 20px);
+        flex-grow: 1;
+        min-width: unset;
+        max-width: unset;
+        padding: v.$medPadding v.$bigPadding;
+        background-color: v.$header-bg;
+        resize: vertical;
+        scrollbar-width: thin;
+        max-height: 200px;
+        min-height: $minInpHeight;
+        height: $minInpHeight;
+      }
+      .btn {
+        flex-shrink: 0;
+        font-size: 1rem;
+        padding: v.$smallPadding v.$medPadding;
+        background-color: v.$header-bg;
+        border-radius: 1.65rem;
+      }
+    }
+  }
+  .ChatMessages {
+    width: 100%;
+    height: fit-content;
+    min-height: 100%;
+    padding: v.$medPadding;
+    .card {
+      $cardMaxWidth: 370px;
+      width: fit-content;
+      padding: v.$medPadding;
+      max-width: calc(100% - (v.$bigPadding * 4));
+      margin-bottom: v.$medPadding;
+      animation: slide_down_in 0.35s;
+      color: v.$text-primary;
+      border: 1px solid v.$card-border;
+      box-shadow: v.$glass-shadow, v.$glass-inset;
+      border-radius: 5px;
+      .card-name {
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+      &:not(.me) {
+        margin-left: 0;
+        margin-right: auto;
+        background-color: v.$item-card-bg;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        .card-name {
+          color: v.$primary;
+        }
+        .card-text {
+          color: v.$text-primary;
+        }
+        .card-meta {
+          color: v.$text-secondary;
+        }
+      }
+      &.me {
+        margin-right: 0;
+        margin-left: auto;
+        background-color: v.$primary;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        .card-name {
+          color: rgba(v.$white, 0.8);
+        }
+        .card-text {
+          color: v.$white;
+        }
+        .card-meta {
+          color: v.$accent-gold-light;
+        }
+      }
+      .card-media {
+        margin-bottom: v.$medPadding;
+        width: 100%;
+        max-width: $cardMaxWidth;
+        overflow: hidden;
+        background-color: rgba(v.$black, 0.3);
+        padding: v.$smallPadding;
+        border-radius: 14px;
+
+        a {
+          display: block;
+          width: 100%;
+          height: fit-content;
+          text-decoration: none;
+        }
+        .ofile {
+          background-color: v.$primary-dark;
+          width: 100%;
+          padding: v.$medPadding;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          gap: v.$medPadding;
+          color: v.$white;
+          border-radius: 14px;
+          &:before {
+            flex-shrink: 0;
+            content: "\f15c";
+            font-family: "Font Awesome 7 Pro";
+            font-weight: 600;
+            font-size: 1.65rem;
+          }
+          &:after {
+            flex-shrink: 0;
+            content: "\f33d";
+            font-family: "Font Awesome 7 Pro";
+            font-weight: 600;
+            font-size: 1.65rem;
+          }
+          .ofile-meta {
+            flex-grow: 1;
+            min-width: 0;
+            .ofile-title {
+              font-size: 0.6rem;
+            }
+            .ofile-name {
+              max-width: 100%;
+              font-size: 0.7rem;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+        img {
+          border-radius: 10px;
+          display: block;
+          margin: 0 auto;
+          width: fit-content;
+          height: fit-content;
+          max-width: 100%;
+          max-height: 300px;
+        }
+        video {
+          border-radius: 10px;
+          display: block;
+          margin: 0 auto;
+          width: fit-content;
+          height: fit-content;
+          max-width: 100%;
+          max-height: 300px;
+        }
+      }
+
+      .card-name {
+        .skeleton {
+          margin-bottom: v.$smallPadding;
+          width: 160px;
+          height: 26px;
+        }
+      }
+
+      .card-text {
+        max-width: $cardMaxWidth;
+        margin-bottom: v.$smallPadding;
+        text-align: left;
+        font-size: 0.8rem;
+        line-height: 1.25;
+        .skeleton {
+          width: 240px;
+          height: 94px;
+        }
+      }
+      .card-meta {
+        max-width: $cardMaxWidth;
+        font-size: 0.6rem;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: v.$smallPadding;
+        .skeleton {
+          width: 120px;
+          height: 26px;
+        }
+      }
+    }
+  }
+
+  &.out {
+    .StaffPage-Box {
+      animation: rootOut2 0.3s forwards;
+    }
+  }
+
+  @media (min-width: 666px) {
+    .StaffPage-Box {
+      margin-left: auto;
+      margin-right: 0;
+      width: calc(100dvw - (180px + (v.$medPadding * 3)));
     }
   }
 }

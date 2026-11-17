@@ -5,14 +5,15 @@ import { futor, kel } from "@/core/kel"
 import { type IStackHierarchy } from "@/core/hierarchy"
 import waittime from "@/lib/waittime"
 import { getLanguage, lang } from "@/core/languages"
-import { type IRippleReturn } from "@/lib/Ripple"
-import { formAbort } from "@/lib/modal"
+import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
+import { formAbort, formAlert } from "@/lib/modal"
 import xhr from "@/lib/xhr"
 import db from "../data/db"
 import type { IBalanceReturn, ITransaction, PaginatedResult } from "../types/EmbededAPITypes"
 import { toCurrency } from "@/lib/gen"
 import { PageBar } from "@/lib/PageBar"
 import { NoDataTransactionCard, TransactionCard } from "../Components/Balance/TransactionCard"
+import { Colors } from "@/core/Colors"
 
 export class Balance implements IPrimary {
   private el!: HTMLDivElement
@@ -45,6 +46,7 @@ export class Balance implements IPrimary {
 
     this.createElement()
     this.writeData()
+    this.btnRecapListener()
   }
 
   private createElement(): void {
@@ -90,12 +92,12 @@ export class Balance implements IPrimary {
           </div>
         </div>
         <div class="hero-actions">
-          <button class="btn btn-balance-action btn-recap"><i class="fas fa-download"></i> ${lang("balance_report_download")}</button>
+          <button class="btn btn-balance-action btn-recap"><i class="fas fa-upload"></i> ${lang("balance_report_download")}</button>
         </div>
       </div>
 
       <div class="section-title">
-        <h3><i class="fadr fa-chart-simple"></i> Audit</h3>
+        <h3><i class="fadr fa-chart-simple"></i> ${lang("balance_audit")}</h3>
       </div>
 
       <div class="pagination-container">
@@ -210,6 +212,25 @@ export class Balance implements IPrimary {
     }
 
     if (oldCard) oldCard.destroy()
+  }
+
+  private btnRecapListener(): void {
+    const btnRecap = futor(".btn-recap", this.el)
+    this._rippleCaches.push(
+      SetRipple(btnRecap, {
+        color: Colors.cgreen,
+        run: async () => {
+          if (this.manager.busy) return
+          if (this.locked) return
+
+          this.locked = true
+
+          await formAlert("Under Development LOL XD")
+
+          this.locked = false
+        }
+      })
+    )
   }
 
   private updateString(): void {

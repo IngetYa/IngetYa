@@ -300,8 +300,12 @@
     "en": "Total Expense"
   },
   "balance_report_download": {
-    "id": "Download Laporan",
+    "id": "Export Laporan",
     "en": "Export Data"
+  },
+  "balance_audit": {
+    "id": "Audit",
+    "en": "Audit"
   },
   "balance_no_data": {
     "id": "Engga ada",
@@ -310,6 +314,22 @@
   "explore_category_all": {
     "id": "Semua",
     "en": "All"
+  },
+  "explore_context_see": {
+    "id": "Lihat Contoh",
+    "en": "See Preview"
+  },
+  "explore_context_edit": {
+    "id": "Edit Produk",
+    "en": "Edit Product"
+  },
+  "product_status_public": {
+    "id": "Publik",
+    "en": "Public"
+  },
+  "product_status_draft": {
+    "id": "Draft",
+    "en": "Draft"
   },
   "orders_no_data": {
     "id": "Engga ada",
@@ -358,5 +378,45 @@
   "user_order_total": {
     "id": "Total Pesanan",
     "en": "Orders Total"
+  },
+  "user_type_user": {
+    "id": "User",
+    "en": "User"
+  },
+  "user_type_staff": {
+    "id": "Staff",
+    "en": "Staff"
+  },
+  "user_type_reseller": {
+    "id": "Reseller",
+    "en": "Reseller"
+  },
+  "user_manage": {
+    "id": "Kelola",
+    "en": "Manage"
+  },
+  "account_back_to_app": {
+    "id": "Kembali ke User Panel",
+    "en": "Back to User Panel"
+  },
+  "chat_type_file": {
+    "id": "File",
+    "en": "File"
+  },
+  "chat_open_chat": {
+    "id": "Open Chat",
+    "en": "Buka Chat"
+  },
+  "chat_no_data": {
+    "id": "Engga ada",
+    "en": "No data"
+  },
+  "message_landing_title": {
+    "id": "Live Chat",
+    "en": "Live Chats"
+  },
+  "message_landing_desc": {
+    "id": "Pilih user/room buat kirim chat",
+    "en": "Select a chat room to start messaging"
   }
 }

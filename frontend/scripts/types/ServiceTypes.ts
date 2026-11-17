@@ -78,3 +78,29 @@ export interface IBill {
   expiry_time: string
   settlement_time: string
 }
+
+export type ChatMessageType = "file" | "text"
+
+export interface IMessage {
+  id: string
+  userId: string
+  roomId: string
+  fileUrl?: string
+  fileName?: string
+  text?: string
+  readers: string[]
+  createdAt: Date
+  expiresAt?: Date
+}
+
+export type ChatRoomType = "support" | "order"
+
+export interface IConvo {
+  id: string // roomId on message
+  roomType: ChatRoomType
+  userName?: string
+  roomName?: string
+  updatedAt: Date
+  unreads: number
+  lastMessage: IMessage
+}

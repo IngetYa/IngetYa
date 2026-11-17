@@ -10,6 +10,8 @@ import waittime from "#core/waittime"
 import { question } from "#lib/question"
 import BalanceModel from "#models/BalanceModel"
 import TransactionModel from "#models/TransactionModel"
+import MessageModel from "#models/MessageModel"
+import RoomModel from "#models/RoomModel"
 
 interface IUserOutput {
   userId: string
@@ -223,14 +225,51 @@ async function createBalance(): Promise<void> {
 //   )
 // }
 
-// let dev: boolean = true
+async function createChat(): Promise<void> {
+  const id_1 = rUid()
+  const id_2 = rUid()
+  await MessageModel.create(
+    {
+      id: id_1,
+      userId: "7915790",
+      roomId: "8370",
+      text: "Aihihihi"
+    },
+    {
+      id: id_2,
+      userId: "7915790",
+      roomId: "9999",
+      text: "Kocak",
+      fileName: "olive.png",
+      fileUrl: "/assets/example/olive.png"
+    }
+  )
+
+  await RoomModel.create(
+    {
+      id: "9999",
+      type: "support",
+      userId: "7915790",
+      latestChatId: id_2
+    },
+    {
+      id: "8370",
+      type: "order",
+      userId: "7915790",
+      latestChatId: id_1
+    }
+  )
+}
+
+let dev: boolean = true
 
 async function createDatabase(): Promise<void> {
   // await createTransaction()
+  await createChat()
 
-  // if (dev) return process.exit(0)
+  if (dev) return process.exit(0)
 
-  // dev = false
+  dev = false
 
   await waittime(2000)
   console.log(" ")

@@ -143,6 +143,8 @@
           display: flex;
           gap: 6px;
           .btn-detail {
+            position: relative;
+            overflow: hidden;
             padding: v.$smallPadding v.$medPadding;
             border-radius: 10px;
             background-color: v.$primary;

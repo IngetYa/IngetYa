@@ -4,9 +4,13 @@ import { StateManager } from "../core/StateManager"
 import { futor, kel } from "@/core/kel"
 import { type IStackHierarchy } from "@/core/hierarchy"
 import waittime from "@/lib/waittime"
-import { changeLang, lang } from "@/core/languages"
+import { changeLang, getLanguage, lang, LangName } from "@/core/languages"
 import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
 import { Colors } from "@/core/Colors"
+import db from "../data/db"
+import { toText } from "@/lib/gen"
+import { UserRoleAccess } from "../data/_RoleList"
+import type { ILanguage } from "@/types/LibTypes"
 
 export class Account implements IPrimary {
   private el!: HTMLDivElement
@@ -16,6 +20,8 @@ export class Account implements IPrimary {
   manager: StateManager
   private _rippleCaches: IRippleReturn[] = []
 
+  private curLang: ILanguage = getLanguage()
+
   constructor(config: IPrimaryConfig) {
     this.king = config.king
     this.manager = config.manager
@@ -23,6 +29,8 @@ export class Account implements IPrimary {
 
     this.createElement()
     this.changeLangListener()
+
+    this.updateData()
   }
 
   private createElement(): void {
@@ -45,10 +53,10 @@ export class Account implements IPrimary {
       <div class="staff-profile-card">
         <div class="profile-avatar-wrap">
           <div class="profile-avatar"><i class="fas fa-user-tie"></i></div>
-          <span class="badge-staff-role">Staff #123XX</span>
+          <span class="badge-staff-role">Staff #${db.me.id}</span>
         </div>
         <div class="profile-info">
-          <p class="profile-name">dvnkz</p>
+          <p class="profile-name">${toText(db.me.name)}</p>
           <p class="profile-roles">
             <span>IngetYa Staff</span>
             <span>Balance</span>
@@ -79,9 +87,9 @@ export class Account implements IPrimary {
 
           <div class="f">
             <div class="s">
-              <div class="btn btn-delete-object btn-logout-staff">
-                <i class="fas fa-right-from-bracket"></i> Keluar dari Staff Panel
-              </div>
+              <a href="/app#me" class="btn btn-ok btn-logout-staff">
+                <i class="fas fa-arrow-left-to-arc"></i> <span>${lang("account_back_to_app")}</span>
+              </a>
             </div>
           </div>
         </div>
@@ -93,7 +101,29 @@ export class Account implements IPrimary {
     const title = futor(".Title", this.el)
     title.innerHTML = `<h1><i class="fajdr fa-user"></i> ${lang("tab_me")}</h1>`
 
+    const btnLogoff = futor(".btn-logout-staff span", this.el)
+    btnLogoff.innerText = lang("account_back_to_app")
+
     this.king.tabs.updateString()
+  }
+
+  updateData(): void {
+    const inpLang = futor("#account-lang", this.el, "input")
+    inpLang.value = LangName[this.curLang]
+
+    const eroles = futor(".profile-roles", this.el)
+    while (eroles.firstChild) {
+      eroles.firstChild.remove()
+    }
+
+    const roles = db.me.access || []
+
+    roles.forEach((k) => {
+      const span = kel("span")
+      span.innerText = UserRoleAccess[k][this.curLang]
+
+      eroles.append(span)
+    })
   }
 
   private changeLangListener(): void {
@@ -112,8 +142,11 @@ export class Account implements IPrimary {
 
         if (!changedLang) return
 
+        this.curLang = changedLang
+
         // ulangi rendernya
         this.updateString()
+        this.updateData()
       }
     })
 

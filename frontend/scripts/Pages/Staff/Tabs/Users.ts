@@ -11,6 +11,7 @@ import { PageBar } from "@/lib/PageBar"
 import db from "../data/db"
 import xhr from "@/lib/xhr"
 import type { IUserStaff, PaginatedResult } from "../types/EmbededAPITypes"
+import { formAbort } from "@/lib/modal"
 
 export class Users implements IPrimary {
   private el!: HTMLDivElement
@@ -169,7 +170,7 @@ export class Users implements IPrimary {
     const items = db.users.getAll()
 
     for (const item of items) {
-      const card = new UserCard({ users: this, item })
+      const card = new UserCard({ users: this, item, manager: this.manager })
 
       this.list.push(card)
 
@@ -195,7 +196,54 @@ export class Users implements IPrimary {
     if (oldCard) oldCard.destroy()
   }
 
-  async handleHistory(_hierarchy: IStackHierarchy): Promise<void> {}
+  private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
+    // hapus dulu kalo ada modal
+    formAbort()
+
+    // // hapus dulu kalo ada product context
+    // await this.contextsDestroy()
+    // // if (this.context) {
+    // //   await this.context.destroy()
+    // //   this.setContext()
+    // // }
+
+    // // cek path hierarchy
+    // const { section, sub } = hierarchy
+
+    // // kalo lagi buka cart
+    // if (this.cart) {
+    //   // hapus dulu cart-nya
+    //   this.king.tabs.hide(false)
+    //   this.hide(false)
+    //   await this.cart.destroy()
+    // }
+
+    // // kalo gada path section, stop
+    // if (!section) return
+
+    // // kalo section-nya adalah buy
+    // if (section === "buy") {
+    //   // tapi gada sub-nya, stop
+    //   if (!sub) return
+
+    //   // jalanin pembuatan cart
+    //   this.hide()
+    //   this.king.tabs.hide()
+
+    //   await this.startCart(sub)
+    // }
+  }
+
+  async handleHistory(hierarchy: IStackHierarchy): Promise<void> {
+    if (this.isLoaded) return await this.runHistoryQueue(hierarchy)
+
+    return new Promise((resolve) => {
+      this.onLoaded = async () => {
+        await this.runHistoryQueue(hierarchy)
+        resolve()
+      }
+    })
+  }
 
   async destroy(anim?: string): Promise<void> {
     this._rippleCaches.forEach((r) => r.stopListener())

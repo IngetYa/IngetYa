@@ -21,6 +21,22 @@
             }
           }
         }
+        .s {
+          .btn {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            i {
+              flex-shrink: 0;
+            }
+            span {
+              flex-grow: 0;
+            }
+          }
+        }
       }
     }
   }

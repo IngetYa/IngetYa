@@ -68,7 +68,6 @@ export class Bill {
     return this.bill.orderId
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppSec Bill")
 

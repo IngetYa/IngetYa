@@ -5,6 +5,7 @@ import { futor, kel } from "@/core/kel"
 import { toCurrency, toText } from "@/lib/gen"
 import { Colors } from "@/core/Colors"
 import db from "../../data/db"
+import { lang } from "@/core/languages"
 
 export interface ProductCardConfig {
   products: Products
@@ -34,7 +35,7 @@ export class ProductCard {
 
     // one line biar ga menuhin editor wkwk
     // format aja atau pake beautifier biar rapi
-    this.el.innerHTML = `<div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="tags"></div> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div>`
+    this.el.innerHTML = `<div class="thumbnail"> <div class="status public">${lang("product_status_" + (this.product.isActive ? "public" : "draft"))}</div> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="tags"></div> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div>`
   }
 
   // render semua kategori

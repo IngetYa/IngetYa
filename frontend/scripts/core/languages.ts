@@ -118,7 +118,7 @@ export async function changeLang(): Promise<ILanguage | undefined> {
     ]
   })
 
-  if (!langResult) return currentLanguage
+  if (!langResult) return undefined
 
   const newLanguage: ILanguage = langResult === "luna-lang-id" ? "id" : "en"
 

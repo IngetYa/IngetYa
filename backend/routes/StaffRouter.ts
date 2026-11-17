@@ -4,7 +4,7 @@ import { cooldown } from "#core/cooldown"
 import { isStaff } from "#core/middlewares"
 import { rep } from "#lib/gen"
 import { getUserData } from "#controllers/ProfileController"
-import { getDataBalance, getDataBills, getDataOrders, getDataOverview, getDataTransactions, getDataUsers } from "#controllers/StaffController"
+import { getDataBalance, getDataBills, getDataConvo, getDataMessage, getDataOrders, getDataOverview, getDataTransactions, getDataUsers } from "#controllers/StaffController"
 
 const router: Router = express.Router()
 
@@ -58,6 +58,22 @@ router.get("/data/users/:page", cooldown.user("data", 1000), express.json({ limi
   const usersData = rep(await getDataUsers(req.user!.id, page.toString()))
 
   return res.status(usersData.status).json(usersData)
+})
+
+router.get("/data/convo/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
+  const { page } = req.params
+
+  const convoData = rep(await getDataConvo(req.user!.id, page.toString()))
+
+  return res.status(convoData.status).json(convoData)
+})
+
+router.get("/data/messages/:roomId/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
+  const { roomId, page } = req.params
+
+  const messageData = rep(await getDataMessage(req.user!.id, roomId.toString(), page.toString()))
+
+  return res.status(messageData.status).json(messageData)
 })
 
 export default router
