@@ -10,7 +10,7 @@ import waittime from "@/lib/waittime"
 import xhr from "@/lib/xhr"
 import { BubbleCard } from "./MessageCard"
 import { Colors } from "@/core/Colors"
-import type { IMessageStaff, PaginatedResult } from "../../types/EmbededAPITypes"
+import type { HistoryPaginatedResult, IMessageStaff } from "../../types/EmbededAPITypes"
 import type { IConvo } from "@/types/ServiceTypes"
 
 export interface IChatPanelConfig {
@@ -138,13 +138,13 @@ export class ChatPanel {
     if (!db.messages.isLoaded) {
       await waittime(1000)
 
-      const res = await xhr.forceGet(`/x/staff/data/messages/${this.roomId}/1`)
+      const res = await xhr.forceGet(`/x/staff/data/messages/${this.roomId}`)
 
       if (this.isDestroyed) return
 
-      const rawData = res.data as PaginatedResult<IMessageStaff>
+      const rawData = res.data as HistoryPaginatedResult<IMessageStaff>
 
-      const data: PaginatedResult<IMessageStaff> = {
+      const data: HistoryPaginatedResult<IMessageStaff> = {
         meta: rawData.meta,
         data: rawData.data.map((k) => ({
           ...k,
@@ -198,15 +198,12 @@ export class ChatPanel {
   }
 
   private goHistoryBack(): void {
-    // batalin kalo history lagi frustasi
     if (this.locked) return
     if (this.manager.busy) return
 
-    // mundur 1 state
     history.back()
   }
 
-  // listener tombol kembali
   private btnBackListener(): void {
     const btnBack = futor(".btn-back", this.el)
     const rippleBack = SetRipple(btnBack, {
@@ -215,7 +212,6 @@ export class ChatPanel {
         this.goHistoryBack()
       }
     })
-    // btnBack.onclick = () => this.goHistoryBack()
 
     this._rippleCaches.push(rippleBack)
 

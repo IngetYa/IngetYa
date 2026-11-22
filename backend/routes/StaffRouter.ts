@@ -31,7 +31,7 @@ router.get("/data/balance", cooldown.user("data", 2000), express.json({ limit: "
 router.get("/data/transaction/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
   const { page } = req.params
 
-  const transactionData = rep(await getDataTransactions(req.user!.id, page.toString()))
+  const transactionData = rep(await getDataTransactions(req.user!.id, page?.toString()))
 
   return res.status(transactionData.status).json(transactionData)
 })
@@ -39,7 +39,7 @@ router.get("/data/transaction/:page", cooldown.user("data", 1000), express.json(
 router.get("/data/orders/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
   const { page } = req.params
 
-  const ordersData = rep(await getDataOrders(req.user!.id, page.toString()))
+  const ordersData = rep(await getDataOrders(req.user!.id, page?.toString()))
 
   return res.status(ordersData.status).json(ordersData)
 })
@@ -47,7 +47,7 @@ router.get("/data/orders/:page", cooldown.user("data", 1000), express.json({ lim
 router.get("/data/bills/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
   const { page } = req.params
 
-  const ordersData = rep(await getDataBills(req.user!.id, page.toString()))
+  const ordersData = rep(await getDataBills(req.user!.id, page?.toString()))
 
   return res.status(ordersData.status).json(ordersData)
 })
@@ -55,23 +55,23 @@ router.get("/data/bills/:page", cooldown.user("data", 1000), express.json({ limi
 router.get("/data/users/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
   const { page } = req.params
 
-  const usersData = rep(await getDataUsers(req.user!.id, page.toString()))
+  const usersData = rep(await getDataUsers(req.user!.id, page?.toString()))
 
   return res.status(usersData.status).json(usersData)
 })
 
-router.get("/data/convo/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
-  const { page } = req.params
+router.get("/data/convo{/:cursor}", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
+  const { cursor } = req.params
 
-  const convoData = rep(await getDataConvo(req.user!.id, page.toString()))
+  const convoData = rep(await getDataConvo(req.user!.id, cursor?.toString()))
 
   return res.status(convoData.status).json(convoData)
 })
 
-router.get("/data/messages/:roomId/:page", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
-  const { roomId, page } = req.params
+router.get("/data/messages/:roomId{/:cursor}", cooldown.user("data", 1000), express.json({ limit: "100KB" }), async (req: Request, res: Response) => {
+  const { roomId, cursor } = req.params
 
-  const messageData = rep(await getDataMessage(req.user!.id, roomId.toString(), page.toString()))
+  const messageData = rep(await getDataMessage(req.user!.id, roomId?.toString(), cursor?.toString()))
 
   return res.status(messageData.status).json(messageData)
 })

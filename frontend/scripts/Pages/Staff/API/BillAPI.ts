@@ -14,7 +14,6 @@ export class BillAPI {
     this._loaded = status
   }
 
-  // ambil bill pake id
   find(orderId: string): IBillStaff | null {
     const bill = this._data.find((k) => k.orderId === orderId)
 
@@ -29,7 +28,6 @@ export class BillAPI {
     return this._meta || null
   }
 
-  // ambil semua
   getAll(): IBillStaff[] {
     return this._data
   }
@@ -42,12 +40,10 @@ export class BillAPI {
     }
   }
 
-  // jumlah bills
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

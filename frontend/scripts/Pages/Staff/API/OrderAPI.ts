@@ -14,7 +14,6 @@ export class OrderAPI {
     this._loaded = status
   }
 
-  // ambil order pake id
   find(id: string): IOrderStaff | null {
     const order = this._data.find((k) => k.id === id)
 
@@ -29,7 +28,6 @@ export class OrderAPI {
     return this._meta || null
   }
 
-  // ambil semua
   getAll(): IOrderStaff[] {
     return this._data
   }
@@ -42,12 +40,10 @@ export class OrderAPI {
     }
   }
 
-  // jumlah orders
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

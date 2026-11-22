@@ -13,7 +13,6 @@ export interface StackPrimaryConfig {
 export class StackPrimary {
   private el!: HTMLDivElement
 
-  // 2 komponen utama, tabs (nav) & content
   tabs!: Tabs
   content!: Content
 
@@ -27,7 +26,6 @@ export class StackPrimary {
     this.createElement()
   }
 
-  // bikin elemen utama
   private createElement(): void {
     this.el = kel("div", "Stack Stack-Primary")
 
@@ -42,7 +40,6 @@ export class StackPrimary {
     this.el.append(this.content.html, this.tabs.html)
   }
 
-  // jalanin children-nya
   async setContent(id: string, hierarchy: IStackHierarchy): Promise<void> {
     await this.content.update(id, hierarchy)
   }
@@ -62,7 +59,6 @@ export class StackPrimary {
     this.el.classList.remove("stackIn2")
   }
 
-  // hapus stack saat ini only
   async destroy(): Promise<void> {
     this.el.classList.add("out")
     await waittime()

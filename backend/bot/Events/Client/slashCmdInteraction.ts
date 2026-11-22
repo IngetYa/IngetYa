@@ -2,10 +2,8 @@ import { EmbedBuilder, ChatInputCommandInteraction, MessageFlags, Colors } from 
 import { BotClient } from "#bot/BotClient"
 
 export default async function slashCmdInteraction(interaction: ChatInputCommandInteraction, client: BotClient) {
-  // cek apakah slash command valid di collection
   const command = client.slashCommands.get(interaction.commandName)
 
-  // kalo ternyata ga valid, kasih follow-up
   if (!command) {
     return await interaction.reply({
       flags: [MessageFlags.Ephemeral],
@@ -13,7 +11,6 @@ export default async function slashCmdInteraction(interaction: ChatInputCommandI
     })
   }
 
-  // logic cooldown biasa
   if (command.options?.cooldown) {
     const currentMemberCooldown = client.cooldowns.get(`${interaction.user.id}-button-${interaction.commandName}`)
     if (!currentMemberCooldown) client.cooldowns.set(`${interaction.user.id}-button-${interaction.commandName}`, (Date.now() + command.options.cooldown).toString())
@@ -25,6 +22,5 @@ export default async function slashCmdInteraction(interaction: ChatInputCommandI
       })
   }
 
-  // lanjut ke method di class slashCommands
   command.execute(interaction, client)
 }

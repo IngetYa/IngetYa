@@ -14,7 +14,6 @@ export class UserAPI {
     this._loaded = status
   }
 
-  // ambil user pake id
   find(id: string): IUserStaff | null {
     const user = this._data.find((k) => k.id === id)
 
@@ -29,7 +28,6 @@ export class UserAPI {
     return this._meta || null
   }
 
-  // ambil semua
   getAll(): IUserStaff[] {
     return this._data
   }
@@ -42,12 +40,10 @@ export class UserAPI {
     }
   }
 
-  // jumlah users
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

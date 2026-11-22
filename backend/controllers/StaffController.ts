@@ -1,4 +1,4 @@
-import { PaginatedResult, paginateQuery } from "#main/PaginateDoc"
+import { HistoryPaginatedResult, PaginatedResult, paginateHistory, paginateQuery } from "#main/PaginateDoc"
 import BalanceModel from "#models/BalanceModel"
 import BillModel from "#models/BillModel"
 import MessageModel from "#models/MessageModel"
@@ -207,14 +207,8 @@ export async function getDataUsers(_uid: string, pageNum: string): Promise<IResT
   return { status: 200, data: userStaff }
 }
 
-export async function getDataConvo(_uid: string, pageNum: string): Promise<IResTemp> {
-  const page = Number(pageNum)
-
-  if (isNaN(page) || page < 1 || page > 100) {
-    return { status: 404 }
-  }
-
-  const rooms = await paginateQuery(RoomModel, {}, { page: Number(page), limit: 50 })
+export async function getDataConvo(_uid: string, cursor?: string): Promise<IResTemp> {
+  const rooms = await paginateHistory(RoomModel, {}, { cursor: cursor, limit: 30 })
 
   const userIds = rooms.data.map((k) => k.userId)
   const orderIds = rooms.data.filter((k) => k.type === "order").map((k) => k.id)
@@ -224,12 +218,13 @@ export async function getDataConvo(_uid: string, pageNum: string): Promise<IResT
 
   const orders = await OrderModel.find({ id: { $in: orderIds } }, { _id: 0, id: 1, name: 1 }).lean()
 
-  const messages = await MessageModel.find({ id: { $in: messageIds } }, { _id: 0, __v: 0 }).lean()
+  const messages = await MessageModel.find({ id: { $in: messageIds } }, { _id: 1, __v: 0 }).lean()
 
   const convos: IConvo[] = rooms.data.map((k) => {
     const message = messages.find((snap) => snap.roomId === k.id)!
 
     return {
+      _id: k._id,
       id: k.id,
       roomType: k.type,
       roomName: orders.find((order) => order.id === k.id)?.name || `Order ${k.id}`,
@@ -239,7 +234,7 @@ export async function getDataConvo(_uid: string, pageNum: string): Promise<IResT
     }
   })
 
-  const convoStaff: PaginatedResult<IConvo> = {
+  const convoStaff: HistoryPaginatedResult<IConvo> = {
     data: convos,
     meta: rooms.meta
   }
@@ -251,20 +246,14 @@ export interface IMessageStaff extends IMessage {
   userName: string
 }
 
-export async function getDataMessage(_uid: string, roomId: string, pageNum: string): Promise<IResTemp> {
-  const page = Number(pageNum)
-
-  if (isNaN(page) || page < 1 || page > 100) {
-    return { status: 404 }
-  }
-
-  const chats = await paginateQuery(MessageModel, { roomId }, { page: 1, limit: 100 })
+export async function getDataMessage(_uid: string, roomId: string, cursor?: string): Promise<IResTemp> {
+  const chats = await paginateHistory(MessageModel, { roomId }, { cursor, limit: 16 })
 
   const userIds = chats.data.map((k) => k.userId)
 
-  const users = await UserModel.find({ id: { $in: userIds } }, { _id: 0, id: 1, name: 1 }).lean()
+  const users = await UserModel.find({ id: { $in: userIds } }, { _id: 1, id: 1, name: 1 }).lean()
 
-  const messages: PaginatedResult<IMessageStaff> = {
+  const messages: HistoryPaginatedResult<IMessageStaff> = {
     meta: chats.meta,
     data: chats.data.map((k) => {
       const user = users.find((usr) => usr.id === k.userId)!

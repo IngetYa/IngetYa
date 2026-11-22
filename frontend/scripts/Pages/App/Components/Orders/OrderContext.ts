@@ -73,12 +73,9 @@ export class OrderContext {
     return this._id
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "ContextExplore")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="btn btn-close"> ${lang("close")} <i class="fajdr fa-xmark fa-fw"></i> </div>
     <div class="order-name">${toText(this.order.name)}</div>
@@ -141,7 +138,6 @@ export class OrderContext {
     paymentAmount.innerText = `Rp${toCurrency(this.bill.price)}`
   }
 
-  // update action buttons
   private updateActionButtons(): void {
     const actionGroup = futor(".action-group", this.el, "div")
 
@@ -259,7 +255,6 @@ export class OrderContext {
     )
   }
 
-  // posisi atas
   private setVertical(pos: number, offset: number): void {
     const windowHeight = window.innerHeight
 
@@ -270,14 +265,12 @@ export class OrderContext {
 
     const centerY = (windowHeight - offset) / 2
 
-    // kasih jarak dari atas/bawah biar  agak ke tengah
     const margin = Math.max(24, centerY * 0.5)
     const minTop = margin
     const maxTop = windowHeight - offset - margin
 
     let top = pos - offset / 2
 
-    // kalo dah terlalu ujung, buat agak ke tengah
     if (top < minTop) {
       top = minTop
     } else if (top > maxTop) {
@@ -287,22 +280,17 @@ export class OrderContext {
     this.el.style.top = `${top.toString()}px`
   }
 
-  // posisi kiri
   private setHorizontal(pos: number, offset: number): void {
     const windowWidth = window.innerWidth
     const gap = 12
     const edgeMargin = 16
 
-    // default di kanan cursor (pointer)
     let left = pos + gap
 
-    // cek element ngelebihin ujung kanan
     if (left + offset > windowWidth - edgeMargin) {
-      // jadikan ada di kiri
       left = pos - offset - gap
     }
 
-    // paksa biar ga nembus kiri
     if (left < edgeMargin) {
       left = edgeMargin
     }
@@ -318,7 +306,6 @@ export class OrderContext {
     this.setVertical(this.y, offsetY)
   }
 
-  // listener tombol close
   private btnCloseListener(): void {
     const btnClose = futor(".btn-close", this.el)
 
@@ -355,14 +342,12 @@ export class OrderContext {
   }
 
   async destroy(): Promise<void> {
-    // hapus ripple dari cache
     this._rippleCaches.forEach((ripple) => ripple.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
     this.deleteActionCache()
 
     this.el.classList.add("out")
     await waittime()
-    // hapus element
     this.el.remove()
   }
 

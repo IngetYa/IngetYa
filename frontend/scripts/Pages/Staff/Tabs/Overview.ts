@@ -16,8 +16,6 @@ import { OverviewItemCard } from "../Components/Overview/ItemCard"
 function loadingCard(): HTMLDivElement {
   const item = kel("div", "item-card")
 
-  // one line biar ga menuhin editor wkwk
-  // format aja atau pake beautifier biar rapi
   item.innerHTML = `
   <div class="item-head">
     <div class="skeleton"></div>
@@ -95,10 +93,8 @@ export class Overview implements IPrimary {
   }
 
   private writeLoading(): void {
-    // kalo di db udah ada, jangan lanjut
     if (db.overview.isLoaded) return
 
-    // loop sampe 6 kali
     for (let i = 0; i < 6; i++) {
       const eloader = loadingCard()
       this.loaders.push(eloader)
@@ -131,10 +127,8 @@ export class Overview implements IPrimary {
     for (const item of overviewData) {
       const card = new OverviewItemCard({ overview: this, item })
 
-      // masukin ke array
       this.list.push(card)
 
-      // render element
       this.efield.append(card.html)
     }
 
@@ -145,41 +139,7 @@ export class Overview implements IPrimary {
   }
 
   private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
-    // hapus dulu kalo ada modal
     formAbort()
-
-    // // hapus dulu kalo ada product context
-    // await this.contextsDestroy()
-    // // if (this.context) {
-    // //   await this.context.destroy()
-    // //   this.setContext()
-    // // }
-
-    // // cek path hierarchy
-    // const { section, sub } = hierarchy
-
-    // // kalo lagi buka cart
-    // if (this.cart) {
-    //   // hapus dulu cart-nya
-    //   this.king.tabs.hide(false)
-    //   this.hide(false)
-    //   await this.cart.destroy()
-    // }
-
-    // // kalo gada path section, stop
-    // if (!section) return
-
-    // // kalo section-nya adalah buy
-    // if (section === "buy") {
-    //   // tapi gada sub-nya, stop
-    //   if (!sub) return
-
-    //   // jalanin pembuatan cart
-    //   this.hide()
-    //   this.king.tabs.hide()
-
-    //   await this.startCart(sub)
-    // }
   }
 
   async handleHistory(hierarchy: IStackHierarchy): Promise<void> {

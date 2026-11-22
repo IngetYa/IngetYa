@@ -38,7 +38,6 @@ class ConsoleLogger {
       }
     } catch (_err) {
       filename = ""
-      //
     }
 
     Error.prepareStackTrace = _pst

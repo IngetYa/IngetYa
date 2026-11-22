@@ -38,9 +38,7 @@ export async function hasOrderLimit(uid: string): Promise<boolean> {
   return unpaidBillSize >= 5
 }
 
-// hitung biaya layanan (flat & percent)
 function getFeeCharge(price: number, fee: number, type: FeeType): number {
-  // kalo flat, langsung kasih nominal utuh
   if (type === "flat") return fee
 
   /**
@@ -55,16 +53,12 @@ function getFeeCharge(price: number, fee: number, type: FeeType): number {
    *         = 10205
    */
 
-  // rate persen >> n / 100
   const rate = fee / 100
 
-  // rate ditambah kekurangan provider >> n / (1 - rate)
   const finalRate = price / (1 - rate)
 
-  // buletin ke atas
   const finalPrice = Math.ceil(finalRate)
 
-  // hasil full fee dikurangin harga bersih
   return finalPrice - price
 }
 

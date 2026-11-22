@@ -28,7 +28,6 @@ router.post("/user-hex", async (req: Request, res: Response) => {
   if (signHex.ok) {
     const userData = signHex.data.user as IUser
 
-    // set cookie (req.session.user.<data>)
     req.user = {
       id: userData.id,
       createdAt: userData.createdAt
@@ -53,10 +52,8 @@ router.get("/redirect", async (req: Request, res: Response) => {
 
   const userCode = code.toString()
 
-  // get user info
   const user = await getOAuthUser(userCode)
 
-  // kalo gada, return error
   if (!user || !user.ok || user.error || user.errors) {
     userState.error = "auth_failed"
 
@@ -65,7 +62,6 @@ router.get("/redirect", async (req: Request, res: Response) => {
     return res.redirect(`/portal?${queryString}`)
   }
 
-  // parse user info jadi IngetYa user
   const verifyUser = rep(await processThirdParty(user))
 
   if (!verifyUser.ok || verifyUser.status !== 200) {
@@ -78,7 +74,6 @@ router.get("/redirect", async (req: Request, res: Response) => {
 
   const userData = verifyUser.data.user as IUser
 
-  // set cookie (req.session.user.<data>)
   req.user = {
     id: userData.id,
     createdAt: userData.createdAt
@@ -86,7 +81,6 @@ router.get("/redirect", async (req: Request, res: Response) => {
 
   const queryString = new URLSearchParams(userState).toString()
 
-  // redirect lah
   const redirectURL = "/portal" + (queryString.length >= 1 ? `?${queryString}` : "")
 
   return res.redirect(redirectURL)

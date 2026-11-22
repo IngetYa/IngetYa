@@ -10,7 +10,6 @@ interface CommandArgs {
 export interface PrefixCommand {
   name: string
   description?: string
-  // alias biar ga ngetik panjang. contoh "!delete" jadi "!del"
   aliases?: Array<string>
   permissions?: Array<PermissionsString> | PermissionsString
   cooldown?: number

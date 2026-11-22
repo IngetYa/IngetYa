@@ -25,7 +25,6 @@ export class Tabs {
 
   _rippleCaches: IRippleReturn[] = []
 
-  // list button kosongan
   private buttons: TabButton[] = []
 
   constructor(config: ITabsConfig) {
@@ -39,7 +38,6 @@ export class Tabs {
     this.menuUpdateString(true)
   }
 
-  // bikin element pembungkus
   private createElement(): void {
     this.el = kel("div", "Nav")
 
@@ -98,35 +96,25 @@ export class Tabs {
     this.menu.innerHTML = `<i class="${iconClassName}"></i> MENU`
   }
 
-  // render button
   private writeButton(): void {
-    // ambil dair memory
     for (const tab of TabList) {
-      // bikin constructor button
       const btn = new TabButton(tab)
 
-      // click listener
       btn.onClick(() => {
-        // kalo udah aktif, ya jangan dilajut
         if (btn.isActive) return
 
         this.menuOpenClose()
 
-        // masukin ke queue
         this.manager.next({ path: tab.id }, tab.id === "overview")
       })
-      // sisipkan ke list
       this.buttons.push(btn)
 
-      // render button ke pembungkus
       this.elist.append(btn.html)
     }
   }
 
   updateMainTo(id: string): void {
-    // cek semua button
     for (const btn of this.buttons) {
-      // aktifkan hanya kalo id-nya sama
       btn.activate(btn.id === id)
     }
   }
@@ -151,7 +139,6 @@ export class Tabs {
   }
 
   async destroy(): Promise<void> {
-    // unset semua button
     this.buttons.forEach((btn) => btn.destroy())
   }
 

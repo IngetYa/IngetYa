@@ -135,15 +135,12 @@ export class Bill {
   }
 
   private goHistoryBack(): void {
-    // batalin kalo history lagi frustasi
     if (this.locked) return
     if (this.manager.busy) return
 
-    // mundur 1 state
     history.back()
   }
 
-  // listener tombol kembali
   private btnBackListener(): void {
     const btnBack = futor(".btn-back", this.el)
     const rippleBack = SetRipple(btnBack, {
@@ -152,7 +149,6 @@ export class Bill {
         this.goHistoryBack()
       }
     })
-    // btnBack.onclick = () => this.goHistoryBack()
 
     this._rippleCaches.push(rippleBack)
 

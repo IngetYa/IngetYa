@@ -1,13 +1,10 @@
 import type { IAny, IQueries, IURLQueries } from "@/types/LibTypes"
 import { qutor } from "@/core/kel"
 
-// memory
 const queries: IURLQueries = {}
 
-// memory
 const wininp: IQueries = {}
 
-// tadinya buat EJS, ntar lah kalo gada solusi lain
 const inpGlobal = qutor("#xxx", document.documentElement, "input")
 try {
   const inpGlobalJSON = JSON.parse(inpGlobal?.value || "{}")
@@ -16,7 +13,6 @@ try {
   console.error("Parse global input failed")
 }
 
-// query param to object
 const urlParams = new URLSearchParams(window.location.search)
 urlParams.forEach((val, key) => (queries[key] = val))
 

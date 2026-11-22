@@ -28,32 +28,23 @@ export class ProductCard {
     this.contextListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "item")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `<div class="thumbnail"> <img src="${this.product.image}" alt="${this.product.name} Thumbnail" /> </div> <div class="tags"></div> <div class="name">${toText(this.product.name)}</div> <div class="price">Rp${toCurrency(this.product.price + db.price["price_month-1"])}</div>`
   }
 
-  // render semua kategori
   private writeCategories(): void {
     const etags = futor(".tags", this.el)
 
-    // loop kategori
     for (const tag of this.product.categories) {
-      // bikin element
       const etag = kel("div", "tag")
-      // sisipkan nama
       etag.innerText = tag
 
-      // render element
       etags.append(etag)
     }
   }
 
-  // listener click buat element
   private contextListener(): void {
     const ripple = SetRipple(this.el, {
       color: Colors.primaryDark,
@@ -79,11 +70,9 @@ export class ProductCard {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 

@@ -32,7 +32,6 @@ export class Bills implements IPrimary {
   private bill?: Bill
 
   private inp!: HTMLInputElement
-  // private contexts: ProductContext[] = []
 
   constructor(config: IPrimaryConfig) {
     this.king = config?.king
@@ -44,7 +43,6 @@ export class Bills implements IPrimary {
     this.searchListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppMain Bills")
 
@@ -53,8 +51,6 @@ export class Bills implements IPrimary {
       setTimeout(() => this.el.classList.remove(this.anim!), 300)
     }
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="Header">
       <div class="HeaderMain">
@@ -100,14 +96,10 @@ export class Bills implements IPrimary {
   }
 
   private writeData(): void {
-    // ambil data product
     const bills = db.bills.getAll()
-    // loop sampai semua orders dirender
     for (const bill of bills) {
       const tr = new CellRow({ bills: this, bill })
-      // masukin ke array
       this.list.push(tr)
-      // render element
       this.efield.prepend(tr.html)
     }
 
@@ -131,31 +123,23 @@ export class Bills implements IPrimary {
   }
 
   private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
-    // hapus dulu kalo ada modal
     formAbort()
 
-    // cek path hierarchy
     const { section, sub } = hierarchy
 
-    // kalo lagi buka cart
     if (this.bill) {
-      // hapus dulu cart-nya
       this.hide(false)
       this.king.tabs.hide(false)
       await this.bill.destroy()
     }
 
-    // kalo gada path section, stop
     if (!section) return
 
-    // kalo section-nya adalah buy
     if (section === "peek") {
-      // tapi gada sub-nya, stop
       if (!sub) return
 
       this.hide()
       this.king.tabs.hide()
-      // jalanin pembuatan cart
       await this.startBill(sub)
     }
   }
@@ -253,9 +237,6 @@ export class Bills implements IPrimary {
     }
 
     this.isDestroyed = true
-
-    // this.list.forEach((card) => card.destroy())
-    // this.list.splice(0, this.list.length)
 
     this.el.remove()
   }

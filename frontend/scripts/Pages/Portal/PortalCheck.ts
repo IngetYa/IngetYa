@@ -9,16 +9,13 @@ import type { IUser } from "@/types/UserTypes"
 async function checkUser(useAuth?: string): Promise<IResponse> {
   const authStr = useAuth === "1" ? `?apps=${useAuth}` : ""
 
-  // cek kalo user udah login
   const user = await xhr.get(`/x/auth/get-user${authStr}`)
 
-  // kalo too many request, ulangi setelah semenit. aowkwk
   if (user.status === 429) {
     await waittime(1000)
     return await checkUser(useAuth)
   }
 
-  // kalo gagal, kirim apa adanya
   if (!user.ok) return user
 
   return user
@@ -36,8 +33,6 @@ export class PortalCheck implements IPortalClass {
   private createElement(): void {
     this.el = kel("div", "PortalCheck")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `<div class="box"><p><i class="fa-solid fa-circle-notch fa-spin"></i> ${this.text || lang("connecting")}</p></div>`
 
     eroot().append(this.el)
@@ -50,7 +45,6 @@ export class PortalCheck implements IPortalClass {
   async getUser(useAuth?: string): Promise<IResponse> {
     this.createElement()
 
-    // kirim info user
     const userData = await checkUser(useAuth)
 
     await waittime(1000)

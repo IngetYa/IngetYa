@@ -197,41 +197,7 @@ export class Users implements IPrimary {
   }
 
   private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
-    // hapus dulu kalo ada modal
     formAbort()
-
-    // // hapus dulu kalo ada product context
-    // await this.contextsDestroy()
-    // // if (this.context) {
-    // //   await this.context.destroy()
-    // //   this.setContext()
-    // // }
-
-    // // cek path hierarchy
-    // const { section, sub } = hierarchy
-
-    // // kalo lagi buka cart
-    // if (this.cart) {
-    //   // hapus dulu cart-nya
-    //   this.king.tabs.hide(false)
-    //   this.hide(false)
-    //   await this.cart.destroy()
-    // }
-
-    // // kalo gada path section, stop
-    // if (!section) return
-
-    // // kalo section-nya adalah buy
-    // if (section === "buy") {
-    //   // tapi gada sub-nya, stop
-    //   if (!sub) return
-
-    //   // jalanin pembuatan cart
-    //   this.hide()
-    //   this.king.tabs.hide()
-
-    //   await this.startCart(sub)
-    // }
   }
 
   async handleHistory(hierarchy: IStackHierarchy): Promise<void> {

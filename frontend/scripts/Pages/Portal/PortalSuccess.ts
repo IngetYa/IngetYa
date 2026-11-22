@@ -9,14 +9,11 @@ export class PortalSuccess implements IPortalClass {
 
   private el!: HTMLDivElement
 
-  // next function setelah user klik kembali
   private onUserNext?: () => void
 
   private createElement(): void {
     this.el = kel("div", "PortalFinal")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `<div class="box"> <div class="text"> <div class="title">IngetYa</div> <div class="desc"> <p class="reason">${lang("auth_success_1")}</p> <div class="divider"><span>Nice :)</span></div> <p class="failed-p">${lang("auth_success_2")}</p> </div> </div> <div class="action"> <div class="btn btn-back"><i class="fa-solid fa-face-kiss-wink-heart"></i> </div> </div> </div>`
 
     eroot().append(this.el)

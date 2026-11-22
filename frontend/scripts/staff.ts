@@ -13,22 +13,18 @@ import { eroot } from "@/core/kel"
 import { StateManager } from "./Pages/Staff/core/StateManager"
 
 function startApp(): void {
-  // load kode 'locale'
   loadLocale((newLang) => setLanguage(newLang))
 
-  // tambahin ke data locale
   addLocaleData(staffLocaleData, dateLocaleData)
 
   const splash = new Splash()
   eroot().append(splash.html)
 
   splash.onComplete(() => {
-    // langsung cek history state
     const stateManager = new StateManager()
     stateManager.init()
   })
 
-  // langsung load data app
   splash.loadData()
 }
 

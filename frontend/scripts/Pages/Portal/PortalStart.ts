@@ -7,69 +7,49 @@ import { PortalError } from "./PortalError"
 import { PortalSuccess } from "./PortalSuccess"
 import waittime from "@/lib/waittime"
 
-// bikin portal
 export async function createSignInForm() {
-  // base form
   const signInForm = new PortalSignIn()
 
-  // next function kalo login berhasil
   signInForm.onSuccessLogin(() => startAppContent())
 
-  // render formnya
   signInForm.init()
 }
 
 export async function startAppContent(): Promise<void> {
-  // base user check
   const userCheck = new PortalCheck()
 
-  // ambil info user
   const user = await userCheck.getUser()
 
-  // kalo user ga ketemu (belum login), kasih portal
   if (user.status !== 200) return createSignInForm()
 
-  // kasih base success portal
   const lunaSuccess = new PortalSuccess()
-  // next function
   lunaSuccess.onAcknowledge(() => startAppContent())
 
-  // pindah ke next redirect
   window.location.href = `${findQuery("redirect") || "/app"}`
 
   await waittime(1000)
 
-  // render success
   lunaSuccess.init()
 }
 
-// awal dari segala awal
 export async function startPortalApp(): Promise<void> {
-  // load kode 'locale'
   loadLocale((newLang) => setLanguage(newLang))
 
-  // tambahin ke data locale
   addLocaleData(portalLocaleData)
 
   const errMsg = findQuery("errorMsg")
 
   if (findQuery("error")) {
-    // base error portal
     const lunaErr = new PortalError(errMsg)
-    // next function
     lunaErr.onAcknowledge(() => startAppContent())
-    // render error
     lunaErr.init()
 
     return
   }
 
   if (findWininp("error")) {
-    // base error portal
     const lunaErr = new PortalError(findWininp("msg"), true)
-    // next function
     lunaErr.onAcknowledge(() => startAppContent())
-    // render error
     lunaErr.init()
     return
   }

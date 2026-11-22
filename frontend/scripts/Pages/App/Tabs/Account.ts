@@ -41,7 +41,6 @@ export class Account implements IPrimary {
     this.logoutListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppMain Account")
 
@@ -50,8 +49,6 @@ export class Account implements IPrimary {
       setTimeout(() => this.el.classList.remove(this.anim!), 300)
     }
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="Header">
       <div class="HeaderMain">
@@ -198,13 +195,11 @@ export class Account implements IPrimary {
         if (this.manager.busy) return
         this.locked = true
 
-        // bikin form ganti locale
         const changedLang = await changeLang()
         this.locked = false
 
         if (!changedLang) return
 
-        // ulangi rendernya
         this.updateUser()
         this.updateString()
       }
@@ -306,7 +301,6 @@ export class Account implements IPrimary {
   }
 
   private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
-    // hapus dulu kalo ada modal
     formAbort()
   }
 
@@ -331,9 +325,6 @@ export class Account implements IPrimary {
     }
 
     this.isDestroyed = true
-
-    // this.list.forEach((card) => card.destroy())
-    // this.list.splice(0, this.list.length)
 
     this.el.remove()
   }

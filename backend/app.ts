@@ -18,14 +18,10 @@ import { webhook } from "#main/webhook/webhook"
 import { isProd } from "#lib/gen"
 import logger from "#lib/logger"
 
-// express server ambil dari express websocket
-// yang diambil dari express server itu sendiri
 const server = expressWs(express())
 
-// ini hasil servernya (app), sama tiap-tiap koneksi socket.
 const { app, getWss } = server
 
-// koneksi mongodb, buat dipake setelah ini
 const storePromise = mongoose.connection.asPromise().then((conn) => conn.getClient())
 
 app.use(
@@ -35,37 +31,31 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 28, // expire setelah 28 hari
+      maxAge: 1000 * 60 * 60 * 24 * 28,
       sameSite: "strict"
     },
     store: MongoStore.create({
-      clientPromise: storePromise, // append dari koneksi mongodb yang udah ada
+      clientPromise: storePromise,
       dbName: cfg.DB_NAME,
       collectionName: "sessions",
-      stringify: false, // biar bisa dibaca sebagai BSON
+      stringify: false,
       autoRemove: "native"
     })
   })
 )
 
-// biar bisa pake `req.user`
 app.use(sessionUserBinder)
 
-// rencana diubah ke "static"
 app.use(express.static("public"), express.static("static"))
 
-// view engine, tadinya html biasa
 app.set("view engine", "ejs")
 
-// endpoint buat websocket
 app.ws("/socket", (wsClient, req: Request) => {
   const ws = wsClient
 
-  // start websocket hanlder
   startSocketApp(ws, req)
 })
 
-// ini cara satu-satunya buat cek ping user, asu cok cok :)
 const interval = setInterval(() => {
   getWss().clients.forEach((client) => {
     const ws = client as WebSocket
@@ -88,7 +78,6 @@ getWss().on("error", () => {
   // [!TODO] end process and send webhook
 })
 
-// set each router endpoint
 app.use("/x/auth", authRouter)
 app.use("/x/profile", profileRouter)
 app.use("/x/staff", staffRouter)
@@ -126,15 +115,13 @@ app.get("/", (req: Request, res: Response) => {
   return res.render("home")
 })
 
-// endpoint ga ketemu
 app.use("/", (req: Request, res: Response) => {
   const isJsonRequest = req.headers.accept?.includes("application/json") || req.headers["x-requested-with"] === "XMLHttpRequest"
-  // kalo accept type-nya json, ya kasih json
+
   if (isJsonRequest) {
     return res.status(404).json({ ok: false, status: 404, code: "not_found", error: "Not Found" })
   }
 
-  // kalo engga, kirim aja html aowkwk
   return res.status(404).json({
     ok: false,
     status: 404,
@@ -150,7 +137,6 @@ app.use("/", (req: Request, res: Response) => {
   // })
 })
 
-// server express error
 app.use((err: IAny, req: Request, res: Response, next: NextFunction) => {
   // khawatir server ngang-ngong, kadang jadi goblok.
   // kalo error-nya modelan exception, sering header client
@@ -160,7 +146,6 @@ app.use((err: IAny, req: Request, res: Response, next: NextFunction) => {
 
   logger.error(err)
 
-  // kalo errornya berhasil disanitasi, coba kirim webhook
   webhook("errors", {
     author: { name: "Oops!" },
     description: err,
@@ -169,7 +154,6 @@ app.use((err: IAny, req: Request, res: Response, next: NextFunction) => {
 
   const isJsonRequest = req.headers.accept?.includes("application/json") || req.headers["x-requested-with"] === "XMLHttpRequest"
 
-  // kalo accept type-nya json, ya kasih json
   if (isJsonRequest) {
     if (err.type === "entity.too.large" || err.code === "LIMIT_FILE_SIZE") {
       return res.status(413).json({
@@ -185,8 +169,6 @@ app.use((err: IAny, req: Request, res: Response, next: NextFunction) => {
       code: "internal_server_error"
     })
   }
-
-  // kalo engga, kirim aja html aowkwk
 
   if (err.type === "entity.too.large") {
     return res.status(413).json({

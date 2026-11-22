@@ -4,7 +4,7 @@ import { type IRippleReturn } from "@/lib/Ripple"
 import { formAbort } from "@/lib/modal"
 import db from "../data/db"
 import xhr from "@/lib/xhr"
-import type { PaginatedResult } from "../types/EmbededAPITypes"
+import type { HistoryPaginatedResult } from "../types/EmbededAPITypes"
 import type { IConvo } from "@/types/ServiceTypes"
 import { ConvoCard, NoDataConvoCard } from "../Components/Chats/ConvoCard"
 import { StateManager } from "../core/StateManager"
@@ -107,9 +107,9 @@ export class Chats {
     if (!db.convo.isLoaded) {
       await waittime(1000)
 
-      const res = await xhr.forceGet(`/x/staff/data/convo/1`)
+      const res = await xhr.forceGet(`/x/staff/data/convo`)
 
-      const data = res.data as PaginatedResult<IConvo>
+      const data = res.data as HistoryPaginatedResult<IConvo>
 
       db.convo.Meta = data.meta
       db.convo.update(...data.data)
@@ -201,10 +201,8 @@ export class Chats {
     if (!section) return
 
     if (section === "room") {
-      // tapi gada sub-nya, stop
       if (!sub) return
 
-      // jalanin pembuatan cart
       this.hide()
       this.king.tabs.hide()
 

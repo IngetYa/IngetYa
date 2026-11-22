@@ -23,10 +23,8 @@ export class TabButton {
   constructor(private config: ITabButtonConfig) {
     this.createElement()
 
-    // ripple effect kek ala-ala android
     this.ripple = SetRipple(this.el, { color: Colors.primaryDark })
 
-    // listener onclick
     this._onBtnClick()
   }
 
@@ -34,7 +32,6 @@ export class TabButton {
     return this.config.id
   }
 
-  // bikin elemen utama pake anchor
   private createElement(): void {
     this.el = kel("a", `btn btn-${this.config.id}`)
 
@@ -48,29 +45,22 @@ export class TabButton {
   }
 
   private _onBtnClick(): void {
-    // properti clickListener
     this.clickListener = () => {
-      // kalo ada setClick, jalanin
       if (this.setClick) this.setClick()
     }
 
-    // clickListener sesungguhnya
     this.el.addEventListener("click", this.clickListener)
   }
 
-  // sisipkan ke properti setClick
   onClick(newFunc?: () => void): void {
     this.setClick = newFunc
   }
 
-  // true/false
   get isActive(): boolean {
     return this.el.classList.contains("active")
   }
 
-  // ganti status 'isActive'
   activate(status: boolean = true): void {
-    // update warna button
     this.el.classList[status ? "add" : "remove"]("active")
   }
 
@@ -79,17 +69,13 @@ export class TabButton {
   }
 
   destroy(): void {
-    // stop listener ripple (biar ga loop onclick)
     this.ripple.stopListener()
 
-    // stop listener utama (biar ga loop onclick)
     this.el.removeEventListener("click", this.clickListener!)
 
-    // hapus element utama
     this.el.remove()
   }
 
-  // ambil elementnya
   get html(): HTMLAnchorElement {
     return this.el
   }

@@ -13,19 +13,16 @@ export class OverviewAPI {
     this._loaded = status
   }
 
-  // ambil overview pake id
   find(id: string): IOverview | null {
     const overview = this._data.find((k) => k.id === id)
 
     return overview || null
   }
 
-  // ambil semua
   getAll(): IOverview[] {
     return this._data
   }
 
-  // tambah overviews
   add(...overviews: IOverview[]): void {
     for (const overview of overviews) {
       this._data.push(overview)
@@ -44,12 +41,10 @@ export class OverviewAPI {
     }
   }
 
-  // jumlah overviews
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

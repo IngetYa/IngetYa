@@ -50,12 +50,9 @@ export class Cart {
     this.btnBackListener()
   }
 
-  // element utama
   private createElement(): void {
     this.el = kel("div", "AppSec Cart")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="AppMain-Box">
       <div class="Header">
@@ -205,19 +202,14 @@ export class Cart {
     this.etotal = futor(".total-price", this.el, "div")
   }
 
-  // render semua payment
   private writePayments(): void {
     const epayments = futor(".payments", this.el)
 
-    // loop pake fee, karna pake payment yg memang udah ketemu fee-nya
     for (const fee of db.fee) {
-      // bikin constructor
       const payment = new PaymentSummary(this, fee)
 
-      // sisipkan ke array
       this.payments.push(payment)
 
-      // render element
       epayments.append(payment.html)
     }
   }
@@ -249,11 +241,9 @@ export class Cart {
     inpName.focus()
   }
 
-  // perbarui keseluruhan price
   updatePrice(): void {
     const pricing: IBundlePrice[] = []
 
-    // sisipkan harga tema + masa aktif
     pricing.push(
       {
         bundle: lang("label_cart_theme"),
@@ -267,7 +257,6 @@ export class Cart {
       }
     )
 
-    // kalo pake addon buku tamu, sisipkan juga
     if (this.bookId) {
       pricing.push({
         bundle: lang("label_cart_addon"),
@@ -276,59 +265,48 @@ export class Cart {
       })
     }
 
-    // sisipkan harga jumlah tamu
     pricing.push({
       bundle: lang("label_cart_guests"),
       name: lang(`label_cart_${this.guestId}`),
       price: db.price[`price_${this.guestId}`]
     })
 
-    // totalin
     this.countSubTotal(pricing)
   }
 
   private countSubTotal(pricing: IBundlePrice[]): void {
-    // total harga bersih
     const subTotal = pricing.map((k) => k.price).reduce((a, b) => a + b, 0)
 
-    // sisipkan harga bersih
     pricing.push({
       bundle: lang("label_cart_sub_total"),
       price: subTotal
     })
 
-    // buat teks info
     const textPrice = `Rp${toCurrency(subTotal)}`
 
-    // render text info ke subtotal element
     this.etotal.innerText = textPrice
 
-    // kasih tau ke semua payment yg udah dirender
     for (const payment of this.payments) {
       payment.updatePrice(pricing, subTotal)
     }
   }
 
-  // listener setiap input paket
   private packageListener(): void {
     const radios = this.el.querySelectorAll('input[name="month"]') as NodeListOf<HTMLInputElement>
 
     radios.forEach((inp) => {
       inp.onchange = () => {
-        // perbarui id saat ini
         this.packageId = inp.value
         this.updatePrice()
       }
     })
   }
 
-  // listener setiap input tamu
   private guestListener(): void {
     const radios = this.el.querySelectorAll('input[name="guest"]') as NodeListOf<HTMLInputElement>
 
     radios.forEach((inp) => {
       inp.onchange = () => {
-        // perbarui id saat ini
         this.guestId = inp.value
         this.setBookAddon()
         this.updatePrice()
@@ -336,25 +314,19 @@ export class Cart {
     })
   }
 
-  // tentukan addon gratis
   private setBookAddon(): void {
-    // seleksi pilihan tamu
     const cleanType = this.guestId.replace("guest-", "")
-    // ambil angka belakang
     const typeNum = Number(cleanType)
 
     const inpField = futor(".addon-book", this.el)
 
-    // kalo 1 ke bawah, tampilkan input, terus stop
     if (typeNum <= 1) {
       inpField.classList.remove("hide")
       return
     }
 
-    // hide input
     inpField.classList.add("hide")
 
-    // kalo input udah dichecklist, matiin, hapus id saat ini
     const bookAddon = futor('input[name="book"]', this.el, "input")
     if (bookAddon.checked) {
       bookAddon.checked = false
@@ -362,12 +334,9 @@ export class Cart {
     }
   }
 
-  // listener setiap input addon
   private addonListener(): void {
-    // listener buku tamu
     const bookAddon = futor('input[name="book"]', this.el, "input")
     bookAddon.onchange = () => {
-      // perbarui id saat ini
       this.bookId = bookAddon.checked ? bookAddon.value : undefined
       this.setBookAddon()
       this.updatePrice()
@@ -375,15 +344,12 @@ export class Cart {
   }
 
   private goHistoryBack(): void {
-    // batalin kalo history lagi frustasi
     if (this.locked) return
     if (this.manager.busy) return
 
-    // mundur 1 state
     history.back()
   }
 
-  // listener tombol kembali
   private btnBackListener(): void {
     const btnBack = futor(".btn-back", this.el)
     const rippleBack = SetRipple(btnBack, {
@@ -392,7 +358,6 @@ export class Cart {
         this.goHistoryBack()
       }
     })
-    // btnBack.onclick = () => this.goHistoryBack()
 
     const btnCancel = futor(".btn-cancel", this.el)
     const rippleCancel = SetRipple(btnCancel, {
@@ -402,7 +367,6 @@ export class Cart {
         this.goHistoryBack()
       }
     })
-    // btnCancel.onclick = () => this.goHistoryBack()
 
     this._rippleCaches.push(rippleBack, rippleCancel)
 

@@ -30,24 +30,16 @@ export class OrderCard {
     const productId = this.order.productId
     this.product = db.products.find(productId)!
 
-    // this.product = db.products.find(or)
-
-    // this.order.productId;
-
     this.createElement()
-    // this.writeCategories()
     this.contextListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "item")
 
     const productName = this.product.name
     const productImg = this.product.image
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="sources">
       <div class="source-name">${toText(productName)}</div>
@@ -87,11 +79,9 @@ export class OrderCard {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 
@@ -122,12 +112,9 @@ export class NoDataOrderCard {
     this.contextListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "item-empty")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="empty-icon"><i class="fal fa-face-kiss-wink-heart"></i></div>
     <div class="empty-title">${this._name}</div>
@@ -168,11 +155,9 @@ export class NoDataOrderCard {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 

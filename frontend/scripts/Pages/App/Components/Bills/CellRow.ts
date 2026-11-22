@@ -19,7 +19,6 @@ export class CellRow {
   private bill: IBill
 
   private order: IOrder
-  // private product: IProduct
 
   private _rippleCaches: IRippleReturn[] = []
 
@@ -31,19 +30,13 @@ export class CellRow {
 
     this.createElement()
     this.clickListener()
-    // this.writeCategories()
-    // this.contextListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("tr")
 
-    // transaction_status
     const status = this.bill.transaction_status
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <td>#${this.bill.orderId}</td>
     <td><span class="status ${status}">${lang("status_" + status)}</span></td>
@@ -73,11 +66,9 @@ export class CellRow {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 
@@ -103,14 +94,9 @@ export class NoDataCellRow {
     this.createElement()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("tr", "cell-empty")
 
-    // transaction_status
-
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `<td colspan="4">${lang("bill_nodata")}</td>`
   }
 
@@ -127,11 +113,9 @@ export class NoDataCellRow {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 

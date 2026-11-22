@@ -26,12 +26,10 @@ export class BalanceAPI {
     return balance?.amount || 0
   }
 
-  // ambil semua
   getAll(): IBalance[] {
     return this._data
   }
 
-  // tambah balances
   add(...balances: IBalance[]): void {
     for (const balance of balances) {
       this._data.push(balance)
@@ -50,12 +48,10 @@ export class BalanceAPI {
     }
   }
 
-  // jumlah balances
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

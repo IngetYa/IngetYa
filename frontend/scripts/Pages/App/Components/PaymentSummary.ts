@@ -11,7 +11,6 @@ import { Colors } from "@/core/Colors"
 import waittime from "@/lib/waittime"
 import xhr from "@/lib/xhr"
 
-// reusable bikin elemen guides
 export function createGuides(guides: IPaymentGuide): HTMLDivElement {
   const el = kel("div", "PaymentHelp")
 
@@ -36,9 +35,7 @@ export function createGuides(guides: IPaymentGuide): HTMLDivElement {
   return el
 }
 
-// hitung biaya layanan (flat & percent)
 function getFeeCharge(price: number, fee: number, type: FeeType): number {
-  // kalo flat, langsung kasih nominal utuh
   if (type === "flat") return fee
 
   /**
@@ -53,20 +50,15 @@ function getFeeCharge(price: number, fee: number, type: FeeType): number {
    *         = 10205
    */
 
-  // rate persen >> n / 100
   const rate = fee / 100
 
-  // rate ditambah kekurangan provider >> n / (1 - rate)
   const finalRate = price / (1 - rate)
 
-  // buletin ke atas
   const finalPrice = Math.ceil(finalRate)
 
-  // hasil full fee dikurangin harga bersih
   return finalPrice - price
 }
 
-// reusable bikin item summary
 function createSummary(pricing: IBundlePrice): HTMLDivElement {
   const el = kel("div", "item")
 
@@ -114,7 +106,6 @@ export class PaymentSummary {
   ) {
     this.currLang = getLanguage()
 
-    // fetch local dari paymentDetail
     const paymentData = paymentDetail.find((payment) => payment.id === this.fee.id)
     if (!paymentData) throw new Error("Payment Data is invalid")
 
@@ -127,7 +118,6 @@ export class PaymentSummary {
     this.btnBuyListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "Payment")
 
@@ -142,21 +132,16 @@ export class PaymentSummary {
     this.edetail.append(this.efee, this.btnBuy)
   }
 
-  // icon + nama metode pembayaran pake bahasa lokal
   private updateName(): void {
     this.ename.innerHTML = `<span class="arrow-openclose"><i class="fas fa-chevron-right"></i></span><img src="/assets/payments/${this.payment.id}-icon.svg" alt="${this.payment.name[this.currLang]} Logo" height="24" /><span class="title-text">${this.payment.name[this.currLang]}</span>`
   }
 
   private updateGuides(): void {
-    // guide pake bahasa lokal
     const guides = this.payment.guides[this.currLang]
 
-    // render semua guide pake loop
     for (const guide of guides) {
-      // bikin element guide-nya
       const eguide = createGuides(guide)
 
-      // render element
       this.edetail.append(eguide)
     }
   }
@@ -165,7 +150,6 @@ export class PaymentSummary {
     const nameRipple = SetRipple(this.ename, {
       color: Colors.textMuted,
       run: () => {
-        // next status pasti kebalikan kondisi saat ini
         const nextStatus = !this._isActive
 
         this.activate(nextStatus)
@@ -175,67 +159,52 @@ export class PaymentSummary {
     this._rippleCaches.push(nameRipple)
   }
 
-  // update detail harga
   updatePrice(pricing: IBundlePrice[], subTotal: number): void {
     const feeAmount = this.fee.fee.charge
     const feeType = this.fee.fee.type
 
     const feeName = this.fee.fee.type === "flat" ? `Rp${toCurrency(feeAmount)}` : `${feeAmount}%`
 
-    // hitung fee-nya
     const feeCharge = getFeeCharge(subTotal, feeAmount, feeType)
 
-    // buat object serupa baru biar ga ngeoverwrite variable lama
     const newPricing = toObject(pricing) as IBundlePrice[]
 
-    // sisipkan fee
     newPricing.push({
       bundle: lang("label_cart_fee"),
       price: feeCharge,
       name: feeName
     })
 
-    // total plus fee
     const amountTotal = subTotal + feeCharge
 
-    // sisipkan total
     newPricing.push({
       bundle: lang("label_cart_total"),
       price: amountTotal
     })
 
-    // jalanin render
     this.writePriceData(newPricing)
   }
 
-  // render detail harga
   private writePriceData(bundleData: IBundlePrice[]): void {
-    // hapus semua element lama
     while (this.efee.firstChild) {
       this.efee.firstChild.remove()
     }
 
-    // loop semua data array harga
     for (const data of bundleData) {
-      // bikin element
       const item = createSummary(data)
 
-      // render element
       this.efee.append(item)
     }
   }
 
   private async onBuy(): Promise<void> {
-    // kalo history-nya lagi frustasi, stop dulu
     if (this.cart.locked) return
     if (this.cart.manager.busy) return
 
-    // lock cart biar dapet kondisi true
     this.cart.lock()
 
     await waittime(140)
 
-    // ambil data order
     const bundle = this.cart.getOrderData()
 
     if (!bundle.orderName || bundle.orderName.length > 100) {
@@ -245,23 +214,18 @@ export class PaymentSummary {
       return
     }
 
-    // kirim properti payment
     bundle.paymentId = this.payment.id
 
-    // request order ke server
     const order = await formLoading(xhr.post("/x/orders/create", bundle), lang("processing"))
 
-    // kalo gagal, kasih modal pesan error
     if (!order.ok) {
       await formAlert(lang(order.code || "error"))
       this.cart.lock(false)
       return
     }
 
-    // hehe sabar ges
     await formAlert("Under Development LOL XD")
 
-    // unlock cart
     this.cart.lock(false)
   }
 
@@ -275,7 +239,6 @@ export class PaymentSummary {
   }
 
   activate(status: boolean = true): void {
-    // tampilkan detail
     this.el.classList[status ? "add" : "remove"]("show")
     this._isActive = status
   }

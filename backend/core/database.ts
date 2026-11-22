@@ -3,10 +3,8 @@ import mongoose from "mongoose"
 import logger from "#lib/logger"
 
 export default class MongoConnection {
-  // sekali jalan, setelah state database selesai
   private onConnectedCallback?: () => void
 
-  // ngehindarin double connection
   private isConnectedBefore = false
 
   constructor(
@@ -22,26 +20,20 @@ export default class MongoConnection {
   close() {
     logger.info("Closing the MongoDB conection")
 
-    // paksa tutup database
     mongoose.connection.close()
   }
 
   connect(onConnectedCallback?: () => Promise<void> | void) {
-    // simpen next func buat dijalanin kalo bot berhasil online
     if (onConnectedCallback) this.onConnectedCallback = onConnectedCallback
 
-    // coba login
     mongoose.connect(this.mongoUrl, { dbName: this.dbName }).catch((err) => {
       logger.error("error connecting to MongoDB")
 
-      // kalo error, process.exit(n)
       throw new Error(err)
     })
 
-    // kasih mode json
     mongoose.set("toJSON", { versionKey: false, virtuals: true })
 
-    // kasih mode bson/javascript's object (aslinya gatau sebutannya wkwk, pokonya biar bisa gunain banyak propertinya)
     mongoose.set("toObject", { versionKey: false, virtuals: true })
   }
 
@@ -49,7 +41,6 @@ export default class MongoConnection {
     logger.success(`MongoDB: Logged in as ${this.dbName}`)
     this.isConnectedBefore = true
     if (this.onConnectedCallback) {
-      // jalananin next func
       this.onConnectedCallback()
       this.onConnectedCallback = () => logger.info("Server already listen")
     }
@@ -64,7 +55,6 @@ export default class MongoConnection {
   }
 
   private onDisconnected = () => {
-    // auto reconnect
     if (!this.isConnectedBefore) {
       logger.info("Retrying MongoDB connection")
       setTimeout(() => this.connect(), 2000)

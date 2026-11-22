@@ -10,24 +10,17 @@ import type { IPortalClass } from "@/types/PortalTypes"
 import { type IRippleReturn, SetRipple } from "@/lib/Ripple"
 import { Colors } from "@/core/Colors"
 
-// shortcut text aowkwk
 const strings: Record<string, () => string> = {
   redirecting: () => `<i class="fa-jelly-fill fa-regular fa-check"></i> <span>${lang("redirecting")}</span>`,
   processing: () => `<i class="fa-solid fa-circle-notch fa-spin"></i>`,
   login: () => `<i class="fa-solid fa-arrow-right-to-arc"></i> <span>${lang("auth_login")}</span>`,
   luna: () => `<img src="/assets/providers/luna.svg" class="provider-icon" /> <span>Luna</span>`,
   google: () => `<img src="/assets/providers/google.svg" class="provider-icon" /> <span>Google</span>`,
-  // discord: () => `<img src="/assets/providers/discord.svg" class="provider-icon" /> <span>Discord</span>`,
-  // github: () => `<img src="/assets/providers/github_black.svg" class="provider-icon" /> <span>GitHub</span>`,
-  // tiktok: () => `<img src="/assets/providers/tiktok.svg" class="provider-icon" /> <span>TikTok</span>`,
-  // facebook: () => `<img src="/assets/providers/facebook.svg" class="provider-icon" /> <span>Facebook</span>`,
   hex: () => `<i class="fas fa-key"></i> <span>${lang("auth_label_guest")}</span>`
 }
 
-// client email validation
 const emailRegex: RegExp = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
-// not ready just yet
 const IN_DEVELOPMENTS = ["tiktok", "facebook"]
 
 export class PortalSignIn implements IPortalClass {
@@ -38,17 +31,13 @@ export class PortalSignIn implements IPortalClass {
   private btnLogin!: HTMLButtonElement
   private inpEmail!: HTMLInputElement
 
-  // sarang tombol ripple
   private ripples: IRippleReturn[] = []
 
-  // next function setelah berhasil login
   private onSucessFunc?: (s?: IAny) => IAny
 
   private createElement(): void {
     this.el = kel("div", "PortalLogin")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `<div class="PortalForms"> <form action="/x/auth/login" class="PortalEmail" id="login-form"> <div class="f"> <div class="title-icons"> <img src="/assets/icons/ingetya-text.svg" alt="[IngetYa Logo]" /> </div> <div class="title-title"></div> <div class="title-desc form-title"><i class="fa-solid fa-circle-notch fa-spin"></i></div> </div> <div class="f"> <div class="btn btn-language"> <i class="fa-jelly-fill fa-regular fa-language fa-fw"></i> <span>Bahasa/Language</span> <i class="fa-solid fa-chevron-down fa-fw"></i> </div> </div> <div class="f"> <label for="login-email" class="label-email"><i class="fa-solid fa-circle-notch fa-spin"></i></label> <div class="inp"> <div class="inp-icon"> <i class="fa-jelly-fill fa-regular fa-envelope"></i> </div> <input type="email" name="login-email" id="login-email" placeholder="yourmail@email.com" autocomplete="email" maxlength="1000" required /> </div> </div> <div class="group group-code"> </div> <div class="f form-btn-actions"> <button class="btn btn-login"><i class="fa-solid fa-arrow-right-to-arc"></i> <span><i class="fa-solid fa-circle-notch fa-spin"></i></span></button> </div> </form> <div class="PortalOthers"> <div class="portal-other-divider"> <span><i class="fa-solid fa-circle-notch fa-spin"></i></span> </div> <div class="login-providers"> <a href="/x/auth/google" class="btn btn-google" id="google-login"> <img src="/assets/providers/google.svg" class="provider-icon" /> <span>Google</span> </a> <a href="/x/auth/luna" class="btn btn-luna" id="luna-login"> <img src="/assets/providers/luna.svg" class="provider-icon" /> <span>Luna</span> </a> <a href="/x/auth/hex" class="btn btn-hex" id="hex-login"> <i class="fas fa-key"></i> <span>${lang("auth_label_guest")}</span> </a> </div> </div> </div> <div class="PortalAcceptTerms"> <p>By registering, you agree and accept the <a href="/legal/terms" target="_blank">Terms of Serivce</a> and <a href="/legal/privacy" target="_blank">Privacy Policy</a>.</p> </div>`
 
     this.btnLogin = futor(".btn-login", this.el, "button")
@@ -57,7 +46,6 @@ export class PortalSignIn implements IPortalClass {
     eroot().append(this.el)
   }
 
-  // render ulang berdasarkan locale
   private updateString(): void {
     this.inpEmail.placeholder = lang("email_placeholder")
 
@@ -79,43 +67,34 @@ export class PortalSignIn implements IPortalClass {
     btnHex.innerHTML = strings.hex()
   }
 
-  // tombol lang switcher
   private languageListener(): void {
     const btnLang = futor(".btn-language", this.el)
     btnLang.onclick = async () => {
       if (this.locked) return
       this.locked = true
 
-      // bikin form ganti locale
       const changedLang = await changeLang()
       this.locked = false
 
       if (!changedLang) return
 
-      // paksa berhenti ripplesnya
       this.stopRipples()
 
-      // ulangi rendernya
       this.updateString()
       this.providerListener()
     }
   }
 
   private async formHandleEmail(form: HTMLFormElement): Promise<void> {
-    // kalo ada aktivitas penting lain, jangan dilanjut dulu
     if (this.locked) return
 
-    // buat ini jadi aktivitas penting
     this.locked = true
 
-    // buat input gabisa diisi
     this.inpEmail.readOnly = true
 
-    // jadiin form data
     const formData = new FormData(form)
 
     const email = formData.get("login-email")?.toString() || ""
-    // kalo email ga sesuai, kasih alert
     if (!email.match(emailRegex)) {
       await formAlert(lang("email_not_valid"))
       this.inpEmail.readOnly = false
@@ -123,21 +102,16 @@ export class PortalSignIn implements IPortalClass {
       return
     }
 
-    // timpa dengan icon memproses
     this.btnLogin.innerHTML = strings.processing()
 
-    // bikin queryparam jadi base64
     const queryParams = toBase64(getQueries())
 
-    // kirim request
     const getUrl = await xhr.post(`/x/auth/sign-in?i=${queryParams}`, {
       email
     })
 
-    // paksa tunggu 1 detik
     await waittime(1000)
 
-    // kalo gagal, kasih alert, dan jangan pindahin ke mana-mana
     if (!getUrl.ok) {
       this.btnLogin.innerHTML = strings.login()
       await formAlert(lang(getUrl.code))
@@ -146,13 +120,10 @@ export class PortalSignIn implements IPortalClass {
       return
     }
 
-    // kalo berhasil lanjutkan
     this.goToUserArea(getUrl.data.url)
 
-    // timpa ulang tombol login
     this.btnLogin.innerHTML = strings.login()
 
-    // buka kunci aktivitas
     this.locked = false
     this.inpEmail.readOnly = false
   }
@@ -161,7 +132,6 @@ export class PortalSignIn implements IPortalClass {
     const form = futor("#login-form", this.el, "form")
     form.onsubmit = (e) => {
       e.preventDefault()
-      // kirim request
       this.formHandleEmail(form)
     }
   }
@@ -172,24 +142,18 @@ export class PortalSignIn implements IPortalClass {
       this.onSucessFunc = undefined
     }
 
-    // redirect ke next url
     window.location.href = url
   }
 
   private providerListener(): void {
     const loginButtons = document.querySelectorAll(".login-providers .btn") as NodeListOf<HTMLAnchorElement>
 
-    // sesuaikan tombol login provider dengan endpoint masing-masing
     loginButtons.forEach((btn) => {
       const currHref = btn.getAttribute("href") as string
       const btnId = btn.getAttribute("id")!.toString().replace("-login", "")
 
-      // simpen full uri-nya
       const fullHref = `${currHref}?${getStringQueries()}`
 
-      // btn.href = IN_DEVELOPMENTS.find((k) => k === btnId) ? window.location.href : fullHref
-
-      // bikin tampilan ripple
       const toRipple = SetRipple(btn, {
         color: Colors.primaryDark,
         run: async () => {
@@ -250,16 +214,13 @@ export class PortalSignIn implements IPortalClass {
   }
 
   private stopRipples(): void {
-    // hapus listener ripple, hapus dari array
     this.ripples.forEach((ripple) => ripple.stopListener())
     this.ripples.splice(0, this.ripples.length)
   }
 
   destroy() {
-    // stop ripple
     this.stopRipples()
 
-    // hapus element
     this.el.remove()
   }
 

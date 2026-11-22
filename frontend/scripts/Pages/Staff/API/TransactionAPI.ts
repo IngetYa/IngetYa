@@ -4,7 +4,6 @@ export class TransactionAPI {
   private _data: ITransaction[] = []
   private _meta?: IPaginatedMeta
 
-  // ambil transaction pake id
   find(id: string): ITransaction | null {
     const transaction = this._data.find((k) => k.id === id)
 
@@ -19,7 +18,6 @@ export class TransactionAPI {
     return this._meta || null
   }
 
-  // ambil semua
   getAll(): ITransaction[] {
     return this._data
   }
@@ -32,12 +30,10 @@ export class TransactionAPI {
     }
   }
 
-  // jumlah transactions
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

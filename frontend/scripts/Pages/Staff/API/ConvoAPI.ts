@@ -1,9 +1,9 @@
-import type { IPaginatedMeta } from "../types/EmbededAPITypes"
+import type { IHistoryPaginatedMeta } from "../types/EmbededAPITypes"
 import type { IConvo } from "@/types/ServiceTypes"
 
 export class ConvoAPI {
   private _data: IConvo[] = []
-  private _meta?: IPaginatedMeta
+  private _meta?: IHistoryPaginatedMeta
 
   private _loaded: boolean = false
 
@@ -15,18 +15,17 @@ export class ConvoAPI {
     this._loaded = status
   }
 
-  // ambil convo pake id
   find(id: string): IConvo | null {
     const convo = this._data.find((k) => k.id === id)
 
     return convo || null
   }
 
-  set Meta(meta: IPaginatedMeta) {
+  set Meta(meta: IHistoryPaginatedMeta) {
     this._meta = meta
   }
 
-  get Meta(): IPaginatedMeta | null {
+  get Meta(): IHistoryPaginatedMeta | null {
     return this._meta || null
   }
 
@@ -38,7 +37,6 @@ export class ConvoAPI {
     })
   }
 
-  // ambil semua
   getAll(): IConvo[] {
     return this.sortData(this._data)
   }
@@ -67,12 +65,10 @@ export class ConvoAPI {
     }
   }
 
-  // jumlah rooms
   get size(): number {
     return this._data.length
   }
 
-  // hapus array
   reset(): void {
     this._data.splice(0, this._data.length)
   }

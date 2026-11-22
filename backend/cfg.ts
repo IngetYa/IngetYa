@@ -1,8 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config()
 
-// biar cepet, gausah cek typeof process.env["key"] :)
-
 export default {
   APP_PRODUCTION: process.env.APP_PRODUCTION?.toLowerCase() === "true",
   APP_PORT: Number(process.env.APP_PORT ?? 9001),

@@ -136,7 +136,6 @@ export class Account implements IPrimary {
         if (this.manager.busy) return
         this.locked = true
 
-        // bikin form ganti locale
         const changedLang = await changeLang()
         this.locked = false
 
@@ -144,7 +143,6 @@ export class Account implements IPrimary {
 
         this.curLang = changedLang
 
-        // ulangi rendernya
         this.updateString()
         this.updateData()
       }

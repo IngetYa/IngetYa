@@ -44,9 +44,6 @@ export class BubbleCard {
   }
 
   private createElement(): void {
-    // const avatarIcon = getConvoAvatar(this.item.roomType)
-    // const chatName = getConvoName(this.item)
-
     this.el = kel("div", "card")
 
     if (this.item.userId === db.me.id) this.el.classList.add("me")

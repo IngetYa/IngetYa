@@ -41,6 +41,16 @@ export interface PaginatedResult<T> {
   meta: IPaginatedMeta
 }
 
+export interface IHistoryPaginatedMeta {
+  nextCursor: string | null
+  hasOlderMessages: boolean
+}
+
+export interface HistoryPaginatedResult<T> {
+  data: T[]
+  meta: IHistoryPaginatedMeta
+}
+
 export interface IBalanceReturn {
   balance: IBalance[]
   transactions: PaginatedResult<ITransaction>

@@ -53,7 +53,6 @@ export class Orders implements IPrimary {
     this.btnCreateListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("div", "AppMain Orders")
     if (this.anim) {
@@ -61,8 +60,6 @@ export class Orders implements IPrimary {
       setTimeout(() => this.el.classList.remove(this.anim!), 300)
     }
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <div class="Header">
 
@@ -105,17 +102,13 @@ export class Orders implements IPrimary {
   }
 
   private writeData(): void {
-    // ambil data order
     const orders = db.orders.getAll()
 
-    // loop sampai semua orders dirender
     for (const order of orders) {
       const card = new OrderCard({ orders: this, order })
 
-      // masukin ke array
       this.list.push(card)
 
-      // render element
       this.efield.prepend(card.html)
     }
 
@@ -161,31 +154,23 @@ export class Orders implements IPrimary {
   }
 
   private async runHistoryQueue(hierarchy: IStackHierarchy): Promise<void> {
-    // hapus dulu kalo ada modal
     formAbort()
 
     await this.contextsDestroy()
 
-    // cek path hierarchy
     const { section, sub } = hierarchy
 
-    // kalo lagi buka bill
     if (this.bill) {
-      // hapus dulu cart-nya
       this.hide(false)
       this.king.tabs.hide(false)
       await this.bill.destroy()
     }
 
-    // kalo gada path section, stop
     if (!section) return
 
-    // kalo section-nya adalah buy
     if (section === "pay") {
-      // tapi gada sub-nya, stop
       if (!sub) return
 
-      // jalanin pembuatan cart
       this.hide()
       this.king.tabs.hide()
       await this.startBill(sub)
@@ -219,11 +204,6 @@ export class Orders implements IPrimary {
     const y = e.clientY
 
     await this.contextsDestroy()
-
-    // if (this.contexts) {
-    //   this.context.destroy()
-    //   this.setContext()
-    // }
 
     const order = db.orders.find(sub)
 

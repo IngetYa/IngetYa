@@ -11,12 +11,9 @@ const HOST: string = isProd ? `https://${cfg.APP_HOST}` : `http://localhost:${cf
 const PROV_HOST = "https://devanka.id/luna"
 
 export async function getMe(uid: string): Promise<IResTemp> {
-  // cari user berdasarkan id
   const user = await UserModel.findOne({ id: uid }).lean()
-  // kalo ga ketemu, berarti belum login
   if (!user) return { status: 401, code: "unauthorized", error: "Unauthorized" }
 
-  // siapin return data
   const userData: IUserTemp = {
     id: user.id,
     luna: user.luna,
@@ -24,7 +21,6 @@ export async function getMe(uid: string): Promise<IResTemp> {
     access: user.access
   }
 
-  // kirim data
   return { status: 200, code: "ok", data: userData }
 }
 
@@ -40,17 +36,13 @@ export async function authHex(s: IAny): Promise<IResTemp> {
 }
 
 export async function authLogin(s: IAny, query: IAny): Promise<IResTemp> {
-  // pastiin email itu string
   if (typeof s?.email !== "string") return { status: 400, code: "auth_err_01" }
 
-  // jadiin kecil semua, biar konsisten
   const email = s.email.toString().toLowerCase() as string
 
-  // regex format email
   const mailValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
   if (!email.match(mailValid)) return { status: 400, code: "auth_err_02" }
 
-  // parse dari base64 jadi object biasa
   const q = parseBase64(query.i)
 
   const stateData = {
@@ -58,11 +50,9 @@ export async function authLogin(s: IAny, query: IAny): Promise<IResTemp> {
     redirect_uri: `${HOST}/x/auth/redirect`,
     initialEmail: s.email,
     lang: typeof q.lang === "string" && q.lang === "id" ? "id" : "en",
-    // jadiin base64 kembali
     state: toBase64(q)
   }
 
-  // jadiin query ({url}?client_id={string}&redirect_uri={string})
   const queryString = new URLSearchParams(stateData).toString()
 
   const url = `${PROV_HOST}/authorize?${queryString}`
@@ -71,21 +61,16 @@ export async function authLogin(s: IAny, query: IAny): Promise<IResTemp> {
 }
 
 export async function processThirdParty(usr: IExternalUser): Promise<IResTemp> {
-  // cari user
   const existingAccount = await UserModel.findOne({ luna: usr.id }).lean()
 
-  // kalo ada, pake data yg udah ada
   if (existingAccount) {
     return { status: 200, data: { user: existingAccount } }
   }
 
-  // jumlah semua user
   const userSize = await UserModel.countDocuments()
 
-  // bikin Id baru
   const userId = "7" + rNumber(5).toString() + userSize
 
-  // bikin doc user baru
   const newUser: IUser = {
     id: userId,
     luna: usr.id,
@@ -97,7 +82,6 @@ export async function processThirdParty(usr: IExternalUser): Promise<IResTemp> {
   }
   await UserModel.create(newUser)
 
-  // kirim webhook
   webhook("accounts", {
     title: "Registered",
     description: `**ID** ${userId}\n**Luna** ${usr.id}`,

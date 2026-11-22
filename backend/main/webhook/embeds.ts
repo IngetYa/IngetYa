@@ -2,7 +2,6 @@ import { chunkString } from "#lib/gen"
 import { APIEmbed } from "#types/DiscordTypes"
 
 export function createEmbeds(s: APIEmbed): APIEmbed[] {
-  // pisahin string dengan batas 1000 karakter, jadi `string[]`
   const strings = chunkString(s.description || "", 1000)
 
   const isInspect = s.inspect
@@ -10,7 +9,6 @@ export function createEmbeds(s: APIEmbed): APIEmbed[] {
   // jangan sampe string dianggap undefined/null, so, kasih string kosong
   if (strings.length < 1) strings.push("")
 
-  // kelompokkan array description tadi, dengan tetap memiliki properti lainnya.
   const embeds = strings
     .filter((_str, i) => i <= 8)
     .map((str, i) => {
@@ -27,7 +25,6 @@ export function createEmbeds(s: APIEmbed): APIEmbed[] {
       if (s.timestamp) data.timestamp = s.timestamp
       if (s.ts) data.timestamp = new Date().toISOString()
 
-      // kasih aturan "num/total", buat jelasin nomor halaman di pesan yang sama
       if (s.title || strings.length >= 1) {
         data.title = strings.length <= 1 ? s.title : `${s.title || ""} [Page ${i + 1}/${strings.length}]`.trim()
       }

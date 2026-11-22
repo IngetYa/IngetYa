@@ -96,6 +96,7 @@ export interface IMessage {
 export type ChatRoomType = "support" | "order"
 
 export interface IConvo {
+  _id: string
   id: string // roomId on message
   roomType: ChatRoomType
   userName?: string

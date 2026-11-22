@@ -1,3 +1,5 @@
+import { Types } from "mongoose"
+
 export type ImageUrl = string
 export type HtmlUrl = string
 
@@ -78,6 +80,7 @@ export interface IBill {
 export type ChatMessageType = "file" | "text"
 
 export interface IMessage {
+  _id: Types.ObjectId
   id: string
   userId: string
   roomId: string
@@ -92,6 +95,7 @@ export interface IMessage {
 export type ChatRoomType = "support" | "order"
 
 export interface IRoom {
+  _id: Types.ObjectId
   id: string
   userId: string
   type: ChatRoomType
@@ -100,7 +104,8 @@ export interface IRoom {
 }
 
 export interface IConvo {
-  id: string // roomId on message
+  _id: Types.ObjectId
+  id: string // roomId di message
   roomType: ChatRoomType
   userName: string
   roomName: string

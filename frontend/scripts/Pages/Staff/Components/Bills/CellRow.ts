@@ -26,22 +26,16 @@ export class CellRow {
 
     this.createElement()
     this.clickListener()
-    // this.writeCategories()
-    // this.contextListener()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("tr")
 
-    // transaction_status
     const status = this.item.transaction_status
 
     const payment = paymentDetail.find((k) => k.id === this.item.paymentId)
     if (!payment) throw new Error("Payment Data is invalid")
 
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `
     <td>#${this.item.orderId}</td>
     <td>ID ${this.item.userId}</td>
@@ -74,11 +68,9 @@ export class CellRow {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 
@@ -104,14 +96,9 @@ export class NoDataCellRow {
     this.createElement()
   }
 
-  // bikin element utama
   private createElement(): void {
     this.el = kel("tr", "cell-empty")
 
-    // transaction_status
-
-    // one line biar ga menuhin editor wkwk
-    // format aja atau pake beautifier biar rapi
     this.el.innerHTML = `<td colspan="4">${lang("bill_no_data")}</td>`
   }
 
@@ -128,11 +115,9 @@ export class NoDataCellRow {
   }
 
   destroy(): void {
-    // hapus ripplenya dari cache
     this._rippleCaches.forEach((btn) => btn.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
 
-    // hapus element
     this.el.remove()
   }
 

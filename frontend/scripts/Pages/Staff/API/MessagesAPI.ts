@@ -1,8 +1,8 @@
-import type { IMessageStaff, IPaginatedMeta } from "../types/EmbededAPITypes"
+import type { IMessageStaff, IHistoryPaginatedMeta } from "../types/EmbededAPITypes"
 
 export class MessageAPI {
   private _data: IMessageStaff[] = []
-  private _meta?: IPaginatedMeta
+  private _meta?: IHistoryPaginatedMeta
 
   private _loaded: boolean = false
 
@@ -20,11 +20,11 @@ export class MessageAPI {
     return message || null
   }
 
-  set Meta(meta: IPaginatedMeta) {
+  set Meta(meta: IHistoryPaginatedMeta) {
     this._meta = meta
   }
 
-  get Meta(): IPaginatedMeta | null {
+  get Meta(): IHistoryPaginatedMeta | null {
     return this._meta || null
   }
 

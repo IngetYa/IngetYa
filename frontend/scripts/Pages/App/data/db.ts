@@ -15,7 +15,6 @@ type LocalDBType = {
   fee: IBankFee[]
 }
 
-// kasih nilai default
 const db: LocalDBType = {
   products: new ProductsAPI(),
   orders: new OrdersAPI(),
