@@ -7,7 +7,6 @@
     width: 100%;
     height: 100%;
     .List {
-      padding-bottom: calc(v.$hugePadding * 2);
       .UserCard {
         position: relative;
         overflow: hidden;
@@ -160,20 +159,29 @@
       }
     }
   }
+  .Header {
+    flex-shrink: 0;
+  }
   .ChatActions {
     position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
+    flex-shrink: 0;
+    z-index: 2;
     padding: v.$medPadding;
     .ChatEmbed {
-      width: 100%;
-      height: fit-content;
-      margin-bottom: v.$medPadding;
-      background-color: v.$header-bg;
-      border-radius: 10px;
-      box-shadow: v.$glass-shadow, v.$glass-inset;
-      border: 1px solid v.$card-border;
+      display: none;
+      &:has(div) {
+        display: block;
+        width: 100%;
+        height: fit-content;
+        border-radius: 10px;
+        box-shadow: v.$glass-shadow, v.$glass-inset;
+        border: 1px solid v.$card-border;
+        margin-bottom: v.$medPadding;
+        background-color: v.$header-bg;
+      }
       .attach {
         width: 100%;
         height: fit-content;
@@ -241,6 +249,8 @@
         height: $minInpHeight;
       }
       .btn {
+        position: relative;
+        overflow: hidden;
         flex-shrink: 0;
         font-size: 1rem;
         padding: v.$smallPadding v.$medPadding;
@@ -251,8 +261,10 @@
   }
   .ChatMessages {
     width: 100%;
-    height: fit-content;
-    min-height: 100%;
+    height: auto;
+    flex-shrink: 0;
+    min-height: calc(100vh - var(--header-height, 65px) - var(--actions-height, 65px));
+    min-height: calc(100dvh - var(--header-height, 65px) - var(--actions-height, 65px));
     padding: v.$medPadding;
     .card {
       $cardMaxWidth: 370px;
@@ -301,6 +313,12 @@
           color: v.$accent-gold-light;
         }
       }
+
+      .card-text {
+        word-break: break-all;
+        word-break: break-word;
+      }
+
       .card-media {
         margin-bottom: v.$medPadding;
         width: 100%;

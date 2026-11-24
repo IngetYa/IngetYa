@@ -189,3 +189,13 @@ export function replaceStr(text: string, replacements: IReplacerType): string {
 
   return result
 }
+
+export function getFileExtension(filename: string): string {
+  const extension = filename.split(".").pop()
+
+  return extension ? `.${extension}` : ""
+}
+
+export function isTooLarge(fileSize: number, maxSize: number): boolean {
+  return fileSize > maxSize
+}

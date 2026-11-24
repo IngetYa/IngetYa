@@ -14,6 +14,8 @@ import profileRouter from "#routes/ProfileRouter"
 import staffRouter from "#routes/StaffRouter"
 import exploreRouter from "#routes/ExploreRouter"
 import orderRouter from "#routes/OrderRouter"
+import storageRouter from "#routes/StorageRouter"
+import messageRouter from "#routes/MessageRouter"
 import { webhook } from "#main/webhook/webhook"
 import { isProd } from "#lib/gen"
 import logger from "#lib/logger"
@@ -83,6 +85,8 @@ app.use("/x/profile", profileRouter)
 app.use("/x/staff", staffRouter)
 app.use("/x/explore", exploreRouter)
 app.use("/x/orders", orderRouter)
+app.use("/x/storage", storageRouter)
+app.use("/x/message", messageRouter)
 
 app.get("/build", (req: Request, res: Response, next: NextFunction) => {
   if (isProd) return next()

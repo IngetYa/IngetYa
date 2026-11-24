@@ -12,6 +12,10 @@ import { BubbleCard } from "./MessageCard"
 import { Colors } from "@/core/Colors"
 import type { HistoryPaginatedResult, IMessageStaff } from "../../types/EmbededAPITypes"
 import type { IConvo } from "@/types/ServiceTypes"
+import { genUniq } from "@/lib/gen"
+import { ChatInputAttachment } from "./ChatInputAttachment"
+import { selectFile } from "@/core/FilePicker"
+import { sendChatMessage } from "@/lib/ChatSender"
 
 export interface IChatPanelConfig {
   chats: Chats
@@ -39,8 +43,22 @@ export class ChatPanel {
   private roomId?: string
 
   private efield!: HTMLDivElement
+  private eembed!: HTMLDivElement
+  private eactions!: HTMLDivElement
+  private eheader!: HTMLDivElement
 
   private list: BubbleCard[] = []
+
+  private textarea!: HTMLTextAreaElement
+
+  private attachment?: ChatInputAttachment
+
+  private downed: Set<string> = new Set()
+
+  private panelId: string
+
+  private resizeObserver?: ResizeObserver
+  private onWindowResize = () => this.updateMinHeight()
 
   constructor(config: IChatPanelConfig) {
     const roomId = config.roomId
@@ -48,6 +66,8 @@ export class ChatPanel {
     this.roomId = roomId
     this.chats = config.chats
     this.manager = config.manager
+
+    this.panelId = genUniq("string") as string
 
     const itemData = db.convo.find(roomId)
 
@@ -60,6 +80,10 @@ export class ChatPanel {
     this.createElement()
     this.writeData()
     this.btnBackListener()
+    this.textAreaGrowListener()
+    this.sendListener()
+    this.fileListener()
+    this.setupMinHeight()
   }
 
   private createElement(): void {
@@ -98,20 +122,6 @@ export class ChatPanel {
 
       <div class="ChatActions">
         <div class="ChatEmbed">
-          <div class="attach">
-            <div class="attach-file">
-              <div class="icon">
-                <i class="fas fa-file"></i>
-              </div>
-              <div class="file-meta">
-                <div class="file-title">File</div>
-                <div class="file-name">file-laporan.csv</div>
-              </div>
-            </div>
-            <div class="btn btn-attach-cancel">
-              <i class="fadr fa-circle-xmark"></i>
-            </div>
-          </div>
         </div>
 
         <div class="ChatForm">
@@ -119,7 +129,7 @@ export class ChatPanel {
             <i class="fajdr fa-paperclip"></i>
           </div>
 
-          <textarea name="chat-text" id="chat-text" placeholder="Type Something" maxlength="300"></textarea>
+          <textarea name="chat-text-${this.panelId}" id="chat-text-${this.panelId}" placeholder="Type Something" maxlength="300"></textarea>
 
           <div class="btn btn-send">
             <i class="fajdr fa-paper-plane"></i>
@@ -129,7 +139,38 @@ export class ChatPanel {
       </div>
     </div>`
 
+    this.eheader = futor(".Header", this.el, "div")
     this.efield = futor(".ChatMessages", this.el, "div")
+    this.eembed = futor(".ChatEmbed", this.el, "div")
+    this.eactions = futor(".ChatActions", this.el, "div")
+    this.textarea = futor(`#chat-text-${this.panelId}`, this.el, "textarea")
+  }
+
+  private updateMinHeight(): void {
+    if (this.isDestroyed || !this.eheader || !this.eactions) return
+
+    const headerHeight = this.eheader.offsetHeight || 0
+    const actionsHeight = this.eactions.offsetHeight || 0
+
+    if (headerHeight > 0) {
+      this.el.style.setProperty("--header-height", `${headerHeight}px`)
+    }
+    if (actionsHeight > 0) {
+      this.el.style.setProperty("--actions-height", `${actionsHeight}px`)
+    }
+  }
+
+  private setupMinHeight(): void {
+    this.updateMinHeight()
+    requestAnimationFrame(() => this.updateMinHeight())
+
+    if (typeof ResizeObserver !== "undefined") {
+      this.resizeObserver = new ResizeObserver(() => this.updateMinHeight())
+      if (this.eheader) this.resizeObserver.observe(this.eheader)
+      if (this.eactions) this.resizeObserver.observe(this.eactions)
+    }
+
+    window.addEventListener("resize", this.onWindowResize)
   }
 
   async openChat(): Promise<void> {}
@@ -177,12 +218,143 @@ export class ChatPanel {
     const items = db.messages.getAll()
 
     for (const item of items) {
-      const card = new BubbleCard({ item: item, manager: this.manager, panel: this })
-
-      this.list.push(card)
-
-      this.efield.append(card.html)
+      this.updateChat(item)
     }
+  }
+
+  private updateChat(item: IMessageStaff, tempId?: string): void {
+    const oldCard = this.list.find((k) => k.id === item.id || k.id === tempId)
+
+    if (oldCard) {
+      oldCard.updateData(item)
+
+      return
+    }
+
+    const card = new BubbleCard({ item: item, manager: this.manager, panel: this })
+
+    this.list.push(card)
+
+    this.efield.append(card.html)
+
+    if (this.attachment) {
+      this.efield.append(this.attachment.html)
+    }
+  }
+
+  private keyDown(e: KeyboardEvent): void {
+    const key = e.key.toLowerCase()
+    if (key === "shift") this.downed.add(key)
+    if (key === "enter" && this.downed.has("shift")) {
+      e.preventDefault()
+      this.sendMessage()
+    }
+  }
+
+  private keyUp(e: KeyboardEvent): void {
+    const key = e.key.toLowerCase()
+    if (key === "shift" && this.downed.has(key)) this.downed.delete(key)
+  }
+
+  private textAreaGrowListener(): void {
+    this.textarea.oninput = () => {
+      this.textarea.style.height = "calc(1rem + (5px * 5))"
+      this.textarea.style.height = `${this.textarea.scrollHeight}px`
+    }
+
+    this.textarea.onkeydown = (e) => this.keyDown(e)
+    this.textarea.onkeyup = (e) => this.keyUp(e)
+  }
+
+  private sendListener(): void {
+    const btnSend = futor(".btn-send", this.el)
+    btnSend.onclick = () => this.sendMessage()
+  }
+
+  private fileListener(): void {
+    const btnFile = futor(".btn-attach", this.el)
+
+    this._rippleCaches.push(
+      SetRipple(btnFile, {
+        run: () => {
+          if (this.locked) return
+          selectFile("*/*", "single", (file) => this.onFileChosen(file))
+        }
+      })
+    )
+  }
+
+  private onFileChosen(rawFile?: File | File[]): void {
+    if (!rawFile) return
+
+    const file = Array.isArray(rawFile) ? rawFile[0] : rawFile
+
+    this.updateAttachment(file)
+  }
+
+  updateAttachment(file: File): void {
+    if (this.attachment) this.attachment.destroy()
+
+    const attach = new ChatInputAttachment(file)
+    attach.onCancel(() => (this.attachment = undefined))
+
+    this.attachment = attach
+
+    this.eembed.append(this.attachment.html)
+  }
+
+  private sendMessage(): void {
+    if (this.locked) return
+    const file = this.attachment?.file
+
+    const val = this.textarea.value.trim()
+
+    if (val.length < 1 && !file) return
+
+    if (val.length > 3000) return
+
+    this.textarea.value = ""
+    this.focusUserInp()
+    this.textarea.style.height = "41px"
+
+    if (this.attachment) {
+      this.attachment.destroy()
+      this.attachment = undefined
+    }
+
+    const tempChatId = Date.now().toString(36)
+
+    const objURL = file ? URL.createObjectURL(file) : undefined
+
+    const msgData: IMessageStaff = {
+      createdAt: new Date(),
+      id: tempChatId,
+      readers: [],
+      roomId: this.item.id,
+      userId: db.me.id,
+      userName: db.me.name,
+      text: val,
+      fileName: file?.name,
+      fileUrl: objURL
+    }
+
+    this.updateChat(msgData)
+    this.toBottomContent()
+
+    const url = "/x/message/staff-send"
+
+    sendChatMessage({ text: val, tempId: tempChatId, file, url, roomId: this.roomId! })
+  }
+
+  private focusUserInp(): void {
+    this.textarea.readOnly = true
+    this.textarea.focus()
+
+    setTimeout(() => (this.textarea.readOnly = false), 100)
+  }
+
+  toBottomContent(): void {
+    this.el.scrollTop = this.el.scrollHeight
   }
 
   hide(status: boolean = true): void {
@@ -222,10 +394,19 @@ export class ChatPanel {
 
       const isElement = target instanceof Node
       if (!isElement) return
+
       if (box.contains(target)) return
+
+      if (this.attachment && this.attachment.html.contains(target)) return
 
       this.goHistoryBack()
     }
+  }
+
+  private textAreaRemoveListener(): void {
+    this.textarea.onkeydown = null
+    this.textarea.onkeyup = null
+    this.textarea.oninput = null
   }
 
   get html(): HTMLDivElement {
@@ -235,6 +416,14 @@ export class ChatPanel {
   async destroy(): Promise<void> {
     this._rippleCaches.forEach((ripple) => ripple.stopListener())
     this._rippleCaches.splice(0, this._rippleCaches.length)
+
+    this.textAreaRemoveListener()
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+      this.resizeObserver = undefined
+    }
+    window.removeEventListener("resize", this.onWindowResize)
 
     this.el.classList.add("out")
     this.el.onclick = null

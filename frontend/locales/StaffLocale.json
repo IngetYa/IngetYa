@@ -68,8 +68,8 @@
     "en": "Your requested data is not found"
   },
   "entity_too_large": {
-    "id": "Data kamu melebihi batas ukuran request",
-    "en": "Your data exceeded the request size limit"
+    "id": "Data kamu melebihi batas ukuran request (2MB)",
+    "en": "Your data exceeded the request size limit (2MB)"
   },
   "internal_server_error": {
     "id": "Server lagi ngadepin masalah nih. Coba lagi nanti ya.",
@@ -418,5 +418,13 @@
   "message_landing_desc": {
     "id": "Pilih user/room buat kirim chat",
     "en": "Select a chat room to start messaging"
+  },
+  "message_too_long": {
+    "id": "Panjang pesan harus kurang dari 3.000 karakter",
+    "en": "The message must be less than 3,000 characters long"
+  },
+  "message_file_not_found": {
+    "id": "File yang direquest ga ketemu",
+    "en": "The file can't be found"
   }
 }

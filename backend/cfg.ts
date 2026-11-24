@@ -23,5 +23,13 @@ export default {
   SESSION_SECRET: process.env.SESSION_SECRET ?? "secret",
 
   LUNA_CLIENT_ID: process.env.LUNA_CLIENT_ID ?? "secret",
-  LUNA_CLIENT_SECRET: process.env.LUNA_CLIENT_SECRET ?? "secret"
+  LUNA_CLIENT_SECRET: process.env.LUNA_CLIENT_SECRET ?? "secret",
+
+  S3_TOKEN: process.env.S3_TOKEN ?? "secret",
+  S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID ?? "secret",
+  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY ?? "secret",
+  S3_ENDPOINT: process.env.S3_ENDPOINT ?? "secret",
+  S3_BUCKET_NAME: process.env.S3_BUCKET_NAME ?? "secret",
+
+  PUBLIC_BUCKET: process.env.PUBLIC_BUCKET ?? "secret"
 }

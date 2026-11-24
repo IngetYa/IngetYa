@@ -9,6 +9,7 @@ const schema = new Schema(
     userId: { type: String, required: true },
     roomId: { type: String, required: true },
     fileUrl: { type: String },
+    fileKey: { type: String },
     fileName: { type: String },
     text: { type: String },
     readers: { type: [String], default: [] },

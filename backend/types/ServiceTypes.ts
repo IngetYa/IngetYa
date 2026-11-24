@@ -85,6 +85,7 @@ export interface IMessage {
   userId: string
   roomId: string
   fileUrl?: string
+  fileKey?: string
   fileName?: string
   text?: string
   readers: string[]

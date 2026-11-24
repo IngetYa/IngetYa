@@ -165,6 +165,14 @@ export class BubbleCard {
     eMedia.append(a)
   }
 
+  updateData(data: IMessageStaff): void {
+    this.item = data
+
+    if (data.isSent) this._isSent = data.isSent
+
+    this.statusUpdate()
+  }
+
   get html(): HTMLDivElement {
     return this.el
   }
