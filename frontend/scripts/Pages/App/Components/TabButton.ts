@@ -7,6 +7,7 @@ export interface ITabButtonConfig {
   id: string
   name: string
   icon: string
+  isMoreOption?: boolean
 }
 
 export class TabButton {
@@ -30,6 +31,10 @@ export class TabButton {
 
   get id(): string {
     return this.config.id
+  }
+
+  get isMoreOption(): boolean {
+    return Boolean(this.config.isMoreOption)
   }
 
   private createElement(): void {

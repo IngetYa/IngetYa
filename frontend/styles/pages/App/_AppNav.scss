@@ -18,7 +18,35 @@
   box-shadow: v.$glass-shadow, v.$glass-inset;
   padding: v.$smallPadding;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible;
+  .nav-more {
+    position: absolute;
+    bottom: calc(100% + v.$medPadding);
+    right: 0;
+    display: none;
+    justify-content: center;
+    align-items: start;
+    gap: 0;
+    background-image: url("./abstracts/nature-seamless.svg");
+    background-position: center center;
+    background-repeat: repeat;
+    background-color: v.$nav-bg;
+    box-shadow: v.$glass-shadow, v.$glass-inset;
+    padding: v.$smallPadding;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  &.more-opened {
+    .nav-more {
+      display: flex;
+      animation: tabItemIn1 0.3s;
+    }
+  }
+  &.more-out {
+    .nav-more {
+      animation: tabItemOut1 0.3s forwards;
+    }
+  }
   .btn {
     position: relative;
     text-decoration: none;
@@ -75,6 +103,21 @@
     border-bottom-left-radius: 1.65rem;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    overflow: hidden;
+    .btn-more {
+      display: none;
+    }
+    .nav-more {
+      position: static;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      border-radius: 0;
+      animation: none !important;
+    }
     .btn {
       width: 100%;
       flex-direction: row;

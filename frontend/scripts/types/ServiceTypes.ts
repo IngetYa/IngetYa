@@ -98,6 +98,7 @@ export type ChatRoomType = "support" | "order"
 export interface IConvo {
   _id: string
   id: string // roomId on message
+  userId: string
   roomType: ChatRoomType
   userName?: string
   roomName?: string

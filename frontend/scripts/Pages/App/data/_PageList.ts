@@ -15,8 +15,13 @@ export const PagesRoot = [
     group: "primary"
   },
   {
-    id: "me",
+    id: "chats",
     n: 4,
+    group: "primary"
+  },
+  {
+    id: "me",
+    n: 5,
     group: "primary"
   }
   // {

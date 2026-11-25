@@ -15,8 +15,15 @@ export const TabList = [
     name: "bills"
   },
   {
+    id: "chats",
+    icon: "fajdr fa-comment-dots fa-fw",
+    name: "chats",
+    isMoreOption: true
+  },
+  {
     id: "me",
     icon: "fajdr fa-user fa-fw",
-    name: "me"
+    name: "me",
+    isMoreOption: true
   }
 ]

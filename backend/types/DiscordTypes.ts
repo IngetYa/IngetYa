@@ -9,9 +9,18 @@ export interface IDiscordConfig {
 }
 
 export interface IWebhookChannels {
-  clients: string
-  traffics: string
-  accounts: string
+  core_gitwebhook: string
+  core_error: string
+  core_transcripts: string
+  service_clients: string
+  service_products: string
+  service_orders: string
+  service_bills: string
+  service_balance: string
+  service_accounts: string
+  gate_visitors: string
+  messaging_category: string
+  help_category: string
 }
 
 export interface APIEmbed extends DiscordAPIEmbed {

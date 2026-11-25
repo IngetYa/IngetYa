@@ -1,5 +1,14 @@
 {
-  "clients": "1480072837757669456",
-  "traffics": "1480102707535544340",
-  "accounts": "1476142226038849689"
+  "core_gitwebhook": "1575135604205813841",
+  "core_error": "1575140277889540196",
+  "core_transcripts": "1575149830383337627",
+  "service_clients": "1575143398040543354",
+  "service_products": "1575144309387436162",
+  "service_orders": "1575144646164611253",
+  "service_bills": "1575145216678166681",
+  "service_balance": "1575145969878696106",
+  "service_accounts": "1575145442654818364",
+  "gate_visitors": "1575150913339920424",
+  "messaging_category": "1575148899188875294",
+  "help_category": "1575158438194057259"
 }

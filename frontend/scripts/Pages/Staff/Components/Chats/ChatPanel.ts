@@ -214,12 +214,16 @@ export class ChatPanel {
     }
   }
 
-  private renderItems(): void {
+  private async renderItems(): Promise<void> {
     const items = db.messages.getAll()
 
     for (const item of items) {
       this.updateChat(item)
     }
+
+    await waittime()
+
+    this.toBottomContent()
   }
 
   private updateChat(item: IMessageStaff, tempId?: string): void {
@@ -339,11 +343,12 @@ export class ChatPanel {
     }
 
     this.updateChat(msgData)
-    this.toBottomContent()
 
     const url = "/x/message/staff-send"
 
     sendChatMessage({ text: val, tempId: tempChatId, file, url, roomId: this.roomId! })
+
+    this.toBottomContent()
   }
 
   private focusUserInp(): void {
@@ -354,7 +359,8 @@ export class ChatPanel {
   }
 
   toBottomContent(): void {
-    this.el.scrollTop = this.el.scrollHeight
+    const field = futor(".StaffPage-Box", this.el)
+    field.scrollTop = field.scrollHeight
   }
 
   hide(status: boolean = true): void {
@@ -392,14 +398,11 @@ export class ChatPanel {
     this.el.onclick = (e) => {
       const target = e.target
 
-      const isElement = target instanceof Node
-      if (!isElement) return
-
-      if (box.contains(target)) return
-
-      if (this.attachment && this.attachment.html.contains(target)) return
-
-      this.goHistoryBack()
+      if (target instanceof HTMLElement && target.classList.contains("ChatPanel")) {
+        this.goHistoryBack()
+      } else if (target === box) {
+        this.goHistoryBack()
+      }
     }
   }
 

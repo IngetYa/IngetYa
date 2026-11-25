@@ -100,13 +100,16 @@ export interface IRoom {
   id: string
   userId: string
   type: ChatRoomType
+  channelId: string
   latestChatId: string
+  updatedAt: Date
   expiresAt?: Date
 }
 
 export interface IConvo {
   _id: Types.ObjectId
   id: string // roomId di message
+  userId: string
   roomType: ChatRoomType
   userName: string
   roomName: string

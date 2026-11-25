@@ -103,6 +103,26 @@
     "id": "Akun",
     "en": "Account"
   },
+  "tab_chats": {
+    "id": "Chat",
+    "en": "Chats"
+  },
+  "tab_more": {
+    "id": "Lainnya",
+    "en": "More"
+  },
+  "chat_type_file": {
+    "id": "File",
+    "en": "File"
+  },
+  "chat_open_chat": {
+    "id": "Buka Chat",
+    "en": "Open Chat"
+  },
+  "chat_no_data": {
+    "id": "Engga ada",
+    "en": "No data"
+  },
   "header_explore": {
     "id": "Ambil Tema",
     "en": "Explore Themes"

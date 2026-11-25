@@ -49,5 +49,15 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
     if (newRoot === "explore") return STATENUM.BACK
   }
 
+  if (oldRoot === "chats") {
+    if (newRoot === "explore") return STATENUM.BACK
+
+    if (oldSection === "room") {
+      if (newSection === "room") return STATENUM.REPLACE
+    }
+
+    if (newSection === "room") return STATENUM.FORWARD
+  }
+
   return STATENUM.REPLACE
 }

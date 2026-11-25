@@ -9,6 +9,7 @@ import { Explore } from "../Tabs/Explore"
 import { Orders } from "../Tabs/Orders"
 import { Bills } from "../Tabs/Bills"
 import { Account } from "../Tabs/Account"
+import { Chats } from "../Tabs/SupportChats"
 
 export interface IContentConfig {
   king: StackPrimary
@@ -87,6 +88,10 @@ export class Content {
       this.sectNum = 4
       this.sectName = "me"
       await this.addSect(new Account({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
+    } else if (rootName === "chats") {
+      this.sectNum = 5
+      this.sectName = "chats"
+      await this.addSect(new Chats({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
     }
   }
 

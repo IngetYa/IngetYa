@@ -4,12 +4,16 @@ import type { IBankFee, IPriceDetail } from "@/types/PaymentTypes"
 import { OrdersAPI } from "../API/OrdersAPI"
 import { BillsAPI } from "../API/BillsAPI"
 import { ContentsAPI } from "../API/ContentAPI"
+import { ConvoAPI } from "../API/ConvoAPI"
+import { MessageAPI } from "../API/MessagesAPI"
 
 type LocalDBType = {
   products: ProductsAPI
   orders: OrdersAPI
   contents: ContentsAPI
   bills: BillsAPI
+  convo: ConvoAPI
+  messages: MessageAPI
   me: IUser
   price: IPriceDetail
   fee: IBankFee[]
@@ -20,6 +24,8 @@ const db: LocalDBType = {
   orders: new OrdersAPI(),
   contents: new ContentsAPI(),
   bills: new BillsAPI(),
+  convo: new ConvoAPI(),
+  messages: new MessageAPI(),
   me: { name: "unknown", createdAt: Date.now(), email: "unknown", id: "unknown", luna: "unknown" },
   price: {
     "price_book-1": 7610000,

@@ -1,4 +1,4 @@
-import { HistoryPaginatedResult, PaginatedResult, paginateHistory, paginateQuery } from "#main/PaginateDoc"
+import { PaginatedMessagesResult, PaginatedResult, PaginatedRoomsResult, paginateMessages, paginateQuery, paginateRooms } from "#main/PaginateDoc"
 import BalanceModel from "#models/BalanceModel"
 import BillModel from "#models/BillModel"
 import MessageModel from "#models/MessageModel"
@@ -208,7 +208,7 @@ export async function getDataUsers(_uid: string, pageNum: string): Promise<IResT
 }
 
 export async function getDataConvo(_uid: string, cursor?: string): Promise<IResTemp> {
-  const rooms = await paginateHistory(RoomModel, {}, { cursor: cursor, limit: 30 })
+  const rooms = await paginateRooms(RoomModel, {}, { cursor: cursor, limit: 30 })
 
   const userIds = rooms.data.map((k) => k.userId)
   const orderIds = rooms.data.filter((k) => k.type === "order").map((k) => k.id)
@@ -226,6 +226,7 @@ export async function getDataConvo(_uid: string, cursor?: string): Promise<IResT
     return {
       _id: k._id,
       id: k.id,
+      userId: k.userId,
       roomType: k.type,
       roomName: orders.find((order) => order.id === k.id)?.name || `Order ${k.id}`,
       userName: users.find((user) => user.id === k.userId)?.name || `User ${k.userId}`,
@@ -234,7 +235,7 @@ export async function getDataConvo(_uid: string, cursor?: string): Promise<IResT
     }
   })
 
-  const convoStaff: HistoryPaginatedResult<IConvo> = {
+  const convoStaff: PaginatedRoomsResult<IConvo> = {
     data: convos,
     meta: rooms.meta
   }
@@ -247,13 +248,13 @@ export interface IMessageStaff extends IMessage {
 }
 
 export async function getDataMessage(_uid: string, roomId: string, cursor?: string): Promise<IResTemp> {
-  const chats = await paginateHistory(MessageModel, { roomId }, { cursor, limit: 16 })
+  const chats = await paginateMessages(MessageModel, { roomId }, { cursor, limit: 16 })
 
   const userIds = chats.data.map((k) => k.userId)
 
   const users = await UserModel.find({ id: { $in: userIds } }, { _id: 1, id: 1, name: 1 }).lean()
 
-  const messages: HistoryPaginatedResult<IMessageStaff> = {
+  const messages: PaginatedMessagesResult<IMessageStaff> = {
     meta: chats.meta,
     data: chats.data.map((k) => {
       const user = users.find((usr) => usr.id === k.userId)!
