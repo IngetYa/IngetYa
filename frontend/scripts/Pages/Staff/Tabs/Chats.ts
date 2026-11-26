@@ -174,6 +174,9 @@ export class Chats {
 
     if (!convoData) return
 
+    this.hide()
+    this.king.tabs.hide()
+
     const chatPanel = new ChatPanel({ roomId: sub, chats: this, manager: this.manager })
 
     this.setChatPanel(chatPanel)
@@ -202,9 +205,6 @@ export class Chats {
 
     if (section === "room") {
       if (!sub) return
-
-      this.hide()
-      this.king.tabs.hide()
 
       await this.startChatPanel(sub)
     }

@@ -3,6 +3,7 @@ import { type HistoryStateData, StateManager } from "./core/StateManager"
 import { StackPrimary } from "./main/StackPrimary"
 import { eroot } from "@/core/kel"
 import { PagesRoot } from "./data/_PageList"
+import { isValidHash } from "./data/_HashList"
 
 export class Stack {
   private king?: StackPrimary
@@ -42,6 +43,8 @@ export class Stack {
   }
 
   async update(path: string, data?: HistoryStateData): Promise<void> {
+    if (!isValidHash(path)) return
+
     const hierarchy = getHierarchy(path)
     const { root } = hierarchy
 

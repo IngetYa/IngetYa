@@ -3,6 +3,7 @@ import { Stack } from "@/Pages/Staff/Stack"
 import { getHierarchy } from "@/core/hierarchy"
 import { getState } from "./HashState"
 import waittime from "@/lib/waittime"
+import { isValidHash } from "../data/_HashList"
 
 export type HistoryStateData = Record<string, IAny>
 
@@ -81,6 +82,8 @@ export class StateManager {
       return history.back()
     }
 
+    if (!isValidHash(state.path)) return
+
     this.queue.push(state)
 
     if (!state.data?.force) this.addState(state.path, state.data)
@@ -97,7 +100,8 @@ export class StateManager {
     this.stack = stack
 
     const hash = window.location.hash
-    const path = hash.length >= 1 ? hash : "#overview"
+    const rawPath = hash.length >= 1 ? hash : "#overview"
+    const path = isValidHash(rawPath) ? rawPath : "#overview"
 
     const hierarchy = getHierarchy(path)
     const { root, section } = hierarchy

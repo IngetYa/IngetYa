@@ -12,12 +12,6 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
 
   if (oldRoot === "overview") {
     if (newRoot !== "overview") return STATENUM.FORWARD
-
-    if (oldSection === "buy") {
-      if (newSection === "buy") return STATENUM.REPLACE
-    }
-
-    if (newSection === "buy") return STATENUM.FORWARD
   }
 
   if (oldRoot === "balance") {

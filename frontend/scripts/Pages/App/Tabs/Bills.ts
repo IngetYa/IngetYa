@@ -138,8 +138,6 @@ export class Bills implements IPrimary {
     if (section === "peek") {
       if (!sub) return
 
-      this.hide()
-      this.king.tabs.hide()
       await this.startBill(sub)
     }
   }
@@ -152,6 +150,9 @@ export class Bills implements IPrimary {
     const billData = db.bills.find(sub)
 
     if (!billData) return
+
+    this.hide()
+    this.king.tabs.hide()
 
     const bill = new Bill({ parent: this, manager: this.manager, bill: billData })
 

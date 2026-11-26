@@ -171,7 +171,10 @@ export class OrderContext {
     this._actionCaches.push(
       SetRipple(btn, {
         run: async () => {
-          await formAlert("Under Development LOLXD")
+          if (this.manager.busy) return
+          if (this.orders.locked) return
+
+          this.manager.next({ path: `#orders/talk/${this.order.id}` })
         }
       })
     )

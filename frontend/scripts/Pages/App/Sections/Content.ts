@@ -85,11 +85,11 @@ export class Content {
       this.sectName = "bills"
       await this.addSect(new Bills({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
     } else if (rootName === "me") {
-      this.sectNum = 4
+      this.sectNum = 5
       this.sectName = "me"
       await this.addSect(new Account({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
     } else if (rootName === "chats") {
-      this.sectNum = 5
+      this.sectNum = 4
       this.sectName = "chats"
       await this.addSect(new Chats({ king: this.king, anim, manager: this.manager }), anim, hierarchy)
     }

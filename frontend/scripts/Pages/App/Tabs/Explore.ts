@@ -161,9 +161,6 @@ export class Explore implements IPrimary {
     if (section === "buy") {
       if (!sub) return
 
-      this.hide()
-      this.king.tabs.hide()
-
       await this.startCart(sub)
     }
   }
@@ -176,6 +173,9 @@ export class Explore implements IPrimary {
     const product = db.products.find(sub)
 
     if (!product) return
+
+    this.hide()
+    this.king.tabs.hide()
 
     const cart = new Cart({ explore: this, manager: this.manager, product })
 

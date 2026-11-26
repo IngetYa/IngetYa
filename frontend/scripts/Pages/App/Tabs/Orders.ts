@@ -15,6 +15,7 @@ import { debounce, searchOrders } from "@/core/Search"
 import type { IOrder } from "@/types/ServiceTypes"
 import { SetRipple, type IRippleReturn } from "@/lib/Ripple"
 import { Colors } from "@/core/Colors"
+import { ChatPanel } from "../Components/Chats/ChatPanel"
 
 export class Orders implements IPrimary {
   private el!: HTMLDivElement
@@ -35,6 +36,7 @@ export class Orders implements IPrimary {
   private efield!: HTMLDivElement
 
   private bill?: Bill
+  private ChatPanel?: ChatPanel
 
   private contexts: OrderContext[] = []
 
@@ -166,13 +168,21 @@ export class Orders implements IPrimary {
       await this.bill.destroy()
     }
 
+    if (this.ChatPanel) {
+      this.king.tabs.hide(false)
+      this.hide(false)
+      await this.ChatPanel.destroy()
+    }
+
     if (!section) return
 
-    if (section === "pay") {
+    if (section === "talk") {
       if (!sub) return
 
-      this.hide()
-      this.king.tabs.hide()
+      await this.startChatPanel(sub)
+    } else if (section === "pay") {
+      if (!sub) return
+
       await this.startBill(sub)
     }
   }
@@ -181,6 +191,9 @@ export class Orders implements IPrimary {
     const billData = db.bills.find(sub)
 
     if (!billData) return
+
+    this.hide()
+    this.king.tabs.hide()
 
     const bill = new Bill({ parent: this, manager: this.manager, bill: billData })
 
@@ -193,6 +206,29 @@ export class Orders implements IPrimary {
 
   setBill(bill?: Bill) {
     this.bill = bill
+  }
+
+  private async startChatPanel(sub: string): Promise<void> {
+    const orderData = db.orders.find(sub)
+
+    if (!orderData || orderData.userId !== db.me.id) return
+
+    this.hide()
+    this.king.tabs.hide()
+
+    const roomName = orderData.name || `Order-${orderData.id}`
+
+    const chatPanel = new ChatPanel({ roomId: sub, parent: this, manager: this.manager, roomName })
+
+    this.setChatPanel(chatPanel)
+
+    eroot().append(chatPanel.html)
+
+    await waittime()
+  }
+
+  setChatPanel(chatPanel?: ChatPanel) {
+    this.ChatPanel = chatPanel
   }
 
   async startContext(sub: string, e: PointerEvent): Promise<void> {

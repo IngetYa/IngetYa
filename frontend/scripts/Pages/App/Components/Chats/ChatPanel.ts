@@ -12,10 +12,12 @@ import { genUniq, toText } from "@/lib/gen"
 import { ChatInputAttachment } from "./ChatInputAttachment"
 import { selectFile } from "@/core/FilePicker"
 import { sendChatMessage } from "@/lib/ChatSender"
+import { Orders } from "../../Tabs/Orders"
 
 export interface IChatPanelConfig {
-  chats: Chats
+  parent: Chats | Orders
   roomId: string
+  roomName: string
   manager: StateManager
 }
 
@@ -24,10 +26,10 @@ export class ChatPanel {
 
   private el!: HTMLDivElement
 
-  private chats: Chats
+  private parent: Chats | Orders
   private manager: StateManager
 
-  private item: IConvo
+  private roomName: string
 
   private _rippleCaches: IRippleReturn[] = []
 
@@ -36,7 +38,7 @@ export class ChatPanel {
   private isLoaded: boolean = false
   private onLoaded?: () => void
 
-  private roomId?: string
+  private roomId: string
 
   private efield!: HTMLDivElement
   private eembed!: HTMLDivElement
@@ -57,21 +59,12 @@ export class ChatPanel {
   private onWindowResize = () => this.updateMinHeight()
 
   constructor(config: IChatPanelConfig) {
-    const roomId = config.roomId
-
-    this.roomId = roomId
-    this.chats = config.chats
+    this.roomId = config.roomId
+    this.roomName = config.roomName
+    this.parent = config.parent
     this.manager = config.manager
 
     this.panelId = genUniq("string") as string
-
-    const itemData = db.convo.find(roomId)
-
-    if (!itemData) {
-      throw new Error("Room ga ketemu")
-    }
-
-    this.item = itemData
 
     this.createElement()
     this.writeData()
@@ -93,7 +86,7 @@ export class ChatPanel {
             <i class="fas fa-arrow-left"></i>
           </div>
           <div class="Title">
-            <h1>${toText(this.item.roomName || this.item.userName || this.item.id)}</h1>
+            <h1>${toText(this.roomName)}</h1>
           </div>
         </div>
       </div>
@@ -321,7 +314,7 @@ export class ChatPanel {
       createdAt: new Date(),
       id: tempChatId,
       readers: [],
-      roomId: this.item.id,
+      roomId: this.roomId,
       userId: db.me.id,
       userName: db.me.name,
       text: val,
@@ -421,6 +414,6 @@ export class ChatPanel {
 
     this.el.remove()
 
-    this.chats.setChatPanel()
+    this.parent.setChatPanel()
   }
 }

@@ -28,6 +28,12 @@ export function getState(older: IStackHierarchy, newer: IStackHierarchy): STATEN
     }
 
     if (newSection === "pay") return STATENUM.FORWARD
+
+    if (oldSection === "talk") {
+      if (newSection === "talk") return STATENUM.REPLACE
+    }
+
+    if (newSection === "talk") return STATENUM.FORWARD
     // if (oldSection === "edit") {
     //   if (newSection === "edit") return STATENUM.REPLACE
     // }
