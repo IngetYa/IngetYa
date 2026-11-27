@@ -19,7 +19,7 @@ export default class ClientEventsHandler {
 
     if (!reloading) {
       setTimeout(() => {
-        logger.info("Client Events • loaded")
+        logger.info("[BOT] Client Events >> loaded")
         client.currentStatus++
         client.checkStatus()
       }, 1000)

@@ -63,6 +63,22 @@
     "id": "<b>Alamat email gak valid</b><br />Periksa dulu aja dan coba lagi",
     "en": "<b>Your email address is not valid</b><br />Please try again"
   },
+  "auth_verification_otp": {
+    "id": "Kami udah kirim kode verifikasi 6-digit ke email tersebut. Cek folder spam kalo ga muncul di kontak masuk.",
+    "en": "We have sent you an email for your 6-digit verification code. Check the spam folder if it does not appear in your inbox."
+  },
+  "auth_whatsapp": {
+    "id": "Nomor WhatsApp",
+    "en": "WhatsApp Number"
+  },
+  "whatsapp_placeholder": {
+    "id": "contoh: 081234567890",
+    "en": "ex: 6281234567890"
+  },
+  "whatsapp_not_valid": {
+    "id": "<b>Nomor WhatsApp gak valid</b><br />Periksa dulu aja dan coba lagi",
+    "en": "<b>Your WhatsApp number is not valid</b><br />Please try again"
+  },
   "auth_form_title": {
     "en": "wants to access your Luna Account",
     "id": "minta izin ke Akun Luna kamu"
@@ -74,6 +90,18 @@
   "auth_otp_code": {
     "id": "Kode",
     "en": "Code"
+  },
+  "otp_placeholder": {
+    "id": "------",
+    "en": "------"
+  },
+  "auth_otp_not_valid": {
+    "id": "<b>Kode OTP gak valid</b><br />Coba cek lagi",
+    "en": "<b>Invalid OTP code</b><br />Please check your verification code"
+  },
+  "auth_otp_back_confirm": {
+    "id": "Yakin mau balik ganti tujuan login?",
+    "en": "Are you sure you want to go back and change your login target?"
   },
   "auth_verify": {
     "id": "VERIFIKASI",

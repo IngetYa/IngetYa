@@ -24,7 +24,7 @@ async function processWebhook({ channelKey, message, onSent }: QueueItem): Promi
   try {
     // in case mode dev atau bot offline
     if (bot.ws.status !== 0) {
-      logger.info("[WEBHOOK]: discord bot (app) is not started")
+      logger.info("[WEBHOOK] Bot (app) is not started")
       return onSent?.()
     }
 
@@ -45,7 +45,8 @@ async function processWebhook({ channelKey, message, onSent }: QueueItem): Promi
 
     return onSent?.()
   } catch (err) {
-    logger.error(err)
+    logger.error("[WEBHOOK] Failed sending message")
+    console.error(err)
     return onSent?.()
   }
 }

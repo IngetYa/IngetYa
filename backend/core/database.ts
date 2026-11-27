@@ -18,7 +18,7 @@ export default class MongoConnection {
   }
 
   close() {
-    logger.info("Closing the MongoDB conection")
+    logger.info("[DB] Closing the MongoDB conection")
 
     mongoose.connection.close()
   }
@@ -27,7 +27,7 @@ export default class MongoConnection {
     if (onConnectedCallback) this.onConnectedCallback = onConnectedCallback
 
     mongoose.connect(this.mongoUrl, { dbName: this.dbName }).catch((err) => {
-      logger.error("error connecting to MongoDB")
+      logger.error("[DB] error connecting to MongoDB")
 
       throw new Error(err)
     })
@@ -38,25 +38,25 @@ export default class MongoConnection {
   }
 
   private onConnected = () => {
-    logger.success(`MongoDB: Logged in as ${this.dbName}`)
+    logger.success(`[DB] Logged in as ${this.dbName}`)
     this.isConnectedBefore = true
     if (this.onConnectedCallback) {
       this.onConnectedCallback()
-      this.onConnectedCallback = () => logger.info("Server already listen")
+      this.onConnectedCallback = () => logger.info("[DB] Server already listen")
     }
   }
 
   private onReconnected = () => {
-    logger.info("Reconnected to MongoDB")
+    logger.info("[DB] Reconnected")
   }
 
   private onError = () => {
-    logger.error(`Could not connect to MongoDB at ${this.mongoUrl}`)
+    logger.error(`[DB] Could not connect to ${this.mongoUrl}`)
   }
 
   private onDisconnected = () => {
     if (!this.isConnectedBefore) {
-      logger.info("Retrying MongoDB connection")
+      logger.info("[DB] Retrying connection")
       setTimeout(() => this.connect(), 2000)
     }
   }

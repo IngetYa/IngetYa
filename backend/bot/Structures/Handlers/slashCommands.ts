@@ -31,16 +31,16 @@ async function setREST(client: BotClient, CmdArray: RESTPostAPIChatInputApplicat
       await rest.put(Routes.applicationCommands(cfg.DISCORD_CLIENT_ID), {
         body: CmdArray
       })
-      logger.info(`Production mode • Slash Commands registered globally`)
+      logger.info(`[BOT] Production >> Slash Commands registered globally`)
     } else {
       await rest.put(Routes.applicationGuildCommands(cfg.DISCORD_CLIENT_ID, config.guild), {
         body: [...CmdArray]
       })
-      logger.info(`Dev mode • Slash Commands registered for guild "${config.guild}"`)
+      logger.info(`[BOT] Development >> Slash Commands registered for guild "${config.guild}"`)
     }
 
     if (!reloading) {
-      logger.info("Slash Commands • loaded")
+      logger.info("[BOT] Slash Commands >> loaded")
       client.currentStatus++
       client.checkStatus()
     } else {

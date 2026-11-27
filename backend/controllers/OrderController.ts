@@ -195,7 +195,8 @@ export async function createOrder(uid: string, s: IOrderData): Promise<IResTemp>
   const charge: IBill & IAny = await xhr.post(`${midtrans.url}/charge`, `Basic ${midtrans.authorization}`, chargeOptions)
 
   if (charge.error || charge.errors) {
-    logger.error(charge)
+    logger.error(`[BOT] Charge failed`)
+    console.error(charge)
     return { status: 500, code: "internal_server_error" }
   }
 

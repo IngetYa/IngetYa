@@ -25,6 +25,11 @@ export default {
   LUNA_CLIENT_ID: process.env.LUNA_CLIENT_ID ?? "secret",
   LUNA_CLIENT_SECRET: process.env.LUNA_CLIENT_SECRET ?? "secret",
 
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? "secret",
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET ?? "secret",
+
+  WHATSAPP_CLIENT_ID: process.env.WHATSAPP_CLIENT_ID ?? "secret",
+
   S3_TOKEN: process.env.S3_TOKEN ?? "secret",
   S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID ?? "secret",
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY ?? "secret",

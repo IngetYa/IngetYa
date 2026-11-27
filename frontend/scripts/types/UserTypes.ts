@@ -1,4 +1,4 @@
-export type UserAccess = "staff" | "support" | "products" | "orders" | "bills" | "accounts" | "balance" | "reseller"
+export type UserAccess = "staff" | "support" | "products" | "orders" | "bills" | "accounts" | "balance" | "reseller" | "owner"
 
 export interface IUser {
   id: string

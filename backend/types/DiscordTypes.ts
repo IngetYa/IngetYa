@@ -27,3 +27,9 @@ export interface APIEmbed extends DiscordAPIEmbed {
   ts?: boolean
   inspect?: boolean
 }
+
+export interface IWhatsAppConfig {
+  phone_number: string
+  username: string
+  command: string
+}

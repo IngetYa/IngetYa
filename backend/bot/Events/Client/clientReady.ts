@@ -6,7 +6,7 @@ let aliveNumber: number = 0
 export default async function clientReady(client: Client, appFunc?: () => void) {
   aliveNumber++
 
-  logger.success(`Bot: Logged in as ${client.user!.username} ( ${client.user!.tag} )`)
+  logger.success(`[BOT] Logged in as ${client.user!.username} ( ${client.user!.tag} )`)
 
   client.user!.setPresence({
     activities: [

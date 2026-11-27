@@ -1,5 +1,6 @@
 import { WebSocket } from "ws"
 import { IAny } from "./LibTypes"
+import { UserAccess } from "./UserTypes"
 
 export interface ISocketClient {
   id: string
@@ -10,6 +11,7 @@ export interface ISocketClient {
 export interface ISocketUser {
   id: string
   clientId: string
+  role?: UserAccess[]
 }
 
 export type SocketMessage = Record<string, IAny>

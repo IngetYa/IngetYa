@@ -61,6 +61,9 @@ $fontProviderIcon: 1.1rem;
       display: block;
       width: 100%;
       padding: v.$bigPadding;
+      .group-code {
+        margin-bottom: v.$medPadding;
+      }
       .f {
         display: block;
         width: 100%;
@@ -178,6 +181,16 @@ $fontProviderIcon: 1.1rem;
               &:hover {
                 background-color: v.$btn-primary-hover;
                 transform: translateY(-1px);
+              }
+            }
+            &.btn-back {
+              flex-grow: 0;
+              background-color: v.$search-inp-bg;
+              color: v.$btn-secondary-text;
+              border: 1px solid v.$btn-secondary-border;
+              font-weight: 500;
+              &:hover {
+                background-color: color.scale(v.$btn-secondary-bg, $blackness: 10%);
               }
             }
           }

@@ -41,7 +41,7 @@ export async function getUserData(uid: string): Promise<IResTemp> {
 
   const bills = await BillModel.find({ userId: uid }).lean()
 
-  const socket = sockets.save(uid)
+  const socket = sockets.save(uid, me?.access)
 
   const data: Partial<IUserData> = {
     me,

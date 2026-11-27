@@ -13,6 +13,6 @@ export default class ComponentsHandler {
       client.checkStatus()
     }
 
-    setTimeout(() => logger.info("Buttons • loaded"), 500)
+    setTimeout(() => logger.info("[BOT] Buttons >> loaded"), 500)
   }
 }

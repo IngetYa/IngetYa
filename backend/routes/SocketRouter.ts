@@ -8,7 +8,7 @@ import { Colors } from "discord.js"
 
 export function startSocketApp(ws: WebSocket, req: Request) {
   if (!req.user || !req.user.id) {
-    logger.info("❌ Connection rejected: no user ID")
+    logger.info("[SOCKET] ❌ Connection rejected: no user ID")
     ws.close()
     return
   }
@@ -17,7 +17,7 @@ export function startSocketApp(ws: WebSocket, req: Request) {
   const clientId = req.query.id?.toString()
 
   if (!clientId) {
-    logger.info(`❌ Connection rejected: client ${clientId} is not found`)
+    logger.info(`[SOCKET] ❌ Connection rejected: client ${clientId} is not found`)
     ws.close()
     return
   }
@@ -25,12 +25,12 @@ export function startSocketApp(ws: WebSocket, req: Request) {
   const registered = sockets.create(userId, clientId, ws)
 
   if (!registered) {
-    logger.info(`❌ Connection rejected: socket client ${clientId} is not valid`)
+    logger.info(`[SOCKET] ❌ Connection rejected: socket client ${clientId} is not valid`)
     ws.close()
     return
   }
 
-  logger.info(`Online   ${userId} ${clientId}`)
+  logger.info(`[SOCKET] Online   ${userId} ${clientId}`)
 
   webhook("clients", {
     description: `Id ${userId} Online`,
@@ -44,15 +44,15 @@ export function startSocketApp(ws: WebSocket, req: Request) {
 
       processSocketMessages({ ...msg, clientId, userId })
     } catch (err) {
-      logger.error("Failed to parse JSON.")
-      logger.error(err)
+      logger.error("[SOCKET] Failed to parse JSON.")
+      console.error(err)
     }
   })
 
   ws.on("close", () => {
     sockets.delete(clientId)
 
-    logger.info(`Offline  ${userId} ${clientId}`)
+    logger.info(`[SOCKET] Offline  ${userId} ${clientId}`)
 
     webhook("clients", {
       description: `Id ${userId} Offline`,

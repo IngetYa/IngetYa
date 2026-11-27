@@ -62,7 +62,7 @@ export class BotClient extends Client {
   checkStatus(): void {
     if (this.currentStatus > 4) {
       console.log("---")
-      logger.success(`Client • ready to use (v.${version})\n---`)
+      logger.success(`[BOT] Client • ready to use (v.${version})\n---`)
     }
   }
 }

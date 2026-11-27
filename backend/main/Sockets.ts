@@ -1,15 +1,16 @@
 import { WebSocket } from "ws"
 import { genhex } from "#lib/gen"
 import { ISocketClient, ISocketUser, IZender } from "#types/SocketClientTypes"
+import { UserAccess } from "#types/UserTypes"
 
 export class Sockets {
   private clients: ISocketClient[] = []
   private users: ISocketUser[] = []
 
-  save(uid: string): string {
+  save(uid: string, role?: UserAccess[]): string {
     const clientId = genhex(4)
 
-    this.users.push({ id: uid, clientId })
+    this.users.push({ id: uid, clientId, role })
 
     return clientId
   }
@@ -20,10 +21,16 @@ export class Sockets {
     return client
   }
 
-  getByUser(uid: string): ISocketClient[] | undefined {
+  getByUser(uid: string): ISocketClient[] {
     const clients = this.clients.filter((k) => k.userId === uid)
 
-    if (clients.length < 1) return undefined
+    return clients
+  }
+
+  getByRole(role: UserAccess): ISocketClient[] {
+    const userIds = this.users.filter((k) => k.role && k.role.some((r) => r === role)).map((k) => k.id)
+
+    const clients = this.clients.filter((k) => userIds.some((uid) => uid === k.userId))
 
     return clients
   }
